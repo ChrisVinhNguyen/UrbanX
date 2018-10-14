@@ -1,0 +1,37 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_name: MyString
+  last_name: MyString
+  picture: MyString
+  email: MyString
+  uniqueness: 
+  password: MyString
+  date_of_birth: 2018-10-14 18:11:32
+  location: MyString
+  review_id: 1
+  transaction_id: 1
+  contact_list: MyString
+  array: 
+  default: 
+  items: 1
+  array: 
+  default: 
+
+two:
+  first_name: MyString
+  last_name: MyString
+  picture: MyString
+  email: MyString
+  uniqueness: 
+  password: MyString
+  date_of_birth: 2018-10-14 18:11:32
+  location: MyString
+  review_id: 1
+  transaction_id: 1
+  contact_list: MyString
+  array: 
+  default: 
+  items: 1
+  array: 
+  default: 

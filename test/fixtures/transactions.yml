@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  item_id: 1
+  borrower_id: 1
+  lender_id: 1
+  lend_date: 2018-10-14 18:04:18
+  return_date: 2018-10-14 18:04:18
+  expiry_date: 2018-10-14 18:04:18
+  status: MyString
+
+two:
+  item_id: 1
+  borrower_id: 1
+  lender_id: 1
+  lend_date: 2018-10-14 18:04:18
+  return_date: 2018-10-14 18:04:18
+  expiry_date: 2018-10-14 18:04:18
+  status: MyString

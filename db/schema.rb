@@ -10,10 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_09_210349) do
+ActiveRecord::Schema.define(version: 2018_10_14_223714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "items", force: :cascade do |t|
+    t.string "name"
+    t.string "picture"
+    t.text "description"
+    t.string "category"
+    t.integer "quantity"
+    t.string "condition"
+    t.datetime "date_posted"
+    t.float "value"
+    t.integer "owner_id"
+    t.string "status"
+    t.integer "review_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.float "rating"
+    t.text "comment"
+    t.datetime "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer "item_id"
+    t.integer "borrower_id"
+    t.integer "lender_id"
+    t.datetime "lend_date"
+    t.datetime "return_date"
+    t.datetime "expiry_date"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "first_name"
@@ -26,7 +60,9 @@ ActiveRecord::Schema.define(version: 2018_10_09_210349) do
     t.integer "review_id"
     t.integer "transaction_id"
     t.string "contact_list", default: [], array: true
-    t.integer "items"
+    t.integer "items", default: [], array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
