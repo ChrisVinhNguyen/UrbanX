@@ -19,11 +19,11 @@ class UsersController < ApplicationController
   end
 
   def index
-    User.all
+    @users = User.all
   end
 
   def show
-    User.find(params[:id])
+    @user = User.find(params[:id])
   end
 
 end
