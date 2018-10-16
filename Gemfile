@@ -11,15 +11,10 @@ gem 'rails_12factor', group: :production
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.1'
-<<<<<<< HEAD
-# Use sqlite3 as the database for Active Record
-# gem 'sqlite3'
-=======
 # Use postgresql as the database for Active Record
 gem 'pg'
 gem 'rails_12factor', group: :production
 gem 'dotenv-rails'
->>>>>>> d8e0e99f0d9a8477c6f5197fac06762c9b5cf1db
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
