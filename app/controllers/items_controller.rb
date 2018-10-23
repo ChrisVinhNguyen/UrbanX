@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(params.permit(:name ,:category, :quantity, :data_posted, :owner_id, :status))
+    @item = Item.new(params.permit(:name ,:category, :quantity, :data_posted, :owner_id, :status, :condition))
     @item.save
   end
 
@@ -13,16 +13,5 @@ class ItemsController < ApplicationController
     @item.update(params)
   end
 
-  def destroy
-    @item = Item.find(params[:id])
-    @item.destroy
-  end
 
-  def index
-    @items = Item.all
-  end
 
-  def show
-    @item = Item.find(params[:id])
-  end
-end
