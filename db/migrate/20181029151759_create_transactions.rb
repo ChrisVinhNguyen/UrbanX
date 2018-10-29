@@ -1,9 +1,9 @@
 class CreateTransactions < ActiveRecord::Migration[5.2]
   def change
     create_table :transactions do |t|
-      t.integer :item_id
-      t.integer :borrower_id
-      t.integer :lender_id
+      t.references :item, index: true, foreign_key: true
+      t.references :borrower, index: true, foreign_key: { to_table: :users }
+      t.references :lender, index: true, foreign_key: { to_table: :users }
       t.datetime :lend_date
       t.datetime :return_date
       t.datetime :expiry_date

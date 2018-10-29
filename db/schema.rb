@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_14_223714) do
+ActiveRecord::Schema.define(version: 2018_10_29_171315) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "item_reviews", force: :cascade do |t|
+    t.bigint "item_id"
+    t.float "rating"
+    t.text "comment"
+    t.datetime "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_item_reviews_on_item_id"
+  end
 
   create_table "items", force: :cascade do |t|
     t.string "name"
@@ -24,45 +34,69 @@ ActiveRecord::Schema.define(version: 2018_10_14_223714) do
     t.string "condition"
     t.datetime "date_posted"
     t.float "value"
-    t.integer "owner_id"
+    t.bigint "owner_id"
     t.string "status"
-    t.integer "review_id"
-  end
-
-  create_table "reviews", force: :cascade do |t|
-    t.float "rating"
-    t.text "comment"
-    t.datetime "date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.index ["owner_id"], name: "index_items_on_owner_id"
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.integer "item_id"
-    t.integer "borrower_id"
-    t.integer "lender_id"
+    t.bigint "item_id"
+    t.bigint "borrower_id"
+    t.bigint "lender_id"
     t.datetime "lend_date"
     t.datetime "return_date"
     t.datetime "expiry_date"
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["borrower_id"], name: "index_transactions_on_borrower_id"
+    t.index ["item_id"], name: "index_transactions_on_item_id"
+    t.index ["lender_id"], name: "index_transactions_on_lender_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "user_profiles", force: :cascade do |t|
+    t.bigint "user_id"
     t.string "first_name"
     t.string "last_name"
     t.string "picture"
-    t.string "email"
-    t.string "password"
     t.datetime "date_of_birth"
     t.string "location"
-    t.integer "review_id"
-    t.integer "transaction_id"
     t.string "contact_list", default: [], array: true
-    t.integer "items", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_profiles_on_user_id"
   end
 
+  create_table "user_reviews", force: :cascade do |t|
+    t.bigint "user_id"
+    t.float "rating"
+    t.text "comment"
+    t.datetime "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_reviews_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  add_foreign_key "item_reviews", "items"
+  add_foreign_key "items", "users", column: "owner_id"
+  add_foreign_key "transactions", "items"
+  add_foreign_key "transactions", "users", column: "borrower_id"
+  add_foreign_key "transactions", "users", column: "lender_id"
+  add_foreign_key "user_profiles", "users"
+  add_foreign_key "user_reviews", "users"
 end

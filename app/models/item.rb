@@ -1,6 +1,5 @@
 class Item < ApplicationRecord
 	belongs_to :user
-	has_many :reviews
-	belongs_to :transaction 
-	validates :name ,:category, :quantity, :data_posted, :owner_id, :status, presence: true
+	has_many :item_reviews
+	has_many :transactions
 end
