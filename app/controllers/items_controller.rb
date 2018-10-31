@@ -4,8 +4,10 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(params.permit(:name ,:category, :quantity, :data_posted, :owner_id, :status, :condition))
+    @item = Item.new(params[:item])
+
     @item.save
+    redirect_to @item
   end
 
   def update
@@ -24,5 +26,11 @@ class ItemsController < ApplicationController
   
   def show
     @item = Item.find(params[:id])
+  end
+
+private
+  def item_params
+      params.require(:item).permit(:owner_id, :name)
+        # ,:category, :quantity, :data_posted, :owner_id, :status, :condition, :value, :description)
   end
 end
