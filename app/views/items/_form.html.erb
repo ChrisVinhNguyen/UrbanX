@@ -1,0 +1,68 @@
+<%= form_with model: @item, local: true do |form| %>
+ 
+  <% if @item.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@item.errors.count, "error") %> prohibited
+        this item from being saved:
+      </h2>
+      <ul>
+        <% @item.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if user_signed_in? %>
+    <li> 
+      <%=link_to('Logout', destroy_user_session_path, method: :delete) %>
+    </li>
+
+  <% else %>
+    <li>
+      <%= link_to('Login', new_user_session_path) %>
+    </li>
+    <%end%>
+   
+ 
+
+
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_area :name %>
+  <p>
+
+  <p>
+    <%= form.label :description %><br>
+    <%= form.text_area :description %>
+  <p>
+
+  <p>
+    <%= form.label :category %><br>
+    <%= form.text_field :category %>
+  <p>
+
+  <p>
+
+  <p>
+    <%= form.label :quantity %><br>
+    <%= form.text_field :quantity %>
+  <p>
+    <%= form.label :condition %><br>
+    <%= form.text_field :condition %>
+  <p>
+
+  <p>
+    <%= form.label :value %><br>
+    <%= form.text_field :value %>
+  <p>
+
+  
+
+
+
+    <%= form.submit %>
+  </p>
+ 
+<% end %>
