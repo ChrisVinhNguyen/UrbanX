@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
     if user_signed_in?
 
       @item = Item.new(item_params)
-      @item.owner_id = @current_user.id
+      @item.user_id = @current_user.id
       if @item.save
           redirect_to @item
       else
