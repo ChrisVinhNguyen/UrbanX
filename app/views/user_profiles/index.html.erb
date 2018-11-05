@@ -1,2 +1,17 @@
 <h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+
+<% if user_signed_in? %>
+    <p> 
+      <%=link_to('Logout', destroy_user_session_path, method: :delete) %>
+    </p>
+    </p>
+    <%=link_to('Profile', "/user_profiles/" + current_user.user_profile.id.to_s) %>
+    </p>
+  <% else %>
+    <p>
+      <%= link_to('Login', new_user_session_path) %>
+    </p>
+    <%end%>
+
+<p>Testing Heroku! Find me in app/views/users/index.html.erb</p>
+

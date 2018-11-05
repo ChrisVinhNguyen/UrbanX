@@ -1,6 +1,5 @@
 class UserReviewsController < ApplicationController
   def new
-  	@user_review = UserReview.new
   end
 
   def create

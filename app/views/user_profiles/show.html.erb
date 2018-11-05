@@ -1,2 +1,52 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<% if user_signed_in? %>
+    <li> 
+      <%=link_to('Logout', destroy_user_session_path, method: :delete) %>
+    </li>
+
+  <% else %>
+    <li>
+      <%= link_to('Login', new_user_session_path) %>
+    </li>
+    <%end%>
+
+<h1><%= @user_profile.first_name + " " + @user_profile.last_name %></h1>
+	<p>
+		<strong>Date of birth:</strong>
+		<%=  @user_profile.date_of_birth %>
+
+	<p>
+		<strong>Location:</strong>
+		<%=  @user_profile.location %>
+	</p>
+	<p>
+		<strong>Items:</strong>
+		<%  current_user.items.each do |item| %>
+		<%= link_to(item.name, "/items/"+item.id.to_s) %>
+		<%  end %>
+
+		<% if user_signed_in? %>
+		<% if current_user.id == @user_profile.user_id %>
+		<%= link_to("New Item", "/items/new") %>
+		<%  end %>
+		<%  end %>
+	</p>
+	<p>
+		<strong>Contacts:</strong>
+		<%  @user_profile.contact_list do |contact|%>
+		<%= link_to(contact, "/user_profiles/"+contact) %>
+		<%  end %>
+
+		<% if user_signed_in? %>
+		<% if current_user.id == @user_profile.user_id %>
+		<%= link_to("Add contact", "/user_profiles/" + @user_profile.id.to_s + "/edit") %>
+		<%  end %>
+		<%  end %>
+	</p>
+<% if user_signed_in? %>
+<% if current_user.id == @user_profile.user_id %>
+<%= link_to("Edit profile", "/user_profiles/" + @user_profile.id.to_s + "/edit") %>
+<%  end %>
+<%  end %>
+
+
+
