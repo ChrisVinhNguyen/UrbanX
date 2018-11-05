@@ -1,6 +1,4 @@
 <h1>Items#show</h1>
-
-
 	<p>
 	  <strong>Item name:</strong>
 	  <%= @item.name %>
@@ -29,3 +27,15 @@
 	<h2>
 		<%=  @item.value %>
 	</h2>	
+	<h2>Reviews</h2>
+	<%= render @item.item_reviews %>
+
+	<h2>Add a review:</h2>
+	<%= render 'item_reviews/form' %>
+
+	<h2>Edit a review:</h2>
+	<%= render 'item_reviews/form'%>
+
+	
+	<%= link_to 'Edit', edit_item_path(@item) %> |
+	<%= link_to 'Back', items_path %>
