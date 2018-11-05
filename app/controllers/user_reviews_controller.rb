@@ -4,7 +4,7 @@ class UserReviewsController < ApplicationController
   end
 
   def create
-    @user_review = UserReview.new(params.permit(:user:id, :rating))
+    @user_review = UserReview.new(params.permit(:user_id, :rating))
     @user_review.save
   end
 
