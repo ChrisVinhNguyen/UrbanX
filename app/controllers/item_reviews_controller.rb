@@ -4,7 +4,7 @@ class ItemReviewsController < ApplicationController
   end
 
   def create
-    @item_review = ItemReview.new(params.permit(:user:id, :rating))
+    @item_review = ItemReview.new(params.permit(:user_id, :rating))
     @item_review.save
   end
 
