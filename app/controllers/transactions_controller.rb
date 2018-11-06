@@ -27,11 +27,17 @@ class TransactionsController < ApplicationController
   end
 
   def index
-    @transactions = Transaction.all
+    if user_signed_in?
+      @transactions = Transaction.where(lender_id: @current_user.id).
+      or(Transaction.where(borrower_id: @current_user.id))
+    end
   end
   
   def show
-    @transaction = Transaction.find(params[:id])
+    if user_signed_in?
+      @transaction = Transaction.where(id: params[:id], lender_id: @current_user.id).
+      or(Transaction.where(id: params[:id], borrower_id: @current_user.id)).first
+    end
   end
 
 
