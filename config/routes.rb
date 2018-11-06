@@ -28,6 +28,9 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "user_profiles#index"
 
+  resources :users do 
+    resources :user_reviews
+  end
   resources :user_profiles
   resources :items do 
     resources :item_reviews

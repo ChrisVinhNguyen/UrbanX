@@ -7,9 +7,17 @@
 	<strong>Comment:</strong>
 	<%= item_review.comment %>
 </p>
-
 <p>
+	<% if item_review.owner_id == current_user.id %>
+		<p>Edit Review</p>
+		<%= render 'item_reviews/form' %>
+	<% end %>
+</p>
+<p>
+	<% if item_review.owner_id == current_user.id %>
 	<%= link_to 'Delete Review', [item_review.item, item_review], 
 				method: :delete,
 				data: { confirm: 'Are you sure?'} %>
+	<%end%>
 </p>
+
