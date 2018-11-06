@@ -3,11 +3,15 @@
 one:
   rating: 1.5
   comment: MyText
-  date: 2018-11-05 16:29:35
+  created_at: 2018-11-05 23:08:06
+  updated_at: 2018-11-05 23:08:06
+  owner_id: 1
   item: one
 
 two:
   rating: 1.5
   comment: MyText
-  date: 2018-11-05 16:29:35
+  created_at: 2018-11-05 23:08:06
+  updated_at: 2018-11-05 23:08:06
+  owner_id: 1
   item: two

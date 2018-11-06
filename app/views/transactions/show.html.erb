@@ -1,2 +1,25 @@
-<h1>Transactions#show</h1>
-<p>Find me in app/views/transactions/show.html.erb</p>
+<h1>Transaction</h1>
+
+	<% if @transaction != nil %>
+		<p>
+		  <strong>Item name:</strong>
+		  <%= Item.find(@transaction.item_id).name %>
+		</p>
+
+		<h2>
+			Lent to <%=  User.find(@transaction.borrower_id).email %>
+		</h2>
+
+		<h2>
+			Lent by <%=  User.find(@transaction.lender_id).email %>
+		</h2>	
+
+		<h2>
+			Status: <%=  @transaction.status %>
+		</h2>	
+
+	<% else %>
+		<h2> You do not have permission to view this transaction </h2>
+	<% end %>
+
+	<%= link_to 'Back', transactions_path %>

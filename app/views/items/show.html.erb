@@ -33,9 +33,6 @@
 	<h2>Add a review:</h2>
 	<%= render 'item_reviews/form' %>
 
-	<h2>Edit a review:</h2>
-	<%= render 'item_reviews/form'%>
-
-	
 	<%= link_to 'Edit', edit_item_path(@item) %> |
+	<%= link_to 'Lend', {:controller => "transactions", :action => "new", :item_id => @item.id } %> |
 	<%= link_to 'Back', items_path %>
