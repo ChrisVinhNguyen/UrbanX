@@ -4,7 +4,7 @@
 <p>
 	  <strong>Item name:</strong>
 	  <br>
-	  <% @item.each do |t| %>
-	  <li><%= link_to(t.name, "/items/"+t.id.to_s) %></li>
+	  <% @items.each do |item| %>
+	  <li><%= link_to(item.name, "/items/"+item.id.to_s) %></li>
 	  <% end %>
 	</p>
