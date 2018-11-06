@@ -4,8 +4,16 @@ class TransactionsController < ApplicationController
   end
 
   def create
-    @transaction = Transaction.new(params.permit(:item_id ,:borrower_id, :lender_id, :status))
-    @transaction.save
+    if user_signed_in?
+      @transaction = Transaction.new(transaction_params)
+      @transaction.lender_id = @current_user.id
+      @transaction.item_id = params[:item_id]
+      if @transaction.save
+        redirect_to @transaction
+      else
+        render 'new'
+      end
+    end
   end
 
   def update
@@ -24,5 +32,11 @@ class TransactionsController < ApplicationController
   
   def show
     @transaction = Transaction.find(params[:id])
+  end
+
+
+  private
+  def transaction_params
+    params.require(:transaction).permit(:borrower_id, :status)
   end
 end
