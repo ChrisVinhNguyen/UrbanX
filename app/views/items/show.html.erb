@@ -38,4 +38,5 @@
 
 	
 	<%= link_to 'Edit', edit_item_path(@item) %> |
+	<%= link_to 'Lend', {:controller => "transactions", :action => "new", :item_id => @item.id } %> |
 	<%= link_to 'Back', items_path %>

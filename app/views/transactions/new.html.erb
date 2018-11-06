@@ -1,2 +1,35 @@
 <h1>Transactions#new</h1>
-<p>Find me in app/views/transactions/new.html.erb</p>
+
+<%= form_with model: @transaction, local: true do |form| %>
+ 
+  <% if @transaction.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@transaction.errors.count, "error") %> prohibited
+        this transaction from being saved:
+      </h2>
+      <ul>
+        <% @transaction.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+  <p>
+    <%= form.label :borrower_id %><br>
+    <%= form.text_field :borrower_id %>
+  </p>
+
+  <p>
+    <%= form.label :status %><br>
+    <%= form.text_area :status %>
+  </p>
+ 
+  <%= hidden_field_tag :item_id, params[:item_id] %>
+ 
+  <p>
+    <%= form.submit %>
+  </p>
+ 
+<% end %>
