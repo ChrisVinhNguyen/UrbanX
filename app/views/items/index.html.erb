@@ -1,2 +1,10 @@
 <h1>Items#index</h1>
 <p>Find me in app/views/items/index.html.erb</p>
+
+<p>
+	  <strong>Item name:</strong>
+	  <br>
+	  <% @item.each do |t| %>
+	  <li><%= link_to(t.name, "/items/"+t.id.to_s) %></li>
+	  <% end %>
+	</p>
