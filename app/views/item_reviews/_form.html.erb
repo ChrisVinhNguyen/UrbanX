@@ -1,4 +1,4 @@
-<%= form_with(model: @item, url: [@item, @item_review], local: true) do |form| %>
+<%= form_with(model: [ @item, @item.item_reviews.build ], local: true) do |form| %>
   <% if @item.errors.any? %>
     <div id="error_explanation">
       <h2>
