@@ -5,7 +5,7 @@ class CreateUserReviews < ActiveRecord::Migration[5.2]
       t.text :comment
       t.datetime :created_at
       t.datetime :updated_at
-      t.references :user, foreign_key: true
+      t.integer :user_id
 
       t.timestamps
     end

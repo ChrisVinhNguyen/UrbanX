@@ -9,8 +9,7 @@
 </p>
 <p>
 	<% if item_review.owner_id == current_user.id %>
-		<p>Edit Review</p>
-		<%= render 'item_reviews/form' %>
+	<%= link_to 'Edit', edit_item_item_review_path(@item, item_review) %> 
 	<% end %>
 </p>
 <p>
