@@ -20,7 +20,7 @@
 	</p>
 	<p>
 		<strong>Items:</strong>
-		<%  current_user.items.each do |item| %>
+		<%  @user_profile.user.items.each do |item| %>
 		<%= link_to(item.name, "/items/"+item.id.to_s) %>
 		<%  end %>
 
