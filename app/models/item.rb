@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: items
+#
+#  id          :bigint(8)        not null, primary key
+#  name        :string
+#  picture     :string
+#  description :text
+#  category    :string
+#  quantity    :integer
+#  condition   :string
+#  date_posted :datetime
+#  value       :float
+#  user_id     :integer
+#  status      :string
+#
+
 class Item < ApplicationRecord
   validates :name, :category, :quantity, :condition, presence: true
   validates :quantity, numericality: { only_integer: true }
