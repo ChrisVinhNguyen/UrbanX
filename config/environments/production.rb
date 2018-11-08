@@ -97,7 +97,7 @@ Rails.application.configure do
   # Needed for Devise
   # Change the host for production with the acttual domain
   #config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-  config.action_mailer.default_url_options = { :host => 'https://agile-caverns-41014.herokuapp.compile/' }
+  config.action_mailer.default_url_options = { :host => 'https://agile-caverns-41014.herokuapp.com/' }
   #Might need the following line
   #Rails.application.routes.default_url_options[:host] = 'https://agile-caverns-41014.herokuapp.com/'
 
