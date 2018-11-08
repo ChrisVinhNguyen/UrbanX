@@ -12,7 +12,7 @@ class TransactionsController < ApplicationController
     if user_signed_in?
       @item = Item.find(params[:item_id])
       @transaction = @item.transactions.create(transaction_params)
-      @transaction.lender_id = @current_user.id
+      @transaction.borrower_id = @current_user.id
       if @transaction.save
         redirect_to @item
       else
@@ -64,6 +64,6 @@ class TransactionsController < ApplicationController
 
   private
   def transaction_params
-    params.require(:transaction).permit(:item_id, :borrower_id, :status)
+    params.require(:transaction).permit(:item_id, :lender_id, :status)
   end
 end
