@@ -28,7 +28,12 @@
 
 	<h2>Add a review:</h2>
 	<%= render 'item_reviews/form' %>
+	<% if user_signed_in? %>
 
-	<%= link_to 'Edit', edit_item_path(@item) %> |
-	<%= link_to 'Lend', new_item_transaction_path(@item) %> |
+		<% if @item.user_id == current_user.id %>
+			<%= link_to 'Edit', edit_item_path(@item) %> 
+		<% end %> 
+	<% end %> 
+
+	<%= link_to 'Borrow', new_item_transaction_path(@item) %> |
 	<%= link_to 'Back', items_path %>
