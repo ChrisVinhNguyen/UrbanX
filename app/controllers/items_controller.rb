@@ -7,6 +7,7 @@ class ItemsController < ApplicationController
       @item = Item.new(item_params)
 
       @item.user_id = @current_user.id
+      @item.status = "available"
     
       if @item.save
           redirect_to @item
@@ -69,7 +70,7 @@ class ItemsController < ApplicationController
 
 private
   def item_params
-      params.require(:item).permit(:name, :description, :category,  :quantity,  :condition, :value, :user_id)
+      params.require(:item).permit(:name, :description, :category,  :quantity,  :condition, :value, :user_id, :status)
     end
 
 
