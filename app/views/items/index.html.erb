@@ -16,4 +16,9 @@
 	  		</p>
 	  <% end %>
 	  </p>
+	  <p>
+	  	<% if user_signed_in? %>
+	  		<%= link_to 'Create Item' , items_new_path %>
+	  	<%end%>
+	  </p>
 	</p>

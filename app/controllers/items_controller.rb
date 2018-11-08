@@ -7,12 +7,15 @@ class ItemsController < ApplicationController
       @item = Item.new(item_params)
 
       @item.user_id = @current_user.id
+      @item.status = "available"
     
       if @item.save
           redirect_to @item
       else
         render :new
       end
+    else
+        redirect_to new_user_session_path
     end
   end
 
@@ -31,6 +34,9 @@ class ItemsController < ApplicationController
   def edit
     if user_signed_in?
       @item = Item.find(params[:id])
+      if @item.user_id != @current_user.id
+        redirect_to items_path
+      end
     end
   end
 
@@ -45,7 +51,10 @@ class ItemsController < ApplicationController
           render 'edit'
         end
       end
+    else
+        redirect_to new_user_session_path
     end
+
   end
 
   def destroy
@@ -61,7 +70,7 @@ class ItemsController < ApplicationController
 
 private
   def item_params
-      params.require(:item).permit(:name, :description, :category,  :quantity,  :condition, :value, :user_id)
+      params.require(:item).permit(:name, :description, :category,  :quantity,  :condition, :value, :user_id, :status)
     end
 
 
