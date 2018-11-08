@@ -13,6 +13,8 @@ class ItemsController < ApplicationController
       else
         render :new
       end
+    else
+        redirect_to new_user_session_path
     end
   end
 
@@ -45,7 +47,10 @@ class ItemsController < ApplicationController
           render 'edit'
         end
       end
+    else
+        redirect_to new_user_session_path
     end
+
   end
 
   def destroy
