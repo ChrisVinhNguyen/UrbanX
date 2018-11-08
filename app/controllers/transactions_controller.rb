@@ -1,15 +1,16 @@
 class TransactionsController < ApplicationController
   def new
-    @transaction = Transaction.new
+    @item = Item.find(params[:item_id])
+    @transaction = @item.transactions.new
   end
 
   def create
     if user_signed_in?
-      @transaction = Transaction.new(transaction_params)
+      @item = Item.find(params[:item_id])
+      @transaction = @item.transactions.create(transaction_params)
       @transaction.lender_id = @current_user.id
-      @transaction.item_id = params[:item_id]
       if @transaction.save
-        redirect_to @transaction
+        redirect_to @item
       else
         render 'new'
       end
@@ -17,32 +18,34 @@ class TransactionsController < ApplicationController
   end
 
   def update
-    @transaction = Transaction.find(params[:id])
+    @item = Item.find(params[:item_id])
+    @transaction = @item.transactions.find(params[:id])
     @transaction.update(params)
   end
 
   def destroy
-    @transaction = Transaction.find(params[:id])
+    @item = Item.find(params[:item_id])
+    @transaction = @item.transactions.find(params[:id])
     @transaction.destroy
   end
 
   def index
     if user_signed_in?
-      @transactions = Transaction.where(lender_id: @current_user.id).
-      or(Transaction.where(borrower_id: @current_user.id))
+      @item = Item.find(params[:item_id])
+      @transactions = @item.transactions.all
     end
   end
   
   def show
     if user_signed_in?
-      @transaction = Transaction.where(id: params[:id], lender_id: @current_user.id).
-      or(Transaction.where(id: params[:id], borrower_id: @current_user.id)).first
+      @item = Item.find(params[:item_id])
+      @transaction = @item.transactions.find(params[:id])
     end
   end
 
 
   private
   def transaction_params
-    params.require(:transaction).permit(:borrower_id, :status)
+    params.require(:transaction).permit(:item_id, :borrower_id, :status)
   end
 end

@@ -1,6 +1,6 @@
 <h1>Transactions#new</h1>
 
-<%= form_with model: @transaction, local: true do |form| %>
+<%= form_with(model: [ @item, @item.transactions.build ], local: true) do |form| %>
  
   <% if @transaction.errors.any? %>
     <div id="error_explanation">
@@ -26,7 +26,6 @@
     <%= form.text_area :status %>
   </p>
  
-  <%= hidden_field_tag :item_id, params[:item_id] %>
  
   <p>
     <%= form.submit %>
