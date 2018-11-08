@@ -1,7 +1,11 @@
 class TransactionsController < ApplicationController
   def new
-    @item = Item.find(params[:item_id])
-    @transaction = @item.transactions.new
+    if user_signed_in?
+      @item = Item.find(params[:item_id])
+      @transaction = @item.transactions.new
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def create
@@ -14,25 +18,37 @@ class TransactionsController < ApplicationController
       else
         render 'new'
       end
+    else 
+      redirect_to new_user_session_path
     end
   end
 
   def update
-    @item = Item.find(params[:item_id])
-    @transaction = @item.transactions.find(params[:id])
-    @transaction.update(params)
+    if user_signed_in?
+      @item = Item.find(params[:item_id])
+      @transaction = @item.transactions.find(params[:id])
+      @transaction.update(params)
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def destroy
-    @item = Item.find(params[:item_id])
-    @transaction = @item.transactions.find(params[:id])
-    @transaction.destroy
+    if user_signed_in?
+      @item = Item.find(params[:item_id])
+      @transaction = @item.transactions.find(params[:id])
+      @transaction.destroy
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def index
     if user_signed_in?
       @item = Item.find(params[:item_id])
       @transactions = @item.transactions.all
+    else 
+      redirect_to new_user_session_path
     end
   end
   
@@ -40,6 +56,8 @@ class TransactionsController < ApplicationController
     if user_signed_in?
       @item = Item.find(params[:item_id])
       @transaction = @item.transactions.find(params[:id])
+    else 
+      redirect_to new_user_session_path
     end
   end
 
