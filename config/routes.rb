@@ -19,12 +19,6 @@ Rails.application.routes.draw do
   get 'items/edit'
   get 'items/update'
   get 'items/destroy'
-  get 'transactions/new'
-  get 'transactions/create'
-  get 'transactions/update'
-  get 'transactions/destroy'
-  get 'transactions/index'
-  get 'transactions/show'
   devise_for :users
   root to: "user_profiles#index"
 
@@ -34,6 +28,6 @@ Rails.application.routes.draw do
   resources :user_profiles
   resources :items do 
     resources :item_reviews
+    resources :transactions
   end
-  resources :transactions
 end

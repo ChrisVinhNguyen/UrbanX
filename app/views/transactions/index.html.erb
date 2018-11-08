@@ -1,4 +1,4 @@
-<h1>Transactions#index</h1>
+<h1><%= pluralize(@transactions.count, "transaction") %></h1>
 
 <table>
   <tr>
@@ -13,7 +13,7 @@
       <td><%= transaction.item_id %></td>
       <td><%= User.find(transaction.borrower_id).email %></td>
       <td><%= User.find(transaction.lender_id).email %></td>
-      <td><%= link_to 'Show', transaction_path(transaction) %></td>
+      <td><%= link_to('Show', "/items/"+transaction.item_id.to_s+"/transactions/"+transaction.id.to_s) %></td>
     </tr>
   <% end %>
 
