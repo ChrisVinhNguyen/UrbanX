@@ -53,6 +53,12 @@ class UserProfilesController < ApplicationController
     @user_profile = UserProfile.find(params[:id])
   end
 
+  def transactions
+    @user_profile = UserProfile.find(params[:id])
+    @transactions = Transaction.where(:lender_id => @user_profile.user_id)
+    .or(Transaction.where(:borrower_id => @user_profile.user_id))
+  end
+
   private
   def user_profile_params
       params.require(:user_profile).permit(:first_name, :last_name, :date_of_birth,  :location,  :contact_list)
