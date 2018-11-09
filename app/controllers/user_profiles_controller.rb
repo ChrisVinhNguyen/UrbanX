@@ -65,15 +65,6 @@ class UserProfilesController < ApplicationController
     end
   end
 
-  def user_reviews
-    if user_signed_in?
-      @user_profile = UserProfile.find(params[:id])
-      @user_reviews = UserReview.where(:reviewee_id => @user_profile.user_id)
-    else
-      redirect_to new_user_session_path
-    end
-  end    
-
   private
   def user_profile_params
       params.require(:user_profile).permit(:first_name, :last_name, :date_of_birth,  :location,  :contact_list)

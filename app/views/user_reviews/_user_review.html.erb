@@ -1,29 +1,51 @@
 <h1>Reviews</h1>
-<% @user_profile.user_reviews.each do |user_review| %>
-<li>
-<p>
-	<strong>Rating:</strong>
-	<%= user_review.rating %>
-</p>
+<% if @user_reviews == nil %>
+	<h1> Access denied </h1>
+<% elsif @user_reviews.empty? %>
+	<h1> You do not have any reviews </h1>
+<% else %>
+	<h1><%= pluralize(@user_reviews.count, "review") %></h1>
 
-<p>
-	<strong>Comment:</strong>
-	<%= user_review.comment %>
-</p>
-<p>
-	<% if current_user != nil and user_review.reviewer_id == current_user.id %>
-	<%= link_to 'Edit', edit_user_profile_user_review_path(@user_profile, user_review) %> 
-	<% end %>
-</p>
-<p>
-	<% if current_user != nil and if user_review.reviewer_id == current_user.id %>
-	<%= link_to 'Delete Review', [user_review.user_profile, user_review], 
+<h1>Reviews</h1>
+
+<table>
+	<tr>
+		<th>Rating</th>
+		<th>Comment</th>
+		<th>Reviewer</th>
+		<th>Updated On</th>
+		<th></th>
+	</tr>
+
+<% @user_reviews.each do |user_review| %>
+	<tr>
+		<td><%= user_review.rating %></td>
+		<td><%= user_review.comment %></td>
+		<td><%= UserProfile.find(user_review.reviewer_id).first_name %>
+			<%= UserProfile.find(user_review.reviewer_id).last_name %> 
+			<%= UserProfile.find(user_review.reviewer_id).email %>
+		</td>
+		<td><%= user_review.updated_on %></td>
+
+		<p>
+		<% if current_user != nil and user_review.reviewer_id == current_user.id %>
+			<%= link_to 'Edit', edit_user_profile_user_review_path(@user_profile, user_review) %>
+		<% end %>
+		</p>
+
+		<p>
+		<% if current_user != nil and if user_review.reviewer_id == current_user.id %>
+			<%= link_to 'Delete Review', [user_review.user_profile, user_review], 
 				method: :delete,
 				data: { confirm: 'Are you sure?'} %>
-	<% end %>
-</p>
-</li>
+		<% end %>
+		</p>
+	</tr>
 <% end %>
 
-<%= link_to 'Add New Review', new_item_item_review_path(@user_profile, user_review) %>
+</table>
+
 <% end %>
+<% end %>
+
+

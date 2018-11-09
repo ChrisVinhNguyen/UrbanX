@@ -26,13 +26,19 @@ class UserReviewsController < ApplicationController
   def index
     if user_signed_in?
       @user_profile = UserProfile.find(params[:user_profile_id])
-      @user_reviews = @user_profile.user_reviews.all
+      @user_reviews = UserReview.where(:reviewee_id => @user_profile.user_id)
     else
       redirect_to new_user_session_path
     end
   end
 
   def show
+    if user_signed_in?
+      @user_profile = UserProfile.find(params[:user_profile_id])
+      @user_reviews = UserReview.where(:reviewer_id => @user_profile.user_id)
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def update

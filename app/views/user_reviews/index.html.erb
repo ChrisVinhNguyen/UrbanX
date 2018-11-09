@@ -1,7 +1,8 @@
+<h1>Reviews</h1>
 <% if @user_reviews == nil %>
 	<h1> Access denied </h1>
 <% elsif @user_reviews.empty? %>
-	<h1> This item does not have any reviews </h1>
+	<h1> You do not have any reviews </h1>
 <% else %>
 	<h1><%= pluralize(@user_reviews.count, "review") %></h1>
 
@@ -44,8 +45,6 @@
 
 </table>
 
-<% if @user_reviews.empty? %>
-	<h1> You do not have any reviews </h1>
 <% end %>
 <% end %>
 
