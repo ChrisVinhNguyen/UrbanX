@@ -1,0 +1,29 @@
+<h1>Reviews</h1>
+<% @user_profile.user_reviews.each do |user_review| %>
+<li>
+<p>
+	<strong>Rating:</strong>
+	<%= user_review.rating %>
+</p>
+
+<p>
+	<strong>Comment:</strong>
+	<%= user_review.comment %>
+</p>
+<p>
+	<% if current_user != nil and user_review.reviewer_id == current_user.id %>
+	<%= link_to 'Edit', edit_user_profile_user_review_path(@user_profile, user_review) %> 
+	<% end %>
+</p>
+<p>
+	<% if current_user != nil and if user_review.reviewer_id == current_user.id %>
+	<%= link_to 'Delete Review', [user_review.user_profile, user_review], 
+				method: :delete,
+				data: { confirm: 'Are you sure?'} %>
+	<% end %>
+</p>
+</li>
+<% end %>
+
+<%= link_to 'Add New Review', new_item_item_review_path(@user_profile, user_review) %>
+<% end %>

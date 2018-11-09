@@ -1,0 +1,38 @@
+<%= form_with(model: [ @user_profile, @user_profile.user_review.build ], local: true) do |form| %>
+  <% if @user_profile.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@user_profile.errors.count, "error") %> prohibited
+        this user review from being saved:
+      </h2>
+      <ul>
+        <% @user_profile.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if user_signed_in? %>
+    <li> 
+      <%=link_to('Logout', destroy_user_session_path, method: :delete) %>
+    </li>
+
+  <% else %>
+    <li>
+      <%= link_to('Login', new_user_session_path) %>
+    </li>
+    <%end%>
+
+    <p>
+      <%= form.label :rating %><br>
+      <%= form.text_field :rating %>
+    </p>
+    <p>
+      <%= form.label :comment %><br>
+      <%= form.text_field :comment %>
+    </p>
+    <p>
+      <%= form.submit %>
+    </p>
+  <% end %>
