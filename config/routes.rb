@@ -14,7 +14,7 @@ Rails.application.routes.draw do
    
   resources :user_profiles do 
     get 'transactions', :on => :member
-    resources :user_reviews
+    get 'user_reviews', :on => :member
   end
 
   resources :items do 

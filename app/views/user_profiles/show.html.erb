@@ -50,7 +50,7 @@
 <% if current_user.id == @user_profile.user_id %>
 <%= link_to("Edit profile", "/user_profiles/" + @user_profile.id.to_s + "/edit") %>
 <%  end %>
-	<%= link_to('Reviews', user_profile_user_reviews_path(@user_profile)) %>
+	<%= link_to('My Reviews', user_reviews_user_profile_path) %>
 <%  end %>
 
 
