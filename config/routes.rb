@@ -13,8 +13,10 @@ Rails.application.routes.draw do
   resources :users 
    
   resources :user_profiles do 
+    get 'transactions', :on => :member
     resources :user_reviews
   end
+
   resources :items do 
     resources :item_reviews
     resources :transactions

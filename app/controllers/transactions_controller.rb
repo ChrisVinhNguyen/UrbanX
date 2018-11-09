@@ -1,38 +1,62 @@
 class TransactionsController < ApplicationController
   def new
-    @item = Item.find(params[:item_id])
-    @transaction = @item.transactions.new
+    if user_signed_in?
+      @item = Item.find(params[:item_id])
+      if @item.status == 'available' && @item.user != @current_user
+        @transaction = @item.transactions.new
+      else
+        redirect_to @item
+      end
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def create
     if user_signed_in?
       @item = Item.find(params[:item_id])
       @transaction = @item.transactions.create(transaction_params)
-      @transaction.lender_id = @current_user.id
+      @transaction.lender = @item.user
+      @transaction.borrower = @current_user
       if @transaction.save
+        @item.update({:status => "unavailable"})
         redirect_to @item
       else
         render 'new'
       end
+    else 
+      redirect_to new_user_session_path
     end
   end
 
   def update
-    @item = Item.find(params[:item_id])
-    @transaction = @item.transactions.find(params[:id])
-    @transaction.update(params)
+    if user_signed_in?
+      @item = Item.find(params[:item_id])
+      @transaction = @item.transactions.find(params[:id])
+      @transaction.update(params)
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def destroy
-    @item = Item.find(params[:item_id])
-    @transaction = @item.transactions.find(params[:id])
-    @transaction.destroy
+    if user_signed_in?
+      @item = Item.find(params[:item_id])
+      @transaction = @item.transactions.find(params[:id])
+      @transaction.destroy
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def index
     if user_signed_in?
       @item = Item.find(params[:item_id])
-      @transactions = @item.transactions.all
+      if @item.user == @current_user
+        @transactions = @item.transactions.all
+      end
+    else 
+      redirect_to new_user_session_path
     end
   end
   
@@ -40,12 +64,17 @@ class TransactionsController < ApplicationController
     if user_signed_in?
       @item = Item.find(params[:item_id])
       @transaction = @item.transactions.find(params[:id])
+      if @transaction.lender != @current_user && @transaction.borrower != @current_user
+        @transaction = nil
+      end
+    else 
+      redirect_to new_user_session_path
     end
   end
 
 
   private
   def transaction_params
-    params.require(:transaction).permit(:item_id, :borrower_id, :status)
+    params.require(:transaction).permit(:item_id, :lender_id, :status)
   end
 end

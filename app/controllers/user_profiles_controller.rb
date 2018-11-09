@@ -53,6 +53,18 @@ class UserProfilesController < ApplicationController
     @user_profile = UserProfile.find(params[:id])
   end
 
+  def transactions
+    if user_signed_in?
+      @user_profile = UserProfile.find(params[:id])
+      if @user_profile.user == @current_user
+        @transactions = Transaction.where(:lender_id => @user_profile.user_id)
+        .or(Transaction.where(:borrower_id => @user_profile.user_id))
+      end
+    else
+      redirect_to new_user_session_path
+    end
+  end
+
   private
   def user_profile_params
       params.require(:user_profile).permit(:first_name, :last_name, :date_of_birth,  :location,  :contact_list)
