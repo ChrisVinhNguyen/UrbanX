@@ -2,7 +2,11 @@ class TransactionsController < ApplicationController
   def new
     if user_signed_in?
       @item = Item.find(params[:item_id])
-      @transaction = @item.transactions.new
+      if @item.status == 'available'
+        @transaction = @item.transactions.new
+      else
+        redirect_to @item
+      end
     else
       redirect_to new_user_session_path
     end
@@ -14,6 +18,7 @@ class TransactionsController < ApplicationController
       @transaction = @item.transactions.create(transaction_params)
       @transaction.borrower_id = @current_user.id
       if @transaction.save
+        @item.update({:status => "unavailable"})
         redirect_to @item
       else
         render 'new'
