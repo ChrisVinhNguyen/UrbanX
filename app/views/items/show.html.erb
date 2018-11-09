@@ -34,6 +34,12 @@
 			<%= link_to 'Edit', edit_item_path(@item) %> 
 		<% end %> 
 	<% end %> 
+	<% if user_signed_in? %>
+
+		<% if @item.user_id == current_user.id %>
+			<%= link_to 'Transactions', item_transactions_path(@item) %> 
+		<% end %> 
+	<% end %> 
 
 	<% if user_signed_in? %>
 		<% if @item.user_id != current_user.id %>

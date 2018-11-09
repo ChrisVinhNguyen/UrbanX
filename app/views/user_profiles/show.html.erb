@@ -31,6 +31,10 @@
 		<%  end %>
 	</p>
 	<p>
+		<strong>Transactions:</strong>
+		<%= link_to("My Transactions", transactions_user_profile_path) %>
+	</p>
+	<p>
 		<strong>Contacts:</strong>
 		<%  @user_profile.contact_list do |contact|%>
 		<%= link_to(contact, "/user_profiles/"+contact) %>
