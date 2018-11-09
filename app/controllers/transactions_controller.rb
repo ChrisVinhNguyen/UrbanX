@@ -16,7 +16,8 @@ class TransactionsController < ApplicationController
     if user_signed_in?
       @item = Item.find(params[:item_id])
       @transaction = @item.transactions.create(transaction_params)
-      @transaction.borrower_id = @current_user.id
+      @transaction.lender = @item.user
+      @transaction.borrower = @current_user
       if @transaction.save
         @item.update({:status => "unavailable"})
         redirect_to @item
@@ -51,7 +52,9 @@ class TransactionsController < ApplicationController
   def index
     if user_signed_in?
       @item = Item.find(params[:item_id])
-      @transactions = @item.transactions.all
+      if @item.user == @current_user
+        @transactions = @item.transactions.all
+      end
     else 
       redirect_to new_user_session_path
     end
@@ -61,6 +64,9 @@ class TransactionsController < ApplicationController
     if user_signed_in?
       @item = Item.find(params[:item_id])
       @transaction = @item.transactions.find(params[:id])
+      if @transaction.lender != @current_user && @transaction.borrower != @current_user
+        @transaction = nil
+      end
     else 
       redirect_to new_user_session_path
     end
