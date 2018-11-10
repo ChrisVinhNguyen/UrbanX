@@ -1,8 +1,9 @@
 class UserReviewsController < ApplicationController
   def create
     if user_signed_in?
+      #puts(params)
       @user_profile = UserProfile.find(params[:user_profile_id])
-      @user_review = @user_profile.user_reviews.create(user_review_params)
+      @user_review = UserReview.create(user_review_params)
       @user_review.reviewer_id = @current_user.id
       @user_review.reviewee_id = @user_profile.id
       @user_review.created_at = DateTime.now
@@ -19,12 +20,15 @@ class UserReviewsController < ApplicationController
   end
 
   def new
-      @user_profile = UserProfile.find(params[:user_profile_id])
-      @user_review = @user_profile.user_reviews.new
+    puts(params)
+    puts("hi there")
+    @user_review = UserReview.new
   end
+
 
   def index
     if user_signed_in?
+      puts(params)
       @user_profile = UserProfile.find(params[:user_profile_id])
       @user_reviews = UserReview.where(:reviewee_id => @user_profile.user_id)
     else

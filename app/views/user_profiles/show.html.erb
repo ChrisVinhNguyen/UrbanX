@@ -50,9 +50,14 @@
 <% if current_user.id == @user_profile.user_id %>
 <%= link_to("Edit profile", "/user_profiles/" + @user_profile.id.to_s + "/edit") %>
 <%  end %>
-	<%= link_to('Reviews', user_profile_user_reviews_path(@user_profile)) %>
-	<%= link_to 'Create Review' , new_user_profile_user_review_path(@user_profile) %>
 
+	<strong>Reviews:</strong>
+		<%= render 'user_reviews' %>
+	</p>
+	<% if current_user.id != @user_profile.user_id %> 
+		<strong>Add a review:</strong>
+		<%= link_to("Add new review", new_user_review_path(@user_profile.user_id)) %>
+	<%end%>
 <%  end %>
 
 
