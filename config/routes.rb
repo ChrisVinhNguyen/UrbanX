@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   end
   resources :user_profiles do
     get 'transactions', :on => :member
+    get 'new_contact', :on => :member
+    post 'add_contact', :on => :member
+    post 'remove_contact', :on => :member
   end
   resources :items do 
     resources :item_reviews

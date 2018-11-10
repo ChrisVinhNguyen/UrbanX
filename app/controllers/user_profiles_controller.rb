@@ -51,6 +51,11 @@ class UserProfilesController < ApplicationController
 
   def show
     @user_profile = UserProfile.find(params[:id])
+    @contact_names = []
+    @user_profile.contact_list.each do |contact_id|
+      contact_profile = UserProfile.find(contact_id)
+      @contact_names.insert(contact_id.to_i,contact_profile.first_name + " " + contact_profile.last_name)
+    end
   end
 
   def transactions
@@ -63,6 +68,31 @@ class UserProfilesController < ApplicationController
     else
       redirect_to new_user_session_path
     end
+  end
+
+  def new_contact
+    if user_signed_in?
+      @user_profile = UserProfile.find(params[:id])
+      if @user_profile.user == @current_user
+        @user_profiles = UserProfile.all
+      end
+    else
+      redirect_to new_user_session_path
+    end
+  end
+
+  def add_contact
+      @contact = UserProfile.find(params[:contact_id])
+      @user_profile = UserProfile.find(params[:id])
+      @user_profile.contact_list.push(params[:contact_id])
+      @user_profile.save
+  end
+
+  def remove_contact
+      @contact = UserProfile.find(params[:contact_id])
+      @user_profile = UserProfile.find(params[:id])
+      @user_profile.contact_list.delete(params[:contact_id])
+      @user_profile.save
   end
 
   private
