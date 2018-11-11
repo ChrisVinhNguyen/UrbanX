@@ -71,7 +71,7 @@ class ItemReviewsController < ApplicationController
     end
   end
 
-  private 
+  private
   def item_review_params
       params.require(:item_review).permit(:rating, :comment)
   end

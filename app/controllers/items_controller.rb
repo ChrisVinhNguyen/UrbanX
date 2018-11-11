@@ -1,6 +1,4 @@
 class ItemsController < ApplicationController
-
-
   def create
     if user_signed_in?
 
@@ -72,6 +70,4 @@ private
   def item_params
       params.require(:item).permit(:name, :description, :category,  :quantity,  :condition, :value, :user_id, :status)
     end
-
-
 end
