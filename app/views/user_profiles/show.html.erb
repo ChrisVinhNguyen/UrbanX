@@ -36,15 +36,19 @@
 	</p>
 	<p>
 		<strong>Contacts:</strong>
-		<%  @user_profile.contact_list do |contact|%>
-		<%= link_to(contact, "/user_profiles/"+contact) %>
-		<%  end %>
-
 		<% if user_signed_in? %>
-		<% if current_user.id == @user_profile.user_id %>
-		<%= link_to("Add contact", "/user_profiles/" + @user_profile.id.to_s + "/edit") %>
+			<% if current_user.id == @user_profile.user_id %>
+				<%= link_to("Add contact",new_contact_user_profile_path) %>
+			<%  end %>
 		<%  end %>
-		<%  end %>
+		
+		<%  @user_profile.contact_list.each do |contact_id|%>
+		<li>
+			<%= link_to(@contact_names[contact_id.to_i], "/user_profiles/"+contact_id) %>
+			<%= button_to "Remove contact", {:action => "remove_contact", :contact_id => contact_id, :id=> @user_profile.id} %>
+			<%  end %>
+		</li>
+	
 	</p>
 <% if user_signed_in? %>
 <% if current_user.id == @user_profile.user_id %>
