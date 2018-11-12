@@ -51,7 +51,7 @@ class UserProfilesController < ApplicationController
 
   def show
     @user_profile = UserProfile.find(params[:id])
-    @user_reviews = UserReview.where(reviewee_id: @user_profile.id)
+    @user_reviews = UserReview.where(reviewee_id: @user_profile.user_id)
     @contact_names = []
     @user_profile.contact_list.each do |contact_id|
       contact_profile = UserProfile.find(contact_id)

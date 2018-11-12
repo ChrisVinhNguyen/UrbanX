@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get 'items/update'
   get 'items/destroy'
   devise_for :users, controllers: { registrations: 'users/registrations' }
-  root to: "user_profiles#index"
+  root to: "items#index"
 
   resources :user_reviews  
   resources :users 

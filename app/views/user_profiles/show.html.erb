@@ -59,9 +59,9 @@
   <strong>Reviews:</strong>
     <%= render 'user_reviews' %>
   </p>
-  <% if current_user.id != @user_profile.user_id %>
+  <% if current_user.id != @user_profile.user_id and ((Transaction.where(lender_id: current_user.id, borrower_id: @user_profile.user_id).exists?) or (Transaction.where(lender_id: @user_profile.user_id, borrower_id: current_user.id).exists?))%>
     <strong>Add a review:</strong>
-    <%= link_to("Add new review", new_user_review_path(reviewer_id: @user_profile.user_id) ) %>
+    <%= link_to("Add new review", new_user_review_path(reviewee_id: @user_profile.user_id)) %>
   <%end%>
 <%  end %>
 
