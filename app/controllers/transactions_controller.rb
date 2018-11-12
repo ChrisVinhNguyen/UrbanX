@@ -19,7 +19,6 @@ class TransactionsController < ApplicationController
       @transaction.lender = @item.user
       @transaction.borrower = @current_user
       if @transaction.save
-        @item.update({:status => "unavailable"})
         redirect_to @item
       else
         render 'new'
@@ -49,6 +48,8 @@ class TransactionsController < ApplicationController
       if @transaction.update(transaction_params)
         if params[:transaction][:status] == 'completed'
           @item.update({:status => 'available'})
+        elsif params[:transaction][:status] =='lent'
+          @item.update({:status => 'unavailable'})
         end
         redirect_to item_transaction_url
       else
