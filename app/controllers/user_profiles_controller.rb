@@ -51,6 +51,7 @@ class UserProfilesController < ApplicationController
 
   def show
     @user_profile = UserProfile.find(params[:id])
+    @user_reviews = UserReview.where(reviewee_id: @user_profile.id)
     @contact_names = []
     @user_profile.contact_list.each do |contact_id|
       contact_profile = UserProfile.find(contact_id)
@@ -82,21 +83,21 @@ class UserProfilesController < ApplicationController
   end
   
   def add_contact
-      @contact = UserProfile.find(params[:contact_id])
-      @user_profile = UserProfile.find(params[:id])
-      @user_profile.contact_list.push(params[:contact_id])
-      @user_profile.save
+    @contact = UserProfile.find(params[:contact_id])
+    @user_profile = UserProfile.find(params[:id])
+    @user_profile.contact_list.push(params[:contact_id])
+    @user_profile.save
   end
 
   def remove_contact
-      @contact = UserProfile.find(params[:contact_id])
-      @user_profile = UserProfile.find(params[:id])
-      @user_profile.contact_list.delete(params[:contact_id])
-      @user_profile.save
+    @contact = UserProfile.find(params[:contact_id])
+    @user_profile = UserProfile.find(params[:id])
+    @user_profile.contact_list.delete(params[:contact_id])
+    @user_profile.save
   end
 
   private
   def user_profile_params
-      params.require(:user_profile).permit(:first_name, :last_name, :date_of_birth,  :location,  :contact_list)
+    params.require(:user_profile).permit(:first_name, :last_name, :date_of_birth,  :location,  :contact_list)
   end
 end

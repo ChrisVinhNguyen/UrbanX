@@ -44,7 +44,7 @@
 
     <%  @user_profile.contact_list.each do |contact_id|%>
     <li>
-      <%= link_to(@contact_names[contact_id.to_i], "/user_profiles/"+contact_id) %>
+      <%= link_to(@contact_names[contact_id.to_i], "/user_profiles/" + contact_id) %>
       <%= button_to "Remove contact", {:action => "remove_contact", :contact_id => contact_id, :id=> @user_profile.id} %>
       <%  end %>
     </li>
@@ -60,7 +60,7 @@
   </p>
   <% if current_user.id != @user_profile.user_id %>
     <strong>Add a review:</strong>
-    <%= link_to("Add new review", new_user_review_path(@user_profile.user_id)) %>
+    <%= link_to("Add new review", new_user_review_path(reviewer_id: @user_profile.user_id) ) %>
   <%end%>
 <%  end %>
 

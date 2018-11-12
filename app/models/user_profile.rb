@@ -15,7 +15,7 @@
 #
 
 class UserProfile < ApplicationRecord
-  	validates :first_name, :last_name, :date_of_birth, presence: true
-  	has_many :user_reviews, dependent: :destroy
-	belongs_to :user
+  validates :first_name, :last_name, :date_of_birth, presence: true
+  has_many :user_reviews, dependent: :destroy
+  belongs_to :user
 end

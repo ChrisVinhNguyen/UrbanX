@@ -20,29 +20,13 @@
 		<td><%= user_review.comment %></td>
 		<td><%= UserProfile.find(user_review.reviewer_id).first_name %>
 			<%= UserProfile.find(user_review.reviewer_id).last_name %> 
-			<%= UserProfile.find(user_review.reviewer_id).email %>
 		</td>
-		<td><%= user_review.updated_on %></td>
-
-		<p>
-		<% if current_user != nil and user_review.reviewer_id == current_user.id %>
-			<%= link_to 'Edit', edit_user_profile_user_review_path(@user_profile, user_review) %>
-		<% end %>
-		</p>
-
-		<p>
-		<% if current_user != nil and if user_review.reviewer_id == current_user.id %>
-			<%= link_to 'Delete Review', [user_review.user_profile, user_review], 
-				method: :delete,
-				data: { confirm: 'Are you sure?'} %>
-		<% end %>
-		</p>
+		<td><%= user_review.updated_at %></td>
 	</tr>
 <% end %>
 
 </table>
 
-<% end %>
 <% end %>
 
 

@@ -1,16 +1,19 @@
 class UserReviewsController < ApplicationController
   def create
     if user_signed_in?
-      #puts(params)
-      @user_profile = UserProfile.find(params[:user_profile_id])
-      @user_review = UserReview.create(user_review_params)
-      @user_review.reviewer_id = @current_user.id
-      @user_review.reviewee_id = @user_profile.id
-      @user_review.created_at = DateTime.now
-      @user_review.updated_at = DateTime.now 
+      @user_profile = UserProfile.find(params[:user_review][:reviewer_id])
+
+      user_review_params = permit_user_review_params
+      user_review_params[:rating] = user_review_params[:rating]
+      user_review_params[:reviewer_id] = @current_user.id
+      user_review_params[:reviewee_id] = @user_profile.id
+      user_review_params[:created_at] = DateTime.now
+      user_review_params[:updated_at] = DateTime.now
+
+      @user_review = UserReview.new(user_review_params)
 
       if @user_review.save
-          redirect_to @user_profile
+        redirect_to @user_profile
       else
         render 'new'
       end
@@ -20,11 +23,9 @@ class UserReviewsController < ApplicationController
   end
 
   def new
-    puts(params)
-    puts("hi there")
+    @reviewer_id = params[:reviewer_id]
     @user_review = UserReview.new
   end
-
 
   def index
     if user_signed_in?
@@ -88,7 +89,7 @@ class UserReviewsController < ApplicationController
   end
 
   private
-  def user_review_params
-      params.require(:user_review).permit(:rating, :comment)
-    end
+  def permit_user_review_params
+    params.require(:user_review).permit(:rating, :comment)
+  end
 end

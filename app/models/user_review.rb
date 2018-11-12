@@ -12,6 +12,6 @@
 #
 
 class UserReview < ApplicationRecord
-	belongs_to :reviewer, class_name: :User_Profile, foreign_key: :reviewer_id
-	belongs_to :reviewee, class_name: :User_Profile, foreign_key: :reviewee_id
+  belongs_to :reviewer, class_name: :UserProfile, foreign_key: :reviewer_id
+  belongs_to :reviewee, class_name: :UserProfile, foreign_key: :reviewee_id
 end
