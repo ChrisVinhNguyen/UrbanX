@@ -15,7 +15,7 @@
 	 
 	  <% @transactions.each do |transaction| %>
 	    <tr>
-	      <td><%= transaction.item_id %></td>
+	      <td><%= Item.find(transaction.item_id).name %></td>
 	      <td><%= User.find(transaction.borrower_id).email %></td>
 	      <td><%= User.find(transaction.lender_id).email %></td>
 	      <td><%= link_to('Show', "/items/"+transaction.item_id.to_s+"/transactions/"+transaction.id.to_s) %></td>
