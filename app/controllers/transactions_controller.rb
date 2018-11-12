@@ -29,11 +29,31 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def edit
+    if user_signed_in?
+      @item = Item.find(params[:item_id])
+      if @item.user == @current_user && @item.transactions.find(params[:id]).status != 'completed'
+        @transaction = @item.transactions.find(params[:id])
+      else
+        redirect_to @item
+      end
+    else
+      redirect_to new_user_session_path
+    end
+  end
+
   def update
     if user_signed_in?
       @item = Item.find(params[:item_id])
       @transaction = @item.transactions.find(params[:id])
-      @transaction.update(params)
+      if @transaction.update(transaction_params)
+        if params[:transaction][:status] == 'completed'
+          @item.update({:status => 'available'})
+        end
+        redirect_to item_transaction_url
+      else
+        render 'edit'
+      end
     else
       redirect_to new_user_session_path
     end
@@ -75,6 +95,6 @@ class TransactionsController < ApplicationController
 
   private
   def transaction_params
-    params.require(:transaction).permit(:item_id, :lender_id, :status)
+    params.require(:transaction).permit(:status)
   end
 end

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     get 'transactions', :on => :member
     get 'user_reviews', :on => :member
     get 'new_contact', :on => :member
+    get 'transactions_requests', :on => :member
     post 'add_contact', :on => :member
     post 'remove_contact', :on => :member
   end
