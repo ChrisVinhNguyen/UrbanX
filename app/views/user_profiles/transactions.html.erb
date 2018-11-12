@@ -5,24 +5,11 @@
 <% else %>
   <h1><%= pluralize(@transactions.count, "transaction") %></h1>
 
-  <table>
-    <tr>
-      <th>Item</th>
-      <th>Borrower</th>
-      <th>Lender</th>
-      <th></th>
-    </tr>
-   
-    <% @transactions.each do |transaction| %>
-      <tr>
-        <td><%= transaction.item_id %></td>
-        <td><%= User.find(transaction.borrower_id).email %></td>
-        <td><%= User.find(transaction.lender_id).email %></td>
-        <td><%= link_to('Show', "/items/"+transaction.item_id.to_s+"/transactions/"+transaction.id.to_s) %></td>
-      </tr>
-    <% end %>
+  <h1>Borrowed:</h1>
+  <%= render 'transactions_table', :transactions => @transactions.where(:borrower_id => @current_user.id) %>
 
-  </table>
+  <h1>Lent:</h1>
+  <%= render 'transactions_table', :transactions => @transactions.where(:lender_id => @current_user.id) %>
 
 <% end %>
 
