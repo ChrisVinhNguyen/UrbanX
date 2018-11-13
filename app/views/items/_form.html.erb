@@ -40,9 +40,11 @@
     <%= form.label :quantity %><br>
     <%= form.text_field :quantity %>
   <p>
-    <%= form.label :condition %><br>
-    <%= form.text_field :condition %>
+
   <p>
+    <%= form.label :condition%><br>
+    <%= form.select :condition, ['Brand New', 'Excellent', 'Good', 'Fair', 'Worn Out']%>
+  </p>
 
   <p>
     <%= form.label :value %><br>
