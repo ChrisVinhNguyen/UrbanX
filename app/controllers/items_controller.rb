@@ -25,7 +25,7 @@ class ItemsController < ApplicationController
     @item_name = params[:item][:search]
     #@items= Item.find(params[:item])
     #@items = Item.where(name: @item_name)
-    @items = Item.where("name ilike ?", "%#{@item_name}%")
+    @items = Item.where("name ilike ? AND status = ?", "%#{@item_name}%","available")
 
 
     @items.each do |item|
