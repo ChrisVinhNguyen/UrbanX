@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'items/destroy'
   devise_for :users, controllers: { registrations: 'users/registrations' }
   root to: "items#index"
+  post 'items/search'
 
   resources :user_reviews  
   resources :users 

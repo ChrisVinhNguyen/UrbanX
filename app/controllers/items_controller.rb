@@ -21,6 +21,24 @@ class ItemsController < ApplicationController
     @item = Item.new
   end
 
+  def search
+    @item_name = params[:item][:search]
+    #@items= Item.find(params[:item])
+    #@items = Item.where(name: @item_name)
+    @items = Item.where("name ilike ?", "%#{@item_name}%")
+
+
+    @items.each do |item|
+      puts item.name
+      puts item.description
+    end
+    #@item =  Item.find_by(name: @item_name)
+    #puts "--------------------searching for "+@item_name
+    #puts @item.description
+
+
+  end
+
   def index
     @items = Item.all
   end
