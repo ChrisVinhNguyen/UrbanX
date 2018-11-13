@@ -1,4 +1,4 @@
-<h1>Transactions#new</h1>
+<h1>Send request for <%= @item.name %>?</h1>
 
 <%= form_with(model: [ @item, @item.transactions.build ], local: true) do |form| %>
  
@@ -16,14 +16,10 @@
     </div>
   <% end %>
 
+  <%= form.hidden_field :status, value: 'pending' %>
+
   <p>
-    <%= form.label :status %><br>
-    <%= form.text_area :status %>
-  </p>
- 
- 
-  <p>
-    <%= form.submit %>
+    <%= form.submit "Send request"%>
   </p>
  
 <% end %>
