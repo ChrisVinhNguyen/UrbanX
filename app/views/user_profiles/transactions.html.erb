@@ -3,13 +3,20 @@
 <% elsif @transactions.empty? %>
   <h1> You do not have any transactions </h1>
 <% else %>
-  <h1><%= pluralize(@transactions.count, "transaction") %></h1>
+  <h1><%= pluralize(@transactions.where.not(:status => 'pending').count, "transaction") %></h1>
 
-  <h1>Borrowed:</h1>
-  <%= render 'transactions_table', :transactions => @transactions.where(:borrower_id => @current_user.id) %>
+  <h1>In progress:</h1>
+  <h2>Borrowing:</h2>
+  <%= render 'transactions_table', :transactions => @transactions.where(:borrower_id => @current_user.id, :status => 'lent') %>
+  <h2>Lending:</h2>
+  <%= render 'transactions_table', :transactions => @transactions.where(:lender_id => @current_user.id, :status => 'lent') %>
 
-  <h1>Lent:</h1>
-  <%= render 'transactions_table', :transactions => @transactions.where(:lender_id => @current_user.id) %>
+  <h1>Completed:</h1>
+  <h2>Borrowed:</h2>
+  <%= render 'transactions_table', :transactions => @transactions.where(:borrower_id => @current_user.id, :status => 'completed') %>
+
+  <h2>Lent:</h2>
+  <%= render 'transactions_table', :transactions => @transactions.where(:lender_id => @current_user.id, :status => 'completed') %>
 
 <% end %>
 

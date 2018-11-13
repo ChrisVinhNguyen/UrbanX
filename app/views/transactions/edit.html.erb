@@ -1,0 +1,38 @@
+<h1>
+  <% if @transaction.status == 'pending' %>
+    Lend <%= @item.name %> to <%= User.find(@transaction.borrower_id).email %>?
+  <% elsif @transaction.status == 'lent' %>
+    <%= @item.name.capitalize %> returned by <%= User.find(@transaction.borrower_id).email %>?
+  <% end %>
+  </h1>
+
+<%= form_with(model: @transaction, url: [@item, @transaction]) do |form| %>
+ 
+  <% if @transaction.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@transaction.errors.count, "error") %> prohibited
+        this transaction from being saved:
+      </h2>
+      <ul>
+        <% @transaction.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if @transaction.status == 'pending' %>
+    <%= form.hidden_field :status, value: 'lent' %>
+  <% elsif @transaction.status == 'lent' %>
+    <%= form.hidden_field :status, value: 'completed' %>
+  <% end %>
+
+  <p>
+    <%= form.submit "Confirm"%>
+  </p>
+ 
+<% end %>
+
+
+<%= link_to 'Back', 'javascript:history.back()' %>
