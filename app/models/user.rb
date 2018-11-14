@@ -28,4 +28,5 @@ class User < ApplicationRecord
 	has_one :user_profile
 	has_many :items
 	has_many :transactions
+
 end

@@ -75,6 +75,9 @@ Rails.application.configure do
   password: ENV["GMAIL_PASSWORD"]
   }
 
+  # Store files locally.
+  config.active_storage.service = :local
+
 
   
 end

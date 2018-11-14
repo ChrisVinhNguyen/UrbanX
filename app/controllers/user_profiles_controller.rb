@@ -111,6 +111,6 @@ class UserProfilesController < ApplicationController
 
   private
   def user_profile_params
-    params.require(:user_profile).permit(:first_name, :last_name, :date_of_birth,  :location,  :contact_list)
+    params.require(:user_profile).permit(:first_name, :last_name, :date_of_birth,  :location,  :contact_list, :image)
   end
 end

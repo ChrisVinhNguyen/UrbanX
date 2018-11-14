@@ -3,16 +3,15 @@
 # Table name: items
 #
 #  id          :bigint(8)        not null, primary key
-#  name        :string
-#  picture     :string
-#  description :text
 #  category    :string
-#  quantity    :integer
 #  condition   :string
 #  date_posted :datetime
+#  description :text
+#  name        :string
+#  quantity    :integer
+#  status      :string
 #  value       :float
 #  user_id     :integer
-#  status      :string
 #
 
 class Item < ApplicationRecord
@@ -22,4 +21,22 @@ class Item < ApplicationRecord
   belongs_to :user, class_name: :User, foreign_key: :user_id
   has_many :item_reviews, dependent: :destroy
   has_many :transactions
+
+  has_many_attached :images
+
+
+  def thumbnail input
+  		return self.images[input].variant(resize: '300x300!').processed
+  end 
+
+
+  private 
+  def image_type
+
+  	images.each do |image|
+  		if !image.content_type.in?(%('image/jpeg image/png image/jpg'))
+  			errors.add(:images, 'needs to be JPEG/JPG/PNG')
+		end
+	end
+  end
 end

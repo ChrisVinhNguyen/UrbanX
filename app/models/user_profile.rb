@@ -19,4 +19,5 @@ class UserProfile < ApplicationRecord
 
   has_many :user_reviews, dependent: :destroy
   belongs_to :user
+  has_one_attached :image
 end
