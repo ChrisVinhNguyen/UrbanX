@@ -84,6 +84,12 @@ class ItemsController < ApplicationController
     end
   end
 
+  def delete_image_attachment
+    @image = ActiveStorage::Attachment.find(params[:item_id])
+    @image.purge
+    redirect_back(fallback_location: items_path)
+  end
+
 private
   def item_params
       params.require(:item).permit(:name, :description, :category,  :quantity,  :condition, :value, :user_id, :status, images: [])

@@ -109,6 +109,15 @@ class UserProfilesController < ApplicationController
     end
   end
 
+  def delete_image_attachment
+    @user_profile = UserProfile.find(params[:user_profile_id])
+    @image = @user_profile.image
+    @image.purge
+    redirect_to @user_profile
+  end
+
+
+
   private
   def user_profile_params
     params.require(:user_profile).permit(:first_name, :last_name, :date_of_birth,  :location,  :contact_list, :image)

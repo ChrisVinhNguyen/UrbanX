@@ -24,6 +24,7 @@ class Item < ApplicationRecord
   has_many :transactions
 
   has_many_attached :images
+  validate :image_type
 
 
   def thumbnail input
@@ -33,11 +34,12 @@ class Item < ApplicationRecord
 
   private 
   def image_type
-
-  	images.each do |image|
-  		if !image.content_type.in?(%('image/jpeg image/png image/jpg'))
-  			errors.add(:images, 'needs to be JPEG/JPG/PNG')
-		end
-	end
+    if images.attached?
+      images.each do |image|
+        if !image.content_type.in?(%('image/jpeg image/png image/jpg'))
+          errors.add(:images, 'needs to be JPEG/JPG/PNG')
+		    end
+      end
+    end
   end
 end

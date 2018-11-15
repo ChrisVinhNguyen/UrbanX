@@ -20,4 +20,17 @@ class UserProfile < ApplicationRecord
   has_many :user_reviews, dependent: :destroy
   belongs_to :user
   has_one_attached :image
+  validate :image_type
+
+
+
+  private 
+  def image_type
+    if image.attached?     
+        if !image.content_type.in?(%('image/jpeg image/png image/jpg'))
+          errors.add(:image, 'needs to be JPEG/JPG/PNG')
+		    end
+    end
+  end
+
 end

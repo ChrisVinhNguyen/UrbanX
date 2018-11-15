@@ -38,6 +38,12 @@
     		<% (0...@item.images.count).each do |image| %>
     			<div style="width:300px; height:300px;">
     			<%=  image_tag(@item.images[image], style: 'width:100%; height:auto') %> 	
+    			<% if user_signed_in? %>
+
+					<% if @item.user_id == current_user.id %>
+						<%= link_to 'Remove', item_delete_image_attachment_url(@item.images[image]), method: :delete, data: {confirm: "Are you sure?"} %> 
+					<% end %> 
+				<% end %> 
     			</div>
 			<%end %>
 		<%end %>

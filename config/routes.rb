@@ -20,10 +20,12 @@ Rails.application.routes.draw do
     get 'transactions_requests', :on => :member
     post 'add_contact', :on => :member
     post 'remove_contact', :on => :member
+    delete :delete_image_attachment
   end
 
   resources :items do 
     resources :item_reviews
     resources :transactions
+    delete :delete_image_attachment
   end
 end
