@@ -13,7 +13,7 @@
 
 class UserReview < ApplicationRecord
   validates :comment, :rating, :reviewee_id, :reviewer_id, presence: true
-  validates :rating, numericality: { only_integer: true }
+  validates :rating, numericality: true
 
   belongs_to :reviewer, class_name: :UserProfile, foreign_key: :reviewer_id
   belongs_to :reviewee, class_name: :UserProfile, foreign_key: :reviewee_id
