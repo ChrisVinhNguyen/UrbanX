@@ -112,7 +112,7 @@ class UserProfilesController < ApplicationController
   def delete_image_attachment
     @user_profile = UserProfile.find(params[:user_profile_id])
     @image = @user_profile.image
-    @image.purge
+    @image.purge_later
     redirect_to @user_profile
   end
 

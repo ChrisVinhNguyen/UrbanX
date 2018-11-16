@@ -86,7 +86,7 @@ class ItemsController < ApplicationController
 
   def delete_image_attachment
     @image = ActiveStorage::Attachment.find(params[:item_id])
-    @image.purge
+    @image.purge_later
     redirect_back(fallback_location: items_path)
   end
 
