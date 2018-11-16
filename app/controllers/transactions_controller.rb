@@ -32,7 +32,11 @@ class TransactionsController < ApplicationController
     if user_signed_in?
       @item = Item.find(params[:item_id])
       if @item.user == @current_user && @item.transactions.find(params[:id]).status != 'completed'
-        @transaction = @item.transactions.find(params[:id])
+        if @item.transactions.find(params[:id]).status == 'pending' && @item.status == 'unavailable'
+          redirect_to @item
+        else
+          @transaction = @item.transactions.find(params[:id])
+        end
       else
         redirect_to @item
       end
