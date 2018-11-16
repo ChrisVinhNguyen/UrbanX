@@ -2,7 +2,7 @@ class TransactionsController < ApplicationController
   def new
     if user_signed_in?
       @item = Item.find(params[:item_id])
-      if @item.status == 'available' && @item.user != @current_user
+      if @item.status == 'available' && @item.user != @current_user && @item.transactions.where(borrower_id: current_user.id, status: 'pending').empty?
         @transaction = @item.transactions.new
       else
         redirect_to @item

@@ -76,7 +76,11 @@
 	<% if user_signed_in? %>
 		<% if @item.user_id != current_user.id %>
 				<% if @item.status == "available" %>
-					<%= link_to 'Borrow', new_item_transaction_path(@item) %> |
+					<% if @item.transactions.where(borrower_id: current_user.id, status: 'pending').exists? %>
+						<p style="display:inline-block;">Request sent |</p>
+					<% else %>
+						<%= link_to 'Borrow', new_item_transaction_path(@item) %> |
+					<% end %>
 				<%end%>
 		<% end %> 
 	<% end %> 
