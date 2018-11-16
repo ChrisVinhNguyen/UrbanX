@@ -3,19 +3,34 @@
 # Table name: user_profiles
 #
 #  id            :bigint(8)        not null, primary key
-#  user_id       :integer
+#  contact_list  :string           default([]), is an Array
+#  date_of_birth :date
 #  first_name    :string
 #  last_name     :string
-#  picture       :string
-#  date_of_birth :datetime
 #  location      :string
-#  contact_list  :string           default([]), is an Array
+#  picture       :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  user_id       :integer
 #
 
 class UserProfile < ApplicationRecord
   validates :first_name, :last_name, :date_of_birth, presence: true
 
-	belongs_to :user
+  has_many :user_reviews, dependent: :destroy
+  belongs_to :user
+  has_one_attached :image
+  validate :image_type
+
+
+
+  private 
+  def image_type
+    if image.attached?     
+        if !image.content_type.in?(%('image/jpeg image/png image/jpg'))
+          errors.add(:image, 'needs to be JPEG/JPG/PNG')
+		    end
+    end
+  end
+
 end

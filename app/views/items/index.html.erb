@@ -1,6 +1,12 @@
 <h1>Items#index</h1>
 <p>Find me in app/views/items/index.html.erb</p>
 
+<%=form_for(:item,:url=>{:controller=>'items',:action=>'search'}) do |f| %>
+<p> Item Name</br><%=f.text_field :search %></p>
+<%=f.submit :Search %>
+<%end%>
+
+
 	<p>
 	  <strong>Item name:</strong>
 	  <br>
@@ -16,4 +22,26 @@
 	  		</p>
 	  <% end %>
 	  </p>
+	  <p>
+	  	<% if user_signed_in? %>
+	  		<%= link_to 'Create Item' , items_new_path %>
+	  	<%end%>
+	  </p>
 	</p>
+
+
+	<br>
+	<br>
+	<% if user_signed_in? %>
+	<li>
+		<%= link_to("My Profile", "/user_profiles/"+current_user.id.to_s) %> 
+	</li>
+    <li> 
+      <%=link_to('Logout', destroy_user_session_path, method: :delete) %>
+    </li>
+
+  <% else %>
+    <li>
+      <%= link_to('Login', new_user_session_path) %>
+    </li>
+<%end%>

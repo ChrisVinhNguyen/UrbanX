@@ -5,7 +5,8 @@ class CreateUserReviews < ActiveRecord::Migration[5.2]
       t.text :comment
       t.datetime :created_at
       t.datetime :updated_at
-      t.integer :user_id
+      t.integer :reviewer_id
+      t.integer :reviewee_id
 
       t.timestamps
     end

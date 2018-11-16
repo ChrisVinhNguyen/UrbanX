@@ -1,0 +1,16 @@
+<h1> Add Contact </h1>
+	<% @user_profiles.each do |user| %>
+		<% if user.id != @user_profile.id %>
+		<li>
+		<%= link_to(user.first_name + " " +user.last_name, "/user_profiles/"+user.id.to_s) %> 
+			<% if !(@user_profile.contact_list.include? user.id.to_s) &&  %>
+				<%= button_to "Add contact", {:action => "add_contact", :contact_id => user.id, :id=> @user_profile.id} %>
+			<%else %>
+				<%= button_to "Remove contact", {:action => "remove_contact", :contact_id => user.id, :id=> @user_profile.id} %>
+			<% end %>
+		<% end %>
+		</li>
+	<% end %>
+
+	<%= link_to 'To Profile', @user_profile %>
+

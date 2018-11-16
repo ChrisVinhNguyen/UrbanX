@@ -5,30 +5,79 @@
 	</p>
 
 	<h2>
+		Description:
 		<%=  @item.description %>
 	</h2>
 	
 	<h2>
+		Category: 
 		<%=  @item.category %>
 	</h2>	
 
 	<h2>
+		Quantity: 
 		<%=  @item.quantity %>
 	</h2>	
 
 	<h2>
+		Condition: 
 		<%=  @item.condition %>
 	</h2>	
 
 	<h2>
+		Value: 
 		<%=  @item.value %>
 	</h2>	
+
+	<h2>
+		Status: 
+		<%=  @item.status %>
+	</h2>
+
+
+	<h2>
+		<% if @item.images.attached? %>
+    		<% (0...@item.images.count).each do |image| %>
+    			<div style="width:300px; height:300px;">
+    			<%=  image_tag(@item.images[image], style: 'width:100%; height:auto') %> 	
+    			<% if user_signed_in? %>
+
+					<% if @item.user_id == current_user.id %>
+						<%= link_to 'Remove', item_delete_image_attachment_url(@item.images[image]), method: :delete, data: {confirm: "Are you sure?"} %> 
+					<% end %> 
+				<% end %> 
+    			</div>
+			<%end %>
+		<%end %>
+	</h2>	
+
+
 	<h2>Reviews</h2>
 	<%= render @item.item_reviews %>
 
+	<% if Transaction.where(borrower_id: current_user.id, item_id: @item.id).exists? %>
 	<h2>Add a review:</h2>
 	<%= render 'item_reviews/form' %>
+	<%end%>
 
-	<%= link_to 'Edit', edit_item_path(@item) %> |
-	<%= link_to 'Lend', new_item_transaction_path(@item) %> |
+	<% if user_signed_in? %>
+
+		<% if @item.user_id == current_user.id %>
+			<%= link_to 'Edit', edit_item_path(@item) %> |
+		<% end %> 
+	<% end %> 
+	<% if user_signed_in? %>
+
+		<% if @item.user_id == current_user.id %>
+			<%= link_to 'Transactions', item_transactions_path(@item) %> |
+		<% end %> 
+	<% end %> 
+
+	<% if user_signed_in? %>
+		<% if @item.user_id != current_user.id %>
+				<% if @item.status == "available" %>
+					<%= link_to 'Borrow', new_item_transaction_path(@item) %> |
+				<%end%>
+		<% end %> 
+	<% end %> 
 	<%= link_to 'Back', items_path %>

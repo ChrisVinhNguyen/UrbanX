@@ -7,45 +7,78 @@
     <li>
       <%= link_to('Login', new_user_session_path) %>
     </li>
-    <%end%>
+<%end%>
 
 <h1><%= @user_profile.first_name + " " + @user_profile.last_name %></h1>
-	<p>
-		<strong>Date of birth:</strong>
-		<%=  @user_profile.date_of_birth %>
+  
+     <% if @user_profile.image.attached? %>      
+          <div style="width:300px; height:300px;">
+            <%= image_tag(url_for(@user_profile.image), style: 'width:100%; height:auto;') %>
+              <% if user_signed_in? %>
 
-	<p>
-		<strong>Location:</strong>
-		<%=  @user_profile.location %>
-	</p>
-	<p>
-		<strong>Items:</strong>
-		<%  @user_profile.user.items.each do |item| %>
-		<%= link_to(item.name, "/items/"+item.id.to_s) %>
-		<%  end %>
+                <% if @user_profile.user_id == current_user.id %>
+                  <%= link_to 'Remove', user_profile_delete_image_attachment_url(@user_profile.user_id), method: :delete, data: {confirm: "Are you sure?"} %> 
+                <% end %> 
 
-		<% if user_signed_in? %>
-		<% if current_user.id == @user_profile.user_id %>
-		<%= link_to("New Item", "/items/new") %>
-		<%  end %>
-		<%  end %>
-	</p>
-	<p>
-		<strong>Contacts:</strong>
-		<%  @user_profile.contact_list do |contact|%>
-		<%= link_to(contact, "/user_profiles/"+contact) %>
-		<%  end %>
+              <% end %> 
+          </div>
+    <%end %>
 
-		<% if user_signed_in? %>
-		<% if current_user.id == @user_profile.user_id %>
-		<%= link_to("Add contact", "/user_profiles/" + @user_profile.id.to_s + "/edit") %>
-		<%  end %>
-		<%  end %>
-	</p>
+
+
+  <p>
+    <strong>Date of birth:</strong>
+    <%= @user_profile.date_of_birth %>
+  </p>
+  <p>
+    <strong>Location:</strong>
+    <%= @user_profile.location %>
+  </p>
+  <p>
+    <strong>Items:</strong>
+    <%  @user_profile.user.items.each do |item| %>
+    <%= link_to(item.name, "/items/"+item.id.to_s) %>
+    <%  end %>
+
+    <% if user_signed_in? %>
+    <% if current_user.id == @user_profile.user_id %>
+    <%= link_to("New Item", "/items/new") %>
+    <%  end %>
+    <%  end %>
+  </p>
+  <p>
+    <strong>Transactions:</strong>
+    <%= link_to("Pending Requests", transactions_requests_user_profile_path) %>
+    <%= link_to("My Transactions", transactions_user_profile_path) %>
+  </p>
+  <p>
+    <strong>Contacts:</strong>
+    <% if user_signed_in? %>
+      <% if current_user.id == @user_profile.user_id %>
+        <%= link_to("Add contact",new_contact_user_profile_path) %>
+      <%  end %>
+    <%  end %>
+
+    <%  @user_profile.contact_list.each do |contact_id|%>
+    <li>
+      <%= link_to(@contact_names[contact_id.to_i], "/user_profiles/" + contact_id) %>
+      <%= button_to "Remove contact", {:action => "remove_contact", :contact_id => contact_id, :id=> @user_profile.id} %>
+      <%  end %>
+    </li>
+
+  </p>
 <% if user_signed_in? %>
 <% if current_user.id == @user_profile.user_id %>
 <%= link_to("Edit profile", "/user_profiles/" + @user_profile.id.to_s + "/edit") %>
 <%  end %>
+
+  <strong>Reviews:</strong>
+    <%= render 'user_reviews' %>
+  </p>
+  <% if current_user.id != @user_profile.user_id and ((Transaction.where(lender_id: current_user.id, borrower_id: @user_profile.user_id).exists?) or (Transaction.where(lender_id: @user_profile.user_id, borrower_id: current_user.id).exists?))%>
+    <strong>Add a review:</strong>
+    <%= link_to("Add new review", new_user_review_path(reviewee_id: @user_profile.user_id)) %>
+  <%end%>
 <%  end %>
 
 

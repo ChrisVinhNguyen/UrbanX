@@ -8,12 +8,12 @@
 	<%= item_review.comment %>
 </p>
 <p>
-	<% if item_review.owner_id == current_user.id %>
+	<% if current_user != nil and item_review.owner_id == current_user.id %>
 	<%= link_to 'Edit', edit_item_item_review_path(@item, item_review) %> 
 	<% end %>
 </p>
 <p>
-	<% if item_review.owner_id == current_user.id %>
+	<% if current_user != nil and item_review.owner_id == current_user.id %>
 	<%= link_to 'Delete Review', [item_review.item, item_review], 
 				method: :delete,
 				data: { confirm: 'Are you sure?'} %>

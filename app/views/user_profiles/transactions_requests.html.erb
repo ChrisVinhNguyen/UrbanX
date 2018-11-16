@@ -1,0 +1,16 @@
+<% if @transactions == nil %>
+  <h1> Access denied </h1>
+<% elsif @transactions.empty? %>
+  <h1> You currently do not have any requests </h1>
+<% else %>
+  <h1><%= pluralize(@transactions.count, "request") %></h1>
+
+  <h2>My requests:</h2>
+  <%= render 'transactions_table', :transactions => @transactions.where(:borrower_id => @current_user.id, :status => 'pending') %>
+  <h2>Requests for me:</h2>
+  <%= render 'transactions_table', :transactions => @transactions.where(:lender_id => @current_user.id, :status => 'pending') %>
+
+<% end %>
+
+
+<%= link_to 'Back', 'javascript:history.back()' %>

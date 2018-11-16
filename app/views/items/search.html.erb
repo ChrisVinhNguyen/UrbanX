@@ -1,0 +1,17 @@
+<h1>Search Result for <%=@item_name%>:</h1>
+	<p>
+	  <% @items.each do |item| %>
+	  		<p>
+	  		<%= link_to(item.name, "/items/"+item.id.to_s) %>
+	  		<% if user_signed_in? %>
+	  			<% if item.user_id == current_user.id %>
+  					<%= link_to("Edit", "/items/"+item.id.to_s) %> 
+				<% end%>
+	  		<% end %>
+	  		</p>
+	  <% end %>
+	</p>
+
+
+	
+

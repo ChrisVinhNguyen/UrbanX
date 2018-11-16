@@ -19,15 +19,6 @@
       <%=link_to('Logout', destroy_user_session_path, method: :delete) %>
     </li>
 
-  <% else %>
-    <li>
-      <%= link_to('Login', new_user_session_path) %>
-    </li>
-    <%end%>
-   
- 
-
-
   <p>
     <%= form.label :name %><br>
     <%= form.text_area :name %>
@@ -49,20 +40,44 @@
     <%= form.label :quantity %><br>
     <%= form.text_field :quantity %>
   <p>
-    <%= form.label :condition %><br>
-    <%= form.text_field :condition %>
+
   <p>
+    <%= form.label :condition%><br>
+    <%= form.select :condition, ['Brand New', 'Excellent', 'Good', 'Fair', 'Worn Out']%>
+  </p>
 
   <p>
     <%= form.label :value %><br>
     <%= form.text_field :value %>
   <p>
 
+    <%= form.file_field :images, multiple: true %>
+  <p>
+
+  </p>
+
+    <%= form.submit %>
+  </p>
+
+
+  <% else %>
+    <li>
+      Please Login to create new items.
+    </li>
+    <li>
+      <%= link_to('Login', new_user_session_path) %>
+    </li>
+    <%end%>
+   
+ 
+
+
+  
+
   
 
 
 
-    <%= form.submit %>
-  </p>
+    
  
 <% end %>

@@ -1,8 +1,4 @@
 class ItemReviewsController < ApplicationController
-  def new
-    @item_review = ItemReview.new
-  end
-
   def create
     if user_signed_in?
       @item = Item.find(params[:item_id])
@@ -15,10 +11,10 @@ class ItemReviewsController < ApplicationController
         puts("saved successfully")
         redirect_to item_path(@item)
       else
-        render'new'
+        render 'new'
       end
     else
-      render 'new'
+      redirect_to new_user_session_path
     end
   end
 
@@ -27,6 +23,12 @@ class ItemReviewsController < ApplicationController
     @item_review = @item.item_reviews.new
   end
 
+  def index
+  end
+  
+  def show
+  end
+  
   def update
     if user_signed_in?
       @item = Item.find(params[:item_id])
@@ -44,28 +46,32 @@ class ItemReviewsController < ApplicationController
       else
         render 'edit'
       end
+    else
+      redirect_to new_user_session_path
     end
   end
-  
-  def destroy
-    @item = Item.find(params[:item_id])
-    @item_review = ItemReview.find(params[:id])
-    @item_review.destroy
-    redirect_to item_path(@item)
-  end
 
-  def index
-  end
-  
-  def show
-  end
-  
   def edit
-    @item = Item.find(params[:item_id])
-    @item_review = @item.item_reviews.find(params[:id])
+    if user_signed_in?
+      @item = Item.find(params[:item_id])
+      @item_review = @item.item_reviews.find(params[:id])
+    else
+      redirect_to new_user_session_path
+    end
   end
-  
 
+  def destroy
+    if user_signed_in?
+      @item = Item.find(params[:item_id])
+      @item_review = @item.item_reviews.find(params[:id])
+      @item_review.destroy
+      redirect_to item_path(@item)
+    else
+      redirect_to new_user_session_path
+    end
+  end
+
+  private
   def item_review_params
       params.require(:item_review).permit(:rating, :comment)
   end

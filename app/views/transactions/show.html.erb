@@ -1,9 +1,10 @@
-<h1>Transaction</h1>
-
-	<% if @transaction != nil %>
+<% if @transaction == nil %>
+	<h2> Access denied </h2>
+<% else %>
+	<h1>Transaction</h1>
 		<p>
-		  <strong>Item name:</strong>
-		  <%= Item.find(@transaction.item_id).name %>
+			<strong>Item name:</strong>
+			<%= Item.find(@transaction.item_id).name %>
 		</p>
 
 		<h2>
@@ -15,11 +16,14 @@
 		</h2>	
 
 		<h2>
-			Status: <%=  @transaction.status %>
-		</h2>	
+			Status: <%=  @transaction.status.capitalize %>
+			<br>
+			<% if @transaction.status == 'pending' && @current_user == @transaction.lender && Item.find(@transaction.item_id).status == 'available' %>
+				<%= link_to 'Lend', edit_item_transaction_path(@item, @transaction) %>
+			<% elsif @transaction.status == 'lent' && @current_user == @transaction.lender %>
+				<%= link_to 'Returned', edit_item_transaction_path(@item, @transaction) %>
+			<% end %>
+		</h2>		
+<% end %>
 
-	<% else %>
-		<h2> You do not have permission to view this transaction </h2>
-	<% end %>
-
-	<%= link_to 'Back', item_transactions_path %>
+<%= link_to 'Back', 'javascript:history.back()' %>
