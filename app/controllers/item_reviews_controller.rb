@@ -63,7 +63,7 @@ class ItemReviewsController < ApplicationController
   def destroy
     if user_signed_in?
       @item = Item.find(params[:item_id])
-      @item_review = @item.find(params[:id])
+      @item_review = @item.item_reviews.find(params[:id])
       @item_review.destroy
       redirect_to item_path(@item)
     else
