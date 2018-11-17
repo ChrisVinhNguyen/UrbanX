@@ -29,6 +29,9 @@ class UserProfile < ApplicationRecord
     if image.attached?     
         if !image.content_type.in?(%('image/jpeg image/png image/jpg'))
           errors.add(:image, 'needs to be JPEG/JPG/PNG')
+
+        elsif image.blob.byte_size > 1000000
+          errors.add(:image, 'file size too big')
 		    end
     end
   end

@@ -38,7 +38,12 @@ class Item < ApplicationRecord
       images.each do |image|
         if !image.content_type.in?(%('image/jpeg image/png image/jpg'))
           errors.add(:images, 'needs to be JPEG/JPG/PNG')
+
+        elsif image.blob.byte_size > 1000000
+          errors.add(:images, 'file size too big')
 		    end
+
+
       end
     end
   end
