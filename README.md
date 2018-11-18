@@ -35,6 +35,7 @@ End with an example of getting some data out of the system or using it for a lit
 ## Frontend
 
 Using [React](https://reactjs.org/)
+
 Following the [Airbnb style guide](https://github.com/airbnb/javascript)
 
 ### Running the lint
