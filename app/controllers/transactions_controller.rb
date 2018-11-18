@@ -19,6 +19,7 @@ class TransactionsController < ApplicationController
       @transaction.lender = @item.user
       @transaction.borrower = @current_user
       if @transaction.save
+        UserMailer.with(transaction: @transaction).notify_lender.deliver_later
         redirect_to @item
       else
         render 'new'

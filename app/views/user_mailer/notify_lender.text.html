@@ -1,0 +1,4 @@
+You have a new transaction request from <%= UserProfile.find(@transaction.borrower_id).first_name %> for the item: 
+    <%= Item.find(@transaction.item_id).name %> 
+
+To login to the site, just follow this link: <%= link_to("Pending Requests", transactions_requests_user_profile_url(UserProfile.find(@transaction.lender_id))) %>
