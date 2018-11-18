@@ -8,7 +8,6 @@
 #  date_posted :datetime
 #  description :text
 #  name        :string
-#  picture     :string
 #  quantity    :integer
 #  status      :string
 #  value       :float
