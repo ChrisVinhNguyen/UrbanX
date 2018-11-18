@@ -7,36 +7,36 @@
 <%end%>
 
 
-	<p>
-	  <strong>Item name:</strong>
-	  <br>
-	  <p>
-	  <% @items.each do |item| %>
-	  		<p>
-	  		<%= link_to(item.name, "/items/"+item.id.to_s) %>
-	  		<% if user_signed_in? %>
-	  			<% if item.user_id == current_user.id %>
-  					<%= link_to("Edit", "/items/"+item.id.to_s) %> 
-				<% end%>
-	  		<% end %>
-	  		</p>
-	  <% end %>
-	  </p>
-	  <p>
-	  	<% if user_signed_in? %>
-	  		<%= link_to 'Create Item' , items_new_path %>
-	  	<%end%>
-	  </p>
-	</p>
+  <p>
+    <strong>Item name:</strong>
+    <br>
+    <p>
+    <% @items.each do |item| %>
+        <p>
+        <%= link_to(item.name, "/items/"+item.id.to_s) %>
+        <% if user_signed_in? %>
+          <% if item.user_id == current_user.id %>
+            <%= link_to("Edit", "/items/"+item.id.to_s) %>
+        <% end%>
+        <% end %>
+        </p>
+    <% end %>
+    </p>
+    <p>
+      <% if user_signed_in? %>
+        <%= link_to 'Create Item' , items_new_path %>
+      <%end%>
+    </p>
+  </p>
 
 
-	<br>
-	<br>
-	<% if user_signed_in? %>
-	<li>
-		<%= link_to("My Profile", "/user_profiles/"+current_user.id.to_s) %> 
-	</li>
-    <li> 
+  <br>
+  <br>
+  <% if user_signed_in? %>
+  <li>
+    <%= link_to("My Profile", "/user_profiles/"+current_user.id.to_s) %>
+  </li>
+    <li>
       <%=link_to('Logout', destroy_user_session_path, method: :delete) %>
     </li>
 
