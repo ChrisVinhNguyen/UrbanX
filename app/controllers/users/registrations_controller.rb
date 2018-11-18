@@ -55,6 +55,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     new_user_profile_path
   end
 
+  def check_for_user
+    render json: current_user
+  end
+
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)

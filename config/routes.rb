@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'root/index'
   get 'user/Reviews'
   get 'items/create'
   get 'items/new'
@@ -8,7 +9,7 @@ Rails.application.routes.draw do
   get 'items/update'
   get 'items/destroy'
   devise_for :users, controllers: { registrations: 'users/registrations' }
-  root to: "items#index"
+  root to: "root#index"
   post 'items/search'
 
   resources :user_reviews  
