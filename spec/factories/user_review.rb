@@ -1,6 +1,6 @@
 require 'faker'
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :user_review do
     comment  { Faker::FamousLastWords.last_words }
     rating   { Faker::Number.between(1, 10) }
