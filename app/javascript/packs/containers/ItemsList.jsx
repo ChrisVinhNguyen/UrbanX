@@ -37,22 +37,10 @@ class ItemsList extends Component {
     return (
       <div className="body">
         <Grid columns={3} divided>
-    <Grid.Row>
-        {items[0]}
-        {items[1]}
-        {items[2]}
-    </Grid.Row>
+          <Grid.Row>
+            {items}
+          </Grid.Row>
 
-    <Grid.Row>
-        {items[3]}
-        {items[4]}
-        {items[5]}
-    </Grid.Row>
-
-    <Grid.Row>
-        {items[6]}
-
-    </Grid.Row>
   </Grid>
 
       </div>
