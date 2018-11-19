@@ -7,12 +7,14 @@
 			<%= Item.find(@transaction.item_id).name %>
 		</p>
 
+		<% bprofile = UserProfile.where(user_id: @transaction.borrower_id).first %>
 		<h2>
-			Lent to <%=  User.find(@transaction.borrower_id).email %>
+			Borrowed by <%= link_to(bprofile.first_name + ' ' + bprofile.last_name, user_profile_path(bprofile)) %>
 		</h2>
 
+		<% lprofile = UserProfile.where(user_id: @transaction.lender_id).first %>
 		<h2>
-			Lent by <%=  User.find(@transaction.lender_id).email %>
+			Lent by <%= link_to(lprofile.first_name + ' ' + lprofile.last_name, user_profile_path(lprofile)) %>
 		</h2>	
 
 		<h2>
