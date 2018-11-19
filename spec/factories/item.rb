@@ -6,7 +6,7 @@ FactoryBot.define do
     description	{ Faker::Internet.password }
     category	{Faker::Commerce.department(1,true)}
     quantity	{Faker::Number.between(1, 10)}
-    condition	"new"
-    status	"unavailable"
+    condition	{ "new" }
+    status	{ "unavailable" }
   end
 end

@@ -31,6 +31,19 @@ describe 'UserReview' do
       
       expect(user_review).to_not be_valid  
     end
+
+    it 'is not valid without a created_at' do 
+      user_review = FactoryBot.build(:user_review, created_at: nil)
+
+      expect(user_review).to_not be_valid
+    end
+
+    it 'is not valid without a updated_at' do 
+      user_review = FactoryBot.build(:user_review, updated_at: nil)
+
+      expect(user_review).to_not be_valid
+    end
+
   end
 
   context 'associations' do
