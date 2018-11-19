@@ -56,7 +56,10 @@ class ItemsController < ApplicationController
         item_reviews_total += item_review.rating
       end
       average_rating = item_reviews_total!=0 ? item_reviews_total/item_reviews_count : 'no rating' 
+      item_description = item.description
+
       item_hash[:average_rating] = average_rating
+      item_hash[:description] = item_description
 
       items_array.push(item_hash)
     end

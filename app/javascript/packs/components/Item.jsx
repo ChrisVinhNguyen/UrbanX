@@ -18,7 +18,7 @@ class Item1 extends Component {
           <a href={'user_profiles/'+ this.props.item.user_id}>{this.props.item.owner}</a>
           <p>Quantity: {this.props.item.quantity}</p>
         </Item.Meta>
-        <Item.Description>This is the description of the item being listed.</Item.Description>
+        <Item.Description>Description: {this.props.item.description}.</Item.Description>
         <Item.Extra>
           <Rating icon='star' defaultRating={this.props.item.average_rating} maxRating={5} />
           <Label>Rating: {this.props.item.average_rating}</Label>
