@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'UserReview' do
+describe UserReview do
   context 'validations' do
     it 'is valid with valid attributes' do
       user_review = FactoryBot.create(:user_review)
@@ -43,9 +43,9 @@ describe 'UserReview' do
 
       expect(user_review).to_not be_valid
     end
-
   end
-
-  context 'associations' do
+  context 'associateions' do
+    it {should belong_to(:reviewee)}
+    it {should belong_to(:reviewer)}
   end
 end

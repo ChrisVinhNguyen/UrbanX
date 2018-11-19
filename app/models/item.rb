@@ -15,8 +15,9 @@
 #
 
 class Item < ApplicationRecord
-  validates :name, :category, :quantity, :condition, presence: true
-  validates :quantity, numericality: { only_integer: true }
+  validates :name, :category, :quantity, :condition, :description, :status, :date_posted, presence: true
+  validates :quantity, numericality: { only_integer: true, greater_than: 0}
+  validates :value, numericality: { greater_than_or_equal_to: 0}
 
   belongs_to :user, class_name: :User, foreign_key: :user_id
   has_many :item_reviews, dependent: :destroy
