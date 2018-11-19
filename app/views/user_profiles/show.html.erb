@@ -46,11 +46,17 @@
     <%  end %>
     <%  end %>
   </p>
-  <p>
-    <strong>Transactions:</strong>
-    <%= link_to("Pending Requests", transactions_requests_user_profile_path) %>
-    <%= link_to("My Transactions", transactions_user_profile_path) %>
-  </p>
+
+  <% if user_signed_in? %>
+    <% if current_user.id == @user_profile.user_id %>
+      <p>
+        <strong>Transactions:</strong>
+            <%= link_to("Pending Requests", transactions_requests_user_profile_path) %>
+            <%= link_to("My Transactions", transactions_user_profile_path) %>
+      </p>
+    <% end %>
+  <% end %>
+  
   <p>
     <strong>Contacts:</strong>
     <% if user_signed_in? %>
