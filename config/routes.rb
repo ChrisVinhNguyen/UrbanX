@@ -10,8 +10,9 @@ Rails.application.routes.draw do
   get 'items/destroy'
   devise_for :users, controllers: { registrations: 'users/registrations' }
   root to: "root#index"
-  # match '*path', to: 'root#index', via: :all
   post 'items/search'
+
+  get 'is_signed_in', to: 'authenticate_user#is_user_signed_in?'
 
   resources :user_reviews  
   resources :users 
