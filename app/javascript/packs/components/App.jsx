@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 import Header from './Header';
 import Body from './Body';
