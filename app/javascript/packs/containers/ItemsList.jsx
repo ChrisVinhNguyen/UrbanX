@@ -14,7 +14,6 @@ class ItemsList extends Component {
   componentDidMount() {
     axios.get('/items')
     .then((response) => {
-      console.log(response.data)
       this.setState({
         items: response.data
       })
@@ -25,7 +24,7 @@ class ItemsList extends Component {
   }
 
   render() {
-    let items = this.state.items.map(item => {return <Item item={item}/>;});
+    let items = this.state.items.map(item => {return <Item key={item.id} item={item}/>;});
     return (
       <div className="body">
         {items}

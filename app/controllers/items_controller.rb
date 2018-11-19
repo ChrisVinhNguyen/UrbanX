@@ -41,7 +41,27 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.all
-    render json: @items
+    items_array = []
+
+    @items.each do |item|
+      user = User.find(item[:user_id])
+      full_name = user.user_profile[:first_name] + " " + user.user_profile[:last_name]
+
+      item_hash = item.attributes
+      item_hash[:owner] = full_name
+
+      item_reviews_count = item.item_reviews.count
+      item_reviews_total = 0
+      item.item_reviews.each do |item_review|
+        item_reviews_total += item_review.rating
+      end
+      average_rating = item_reviews_total!=0 ? item_reviews_total/item_reviews_count : 'no rating' 
+      item_hash[:average_rating] = average_rating
+
+      items_array.push(item_hash)
+    end
+
+    render json: items_array
   end
 
   def show
