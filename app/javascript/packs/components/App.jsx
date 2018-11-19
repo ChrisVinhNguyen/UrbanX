@@ -15,14 +15,14 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      currentUser: null
+      currentUser: {}
     }
     this.updateCurrentUser = this.updateCurrentUser.bind(this);
   }
 
   componentDidMount() {
     let that = this
-    axios.get('/users/check_for_user',{
+    axios.get('/is_signed_in',{
     })
     .then(function(response){
       if(response.data.email){
@@ -40,9 +40,9 @@ class App extends Component {
     })
   }
 
-  updateCurrentUser(email) {
+  updateCurrentUser(newUserInfo) {
     this.setState({
-      currentUser: email
+      currentUser: newUserInfo
     })
   }
 

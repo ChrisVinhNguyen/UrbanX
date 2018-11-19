@@ -22,7 +22,9 @@ class UserProfile < ApplicationRecord
   has_one_attached :image
   validate :image_type
 
-
+  def full_name
+    self.first_name << " " << self.last_name
+  end
 
   private 
   def image_type
