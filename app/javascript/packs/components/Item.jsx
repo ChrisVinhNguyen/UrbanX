@@ -10,7 +10,7 @@ class Item1 extends Component {
   render() {
     return (
       <Item>
-      <Item.Image size = 'medium' src={Logo} />
+      <Item.Image as='a' size = 'medium' src={Logo} href={'items/'+this.props.item.id} />
 
       <Item.Content>
         <Item.Header size = 'medium' as='a' href={'items/'+this.props.item.id}><strong>{this.props.item.name}</strong></Item.Header>

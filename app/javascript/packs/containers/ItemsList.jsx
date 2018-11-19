@@ -12,8 +12,10 @@ class ItemsList extends Component {
     }
   }
 
+
   componentDidMount() {
-    axios.get('/items')
+    //calls /items which which routes to items#index from routes.rb
+    axios.get('/items') 
     .then((response) => {
       this.setState({
         items: response.data
