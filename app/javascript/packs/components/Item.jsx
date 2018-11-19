@@ -20,7 +20,7 @@ class Item1 extends Component {
         </Item.Meta>
         <Item.Description>Description: {this.props.item.description}.</Item.Description>
         <Item.Extra>
-          <Rating icon='star' defaultRating={this.props.item.average_rating} maxRating={5} />
+          <Rating icon='star' defaultRating={this.props.item.average_rating} maxRating={5} disabled />
           <Label>Rating: {this.props.item.average_rating}</Label>
         </Item.Extra>
       </Item.Content>
