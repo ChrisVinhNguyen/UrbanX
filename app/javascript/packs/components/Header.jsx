@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import Signup from './Signup';
-import Login from './Login';
-import Logout from './Logout';
+import { Link } from "react-router-dom";
+
+import ProjectLogo from './ProjectLogo';
+import MainMenu from './MainMenu';
+// import Signup from './Signup';
+// import Login from './Login';
+// import Logout from './Logout';
 
 class Header extends Component {
   constructor(props){
@@ -20,14 +24,20 @@ class Header extends Component {
   }
 
   render() {
-    switch(this.state.userState) {
-      case "signup":
-        return <Signup changeUserState={ this.changeUserState } updateCurrentUser={ this.props.updateCurrentUser } />
-      case "login":
-        return <Login changeUserState={ this.changeUserState } updateCurrentUser={ this.props.updateCurrentUser } />
-      case "logout":
-        return <Logout changeUserState={ this.changeUserState } updateCurrentUser={ this.props.updateCurrentUser } />
-    }
+    return (
+      <div>
+        <ProjectLogo />
+        <MainMenu />
+      </div>
+    )
+    // switch(this.state.userState) {
+    //   case "signup":
+    //     return <Signup changeUserState={ this.changeUserState } updateCurrentUser={ this.props.updateCurrentUser } />
+    //   case "login":
+    //     return <Login changeUserState={ this.changeUserState } updateCurrentUser={ this.props.updateCurrentUser } />
+    //   case "logout":
+    //     return <Logout changeUserState={ this.changeUserState } updateCurrentUser={ this.props.updateCurrentUser } />
+    // }
   }
 }
 

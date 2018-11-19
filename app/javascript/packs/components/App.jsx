@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Link } from "react-router-dom";
+
 import axios from 'axios';
 import Header from './Header';
 import Body from './Body';
 import Footer from './Footer';
+
+
+const About = () => <h2>About</h2>;
+const Users = () => <h2>Users</h2>;
 
 class App extends Component {
 
@@ -45,7 +50,9 @@ class App extends Component {
     return (
       <div className="app">
         <Header updateCurrentUser={this.updateCurrentUser} />
-        <Body />
+        <Route path="/" exact component={Body} />
+        <Route path="/about/" component={About} />
+        <Route path="/users/" component={Users} />
         <Footer />
       </div>
     );
