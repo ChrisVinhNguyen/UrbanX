@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import { Button, Icon, Image, Item, Label } from 'semantic-ui-react'
-import { Rating } from 'semantic-ui-react'
+import { Rating, Divider } from 'semantic-ui-react'
 
 import Logo from '../images/macbook.jpg';
 
@@ -24,6 +24,7 @@ class Item1 extends Component {
           <Label>Rating: {this.props.item.average_rating}</Label>
         </Item.Extra>
       </Item.Content>
+      <Divider/>
     </Item>
     );
   }
