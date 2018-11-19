@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 import Header from './Header';
 import Body from './Body';
@@ -43,7 +44,7 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <Header updateCurrentUser={ this.updateCurrentUser } />
+        <Header updateCurrentUser={this.updateCurrentUser} />
         <Body />
         <Footer />
       </div>

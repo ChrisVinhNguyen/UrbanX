@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'items/destroy'
   devise_for :users, controllers: { registrations: 'users/registrations' }
   root to: "root#index"
+  # match '*path', to: 'root#index', via: :all
   post 'items/search'
 
   resources :user_reviews  
