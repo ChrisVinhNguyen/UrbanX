@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Item extends Component {
   render() {
     return (
-      <div className="body">
+      <div className="item">
         <h1>
           <a href={'items/'+this.props.item.id}>
             <strong>{this.props.item.name}</strong>
