@@ -13,11 +13,14 @@
 	  <p>
 	  <% @items.each do |item| %>
 	  		<p>
-	  		<%= link_to(item.name, "/items/"+item.id.to_s) %>
-	  		<% if user_signed_in? %>
-	  			<% if item.user_id == current_user.id %>
-  					<%= link_to("Edit", "/items/"+item.id.to_s) %> 
-				<% end%>
+
+	  		<% if item.status == "available" %>
+	  			<%= link_to(item.name, "/items/"+item.id.to_s) %>
+	  			<% if user_signed_in? %>
+		  			<% if item.user_id == current_user.id %>
+	  					<%= link_to("Edit", "/items/"+item.id.to_s) %> 
+					<% end%>
+	  			<% end %>
 	  		<% end %>
 	  		</p>
 	  <% end %>
