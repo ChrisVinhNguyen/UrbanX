@@ -7,7 +7,7 @@ class Footer extends Component {
   render() {
     return (
      	<div className="footer">
-	       <Grid textAlign='center' columns={5} inverted>
+	       <Grid textAlign="center" verticalAlign='middle' columns={8} inverted>
 		    <Grid.Row color='black'>
 		      <Grid.Column>
 		      	<ProjectLogo />
@@ -34,10 +34,6 @@ class Footer extends Component {
 		      		</Link>
 		      </Grid.Column>
 		      <Grid.Column>
-		      </Grid.Column>
-		    </Grid.Row>
-		    <Grid.Row color='black'>
-		      <Grid.Column>
 		      		<Link to={'about/'}>
 		        		<Segment color='black' inverted>
 		      				Site Map
@@ -57,6 +53,11 @@ class Footer extends Component {
 		      				FAQ
 		      			</Segment>
 		      		</Link>
+		      </Grid.Column>
+		      <Grid.Column>
+		      		<i class="facebook f icon large" ></i>
+		      		<i class="twitter square icon large"></i>
+		      		<i class="instagram icon large"></i>
 		      </Grid.Column>
 		    </Grid.Row>
 		  </Grid>
