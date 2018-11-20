@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
+import ItemsList from '../containers/ItemsList'
 
-class Body extends React.Component {
+class Body extends Component {
   render() {
     return (
-      <div className="body">
-        <p>This is the Body!</p>
+      <div style={{marginLeft: '20px', marginTop: '100px'}} className="body">
+        <ItemsList />
       </div>
     );
   }

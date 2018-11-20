@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-class Header extends React.Component {
+import ProjectLogo from './ProjectLogo';
+
+import SearchBar from '../containers/SearchBar';
+
+
+class Header extends Component {
   render() {
     return (
-      <div className="header">
-        <p>This is the Header!</p>
+      <div>
+        <ProjectLogo />
+        <SearchBar />
       </div>
-    );
+    )
   }
 }
 
