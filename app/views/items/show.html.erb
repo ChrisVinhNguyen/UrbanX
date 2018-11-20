@@ -55,9 +55,11 @@
 	<h2>Reviews</h2>
 	<%= render @item.item_reviews %>
 
-	<% if Transaction.where(borrower_id: current_user.id, item_id: @item.id).exists? %>
-	<h2>Add a review:</h2>
-	<%= render 'item_reviews/form' %>
+	<% if user_signed_in? %>
+		<% if Transaction.where(borrower_id: current_user.id, item_id: @item.id).exists? %>
+		<h2>Add a review:</h2>
+		<%= render 'item_reviews/form' %>
+		<%end%>
 	<%end%>
 
 	<% if user_signed_in? %>
