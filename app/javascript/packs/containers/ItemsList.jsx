@@ -29,7 +29,7 @@ class ItemsList extends Component {
   render() {
     let items = this.state.items.map(item => {
       return (
-        <Grid.Column>
+        <Grid.Column key = {item.id}>
           <ItemSummary key={item.id} item={item}/>
         </Grid.Column>
       );
