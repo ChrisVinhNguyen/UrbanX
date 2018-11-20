@@ -49,6 +49,7 @@ class ItemsController < ApplicationController
 
       item_hash = item.attributes
       item_hash[:owner] = full_name
+      item_hash[:user_profile_id] = user.user_profile.id
 
       item_reviews_count = item.item_reviews.count
       item_reviews_total = 0

@@ -2,12 +2,14 @@
 import React, { Component } from 'react';
 import { Button, Icon, Image, Item, Label } from 'semantic-ui-react'
 import { Rating, Divider } from 'semantic-ui-react'
+import { Link } from "react-router-dom";
 
 import Logo from '../images/macbook.jpg';
 
 
 class Item1 extends Component {
   render() {
+    console.log(this.props.item)
     return (
       <Item>
       <Item.Image as='a' size = 'medium' src={Logo} href={'items/'+this.props.item.id} />
@@ -15,7 +17,7 @@ class Item1 extends Component {
       <Item.Content>
         <Item.Header size = 'medium' as='a' href={'items/'+this.props.item.id}><strong>{this.props.item.name}</strong></Item.Header>
         <Item.Meta>
-          <a href={'user_profiles/'+ this.props.item.user_id}>{this.props.item.owner}</a>
+          <Link to={'user_profiles/'+ this.props.item.user_profile_id}>{this.props.item.owner}</Link>
           <p>Quantity: {this.props.item.quantity}</p>
         </Item.Meta>
         <Item.Description>Description: {this.props.item.description}.</Item.Description>
