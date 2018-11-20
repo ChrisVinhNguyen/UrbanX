@@ -11,27 +11,24 @@ const About = () => <h2>About</h2>;
 const Users = () => <h2>Users</h2>;
 
 class App extends Component {
-
   constructor() {
     super();
     this.state = {
-      currentUser: {}
-    }
-    this.updateCurrentUser = this.updateCurrentUser.bind(this);
+      currentUserInfo: {}
+    };
   }
 
   componentDidMount() {
     let that = this
-    axios.get('/is_signed_in',{
-    })
+    axios.get('/is_signed_in')
     .then(function(response){
-      if(response.data.email){
+      if(response.data.user_info && response.data.user_info.user_profile_id != null) {
         that.setState({
-          currentUser: response.data.email
+          currentUserInfo: response.data.user_info
         })
       } else {
         that.setState({
-          currentUser: null
+          currentUserInfo: null
         })
       }
     })
@@ -40,19 +37,13 @@ class App extends Component {
     })
   }
 
-  updateCurrentUser(newUserInfo) {
-    this.setState({
-      currentUser: newUserInfo
-    })
-  }
-
   render() {
     return (
       <div className="app">
-        <Header updateCurrentUser={this.updateCurrentUser} />
-        <Route path="/" exact component={Body} />
-        <Route path="/about/" component={About} />
-        <Route path="/users/" component={Users} />
+        <Header currentUser={ this.state.currentUserInfo } />
+        <Route path="/" exact component={ Body } />
+        <Route path="/about/" component={ About } />
+        <Route path="/users/" component={ Users } />
         <Footer />
       </div>
     );
