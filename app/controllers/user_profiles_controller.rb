@@ -57,6 +57,10 @@ class UserProfilesController < ApplicationController
       contact_profile = UserProfile.find(contact_id)
       @contact_names.insert(contact_id.to_i,contact_profile.first_name + " " + contact_profile.last_name)
     end
+    profile_hash = @user_profile.attributes
+    profile_hash[:contact_list] = @contact_names
+    profile_hash[:email] = @user_profile.user.email
+    render json: profile_hash
   end
 
   def transactions
