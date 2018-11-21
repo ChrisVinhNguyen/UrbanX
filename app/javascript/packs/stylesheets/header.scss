@@ -1,0 +1,21 @@
+.header {
+  display: flex;
+  align-items: center;
+
+  .project-logo {
+    flex: 1;
+  }
+
+  .search {
+    flex: 7;
+    padding: 0px 20px 0px 20px;
+
+    .input {
+      width: 100%;
+    }
+  }
+
+  .profile-container {
+    flex: 1;
+  }
+}
