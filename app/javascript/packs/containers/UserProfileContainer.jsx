@@ -12,7 +12,7 @@ class UserProfileContainer extends Component {
   render() {
     console.log(this.props)
     return (
-      <div className="ui category search">
+      <div className="profile-container">
         Test
       </div>
     )

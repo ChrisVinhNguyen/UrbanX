@@ -55,9 +55,9 @@ class Footer extends Component {
               </Link>
           </Grid.Column>
           <Grid.Column>
-              <i class="facebook f icon large" ></i>
-              <i class="twitter square icon large"></i>
-              <i class="instagram icon large"></i>
+              <i className="facebook f icon large" ></i>
+              <i className="twitter square icon large"></i>
+              <i className="instagram icon large"></i>
           </Grid.Column>
         </Grid.Row>
       </Grid>
