@@ -8,7 +8,11 @@ import Footer from './Footer';
 
 
 const About = () => <h2>About</h2>;
-const Users = () => <h2>Users</h2>;
+const TermsOfService = () => <h2>Terms Of Service</h2>;
+const PrivacyPolicy = () => <h2>Privacy Policy</h2>;
+const SiteMap = () => <h2>Site Map</h2>;
+const ContactUs = () => <h2>Contact Us</h2>;
+const FAQ = () => <h2>FAQ</h2>;
 
 class App extends Component {
   constructor() {
@@ -42,8 +46,12 @@ class App extends Component {
       <div className="app">
         <Header currentUser={ this.state.currentUserInfo } />
         <Route path="/" exact component={ Body } />
-        <Route path="/about/" component={ About } />
-        <Route path="/users/" component={ Users } />
+        <Route path="/about" component={ About } />
+        <Route path="/terms-of-service" component={ TermsOfService } />
+        <Route path="/privacy-policy" component={ PrivacyPolicy } />
+        <Route path="/site-map" component={ SiteMap } />
+        <Route path="/contact-us" component={ ContactUs } />
+        <Route path="/faq" component={ FAQ } />
         <Footer />
       </div>
     );
