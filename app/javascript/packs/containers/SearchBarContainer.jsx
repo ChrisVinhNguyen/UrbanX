@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-class SearchBar extends Component {
+class SearchBarContainer extends Component {
   render() {
     return (
       <div className="ui category search">
@@ -15,4 +15,4 @@ class SearchBar extends Component {
   }
 }
 
-export default SearchBar;
+export default SearchBarContainer;

@@ -4,7 +4,7 @@ import { Grid, Divider } from 'semantic-ui-react'
 
 import ItemSummary from '../components/ItemSummary'
 
-class ItemsList extends Component {
+class ItemsListContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -48,4 +48,4 @@ class ItemsList extends Component {
   }
 }
 
-export default ItemsList;
+export default ItemsListContainer;

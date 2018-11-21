@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import ProjectLogo from './ProjectLogo';
 
-import SearchBar from '../containers/SearchBar';
+import SearchBarContainer from '../containers/SearchBarContainer';
 
 
 class Header extends Component {
@@ -10,7 +10,7 @@ class Header extends Component {
     return (
       <div>
         <ProjectLogo />
-        <SearchBar />
+        <SearchBarContainer />
       </div>
     )
   }
