@@ -9,7 +9,7 @@ import SignupButton from '../components/SignupButton';
 import LoginButton from '../components/LoginButton';
 
 
-class UserProfileContainer extends Component {
+class HeaderProfileContainer extends Component {
   componentWillMount() {
     this.props.fetchUser();
   }
@@ -28,7 +28,14 @@ class UserProfileContainer extends Component {
       userAuthenticationContent =
         <div>
           <span>{this.props.user_info.full_name}</span>
-          <img class="ui avatar image" src={ Logo } />
+          <div className="simple ui icon top right pointing dropdown">
+            <img className="ui avatar image" src={ Logo } />
+            <div className="menu">
+              <div className="item">View Profile</div>
+              <div className="item">Logout</div>
+            </div>
+          </div>
+          <img className="ui avatar image" src={ Logo } />
         </div>;
     } else {
       userAuthenticationContent =
@@ -49,7 +56,7 @@ class UserProfileContainer extends Component {
   }
 }
 
-UserProfileContainer.propTypes = {
+HeaderProfileContainer.propTypes = {
   fetchUser: PropTypes.func.isRequired,
   is_signed_in: PropTypes.bool.isRequired,
   user_info: PropTypes.object.isRequired
@@ -60,4 +67,4 @@ const mapStateToProps = state => ({
   user_info: state.user.user_info
 });
 
-export default connect(mapStateToProps, { fetchUser })(UserProfileContainer);
+export default connect(mapStateToProps, { fetchUser })(HeaderProfileContainer);
