@@ -4,8 +4,6 @@ import { BrowserRouter } from 'react-router-dom';
 
 import AppContainer from './containers/AppContainer';
 
-import '../styles/index.scss'
-
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
     <BrowserRouter>
