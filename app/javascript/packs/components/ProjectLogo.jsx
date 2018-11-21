@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import Logo from '../images/doge-logo-transparent-background.png';
+import Logo from '../images/logo2.png';
 
 class ProjectLogo extends Component {
   render() {
     return (
-      <div>
+      <div className="project-logo">
         <Link to="/">
-          <img className="project-logo" src={ Logo } alt="Project Logo" height="42" width="42"/>
+          <img src={ Logo } alt="Project Logo" height="66" width="160"/>
         </Link>
       </div>
     )

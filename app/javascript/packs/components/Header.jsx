@@ -2,15 +2,19 @@ import React, { Component } from 'react';
 
 import ProjectLogo from './ProjectLogo';
 
-import SearchBar from '../containers/SearchBar';
+import SearchBarContainer from '../containers/SearchBarContainer';
+import UserProfileContainer from '../containers/UserProfileContainer';
+
+import '../stylesheets/header.scss';
 
 
 class Header extends Component {
   render() {
     return (
-      <div>
+      <div className="header">
         <ProjectLogo />
-        <SearchBar />
+        <SearchBarContainer />
+        <UserProfileContainer />
       </div>
     )
   }

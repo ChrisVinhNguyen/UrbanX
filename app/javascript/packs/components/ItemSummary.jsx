@@ -4,7 +4,7 @@ import { Button, Icon, Image, Item, Label } from 'semantic-ui-react'
 import { Rating, Divider } from 'semantic-ui-react'
 import { Link } from "react-router-dom";
 
-import Logo from '../images/macbook.jpg';
+import pic from '../images/macbook.jpg';
 
 
 class Item1 extends Component {
@@ -12,7 +12,7 @@ class Item1 extends Component {
     console.log(this.props.item)
     return (
       <Item>
-      <Item.Image as='a' size = 'medium' src={Logo} href={'items/'+this.props.item.id} />
+      <Item.Image as='a' size = 'medium' src={pic} href={'items/'+this.props.item.id} />
 
       <Item.Content>
         <Item.Header size = 'medium' as='a' href={'items/'+this.props.item.id}><strong>{this.props.item.name}</strong></Item.Header>

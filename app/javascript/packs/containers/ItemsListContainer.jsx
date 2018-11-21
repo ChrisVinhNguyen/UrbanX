@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Grid } from 'semantic-ui-react'
+import { Grid, Divider } from 'semantic-ui-react'
 
-import Item from '../components/Item'
+import ItemSummary from '../components/ItemSummary'
 
-class ItemsList extends Component {
+class ItemsListContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,8 +29,8 @@ class ItemsList extends Component {
   render() {
     let items = this.state.items.map(item => {
       return (
-        <Grid.Column>
-          <Item key={item.id} item={item}/>
+        <Grid.Column key = {item.id}>
+          <ItemSummary key={item.id} item={item}/>
         </Grid.Column>
       );
     });
@@ -48,4 +48,4 @@ class ItemsList extends Component {
   }
 }
 
-export default ItemsList;
+export default ItemsListContainer;
