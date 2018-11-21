@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import UserProfileContainer from '../containers/UserProfileContainer'
-
+import '../stylesheets/user-profile.scss'
 
 class UserProfile extends Component {
   render() {
@@ -14,8 +14,8 @@ class UserProfile extends Component {
   		viewingMyProfile = true;
   	}
     return (
-      <div style={{marginBottom: '40px', marginTop: '40px'}} className="body">
-        <UserProfileContainer viewingMyProfile={viewingMyProfile} userProfileId = {this.props.match.params.id} />
+      <div style={{marginBottom: '40px', marginTop: '40px'}} className="user-profile">
+        <UserProfileContainer viewingMyProfile={viewingMyProfile} userProfileId = {this.props.match.params.id} /> 
       </div>
     );
   }

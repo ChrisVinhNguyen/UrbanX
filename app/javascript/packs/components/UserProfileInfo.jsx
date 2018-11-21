@@ -7,7 +7,7 @@ class UserProfileInfo extends Component {
   render() {
   	console.log(this.props)
     return (
-<div class="ui card">
+<div class="ui card user-profile-container">
   <div class="image">
     <img src={Logo}/>
   </div>

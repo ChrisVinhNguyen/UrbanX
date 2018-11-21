@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Grid } from 'semantic-ui-react'
 
 import UserProfileInfo from '../components/UserProfileInfo'
+import ProfileContentContainer from '../containers/ProfileContentContainer'
 
 class UserProfileContainer extends Component {
   constructor(props) {
@@ -28,12 +29,12 @@ class UserProfileContainer extends Component {
   render() {
     console.log(this.props.viewingMyProfile)
       return (
-        <div className="body">
-        <Grid columns={2} divided>
-            <UserProfileInfo userProfile={this.state.userProfile} />
-            {this.props.viewingMyProfile ? <p qwtqwtqwtq /> : null}
-        </Grid>
-      </div>
+        <div>
+          <Grid columns={2} divided>
+              <UserProfileInfo userProfile={this.state.userProfile} />
+              <ProfileContentContainer />     
+          </Grid>
+        </div>
   );
 }
 }
