@@ -12,9 +12,9 @@ class AuthenticateUserController < ApplicationController
         "location" => user_profile.location,
         "contact_list" => user_profile.contact_list
       }
-      render :json => { "signed_in" => true, "user_info" => user_info }.to_json()
+      render :json => { "is_signed_in" => true, "user_info" => user_info }.to_json()
     else
-      render :json => { "signed_in" => false }.to_json()
+      render :json => { "is_signed_in" => false, "user_info" => {} }.to_json()
     end
   end
 end
