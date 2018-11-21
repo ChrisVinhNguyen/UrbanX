@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import ProjectLogo from './ProjectLogo';
 
 import SearchBarContainer from '../containers/SearchBarContainer';
-import UserProfileContainer from '../containers/UserProfileContainer';
+import HeaderProfileContainer from '../containers/HeaderProfileContainer';
 
 import '../stylesheets/header.scss';
 
@@ -14,7 +14,7 @@ class Header extends Component {
       <div className="header">
         <ProjectLogo />
         <SearchBarContainer />
-        <UserProfileContainer />
+        <HeaderProfileContainer />
       </div>
     )
   }
