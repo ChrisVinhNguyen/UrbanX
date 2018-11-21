@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Route, Link } from "react-router-dom";
 
 import axios from 'axios';
-import Header from './Header';
-import Body from './Body';
-import Footer from './Footer';
+import Header from '../components/Header';
+import Body from '../components/Body';
+import Footer from '../components/Footer';
 
 
 const About = () => <h2>About</h2>;
@@ -14,7 +14,7 @@ const SiteMap = () => <h2>Site Map</h2>;
 const ContactUs = () => <h2>Contact Us</h2>;
 const FAQ = () => <h2>FAQ</h2>;
 
-class App extends Component {
+class AppContainer extends Component {
   constructor() {
     super();
     this.state = {
@@ -58,4 +58,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default AppContainer;
