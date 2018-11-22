@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Grid } from 'semantic-ui-react'
 
 import UserProfileInfo from '../components/UserProfileInfo'
-import ItemsListContainer from '../containers/ItemsListContainer'
+import ItemListComponent from '../components/ItemListComponent'
 
 class ProfileContentContainer extends Component {
 
@@ -49,7 +49,7 @@ class ProfileContentContainer extends Component {
               </div>
             </div>
             <div class="ui segment">
-            { this.state.activeTab == "My_Items"? <p> <ItemsListContainer /> </p>: null} 
+            { this.state.activeTab == "My_Items"? <p> <ItemListComponent /> </p>: null} 
             { this.state.activeTab == "My_Transactions"? <p> transactions </p>: null} 
             { this.state.activeTab == "My_Contacts"? <p> contact </p>: null} 
             { this.state.activeTab == "Reviews"? <p> reviewee_id </p>: null} 

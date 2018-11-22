@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
-import { Route, Link } from "react-router-dom";
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import ItemListComponent from './ItemListComponent'
+import { Route } from "react-router-dom";
 
-import axios from 'axios';
-import Header from './Header';
-import Body from './Body';
-import Footer from './Footer';
 import UserProfile from './UserProfile';
-
-import store from '../store';
 
 const About = () => <h2>About</h2>;
 const TermsOfService = () => <h2>Terms Of Service</h2>;
@@ -18,13 +11,11 @@ const SiteMap = () => <h2>Site Map</h2>;
 const ContactUs = () => <h2>Contact Us</h2>;
 const FAQ = () => <h2>FAQ</h2>;
 
-class App extends Component {
+class Body extends Component {
   render() {
     return (
-      <Provider store={ store }>
-        <div className="app">
-          <Header />
-          <Route path="/" exact component={ Body } />
+      <div style={{marginLeft: '20px', marginTop: '100px'}} className="body">
+      	  <Route path="/" exact component={ ItemListComponent } />
           <Route path= "/user_profiles/:id"  component={ UserProfile } />
           <Route path="/about" component={ About } />
           <Route path="/terms-of-service" component={ TermsOfService } />
@@ -32,11 +23,9 @@ class App extends Component {
           <Route path="/site-map" component={ SiteMap } />
           <Route path="/contact-us" component={ ContactUs } />
           <Route path="/faq" component={ FAQ } />
-          <Footer />
-        </div>
-      </Provider>
+      </div>
     );
   }
 }
 
-export default App;
+export default Body;
