@@ -4,6 +4,7 @@ import { Route } from "react-router-dom";
 
 import UserProfile from './UserProfile';
 import UserProfileEditForm from '../containers/UserProfileEditForm';
+import ItemDetails from './ItemDetails';
 
 
 const About = () => <h2>About</h2>;
@@ -26,6 +27,7 @@ class Body extends Component {
           <Route path="/site-map" component={ SiteMap } />
           <Route path="/contact-us" component={ ContactUs } />
           <Route path="/faq" component={ FAQ } />
+          <Route path="/items/:id" component={ ItemDetails } />
       </div>
     );
   }

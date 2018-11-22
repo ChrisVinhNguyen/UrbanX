@@ -1,4 +1,6 @@
-import { FILTER_ITEMS, GET_MY_ITEMS } from './types';
+
+import { FILTER_ITEMS, GET_MY_ITEMS, GET_ITEM } from './types';
+
 
 import axios from 'axios';
 
@@ -22,6 +24,25 @@ export const filterItems = (cur_category=cur_category) => dispatch => {
   })
 }
 
+
+
+export const getItem = (item_id=item_id) => dispatch => {
+  let that = this
+
+  axios.get('/items/'+item_id , {})
+  .then(function(response){
+    console.log("inside getItem")
+    console.log(response)
+    dispatch({
+      type: GET_ITEM,
+      item_id: item_id,
+      item_details: response.data
+    })
+  })
+  .catch(function(error){
+    console.log(error);
+  })
+}
 export const getMyItems = (current_user_profile_id) => dispatch => {
   let that = this
   console.log(current_user_profile_id);
@@ -40,4 +61,8 @@ export const getMyItems = (current_user_profile_id) => dispatch => {
   .catch(function(error){
     console.log(error);
   })
+
 }
+
+
+
