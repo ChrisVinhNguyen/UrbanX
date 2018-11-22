@@ -75,6 +75,8 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
+    item_details= @item.attributes
+    render json: item_details
   end
 
   def edit
