@@ -31,8 +31,8 @@ class UserProfileContainer extends Component {
       return (
         <div>
           <Grid columns={2} divided>
-              <UserProfileInfo userProfile={this.state.userProfile} />
-              <ProfileContentContainer />     
+              <UserProfileInfo viewingMyProfile = {this.props.viewingMyProfile} userProfile={this.state.userProfile} />
+              <ProfileContentContainer viewingMyProfile = {this.props.viewingMyProfile} userProfileId={this.props.userProfileId}/>     
           </Grid>
         </div>
   );

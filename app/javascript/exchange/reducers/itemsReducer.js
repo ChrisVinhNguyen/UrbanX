@@ -1,4 +1,6 @@
-import { FILTER_ITEMS , GET_ITEM } from '../actions/types';
+
+import { FILTER_ITEMS, GET_MY_ITEMS, GET_ITEM} from '../actions/types';
+
 
 const initialState = {
   cur_category: 'All',
@@ -16,11 +18,18 @@ export default function(state = initialState, action) {
         filtered_items: action.filtered_items
       }
 
+
     case GET_ITEM:
       return {
         ...state,
         item_id: action.item_id,
         item_details: action.item_details
+      }
+    case GET_MY_ITEMS:
+      return {
+        ...state,
+        filtered_items: action.filtered_items
+
       }
     default:
       return state;

@@ -9,6 +9,7 @@ import SignupButton from '../components/SignupButton';
 import LoginButton from '../components/LoginButton';
 
 import { Dropdown, Image } from 'semantic-ui-react';
+import { Link } from "react-router-dom";
 
 
 class HeaderProfileContainer extends Component {
@@ -32,7 +33,11 @@ class HeaderProfileContainer extends Component {
         <div>
           <Dropdown icon={null} trigger={trigger} direction='left' floating labeled button pointing>
             <Dropdown.Menu>
-              <Dropdown.Item>View Profile</Dropdown.Item>
+              <Dropdown.Item>
+                <Link to={`/user_profiles/${this.props.user_info.user_profile_id}`}>
+                  View Profile
+                </Link>
+              </Dropdown.Item>
               <Dropdown.Item>Logout</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>

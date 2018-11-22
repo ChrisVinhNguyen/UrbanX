@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'items/update'
   get 'items/destroy'
   get 'items/filter', to: 'items#filter'
+  get 'items/myItems', to: 'items#myItems'
   devise_for :users, controllers: { registrations: 'users/registrations' }
   root to: "root#index"
   post 'items/search'
