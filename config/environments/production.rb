@@ -17,6 +17,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
 
   config.serve_static_files = true 
+  config.assets.compile = true
 
 
   # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
