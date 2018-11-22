@@ -1,4 +1,6 @@
 class UserProfilesController < ApplicationController
+   protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
+
   def create
     if user_signed_in?
 
@@ -29,9 +31,9 @@ class UserProfilesController < ApplicationController
 
   def update
     @user_profile = UserProfile.find(params[:id])
-
-    if @user_profile.update(user_profile_params)
-      redirect_to @user_profile
+    puts params
+    if @user_profile.update(params.require(:params).permit(:first_name, :last_name, :date_of_birth,  :location,  :contact_list, :image))
+      render :json => {"saved_successfull" => true}
     else
       render 'edit'
     end
