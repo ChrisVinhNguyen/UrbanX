@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ItemListComponent from './ItemListComponent'
 import { Route } from "react-router-dom";
 
+import UserProfile from './UserProfile';
+
 const About = () => <h2>About</h2>;
 const TermsOfService = () => <h2>Terms Of Service</h2>;
 const PrivacyPolicy = () => <h2>Privacy Policy</h2>;
