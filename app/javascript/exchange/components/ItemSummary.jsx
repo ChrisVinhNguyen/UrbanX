@@ -19,7 +19,9 @@ class ItemSummary extends Component {
         <Item.Image as='a' size = 'medium' src={pic}/>
       </Link>
       <Item.Content>
-        <Item.Header size = 'medium' as='a' href={'items/'+this.props.item.id}><strong>{this.props.item.name}</strong></Item.Header>
+        <Link to={'items/'+this.props.item.id}>
+          <Item.Header size = 'medium' as='a' onClick={this.handleItemClick}><strong>{this.props.item.name}</strong></Item.Header>
+        </Link>
         <Item.Meta>
           <Link to={'/user_profiles/'+ this.props.item.user_profile_id}>{this.props.item.owner}</Link>
           <p>Quantity: {this.props.item.quantity}</p>

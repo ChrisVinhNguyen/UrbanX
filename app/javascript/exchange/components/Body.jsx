@@ -3,7 +3,9 @@ import ItemListComponent from './ItemListComponent'
 import { Route } from "react-router-dom";
 
 import UserProfile from './UserProfile';
+import UserProfileEditForm from '../containers/UserProfileEditForm';
 import ItemDetails from './ItemDetails';
+
 
 const About = () => <h2>About</h2>;
 const TermsOfService = () => <h2>Terms Of Service</h2>;
@@ -17,7 +19,8 @@ class Body extends Component {
     return (
       <div style={{marginLeft: '20px', marginTop: '100px'}} className="body">
       	  <Route path="/" exact component={ ItemListComponent } />
-          <Route path= "/user_profiles/:id"  component={ UserProfile } />
+          <Route path= "/user_profiles/:id" exact component={ UserProfile } />
+          <Route path= "/user_profiles/:id/edit" exact component={ UserProfileEditForm } />
           <Route path="/about" component={ About } />
           <Route path="/terms-of-service" component={ TermsOfService } />
           <Route path="/privacy-policy" component={ PrivacyPolicy } />
