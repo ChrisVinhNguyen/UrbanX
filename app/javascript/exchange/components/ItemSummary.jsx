@@ -10,21 +10,13 @@ import pic from '../images/macbook.jpg';
 
 
 class ItemSummary extends Component {
-  constructor(){
-    super()
-    this.handleItemClick = this.handleItemClick.bind(this)
-  }
-
-handleItemClick(){
-  this.props.getItem(this.props.item.id)
-}
-
+  
   render() {
     console.log(this.props.item)
     return (
       <Item>
       <Link to={'items/'+this.props.item.id}>
-      <Item.Image as='a' size = 'medium' src={pic} onClick={this.handleItemClick}/>
+        <Item.Image as='a' size = 'medium' src={pic}/>
       </Link>
       <Item.Content>
         <Link to={'items/'+this.props.item.id}>
@@ -41,9 +33,10 @@ handleItemClick(){
         </Item.Extra>
       </Item.Content>
       <Divider/>
+      
     </Item>
     );
   }
-}
+} 
 
 export default connect( ()=> {return {}}, { getItem })(ItemSummary);
