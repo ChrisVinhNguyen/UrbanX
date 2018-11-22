@@ -27,10 +27,11 @@ class Item1 extends Component {
         </Item.Extra>
       </Item.Content>
       <Divider/>
+      
     </Item>
     );
   }
-}
+} 
 
 export default Item1;
 
