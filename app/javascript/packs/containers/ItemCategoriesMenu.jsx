@@ -1,39 +1,47 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import { Menu } from 'semantic-ui-react'
+import { Menu } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { filterItems } from '../actions/itemsActions';
+import PropTypes from 'prop-types';
 
-class MainMenu extends Component {
 
-  constructor(props){
-    super(props);
-    this.state = {
-      activeCategory: "All"
-    }
+
+class ItemCategoriesMenu extends Component {
+  constructor(){
+    super()
+    this.handleCategoryClick = this.handleCategoryClick.bind(this);
   }
 
-  handleCategoryClick = (e, { name }) => this.setState({ activeCategory: name })
+  componentWillMount() {
+    this.props.filterItems('All');
+  }
+
+  handleCategoryClick (e, { name }) {
+    this.props.filterItems(name);
+  } 
 
   render() {
 
-    const { activeCategory } = this.state
+    const { cur_category } = this.props;
 
     return (
       <Menu secondary fluid widths={11}>
         <Menu.Item
           name='All'
-          active={activeCategory === 'All'}
+          active={cur_category === 'All'}
           onClick={this.handleCategoryClick}
         >
           All
         </Menu.Item>
 
-        <Menu.Item name='Electronics' active={activeCategory === 'Electronics'} onClick={this.handleCategoryClick}>
+        <Menu.Item name='Electronics' active={cur_category === 'Electronics'} onClick={this.handleCategoryClick}>
           Electronics
         </Menu.Item>
 
         <Menu.Item
           name='Sports'
-          active={activeCategory === 'Sports'}
+          active={cur_category === 'Sports'}
           onClick={this.handleCategoryClick}
         >
           Sports
@@ -41,7 +49,7 @@ class MainMenu extends Component {
 
         <Menu.Item
           name='Tools'
-          active={activeCategory === 'Tools'}
+          active={cur_category === 'Tools'}
           onClick={this.handleCategoryClick}
         >
           Tools
@@ -49,7 +57,7 @@ class MainMenu extends Component {
 
         <Menu.Item
           name='Music'
-          active={activeCategory === 'Music'}
+          active={cur_category === 'Music'}
           onClick={this.handleCategoryClick}
         >
           Music
@@ -57,7 +65,7 @@ class MainMenu extends Component {
 
         <Menu.Item
           name='Arts'
-          active={activeCategory === 'Arts'}
+          active={cur_category === 'Arts'}
           onClick={this.handleCategoryClick}
         >
           Arts
@@ -65,7 +73,7 @@ class MainMenu extends Component {
 
         <Menu.Item
           name='Vehicles'
-          active={activeCategory === 'Vehicles'}
+          active={cur_category === 'Vehicles'}
           onClick={this.handleCategoryClick}
         >
           Vehicles
@@ -73,7 +81,7 @@ class MainMenu extends Component {
 
         <Menu.Item
           name='Clothing'
-          active={activeCategory === 'Clothing'}
+          active={cur_category === 'Clothing'}
           onClick={this.handleCategoryClick}
         >
           Clothing
@@ -81,7 +89,7 @@ class MainMenu extends Component {
 
         <Menu.Item
           name='Accessories'
-          active={activeCategory === 'Accessories'}
+          active={cur_category === 'Accessories'}
           onClick={this.handleCategoryClick}
         >
           Accessories
@@ -89,7 +97,7 @@ class MainMenu extends Component {
 
         <Menu.Item
           name='Books'
-          active={activeCategory === 'Books'}
+          active={cur_category === 'Books'}
           onClick={this.handleCategoryClick}
         >
           Books
@@ -97,7 +105,7 @@ class MainMenu extends Component {
 
         <Menu.Item
           name='Others'
-          active={activeCategory === 'Others'}
+          active={cur_category === 'Others'}
           onClick={this.handleCategoryClick}
         >
           Others
@@ -108,4 +116,13 @@ class MainMenu extends Component {
   }
 }
 
-export default MainMenu;
+ItemCategoriesMenu.propTypes = {
+  filterItems: PropTypes.func.isRequired,
+  cur_category: PropTypes.string.isRequired
+}
+
+const mapStateToProps = state => ({
+  cur_category: state.items.cur_category
+});
+
+export default connect(mapStateToProps, { filterItems })(ItemCategoriesMenu);
