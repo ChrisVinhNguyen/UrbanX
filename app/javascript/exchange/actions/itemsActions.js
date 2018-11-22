@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 import { FILTER_ITEMS, GET_ITEM_REVIEWS } from './types';
+=======
+
+import { FILTER_ITEMS, GET_MY_ITEMS, GET_ITEM } from './types';
+
+>>>>>>> fcec6a75ac2d6c5887d31227ae571a109a37da07
 
 import axios from 'axios';
 
@@ -22,6 +28,7 @@ export const filterItems = (cur_category=cur_category) => dispatch => {
   })
 }
 
+<<<<<<< HEAD
 export const getItemReviews = (current_viewed_item_id = current_viewed_item_id) => dispatch => {
 
   axios.get('/items/:current_viewed_item_id/item_reviews', {
@@ -34,9 +41,51 @@ export const getItemReviews = (current_viewed_item_id = current_viewed_item_id) 
       type: GET_ITEM_REVIEWS,
       current_viewed_item_id: current_viewed_item_id
       current_viewed_item_reviews: response.data.current_viewed_item_reviews
+=======
+
+
+export const getItem = (item_id=item_id) => dispatch => {
+  let that = this
+
+  axios.get('/items/'+item_id , {})
+  .then(function(response){
+    console.log("inside getItem")
+    console.log(response)
+    dispatch({
+      type: GET_ITEM,
+      item_id: item_id,
+      item_details: response.data
     })
   })
   .catch(function(error){
     console.log(error);
   })
 }
+export const getMyItems = (current_user_profile_id) => dispatch => {
+  let that = this
+  console.log(current_user_profile_id);
+  axios.get('/items/myItems', {
+    params: {
+      current_user_profile_id: current_user_profile_id
+    }
+  })
+  .then(function(response){
+    console.log(response)
+    dispatch({
+      type: GET_MY_ITEMS,
+      filtered_items: response.data.filtered_items
+>>>>>>> fcec6a75ac2d6c5887d31227ae571a109a37da07
+    })
+  })
+  .catch(function(error){
+    console.log(error);
+  })
+<<<<<<< HEAD
+}
+=======
+
+}
+
+
+
+>>>>>>> fcec6a75ac2d6c5887d31227ae571a109a37da07

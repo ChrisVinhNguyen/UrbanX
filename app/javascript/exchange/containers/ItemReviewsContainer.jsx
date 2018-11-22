@@ -4,6 +4,8 @@ import { Menu, Button, Comment, Form, Header } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { filterItems } from '../actions/itemsActions';
 import PropTypes from 'prop-types';
+import ItemReview from '../components/ItemReview'
+
 
 class ItemsReviewsContainer extends Component {
   componentDidMount(){
@@ -19,11 +21,9 @@ class ItemsReviewsContainer extends Component {
     		<Header as='h3' dividing>
       			Reviews
     		</Header>
-
-    		<ItemReview current_viewed_item_reviews={this.props.current_viewed_item_reviews} /> 
+    		<ItemReview/> 
     	</Comment.Group>
-    	);
-      
+    );
   }
 }
 

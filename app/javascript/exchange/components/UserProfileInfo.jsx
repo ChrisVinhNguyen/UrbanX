@@ -23,6 +23,7 @@ class UserProfileInfo extends Component {
       <span class="date">Email: {this.props.userProfile.email}</span>
     </div>
   </div>
+  {this.props.viewingMyProfile ?<button class="ui button">Edit</button> :<button class="ui button">Add contact</button>}
 </div>
     );
   }

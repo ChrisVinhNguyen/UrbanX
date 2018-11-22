@@ -28,17 +28,6 @@ class ItemReview extends Component {
         </Comment>
       );
     });
-    return (
-      <div className="body">
-        <Grid columns={3} divided>
-          <Grid.Row>
-            {items}
-          </Grid.Row>
-
-  </Grid>
-
-      </div>
-    );
   }
 }
 
