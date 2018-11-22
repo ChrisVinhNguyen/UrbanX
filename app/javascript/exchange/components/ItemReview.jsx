@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from "react-router-dom";
+
 import { Button, Comment, Form, Header, Rating } from 'semantic-ui-react'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -7,13 +9,14 @@ import PropTypes from 'prop-types';
 class ItemReview extends Component {
 
   render() {
+    console.log(this.props.current_viewed_item_reviews)
     let reviews = this.props.current_viewed_item_reviews.map(review => {
       return (
         <Comment>
           <Comment.Avatar/>
           <Comment.Content>
             <Comment.Author>
-              <Link to={'/user_profiles/:'+ {review.owner_id}}>
+              <Link to={'/user_profiles/'+ review.owner_id}>
                 {review.owner}
               </Link>
             </Comment.Author>
@@ -28,11 +31,17 @@ class ItemReview extends Component {
         </Comment>
       );
     });
+    return (
+      <div>{
+        reviews
+      }
+      </div>
+    );
   }
 }
 
-ItemsReviewsContainer.propTypes = {
-  current_viewed_item_reviews: PropTypes.string.isRequired
+ItemReview.propTypes = {
+  current_viewed_item_reviews: PropTypes.array.isRequired
 }
 
 const mapStateToProps = state => ({
