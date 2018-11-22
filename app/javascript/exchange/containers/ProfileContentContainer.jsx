@@ -4,6 +4,9 @@ import { Grid } from 'semantic-ui-react'
 
 import UserProfileInfo from '../components/UserProfileInfo'
 import ItemListComponent from '../components/ItemListComponent'
+import { getMyItems } from '../actions/itemsActions' 
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class ProfileContentContainer extends Component {
 
@@ -12,6 +15,12 @@ class ProfileContentContainer extends Component {
     this.state = {
       activeTab: "My_Items" 
     }
+  }
+
+  componentWillMount() {
+    this.props.getMyItems(this.props.userProfileId);
+    console.log(this.props.userProfileId)
+    console.log("=============================")
   }
 
   handleOnClick(activeTab){
@@ -59,5 +68,9 @@ class ProfileContentContainer extends Component {
   );
 }
 }
+ProfileContentContainer.propTypes = {
+  getMyItems: PropTypes.func.isRequired,
+}
 
-export default ProfileContentContainer;
+
+export default connect(() => {return {}}, { getMyItems })(ProfileContentContainer);

@@ -17,7 +17,7 @@ class Item1 extends Component {
       <Item.Content>
         <Item.Header size = 'medium' as='a' href={'items/'+this.props.item.id}><strong>{this.props.item.name}</strong></Item.Header>
         <Item.Meta>
-          <Link to={'user_profiles/'+ this.props.item.user_profile_id}>{this.props.item.owner}</Link>
+          <Link to={'/user_profiles/'+ this.props.item.user_profile_id}>{this.props.item.owner}</Link>
           <p>Quantity: {this.props.item.quantity}</p>
         </Item.Meta>
         <Item.Description>Description: {this.props.item.description}.</Item.Description>

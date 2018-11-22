@@ -7,7 +7,7 @@ import '../stylesheets/user-profile.scss'
 
 class UserProfile extends Component {
   render() {
-  	console.log(this)
+  	console.log(this.props)
   	var viewingMyProfile  = false
   	if ( this.props.match.params.id == this.props.currentUserId )
   	{

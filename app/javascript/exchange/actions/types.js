@@ -6,3 +6,4 @@ export const FETCH_PROFILE = 'FETCH_PROFILE';
 export const NEW_PROFILE = 'NEW_PROFILE';
 
 export const FILTER_ITEMS = 'FILTER_ITEMS';
+export const GET_MY_ITEMS = 'GET_MY_ITEMS';

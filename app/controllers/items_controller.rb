@@ -54,6 +54,35 @@ class ItemsController < ApplicationController
     render :json => {"filtered_items" => items_array}.to_json()
   end
 
+  def myItems
+    user_profile = UserProfile.find(params[:current_user_profile_id])
+    filtered_items = Item.where(user_id: user_profile.user_id)
+    items_array = []
+
+    filtered_items.each do |item|
+      user = User.find(item[:user_id])
+      full_name = user.user_profile[:first_name] + " " + user.user_profile[:last_name]
+      item_hash = item.attributes
+      item_hash[:owner] = full_name
+      item_hash[:user_profile_id] = user.user_profile.id
+
+      item_reviews_count = item.item_reviews.count
+      item_reviews_total = 0
+      item.item_reviews.each do |item_review|
+        item_reviews_total += item_review.rating
+      end
+      average_rating = item_reviews_total!=0 ? item_reviews_total/item_reviews_count : 'no rating' 
+      item_description = item.description
+
+      item_hash[:average_rating] = average_rating
+      item_hash[:description] = item_description
+
+      items_array.push(item_hash)
+    end
+
+    render :json => {"filtered_items" => items_array}.to_json()
+  end
+
 
   def search
     @item_name = params[:item][:search]
