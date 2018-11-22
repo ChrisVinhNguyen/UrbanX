@@ -8,6 +8,8 @@ import Logo from '../images/doge-logo-transparent-background.png';
 import SignupButton from '../components/SignupButton';
 import LoginButton from '../components/LoginButton';
 
+import { Dropdown, Image } from 'semantic-ui-react';
+
 
 class HeaderProfileContainer extends Component {
   componentWillMount() {
@@ -25,17 +27,15 @@ class HeaderProfileContainer extends Component {
     let userAuthenticationContent;
 
     if(isSignedIn) {
+      const trigger = <span>{this.props.user_info.full_name} <Image src={ Logo } avatar /></span>;
       userAuthenticationContent =
         <div>
-          <span>{this.props.user_info.full_name}</span>
-          <div className="simple ui icon top right pointing dropdown">
-            <img className="ui avatar image" src={ Logo } />
-            <div className="menu">
-              <div className="item">View Profile</div>
-              <div className="item">Logout</div>
-            </div>
-          </div>
-          <img className="ui avatar image" src={ Logo } />
+          <Dropdown icon={null} trigger={trigger} direction='left' floating labeled button pointing>
+            <Dropdown.Menu>
+              <Dropdown.Item>View Profile</Dropdown.Item>
+              <Dropdown.Item>Logout</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </div>;
     } else {
       userAuthenticationContent =

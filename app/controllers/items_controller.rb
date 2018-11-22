@@ -21,32 +21,18 @@ class ItemsController < ApplicationController
     @item = Item.new
   end
 
-  def search
-    @item_name = params[:item][:search]
-    #@items= Item.find(params[:item])
-    #@items = Item.where(name: @item_name)
-    @items = Item.where("name ilike ? AND status = ?", "%#{@item_name}%","available")
-
-
-    @items.each do |item|
-      puts item.name
-      puts item.description
+  def filter
+    if (params[:cur_category]=="All")
+      filtered_items = Item.where(status: "available")
+    else
+      filtered_items = Item.where(category: params[:cur_category], status: "available")
     end
-    #@item =  Item.find_by(name: @item_name)
-    #puts "--------------------searching for "+@item_name
-    #puts @item.description
 
-
-  end
-
-  def index
-    @items = Item.all
     items_array = []
 
-    @items.each do |item|
+    filtered_items.each do |item|
       user = User.find(item[:user_id])
       full_name = user.user_profile[:first_name] + " " + user.user_profile[:last_name]
-
       item_hash = item.attributes
       item_hash[:owner] = full_name
       item_hash[:user_profile_id] = user.user_profile.id
@@ -65,7 +51,26 @@ class ItemsController < ApplicationController
       items_array.push(item_hash)
     end
 
-    render json: items_array
+    render :json => {"filtered_items" => items_array}.to_json()
+  end
+
+
+  def search
+    @item_name = params[:item][:search]
+    #@items= Item.find(params[:item])
+    #@items = Item.where(name: @item_name)
+    @items = Item.where("name ilike ? AND status = ?", "%#{@item_name}%","available")
+
+
+    @items.each do |item|
+      puts item.name
+      puts item.description
+    end
+
+  end
+
+  def index
+    @items = Item.all
   end
 
   def show
