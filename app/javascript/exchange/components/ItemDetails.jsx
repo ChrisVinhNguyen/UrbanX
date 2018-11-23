@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { Button, Icon, Image, Item, Label } from 'semantic-ui-react'
 import { Rating, Divider } from 'semantic-ui-react'
@@ -8,7 +7,6 @@ import axios from 'axios';
 import ItemReviewsContainer from '../containers/ItemReviewsContainer'
 import { getItem } from '../actions/itemsActions';
 
-
 import pic from '../images/macbook.jpg';
 
 
@@ -16,6 +14,7 @@ class ItemDetails extends Component {
   componentDidMount(){
     this.props.getItem(this.props.match.params.id)
   }
+
   render() {
     console.log(this.props.item_details)
     console.log(this.props)
