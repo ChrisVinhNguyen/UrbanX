@@ -56,7 +56,6 @@ class UserProfileEditForm extends Component {
     
     e.preventDefault()
 	this.props.history.push(`/user_profiles/${this.props.match.params.id}`);
-
   }
 
   render() {
