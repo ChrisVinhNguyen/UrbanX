@@ -24,6 +24,19 @@ class ItemReviewsController < ApplicationController
   end
 
   def index
+    @item = Item.find(params[:item_id])
+    @item_reviews = @item.item_reviews
+
+    item_reviews_array = []
+    @item_reviews.each do |item_review|
+      user = User.find(item_review[:owner_id])
+      full_name = user.user_profile[:first_name] + " " + user.user_profile[:last_name]
+      item_review_hash = item_review.attributes
+      item_review_hash[:owner] = full_name
+
+      item_reviews_array.push(item_review_hash)
+    end
+    render :json => {"current_viewed_item_reviews" => item_reviews_array}.to_json()
   end
   
   def show

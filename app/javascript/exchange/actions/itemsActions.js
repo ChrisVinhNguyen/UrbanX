@@ -1,7 +1,4 @@
-
-import { FILTER_ITEMS, GET_MY_ITEMS, GET_ITEM, GET_MY_TRANSACTIONS } from './types';
-
-
+import { FILTER_ITEMS, GET_MY_ITEMS, GET_ITEM, GET_MY_TRANSACTIONS, GET_ITEM_REVIEWS } from './types';
 import axios from 'axios';
 
 export const filterItems = (cur_category=cur_category) => dispatch => {
@@ -24,12 +21,28 @@ export const filterItems = (cur_category=cur_category) => dispatch => {
   })
 }
 
-
+export const getItemReviews = (current_viewed_item_id = current_viewed_item_id) => dispatch => {
+  console.log(current_viewed_item_id);
+  axios.get('/items/' + current_viewed_item_id + '/item_reviews', {
+    params: {
+      current_viewed_item_id: current_viewed_item_id
+    }
+  })
+  .then(function(response){
+    dispatch({
+      type: GET_ITEM_REVIEWS,
+      current_viewed_item_reviews: response.data.current_viewed_item_reviews
+    })
+  })
+  .catch(function(error){
+    console.log(error);
+  })
+}
 
 export const getItem = (item_id=item_id) => dispatch => {
   let that = this
 
-  axios.get('/items/'+item_id , {})
+  axios.get('/items/' + item_id , {})
   .then(function(response){
     console.log("inside getItem")
     console.log(response)
@@ -43,6 +56,7 @@ export const getItem = (item_id=item_id) => dispatch => {
     console.log(error);
   })
 }
+
 export const getMyItems = (current_user_profile_id) => dispatch => {
   let that = this
   console.log(current_user_profile_id);
