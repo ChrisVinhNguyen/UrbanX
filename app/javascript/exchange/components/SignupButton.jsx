@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class SignupButton extends Component {
   render() {
     return (
-      <button onClick={ this.props.onClick }>
+      <Link to="/users/sign_up">
         Signup
-      </button>
+      </Link>
     );
   }
 }

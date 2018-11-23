@@ -57,7 +57,7 @@ class HeaderProfileContainer extends Component {
       userAuthenticationContent =
         <div>
           <span>
-            <SignupButton onClick={this.handleOnClick}/>
+            <SignupButton />
             or
             <LoginButton onClick={this.handleOnClick}/>
           </span>
