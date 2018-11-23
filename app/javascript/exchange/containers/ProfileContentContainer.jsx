@@ -4,7 +4,8 @@ import { Grid } from 'semantic-ui-react'
 
 import UserProfileInfo from '../components/UserProfileInfo'
 import ItemListComponent from '../components/ItemListComponent'
-import { getMyItems } from '../actions/itemsActions' 
+import TransactionListComponent from '../components/TransactionListComponent'
+import { getMyItems , getMyTransactions} from '../actions/itemsActions' 
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -19,6 +20,7 @@ class ProfileContentContainer extends Component {
 
   componentWillMount() {
     this.props.getMyItems(this.props.userProfileId);
+    this.props.getMyTransactions(this.props.userProfileId);
     console.log(this.props.userProfileId)
     console.log("=============================")
   }
@@ -59,7 +61,7 @@ class ProfileContentContainer extends Component {
             </div>
             <div class="ui segment">
             { this.state.activeTab == "My_Items"? <p> <ItemListComponent /> </p>: null} 
-            { this.state.activeTab == "My_Transactions"? <p> transactions </p>: null} 
+            { this.state.activeTab == "My_Transactions"? <TransactionListComponent /> : null} 
             { this.state.activeTab == "My_Contacts"? <p> contact </p>: null} 
             { this.state.activeTab == "Reviews"? <p> reviewee_id </p>: null} 
             </div>
@@ -70,7 +72,8 @@ class ProfileContentContainer extends Component {
 }
 ProfileContentContainer.propTypes = {
   getMyItems: PropTypes.func.isRequired,
+  getMyTransactions: PropTypes.func.isRequired,
 }
 
 
-export default connect(() => {return {}}, { getMyItems })(ProfileContentContainer);
+export default connect(() => {return {}}, { getMyItems, getMyTransactions })(ProfileContentContainer);

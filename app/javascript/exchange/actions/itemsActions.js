@@ -1,5 +1,5 @@
 
-import { FILTER_ITEMS, GET_MY_ITEMS, GET_ITEM } from './types';
+import { FILTER_ITEMS, GET_MY_ITEMS, GET_ITEM, GET_MY_TRANSACTIONS } from './types';
 
 
 import axios from 'axios';
@@ -64,5 +64,20 @@ export const getMyItems = (current_user_profile_id) => dispatch => {
 
 }
 
+export const getMyTransactions = (current_user_profile_id) => dispatch => {
+  let that = this
 
+  axios.get('/user_profiles/'+current_user_profile_id+'/transactions' , {})
+  .then(function(response){
+    console.log("inside getMyTransactions")
+    console.log(response)
+    dispatch({
+      type: GET_MY_TRANSACTIONS,
+      filtered_transactions: response.data.filtered_transactions
+    })
+  })
+  .catch(function(error){
+    console.log(error);
+  })
+}
 
