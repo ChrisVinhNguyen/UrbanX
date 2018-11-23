@@ -1,5 +1,8 @@
 export const FETCH_USER = 'FETCH_USER';
 export const NEW_USER = 'NEW_USER';
+export const SIGN_OUT_USER = 'SIGN_OUT_USER';
+export const SIGN_UP_USER = 'SIGN_UP_USER';
+export const LOG_IN_USER = 'LOG_IN_USER';
 
 
 export const FETCH_PROFILE = 'FETCH_PROFILE';

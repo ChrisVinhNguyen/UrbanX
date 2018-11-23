@@ -10,8 +10,9 @@ Rails.application.routes.draw do
   get 'items/destroy'
   get 'items/filter', to: 'items#filter'
   get 'items/myItems', to: 'items#myItems'
-  devise_for :users, controllers: { registrations: 'users/registrations' }
+  devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
   root to: "root#index"
+  delete '/', to: 'root#index'
   post 'items/search'
 
   get 'is_signed_in', to: 'authenticate_user#is_user_signed_in?'
