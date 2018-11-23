@@ -11,3 +11,5 @@ export const GET_ITEM = 'GET_ITEM';
 
 export const GET_MY_ITEMS = 'GET_MY_ITEMS';
 
+export const GET_MY_TRANSACTIONS = 'GET_MY_TRANSACTIONS';
+

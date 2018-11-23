@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class UserProfileEditForm extends Component {
 	constructor(props) {
 	    super(props);
 	    this.state = {
-	    	firstName: "",
-	    	lastName: "",
-	    	dateOfBirth: "",
+	    	first_name: "",
+	    	last_name: "",
+	    	date_of_birth: "",
 	    	location: ""
 	    };
 	    this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
@@ -21,37 +22,41 @@ class UserProfileEditForm extends Component {
   }
 
   handleFirstNameChange(e) {
-    this.setState({ firstName: e.target.value })
-    //console.log(this.props.match.params.id);
+    this.setState({ first_name: e.target.value })
+    console.log(this.state);
   }
 
   handleLastNameChange(e) {
-    this.setState({ lastName: e.target.value });
+    this.setState({ last_name: e.target.value });
+    console.log(this.state);
   }
 
   handleDateOfBirthChange(e) {
-    this.setState({ dateOfBirth: e.target.value });
+    this.setState({ date_of_birth: e.target.value });
+    console.log(this.state);
   }
 
   handleLocationChange(e) {
     this.setState({ location: e.target.value });
+    console.log(this.state);
   }
 
   handleSubmit(e) {
     let userData = this.state;
 
-    fetch(`/user_profiles/$this.props.match.params.id/edit`,{
-        method: "POST",
-        body: JSON.stringify(userData),
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
+    axios.put(`/user_profiles/${this.props.match.params.id}`, {
+    	params:userData
       }).then(response => {
         response.json().then(data =>{
           console.log("Successful" + data);
-        })
+      }).catch(function(error){
+      console.log(error);
+    })
     }) 
+    
+    e.preventDefault()
+	this.props.history.push(`/user_profiles/${this.props.match.params.id}`);
+
   }
 
   render() {
@@ -62,7 +67,7 @@ class UserProfileEditForm extends Component {
 		    <input 
 		    	type="text" 
 		    	name="post[first_name]" 
-		    	value={this.state.title} 
+		    	value={this.state.first_name} 
 		    	onChange = {this.handleFirstNameChange}
 		    	placeholder="First Name"/>
 		  </div>
@@ -71,7 +76,7 @@ class UserProfileEditForm extends Component {
 		    <input 
 		    	type="text" 
 		    	name="past[last_name]" 
-		    	value = {this.state.lastName}
+		    	value = {this.state.last_name}
 		    	onChange = {this.handleLastNameChange}
 		    	placeholder="Last Name"/>
 		  </div>
@@ -80,7 +85,7 @@ class UserProfileEditForm extends Component {
 		    <input 
 		    	type="Date" 
 		    	name="post[date_of_birth]" 
-		    	value={this.state.dateOfBirth}
+		    	value={this.state.date_of_birth}
 		    	onChange = {this.handleDateOfBirthChange}
 		    	placeholder="Date of Birth"/>
 		  </div>

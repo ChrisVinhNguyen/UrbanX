@@ -1,4 +1,5 @@
-import { FILTER_ITEMS, GET_MY_ITEMS, GET_ITEM, GET_ITEM_REVIEWS} from '../actions/types';
+import { FILTER_ITEMS, GET_MY_ITEMS, GET_ITEM, GET_MY_TRANSACTIONS, GET_ITEM_REVIEWS} from '../actions/types';
+
 
 const initialState = {
   cur_category: 'All',
@@ -6,6 +7,7 @@ const initialState = {
   current_viewed_item_id: null,
   current_viewed_item_reviews: [],
   item_id: null,
+  filtered_transactions: [],
   item_details: []
 }
 
@@ -35,6 +37,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         filtered_items: action.filtered_items
+      }
+    case GET_MY_TRANSACTIONS:
+      return {
+        ...state,
+        filtered_transactions: action.filtered_transactions
+
       }
     default:
       return state;

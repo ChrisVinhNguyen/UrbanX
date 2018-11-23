@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { Button, Icon, Image, Item, Label } from 'semantic-ui-react'
 import { Rating, Divider } from 'semantic-ui-react'
@@ -11,7 +10,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Carousel} from 'react-responsive-carousel';
 import { v4 as uuid } from 'uuid';
 
-
 import pic from '../images/macbook.jpg';
 
 
@@ -19,6 +17,7 @@ class ItemDetails extends Component {
   componentDidMount(){
     this.props.getItem(this.props.match.params.id)
   }
+
   render() {
     let numImages = 0
     let url =""

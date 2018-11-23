@@ -1,4 +1,6 @@
 class UserProfilesController < ApplicationController
+   protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
+
   def create
     if user_signed_in?
 
@@ -29,9 +31,9 @@ class UserProfilesController < ApplicationController
 
   def update
     @user_profile = UserProfile.find(params[:id])
-
-    if @user_profile.update(user_profile_params)
-      redirect_to @user_profile
+    puts params
+    if @user_profile.update(params.require(:params).permit(:first_name, :last_name, :date_of_birth,  :location,  :contact_list, :image))
+      render :json => {"saved_successfull" => true}
     else
       render 'edit'
     end
@@ -64,11 +66,27 @@ class UserProfilesController < ApplicationController
   end
 
   def transactions
+
     if user_signed_in?
+      puts params
+      puts '----'
       @user_profile = UserProfile.find(params[:id])
+      puts '==============3'
       if @user_profile.user == @current_user
-        @transactions = Transaction.where(:lender_id => @user_profile.user_id)
+        filtered_transactions = Transaction.where(:lender_id => @user_profile.user_id)
         .or(Transaction.where(:borrower_id => @user_profile.user_id))
+        transactions_array = []
+
+        filtered_transactions.each do |transaction|
+          transaction_hash = transaction.attributes
+          transaction_hash[:item_name] = Item.find(transaction.item_id).name
+          transaction_hash[:lender_name] = UserProfile.where(user_id:transaction.lender_id).first.first_name
+          transaction_hash[:borrower_name] = UserProfile.where(user_id:transaction.borrower_id).first.first_name
+
+          transactions_array.push(transaction_hash)
+        end
+
+        render :json => {"filtered_transactions" => transactions_array}.to_json()
       end
     else
       redirect_to new_user_session_path
