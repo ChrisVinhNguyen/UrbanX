@@ -5,8 +5,8 @@ import { fetchUser, signOutUser } from '../actions/userActions';
 
 import Logo from '../images/doge-logo-transparent-background.png';
 
-import SignupButton from '../components/SignupButton';
-import LoginButton from '../components/LoginButton';
+import SignUpButton from '../components/SignUpButton';
+import SignInButton from '../components/SignInButton';
 
 import { Dropdown, Image } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
@@ -20,10 +20,6 @@ class HeaderProfileContainer extends Component {
 
   componentWillMount() {
     this.props.fetchUser();
-  }
-
-  handleOnClick(e) {
-    console.log('inside onClick!!!');
   }
 
   onHandleLogoutClick(e) {
@@ -57,9 +53,9 @@ class HeaderProfileContainer extends Component {
       userAuthenticationContent =
         <div>
           <span>
-            <SignupButton />
+            <SignUpButton />
             or
-            <LoginButton onClick={this.handleOnClick}/>
+            <SignInButton />
           </span>
         </div>;
     }

@@ -3,16 +3,16 @@ import { Link } from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
 
 
-class SignUpButton extends Component {
+class SignInButton extends Component {
   render() {
     return (
-      <Link to="/users/sign_up">
+      <Link to="/users/sign_in">
         <Button>
-          Sign Up
+          Sign In
         </Button>
       </Link>
     );
   }
 }
 
-export default SignUpButton;
+export default SignInButton;
