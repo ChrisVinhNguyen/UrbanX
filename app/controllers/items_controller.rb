@@ -104,7 +104,15 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
+    @images = []
+    if @item.images.attached?
+        @item.images.each do |image|
+          @images.push(url_for(image))
+        end   
+    end
     item_details= @item.attributes
+    item_details[:images]= @images
+    
     render json: item_details
   end
 
