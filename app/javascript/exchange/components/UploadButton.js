@@ -7,17 +7,9 @@ import { Link } from "react-router-dom";
 import pic from '../images/macbook.jpg';
 import ActiveStorageProvider from 'react-activestorage-provider';
 
-
-
-
-
-
 export class UploadButton extends Component {
 
- 	
-	
   render(){
-
   	var path = '/items/' + this.props.item_id;
   	return (
   	
@@ -63,8 +55,6 @@ export class UploadButton extends Component {
     </div>
 	)}
 	/>
-
-
   		)
   }
 	

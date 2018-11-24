@@ -9,6 +9,7 @@ export const NEW_PROFILE = 'NEW_PROFILE';
 
 export const FILTER_ITEMS = 'FILTER_ITEMS';
 export const GET_ITEM_REVIEWS = 'GET_ITEM_REVIEWS';
+export const NEW_ITEM_REVIEW = 'NEW_ITEM_REVIEW';
 export const GET_ITEM = 'GET_ITEM';
 
 export const GET_MY_ITEMS = 'GET_MY_ITEMS';

@@ -19,11 +19,12 @@ class UserSignUpFormContainer extends Component {
 
   handleChange(e, { name, value }) {
     this.setState({ [name]: value })
+    console.log(this.state.email)
   }
 
   handleSubmit(e) {
     let userData = this.state;
-
+    console.log(this.state)
     this.props.signUpUser(userData);
   }
 
