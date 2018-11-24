@@ -1,4 +1,4 @@
-import { FILTER_ITEMS, GET_MY_ITEMS, GET_ITEM, GET_MY_TRANSACTIONS, GET_ITEM_REVIEWS } from './types';
+import { FILTER_ITEMS, GET_MY_ITEMS, GET_ITEM, GET_MY_TRANSACTIONS, GET_ITEM_REVIEWS, NEW_ITEM} from './types';
 import axios from 'axios';
 
 export const filterItems = (cur_category=cur_category) => dispatch => {
@@ -95,3 +95,28 @@ export const getMyTransactions = (current_user_profile_id) => dispatch => {
   })
 }
 
+export const newItem = (item) => dispatch => {
+  getCSRFToken();
+  axios.post('/items',
+  {
+    item: item
+  })
+  .then(function(response){
+    dispatch({
+      type: NEW_ITEM
+    })
+  })
+  .catch(function(error){
+    console.log(error)
+  })
+}
+
+
+
+const getCSRFToken = () => {
+  const tokenDom = document.querySelector("meta[name=csrf-token]")
+  if (tokenDom) {
+     const csrfToken = tokenDom.content
+     axios.defaults.headers.common['X-CSRF-Token'] = csrfToken
+  }
+}

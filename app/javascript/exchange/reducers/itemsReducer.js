@@ -1,4 +1,4 @@
-import { FILTER_ITEMS, GET_MY_ITEMS, GET_ITEM, GET_MY_TRANSACTIONS, GET_ITEM_REVIEWS} from '../actions/types';
+import { FILTER_ITEMS, GET_MY_ITEMS, GET_ITEM, GET_MY_TRANSACTIONS, GET_ITEM_REVIEWS, NEW_ITEM} from '../actions/types';
 
 
 const initialState = {
@@ -44,6 +44,15 @@ export default function(state = initialState, action) {
         filtered_transactions: action.filtered_transactions
 
       }
+
+    case NEW_ITEM:
+      return {
+        ...state,
+        item_id: action.item_id,
+        item_details: action.item_details
+
+      }
+
     default:
       return state;
   }

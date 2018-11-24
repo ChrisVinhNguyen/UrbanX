@@ -39,6 +39,11 @@ class HeaderProfileContainer extends Component {
           <Dropdown icon={null} trigger={trigger} direction='left' floating labeled button pointing>
             <Dropdown.Menu>
               <Dropdown.Item>
+                <Link to={`/items/new`}>
+                  Add New Item
+                </Link>
+              </Dropdown.Item>
+              <Dropdown.Item>
                 <Link to={`/user_profiles/${this.props.user_info.user_profile_id}`}>
                   View Profile
                 </Link>

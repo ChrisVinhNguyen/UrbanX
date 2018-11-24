@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { Button, Icon, Image, Item, Label } from 'semantic-ui-react'
 import { Rating, Divider } from 'semantic-ui-react'
@@ -10,6 +11,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Carousel} from 'react-responsive-carousel';
 import { v4 as uuid } from 'uuid';
 
+
 import pic from '../images/macbook.jpg';
 
 
@@ -17,7 +19,6 @@ class ItemDetails extends Component {
   componentDidMount(){
     this.props.getItem(this.props.match.params.id)
   }
-
   render() {
     let numImages = 0
     let url =""
@@ -43,6 +44,8 @@ class ItemDetails extends Component {
       })
     }
     else{
+      console.log("COURSEL IS NULL")
+      console.log(carouselItems)
       carouselItems = null
     }
 
@@ -51,7 +54,9 @@ class ItemDetails extends Component {
       <div>
         <Item>
           <Item.Content>
-          {carouselItems ? (<Carousel showThumbs={false} selectedItem={0}> {carouselItems} </Carousel>) : null}
+          <Carousel></Carousel>
+          {carouselItems ? (<Carousel showThumbs={false} width="50%" selectedItem={1}> {carouselItems} </Carousel>) : null}
+
           <Item.Header size = 'medium' as='a' href={'items/'+this.props.item_id}><strong>{this.props.item_details.name}</strong></Item.Header>
         <Item.Meta>
           <p>Quantity: {this.props.item_details.quantity}</p>

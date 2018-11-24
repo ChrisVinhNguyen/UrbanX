@@ -104,6 +104,13 @@ acorn@^6.0.2:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.0.4.tgz#77377e7353b72ec5104550aa2d2097a2fd40b754"
   integrity sha512-VY4i5EKSKkofY2I+6QLTbTTN/UvEQPCo6eiwzzSaSWfpaDhOmStMCMod6wmuPciNq+XS0faCglFu2lHZpdHUtg==
 
+activestorage@^5.2.0:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/activestorage/-/activestorage-5.2.1.tgz#b4be57fbedc25c6c361802707fc5e8884766f6a1"
+  integrity sha512-n3LcwiC3EV5zkVAvay5yprXTBb8vzT2Qef1GCfC8feJTVWEadzNW9zYaOweDpshqzJHx+zdaps6uiHDJQbdCdA==
+  dependencies:
+    spark-md5 "^3.0.0"
+
 ajv-keywords@^3.1.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-3.2.0.tgz#e86b819c602cf8821ad637413698f1dec021847a"
@@ -5933,6 +5940,14 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-activestorage-provider@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/react-activestorage-provider/-/react-activestorage-provider-0.6.0.tgz#08461db7b4520f8158a1f69c82a5fe76a35ebd3c"
+  integrity sha512-BbmQMjl7QgXxp9GlbOqsAVHTHfiAbQJKCE/EF1rJGU9qsTJ2dsoa+8/ZhB0UYDwCsZ25A0dSxJOeqsgIvYjjPA==
+  dependencies:
+    "@babel/runtime" "^7.1.2"
+    activestorage "^5.2.0"
+
 react-dom@^16.5.2:
   version "16.6.3"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.6.3.tgz#8fa7ba6883c85211b8da2d0efeffc9d3825cccc0"
@@ -6730,6 +6745,11 @@ source-map@^0.6.1, source-map@~0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
   integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
+
+spark-md5@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/spark-md5/-/spark-md5-3.0.0.tgz#3722227c54e2faf24b1dc6d933cc144e6f71bfef"
+  integrity sha1-NyIifFTi+vJLHcbZM8wUTm9xv+8=
 
 spdx-correct@^3.0.0:
   version "3.0.2"

@@ -6,6 +6,7 @@ import UserProfile from './UserProfile';
 import UserProfileEditForm from '../containers/UserProfileEditForm';
 import ItemDetails from './ItemDetails';
 import UserSignUpFormContainer from '../containers/UserSignUpFormContainer';
+import ItemCreateFormContainer from '../containers/ItemCreateFormContainer'
 
 
 const About = () => <h2>About</h2>;
@@ -30,6 +31,7 @@ class Body extends Component {
         <Route path="/contact-us" component={ ContactUs } />
         <Route path="/faq" component={ FAQ } />
         <Route path="/items/:id" component={ ItemDetails } />
+        <Route path="/items/new" component={ ItemCreateFormContainer } />
       </div>
     );
   }
