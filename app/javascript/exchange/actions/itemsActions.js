@@ -1,4 +1,5 @@
-import { FILTER_ITEMS, GET_MY_ITEMS, GET_ITEM, GET_MY_TRANSACTIONS, GET_ITEM_REVIEWS, NEW_ITEM} from './types';
+import { FILTER_ITEMS, GET_MY_ITEMS, GET_ITEM, GET_MY_TRANSACTIONS, GET_ITEM_REVIEWS, NEW_ITEM, NEW_ITEM_REVIEW } from './types';
+
 import axios from 'axios';
 
 export const filterItems = (cur_category=cur_category) => dispatch => {
@@ -32,6 +33,25 @@ export const getItemReviews = (current_viewed_item_id = current_viewed_item_id) 
     dispatch({
       type: GET_ITEM_REVIEWS,
       current_viewed_item_reviews: response.data.current_viewed_item_reviews
+    })
+  })
+  .catch(function(error){
+    console.log(error);
+  })
+}
+
+export const newItemReview = (current_viewed_item_id, item_review_data) => dispatch => {
+  console.log(item_review_data);
+  getCSRFToken();
+  axios.post('/items/' + current_viewed_item_id + '/item_reviews', {
+    params: {
+      item_id: current_viewed_item_id,
+      item_review: item_review_data
+    }
+  })
+  .then(function(response){
+    dispatch({
+      type: NEW_ITEM_REVIEW,
     })
   })
   .catch(function(error){
