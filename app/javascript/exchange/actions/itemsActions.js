@@ -1,4 +1,4 @@
-import { FILTER_ITEMS, GET_MY_ITEMS, GET_ITEM, GET_MY_TRANSACTIONS, GET_ITEM_REVIEWS, NEW_ITEM, NEW_ITEM_REVIEW } from './types';
+import { FILTER_ITEMS, GET_MY_ITEMS, GET_ITEM, GET_MY_TRANSACTIONS, GET_ITEM_REVIEWS, NEW_ITEM, NEW_ITEM_REVIEW, NEW_TRANSACTION } from './types';
 
 import axios from 'axios';
 
@@ -108,6 +108,26 @@ export const getMyTransactions = (current_user_profile_id) => dispatch => {
     dispatch({
       type: GET_MY_TRANSACTIONS,
       filtered_transactions: response.data.filtered_transactions
+    })
+  })
+  .catch(function(error){
+    console.log(error);
+  })
+}
+
+export const newTransaction = (transaction) => dispatch => {
+  let that = this
+  getCSRFToken();
+
+  axios.post('/items/'+transaction.item_id+'/transactions' , 
+  {
+    transaction: transaction
+  })
+  .then(function(response){
+    console.log("inside newTransactions")
+    console.log(response)
+    dispatch({
+      type: NEW_TRANSACTION
     })
   })
   .catch(function(error){
