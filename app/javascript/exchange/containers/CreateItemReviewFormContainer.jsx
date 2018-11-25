@@ -40,7 +40,7 @@ class createItemReviewFormContainer extends Component {
 
     console.log(this.state)
     console.log(itemReviewData)
-    this.props.newItemReview(current_viewed_item_id, itemReviewData)
+    this.props.newItemReview(itemReviewData, current_viewed_item_id)
   }
 
   render() {

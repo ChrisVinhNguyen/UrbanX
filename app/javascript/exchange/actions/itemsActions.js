@@ -40,15 +40,14 @@ export const getItemReviews = (current_viewed_item_id = current_viewed_item_id) 
   })
 }
 
-export const newItemReview = (current_viewed_item_id, item_review_data) => dispatch => {
-  console.log(item_review_data);
+export const newItemReview = (item_review, current_viewed_item_id) => dispatch => {
+  console.log(item_review);
   getCSRFToken();
   axios.post('/items/' + current_viewed_item_id + '/item_reviews', {
-    params: {
-      item_id: current_viewed_item_id,
-      item_review: item_review_data
-    }
+      //item_id: current_viewed_item_id,
+      item_review: item_review
   })
+  
   .then(function(response){
     dispatch({
       type: NEW_ITEM_REVIEW,

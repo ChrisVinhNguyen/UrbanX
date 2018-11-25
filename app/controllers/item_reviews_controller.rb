@@ -2,7 +2,7 @@ class ItemReviewsController < ApplicationController
   def create
     if user_signed_in?
       print("inside of create item reviews")
-      print(params[:item_review])
+      print(params)
       @item = Item.find(params[:item_id])
       @item_review = @item.item_reviews.create(item_review_params)
       @item_review.created_at = DateTime.now
