@@ -22,7 +22,7 @@ class Body extends Component {
     return (
       <div className="body">
     	  <Route path="/" exact component={ ItemListComponent } />
-        <Route path="/users/sign_up" exact component={ UserSignInFormContainer } />
+        <Route path="/users/sign_up" exact component={ UserSignUpFormContainer } />
         <Route path="/users/sign_in" exact component={ UserSignInFormContainer } />
         <Route path="/user_profiles/:id" exact component={ UserProfile } />
         <Route path="/user_profiles/:id/edit" exact component={ UserProfileEditForm } />

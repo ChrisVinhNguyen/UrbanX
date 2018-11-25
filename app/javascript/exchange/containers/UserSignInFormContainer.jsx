@@ -9,7 +9,10 @@ class UserSignInFormContainer extends Component {
     super();
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      emailError: false,
+      passwordError: false,
+      errorMessages: []
     };
 
     this.handleChange = this.handleChange.bind(this);
