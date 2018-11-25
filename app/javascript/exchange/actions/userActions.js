@@ -1,4 +1,4 @@
-import { FETCH_USER, SIGN_UP_USER, SIGN_OUT_USER } from './types';
+import { FETCH_USER, SIGN_UP_USER, SIGN_IN_USER, SIGN_OUT_USER } from './types';
 
 import axios from 'axios';
 
@@ -25,6 +25,22 @@ export const signUpUser = (userData) => dispatch => {
   .then(function(response){
     dispatch({
       type: SIGN_UP_USER
+    })
+  })
+  .catch(function(error){
+    console.log(error)
+  })
+}
+
+export const signInUser = (userData) => dispatch => {
+  getCSRFToken();
+  axios.post('/users/sign_in',
+  {
+    user: userData
+  })
+  .then(function(response){
+    dispatch({
+      type: SIGN_IN_USER
     })
   })
   .catch(function(error){
