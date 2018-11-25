@@ -49,6 +49,7 @@ class UserSignInFormContainer extends Component {
     }
 
     this.props.signInUser(userData);
+    this.props.history.push("/");
   }
 
   handleFormErrors() {
