@@ -43,7 +43,10 @@ class UserSignInFormContainer extends Component {
       this.setState({ formError: false })
     }
 
-    let userData = this.state;
+    let userData = {
+      email: this.state.email,
+      password: this.state.password
+    }
 
     this.props.signInUser(userData);
   }
