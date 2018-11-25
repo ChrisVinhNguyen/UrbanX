@@ -1,4 +1,4 @@
-import { FETCH_USER, SIGN_UP_USER, SIGN_IN_USER, SIGN_OUT_USER } from './types';
+import { FETCH_USER, SIGN_UP_USER, SIGN_IN_USER, SIGN_OUT_USER, NEW_PROFILE } from './types';
 
 import axios from 'axios';
 
@@ -41,6 +41,22 @@ export const signInUser = (userData) => dispatch => {
   .then(function(response){
     dispatch({
       type: SIGN_IN_USER
+    })
+  })
+  .catch(function(error){
+    console.log(error)
+  })
+}
+
+export const newProfile = (profile) => dispatch => {
+  getCSRFToken();
+  axios.post('/user_profiles',
+  {
+    user_profile: profile
+  })
+  .then(function(response){
+    dispatch({
+      type: NEW_PROFILE
     })
   })
   .catch(function(error){

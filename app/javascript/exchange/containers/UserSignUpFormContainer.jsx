@@ -3,6 +3,8 @@ import { Button, Checkbox, Form } from 'semantic-ui-react'
 import axios from 'axios';
 import { signUpUser } from '../actions/userActions';
 import { connect } from 'react-redux';
+import { Link } from "react-router-dom";
+
 
 class UserSignUpFormContainer extends Component {
   constructor() {
@@ -26,6 +28,7 @@ class UserSignUpFormContainer extends Component {
     let userData = this.state;
     console.log(this.state)
     this.props.signUpUser(userData);
+    this.props.history.push('/user_profiles/new/profile');
   }
 
   render() {
