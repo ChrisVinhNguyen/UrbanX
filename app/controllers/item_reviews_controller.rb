@@ -11,7 +11,9 @@ class ItemReviewsController < ApplicationController
       @item_review.owner_id = @current_user.id
       if @item_review.save
         puts("saved successfully")
-        redirect_to item_path(@item)
+        #redirect_to item_path(@item)
+        render :json => {"success" => true}.to_json()
+
       else
         render 'new'
       end
@@ -53,7 +55,7 @@ class ItemReviewsController < ApplicationController
         if @item_review.update(item_review_params)
           puts("saved")
           @item_review.updated_at = DateTime.now
-          redirect_to @item
+          render :json => {"success" => true}.to_json()
         else
           puts("not saved")
           render 'edit'
