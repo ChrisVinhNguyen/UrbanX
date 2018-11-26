@@ -36,7 +36,6 @@ class UserSignUpFormContainer extends Component {
 
   handleChange(e, { name, value }) {
     this.setState({ [name]: value })
-    console.log(this.state.email)
   }
 
   handleSubmit(e) {
@@ -127,11 +126,11 @@ class UserSignUpFormContainer extends Component {
             <Form.Input placeholder='bob.smith@gmail.com' name='email' value={ email } onChange={ this.handleChange }  width={10} error={ emailError } />
           </Form.Field>
           <Form.Field>
-            <label>Password</label>
+            <label>Password (6 characters minimum)</label>
             <Form.Input type='password' name='password' value={ password } onChange={ this.handleChange }  width={10} error={ passwordError } />
           </Form.Field>
           <Form.Field>
-            <label>Confirm Password</label>
+            <label>Password Confirmation</label>
             <Form.Input type='password'  name='password_confirmation' value={ password_confirmation } onChange={ this.handleChange }  width={10} error={ password_confirmationError } />
           </Form.Field>
           <Form.Field>

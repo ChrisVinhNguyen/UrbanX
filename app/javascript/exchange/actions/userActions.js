@@ -55,9 +55,7 @@ export const newProfile = (profile) => dispatch => {
     user_profile: profile
   })
   .then(function(response){
-    dispatch({
-      type: NEW_PROFILE
-    })
+    dispatch(fetchUser());
   })
   .catch(function(error){
     console.log(error)

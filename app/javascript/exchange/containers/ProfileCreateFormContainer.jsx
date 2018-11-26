@@ -9,20 +9,14 @@ class ProfileCreateFormContainer extends Component {
   constructor(props) {
       super(props);
       this.state = {
-        first_name: "",
-        last_name: "",
-        date_of_birth: "",
-        location: ""
+        first_name: '',
+        last_name: '',
+        date_of_birth: '',
+        location: ''
       };
       this.handleSubmit = this.handleSubmit.bind(this);
       this.handleChange = this.handleChange.bind(this);
-
     }
-
-  componentWillMount() {
-    console.log(this.props)
-  }
-
 
   handleSubmit(e) {
     let profile = this.state;
@@ -35,8 +29,9 @@ class ProfileCreateFormContainer extends Component {
   }
 
   render() {
-    const { first_name, last_name, date_of_birth, location} = this.state
-  return (
+    const { first_name, last_name, date_of_birth, location } = this.state;
+
+    return (
      <div className="new-item-form-container">
         <h1 className="new-item-form-title">Create User Profile Form</h1>
         <Form className="new-item-form" onSubmit={ this.handleSubmit }>
@@ -56,7 +51,6 @@ class ProfileCreateFormContainer extends Component {
             <label>Location</label>
             <Form.Input placeholder='Location' name='location' value={ location } onChange={ this.handleChange }  width={10} />
           </Form.Field>
-          
           <Form.Button content='Submit' />
         </Form>
       </div>

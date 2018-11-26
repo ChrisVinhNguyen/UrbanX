@@ -27,8 +27,6 @@ class HeaderProfileContainer extends Component {
   }
 
   render() {
-    console.log(this.props)
-
     const isSignedIn = this.props.is_signed_in;
     let userAuthenticationContent;
 
