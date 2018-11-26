@@ -1,9 +1,19 @@
-import { FILTER_ITEMS, GET_MY_ITEMS, GET_ITEM, GET_MY_TRANSACTIONS, GET_ITEM_REVIEWS, NEW_ITEM} from '../actions/types';
+import {
+  FILTER_ITEMS,
+  GET_MY_ITEMS,
+  GET_ITEM,
+  GET_MY_TRANSACTIONS,
+  GET_ITEM_REVIEWS,
+  NEW_ITEM
+} from '../actions/types';
 
 
 const initialState = {
   cur_category: 'All',
   filtered_items: [],
+  search_category: 'All',
+  search_value: '',
+  filtered_items_for_search: [],
   current_viewed_item_id: null,
   current_viewed_item_reviews: [],
   item_id: null,
