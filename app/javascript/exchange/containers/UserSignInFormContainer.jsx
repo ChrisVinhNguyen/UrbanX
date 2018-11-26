@@ -79,7 +79,7 @@ class UserSignInFormContainer extends Component {
       return (
         <li key={ keyVal }>{message}</li>
       )
-    })
+    });
 
     const errorMessage = (
       <Message
@@ -91,7 +91,7 @@ class UserSignInFormContainer extends Component {
           </ul>
         }
       />
-    )
+    );
 
     return (
       <div className="sign-in-form-container">
