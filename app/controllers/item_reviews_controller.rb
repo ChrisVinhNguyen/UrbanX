@@ -82,7 +82,7 @@ class ItemReviewsController < ApplicationController
       @item = Item.find(params[:item_id])
       @item_review = @item.item_reviews.find(params[:id])
       @item_review.destroy
-      redirect_to item_path(@item)
+      render :json => {"success" => true}.to_json()
     else
       redirect_to new_user_session_path
     end

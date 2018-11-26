@@ -100,7 +100,8 @@ class editItemReviewFormContainer extends Component {
 editItemReviewFormContainer.propTypes = {
   editItemReview: PropTypes.func.isRequired,
   is_signed_in: PropTypes.bool.isRequired,
-  user_info: PropTypes.object.isRequired
+  user_info: PropTypes.object.isRequired,
+  review_id: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({

@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
 
-import { Button, Comment, Form, Header, Rating } from 'semantic-ui-react'
+import { Button, Comment, Form, Header, Rating, Popup } from 'semantic-ui-react'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import CreateItemReviewFormContainer from '../containers/CreateItemReviewFormContainer'
 import EditItemReviewFormContainer from '../containers/EditItemReviewFormContainer'
+import DeleteItemReviewContainer from '../containers/DeleteItemReviewContainer'
 
 class ItemReview extends Component {
 
@@ -36,7 +37,8 @@ class ItemReview extends Component {
             {current_user_id == review.owner_id?
             <Comment.Actions>
               <Comment.Action>
-                  <EditItemReviewFormContainer/>
+                  <EditItemReviewFormContainer review_id = {review.id}/>
+                  <DeleteItemReviewContainer review_id = {review.id}/>
               </Comment.Action> 
             </Comment.Actions>
             : null
