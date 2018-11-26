@@ -29,20 +29,17 @@ export default function(state = initialState, action) {
         cur_category: action.cur_category,
         filtered_items: action.filtered_items
       }
-
     case GET_ITEM_REVIEWS:
       return {
         ...state, 
         current_viewed_item_reviews: action.current_viewed_item_reviews
       }
-
     case GET_ITEM:
       return {
         ...state,
         item_id: action.item_id,
         item_details: action.item_details
       }
-
     case GET_MY_ITEMS:
       return {
         ...state,
@@ -52,17 +49,13 @@ export default function(state = initialState, action) {
       return {
         ...state,
         filtered_transactions: action.filtered_transactions
-
       }
-
     case NEW_ITEM:
       return {
         ...state,
         item_id: action.item_id,
         item_details: action.item_details
-
       }
-
     default:
       return state;
   }
