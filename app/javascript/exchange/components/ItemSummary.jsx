@@ -15,11 +15,11 @@ class ItemSummary extends Component {
     return (
       <Item>
       <Link to={ `items/${id}` }>
-        <Item.Image as='a' size ='medium' src={ pic } />
+        <Item.Image size ='medium' src={ pic } />
       </Link>
       <Item.Content>
         <Link to={ `items/${id}` }>
-          <Item.Header size = 'medium' as='a' onClick={this.handleItemClick}>
+          <Item.Header size = 'medium' onClick={this.handleItemClick}>
             <strong>
               { name }
             </strong>

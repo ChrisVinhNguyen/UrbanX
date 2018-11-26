@@ -1,4 +1,4 @@
-import { FILTER_ITEMS, GET_MY_ITEMS, GET_ITEM, GET_MY_TRANSACTIONS, GET_ITEM_REVIEWS, NEW_ITEM, NEW_ITEM_REVIEW } from './types';
+import { FILTER_ITEMS, GET_MY_ITEMS, GET_ITEM, NEW_ITEM, GET_ITEM_REVIEWS, NEW_ITEM_REVIEW, EDIT_ITEM_REVIEW, GET_MY_TRANSACTIONS, NEW_TRANSACTION } from './types';
 
 import axios from 'axios';
 
@@ -40,18 +40,33 @@ export const getItemReviews = (current_viewed_item_id = current_viewed_item_id) 
   })
 }
 
-export const newItemReview = (current_viewed_item_id, item_review_data) => dispatch => {
-  console.log(item_review_data);
+export const newItemReview = (item_review, current_viewed_item_id) => dispatch => {
+  console.log(item_review);
   getCSRFToken();
   axios.post('/items/' + current_viewed_item_id + '/item_reviews', {
-    params: {
-      item_id: current_viewed_item_id,
-      item_review: item_review_data
-    }
+      item_review: item_review
   })
+  
   .then(function(response){
     dispatch({
       type: NEW_ITEM_REVIEW,
+    })
+  })
+  .catch(function(error){
+    console.log(error);
+  })
+}
+
+export const editItemReview = (item_review, current_viewed_item_id) => dispatch => {
+  console.log(item_review.review_id);
+  getCSRFToken();
+  axios.patch('/items/' + current_viewed_item_id + '/item_reviews/' + item_review.review_id, {
+      item_review: item_review
+  })
+  
+  .then(function(response){
+    dispatch({
+      type: EDIT_ITEM_REVIEW,
     })
   })
   .catch(function(error){
@@ -108,6 +123,26 @@ export const getMyTransactions = (current_user_profile_id) => dispatch => {
     dispatch({
       type: GET_MY_TRANSACTIONS,
       filtered_transactions: response.data.filtered_transactions
+    })
+  })
+  .catch(function(error){
+    console.log(error);
+  })
+}
+
+export const newTransaction = (transaction) => dispatch => {
+  let that = this
+  getCSRFToken();
+
+  axios.post('/items/'+transaction.item_id+'/transactions' , 
+  {
+    transaction: transaction
+  })
+  .then(function(response){
+    console.log("inside newTransactions")
+    console.log(response)
+    dispatch({
+      type: NEW_TRANSACTION
     })
   })
   .catch(function(error){

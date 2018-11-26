@@ -6,10 +6,11 @@ import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import axios from 'axios';
 import ItemReviewsContainer from '../containers/ItemReviewsContainer'
-import { getItem } from '../actions/itemsActions';
+import { getItem, newTransaction } from '../actions/itemsActions';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Carousel} from 'react-responsive-carousel';
 import { v4 as uuid } from 'uuid';
+import PropTypes from 'prop-types';
 
 
 import pic from '../images/macbook.jpg';
@@ -18,7 +19,14 @@ import pic from '../images/macbook.jpg';
 class ItemDetails extends Component {
   componentDidMount(){
     this.props.getItem(this.props.match.params.id)
+    this.handleBorrow = this.handleBorrow.bind(this);
   }
+
+  handleBorrow(e) {
+    let transaction = {item_id: this.props.item_id, status:'pending'}
+    this.props.newTransaction(transaction)
+  }
+
   render() {
     let numImages = 0
     let url =""
@@ -60,6 +68,9 @@ class ItemDetails extends Component {
           <Item.Header size = 'medium' as='a' href={'items/'+this.props.item_id}><strong>{this.props.item_details.name}</strong></Item.Header>
         <Item.Meta>
           <p>Quantity: {this.props.item_details.quantity}</p>
+          <Button onClick={ this.handleBorrow }>
+            Borrow
+          </Button>
         </Item.Meta>
         <Item.Description>Description: {this.props.item_details.description}.</Item.Description>
         <Item.Extra>
@@ -77,9 +88,14 @@ class ItemDetails extends Component {
   }
 }
 
+ItemDetails.propTypes = {
+  getItem: PropTypes.func.isRequired,
+  newTransaction: PropTypes.func.isRequired,
+}
+
 const mapStateToProps = state => ({
   item_id: state.items.item_id,
   item_details: state.items.item_details
 });
 
-export default connect(mapStateToProps, {getItem})(ItemDetails);
+export default connect(mapStateToProps, {getItem, newTransaction})(ItemDetails);

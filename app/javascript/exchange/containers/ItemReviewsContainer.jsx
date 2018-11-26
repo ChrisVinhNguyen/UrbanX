@@ -35,7 +35,6 @@ class ItemsReviewsContainer extends Component {
             </Header>
             <ItemReview/> 
           </div>
-          <CreateItemReviewFormContainer/>
     		</Comment.Group>
 		);
 	}
