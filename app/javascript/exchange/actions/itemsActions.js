@@ -1,4 +1,4 @@
-import { FILTER_ITEMS, GET_MY_ITEMS, GET_ITEM, NEW_ITEM, GET_ITEM_REVIEWS, NEW_ITEM_REVIEW, EDIT_ITEM_REVIEW, GET_MY_TRANSACTIONS, NEW_TRANSACTION } from './types';
+import { FILTER_ITEMS, GET_MY_ITEMS, GET_ITEM, NEW_ITEM, GET_ITEM_REVIEWS, DELETE_ITEM_REVIEW, NEW_ITEM_REVIEW, EDIT_ITEM_REVIEW, GET_MY_TRANSACTIONS, NEW_TRANSACTION } from './types';
 
 import axios from 'axios';
 
@@ -62,6 +62,24 @@ export const editItemReview = (item_review, current_viewed_item_id) => dispatch 
   getCSRFToken();
   axios.patch('/items/' + current_viewed_item_id + '/item_reviews/' + item_review.review_id, {
       item_review: item_review
+  })
+  
+  .then(function(response){
+    dispatch({
+      type: EDIT_ITEM_REVIEW,
+    })
+  })
+  .catch(function(error){
+    console.log(error);
+  })
+}
+
+export const deleteItemReview = (current_viewed_item_id, review_id) => dispatch => {
+  console.log(review_id);
+  getCSRFToken();
+  axios.delete('/items/' + current_viewed_item_id + '/item_reviews/' + review_id, {
+      review_id: review_id,
+      item_id: current_viewed_item_id
   })
   
   .then(function(response){
