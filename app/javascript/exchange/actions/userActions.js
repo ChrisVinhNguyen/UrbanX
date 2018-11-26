@@ -39,9 +39,7 @@ export const signInUser = (userData) => dispatch => {
     user: userData
   })
   .then(function(response){
-    dispatch({
-      type: SIGN_IN_USER
-    })
+    dispatch(fetchUser());
   })
   .catch(function(error){
     console.log(error)
