@@ -64,7 +64,7 @@ class EditItemReviewFormContainer extends Component {
             <Form className="edit-item-review-form" onSubmit={ this.handleSubmit }>
               <Form.Field>
                 <label>Rating</label>
-                    <Rating icon='star' Rating={rating} maxRating={5} onRate={ this.handleRate }/>
+                    <Rating icon='star' rating={rating} maxRating={5} onRate={ this.handleRate }/>
               </Form.Field>
               <Form.Field>
                 <label>Comment</label>
