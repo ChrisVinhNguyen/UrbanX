@@ -63,7 +63,7 @@ class ItemDetails extends Component {
 
     let borrowButton = null;
     
-    if (this.props.item_details.status = 'available') {
+    if (this.props.item_details.status == 'available' && this.props.currentUserId != this.props.item_details.user_id) {
       let request = this.props.filtered_transactions.find(
         (e) => e.item_id == this.props.item_id && e.borrower_id == this.props.currentUserId && e.status == 'pending');
       if (request) {
@@ -82,12 +82,13 @@ class ItemDetails extends Component {
       }
     }
     else {
-      
+      if (this.props.currentUserId != this.props.item_details.user_id) {
         borrowButton = (
           <Button disabled>
             Item unavailable
           </Button>
         );
+      }
     }
 
     return (
