@@ -8,7 +8,8 @@ import { FILTER_ITEMS,
         EDIT_ITEM_REVIEW,
         GET_MY_TRANSACTIONS,
         NEW_TRANSACTION,
-        UPDATE_TRANSACTION } from './types';
+        UPDATE_TRANSACTION,
+        DELETE_TRANSACTION } from './types';
 
 
 import axios from 'axios';
@@ -157,7 +158,7 @@ export const getMyTransactions = (current_user_profile_id) => dispatch => {
   })
 }
 
-export const newTransaction = (transaction) => dispatch => {
+export const newTransaction = (transaction, current_user_profile_id) => dispatch => {
   let that = this
   getCSRFToken();
 
@@ -168,16 +169,16 @@ export const newTransaction = (transaction) => dispatch => {
   .then(function(response){
     console.log("inside newTransactions")
     console.log(response)
-    dispatch({
-      type: NEW_TRANSACTION
-    })
+    dispatch(
+      getMyTransactions(current_user_profile_id)
+    )
   })
   .catch(function(error){
     console.log(error);
   })
 }
 
-export const updateTransaction = (transaction) => dispatch => {
+export const updateTransaction = (transaction, current_user_profile_id) => dispatch => {
   let that = this
   getCSRFToken();
   console.log(transaction)
@@ -188,9 +189,29 @@ export const updateTransaction = (transaction) => dispatch => {
   .then(function(response){
     console.log("inside updateTransactions")
     console.log(response)
-    dispatch({
-      type: UPDATE_TRANSACTION
-    })
+    dispatch(
+      getMyTransactions(current_user_profile_id)
+    )
+  })
+  .catch(function(error){
+    console.log(error);
+  })
+}
+
+export const deleteTransaction = (transaction, current_user_profile_id) => dispatch => {
+  let that = this
+  getCSRFToken();
+  console.log(transaction)
+  axios.delete('/items/'+transaction.item_id+'/transactions/'+transaction.id , 
+  {
+    transaction: transaction
+  })
+  .then(function(response){
+    console.log("inside deleteTransactions")
+    console.log(response)
+    dispatch(
+      getMyTransactions(current_user_profile_id)
+    )
   })
   .catch(function(error){
     console.log(error);
