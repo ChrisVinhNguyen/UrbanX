@@ -6,8 +6,8 @@ import { Button } from 'semantic-ui-react';
 class SignInButton extends Component {
   render() {
     return (
-      <Link to="/users/sign_in">
-        <Button>
+      <Link to="/users/sign_in" className="sign-in-button">
+        <Button primary>
           Sign In
         </Button>
       </Link>

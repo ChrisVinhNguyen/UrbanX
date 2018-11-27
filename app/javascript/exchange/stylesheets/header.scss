@@ -1,17 +1,30 @@
 .header {
-  display: flex;
-  align-items: center;
+  .header-top {
+    display: flex;
+    align-items: center;
+    padding-right: 5px;
 
-  .project-logo {
-    flex: 1;
+    .project-logo {
+      flex: 1;
+    }
+
+    .header-search-container {
+      flex: 7;
+      padding: 0px 20px 0px 20px;
+
+      .input {
+        width: 100%;
+      }
+    }
+
+    .profile-container {
+      .sign-in-button {
+        padding-left: 3.5px
+      }
+    }
   }
 
-  .header-search-container {
-    flex: 7;
-    padding: 0px 20px 0px 20px;
-
-    .input {
-      width: 100%;
-    }
+  .item-categories-menu {
+    margin-bottom: 20px!important;
   }
 }

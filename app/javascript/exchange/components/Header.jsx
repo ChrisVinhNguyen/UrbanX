@@ -11,15 +11,15 @@ import '../stylesheets/header.scss';
 class Header extends Component {
   render() {
     return (
-    	<div>
-	      <div className="header">
-	        <ProjectLogo />
-	        <SearchBarContainer />
-	        <HeaderProfileContainer />
-	      </div>
-	      <div>
-	      	<ItemCategoriesMenu />
-	      </div>
+      <div className="header">
+        <div className="header-top">
+          <ProjectLogo />
+          <SearchBarContainer />
+          <HeaderProfileContainer />
+        </div>
+        <div>
+          <ItemCategoriesMenu />
+        </div>
       </div>
     )
   }
