@@ -177,7 +177,7 @@ export const newTransaction = (transaction) => dispatch => {
   })
 }
 
-export const updateTransaction = (transaction) => dispatch => {
+export const updateTransaction = (transaction, current_user_profile_id) => dispatch => {
   let that = this
   getCSRFToken();
   console.log(transaction)
@@ -188,9 +188,9 @@ export const updateTransaction = (transaction) => dispatch => {
   .then(function(response){
     console.log("inside updateTransactions")
     console.log(response)
-    dispatch({
-      type: UPDATE_TRANSACTION
-    })
+    dispatch(
+      getMyTransactions(current_user_profile_id)
+    )
   })
   .catch(function(error){
     console.log(error);

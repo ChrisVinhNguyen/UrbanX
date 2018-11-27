@@ -29,16 +29,14 @@ class TransactionSummary extends Component {
   handleLend(e, transaction) {
     transaction.expiry_date = this.state.due_date;
     transaction.status = 'lent';
-    this.props.updateTransaction(transaction);
+    this.props.updateTransaction(transaction, this.props.currentUserId);
 
-    this.setState({ status: 'lent'})
   }
 
   handleReturn(e, transaction) {
     transaction.status = 'completed';
-    this.props.updateTransaction(transaction);
+    this.props.updateTransaction(transaction, this.props.currentUserId);
 
-    this.setState({ status: 'completed'})
   }
 
   render() {
@@ -47,6 +45,8 @@ class TransactionSummary extends Component {
     let returnDate = null;
     let lendDate = null;
     let dueDate = null;
+    let due_date = this.state.due_date;
+
     if (this.props.transaction.status != 'pending') {
       lendDate = (
                 <p>Lend Date: {String(this.props.transaction.lend_date).split('T')[0]} </p>
