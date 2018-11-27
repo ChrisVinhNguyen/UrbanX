@@ -31,18 +31,18 @@ class ItemDetails extends Component {
     let numImages = 0
     let url =""
     let carouselItems;
-    console.log("before iprinting item datils")
+    console.log("About to print item details")
     console.log(this.props.item_details)
-    console.log(this.props)
-    console.log("inside item item_details")
+    console.log("done printing item_details")
+    console.log("print rating")
+    console.log(this.props.item_details.average_rating)
+    console.log("done printing rating")
+
     if (this.props.item_details.images){
       numImages = this.props.item_details.images.length
       url = this.props.item_details.images[0]
-      console.log("making carousel items")
       carouselItems = this.props.item_details.images.map(imageSrc => {
       const keyVal = uuid();
-      console.log("done generating uuid")
-      console.log(imageSrc)
         return (
           <div key={keyVal}>
             <img src={imageSrc} />
@@ -52,8 +52,6 @@ class ItemDetails extends Component {
       })
     }
     else{
-      console.log("COURSEL IS NULL")
-      console.log(carouselItems)
       carouselItems = null
     }
 
@@ -74,7 +72,7 @@ class ItemDetails extends Component {
         </Item.Meta>
         <Item.Description>Description: {this.props.item_details.description}.</Item.Description>
         <Item.Extra>
-          <Rating icon='star' defaultRating={this.props.item_details.average_rating} maxRating={5} disabled />
+          <Rating icon='star' rating={this.props.item_details.average_rating} maxRating={5} disabled />
           <Label>Rating: {this.props.item_details.average_rating}</Label>
         </Item.Extra>
       </Item.Content>
