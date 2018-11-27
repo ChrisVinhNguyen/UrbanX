@@ -4,6 +4,9 @@ import {
   GET_ITEM,
   GET_MY_TRANSACTIONS,
   GET_ITEM_REVIEWS,
+  NEW_ITEM_REVIEW,
+  EDIT_ITEM_REVIEW,
+  DELETE_ITEM_REVIEW,
   NEW_ITEM
 } from '../actions/types';
 
@@ -30,6 +33,21 @@ export default function(state = initialState, action) {
         filtered_items: action.filtered_items
       }
     case GET_ITEM_REVIEWS:
+      return {
+        ...state, 
+        current_viewed_item_reviews: action.current_viewed_item_reviews
+      }
+    case NEW_ITEM_REVIEW:
+      return {
+        ...state, 
+        current_viewed_item_reviews: action.current_viewed_item_reviews
+      }
+    case EDIT_ITEM_REVIEW:
+      return {
+        ...state, 
+        current_viewed_item_reviews: action.current_viewed_item_reviews
+      }
+    case DELETE_ITEM_REVIEW:
       return {
         ...state, 
         current_viewed_item_reviews: action.current_viewed_item_reviews

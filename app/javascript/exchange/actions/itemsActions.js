@@ -84,7 +84,7 @@ export const deleteItemReview = (current_viewed_item_id, review_id) => dispatch 
   
   .then(function(response){
     dispatch({
-      type: EDIT_ITEM_REVIEW,
+      type: DELETE_ITEM_REVIEW,
     })
   })
   .catch(function(error){

@@ -1,21 +1,39 @@
 class UserReviewsController < ApplicationController
   def create
     if user_signed_in?
-      @user_profile = UserProfile.find_by user_id: (params[:user_review][:reviewee_id])
+      @reviewee = UserProfile.find(params[:user_profile_id])
+      puts(params)
+      @user_review = @reviewee.user_reviews.create(
+        rating: params[:user_review][:rating],
+        comment: params[:user_review][:comment],
+        created_at: DateTime.now,
+        updated_at: DateTime.now,
+        reviewer_id: @current_user.id,
+        reviewee_id: params[:user_profile_id]
+        )
 
+      puts(@user_review.errors.full_messages)
+
+      '''
+      @user_review.created_at = DateTime.now
+      @user_review.updated_at = DateTime.now
+      @user_review.reviewer_id = @current_user.id
+      @user_review.reviewee_id = @reviewee.id
+
+
+      @user_profile = UserProfile.find_by user_id: (params[:user_review][:reviewee_id])
       user_review_params = permit_user_review_params
       user_review_params[:rating] = user_review_params[:rating]
       user_review_params[:reviewer_id] = @current_user.id
       user_review_params[:reviewee_id] = @user_profile.user_id
       user_review_params[:created_at] = DateTime.now
       user_review_params[:updated_at] = DateTime.now
-
       @user_review = UserReview.new(user_review_params)
-
+      '''
       if @user_review.save
-        redirect_to @user_profile
+        render :json => {"success" => true}.to_json()
       else
-        render 'new'
+        puts("failed to create new user review")
       end
     else
       redirect_to new_user_session_path
@@ -23,17 +41,61 @@ class UserReviewsController < ApplicationController
   end
 
   def new
+    @reviewee = UserProfile.find(params[:user_profile_id])
+    puts(params)
+    @user_review = @reviewee.user_reviews.new(reviewee_id: params[:user_profile_id])
+
+    
+    '''
     @reviewee_id = params[:reviewee_id]
-    @user_review = UserReview.new
+    @user_review = UserReview.new'''
   end
 
   def index
+    if user_signed_in?
+      puts(params)
+      @reviewee = UserProfile.find(params[:user_profile_id])
+      @user_reviews = UserReview.where(reviewee_id: params[:user_profile_id])
+
+      @user_reviews.each do |review| 
+        puts(review)
+      end
+
+      render :json => {"user_reviews" => @user_reviews}.to_json()
+    else 
+      redirect_to new_user_session_path
+    end
   end
 
   def show
   end
 
   def update
+    if user_signed_in?
+      @reviewee = UserProfile.find(params[:user_profile_id])
+      @user_review = @reviewee.user_reviews.find(params[:id])
+      #check if current user is allowed to edit
+      if @user_review.reviewer_id == @current_user.id
+        if @user_review.update(
+          rating: params[:user_review][:rating],
+          comment: params[:user_review][:comment],
+          updated_at: DateTime.now,
+          )
+
+          puts("saved")
+          render :json => {"success" => true}.to_json()
+        else
+          puts("not saved")
+          render 'edit'
+        end
+      else
+        render 'edit'
+      end
+    else
+      redirect_to new_user_session_path
+    end
+
+    '''
     if user_signed_in?
       @user_review = UserReview.find(params[:id])
       @user_profile = UserProfile.find_by user_id: @user_review.reviewee_id
@@ -53,31 +115,47 @@ class UserReviewsController < ApplicationController
       end
     else
       redirect_to @user_profile
-    end
+    end'''
   end
 
   def edit
+    if user_signed_in?
+      @reviewee = UserProfile.find(params[:user_profile_id])
+      @user_review = @reviewee.user_reviews.find(params[:id])
+    else
+      redirect_to new_user_session_path
+    end
+
+    '''
     if user_signed_in?
       @reviewee_id = params[:reviewee_id]
       @user_review = UserReview.find(params[:id])
     else 
       redirect_to new_user_session_path
-    end
+    end '''
   end
 
   def destroy
     if user_signed_in?
-      @user_review = UserReview.find(params[:id])
-      @user_profile = UserProfile.find_by user_id: @user_review.reviewee_id
+      @reviewee = UserProfile.find(params[:user_profile_id])
+      @user_review = @reviewee.user_reviews.find(params[:id])
       @user_review.destroy
-      redirect_to @user_profile
+      render :json => {"success" => true}.to_json()
     else
       redirect_to new_user_session_path
     end
+    '''if user_signed_in?
+      @user_review = UserReview.find(params[:id])
+      @user_profile = UserProfile.find_by user_id: @user_review.reviewee_id
+      @user_review.destroy
+      render :json => {"success" => true}.to_json()
+    else
+      redirect_to new_user_session_path
+    end'''
   end
 
   private
-  def permit_user_review_params
+  def user_review_params
     params.require(:user_review).permit(:rating, :comment)
   end
 end

@@ -3,19 +3,18 @@ import PropTypes from 'prop-types';
 
 import { Button, Form, Header, Rating, TextArea } from 'semantic-ui-react';
 import axios from 'axios';
-import { editItemReview } from '../actions/itemsActions';
+import { newUserReview } from '../actions/userActions';
 import { connect } from 'react-redux';
 
 import SignUpButton from '../components/SignUpButton';
 import SignInButton from '../components/SignInButton';
 
-class EditItemReviewFormContainer extends Component {
+class createUserReviewFormContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       rating: '',
-      comment: '',
-      review_id: ''
+      comment: ''
     };
 
     this.handleRate = this.handleRate.bind(this);
@@ -36,48 +35,49 @@ class EditItemReviewFormContainer extends Component {
   handleSubmit(e) {
     console.log(this.state.rating)
     console.log(this.state.comment)
-    console.log(this.state.review_id)
-    let itemReviewData = this.state;
-    let current_viewed_item_id = this.props.item_id;
 
+    let userReviewData = this.state;
+    let current_viewed_item_id = this.props.item_id;
+    let reviewee_id = this.props.reviewee_id;
 
     console.log(this.state)
-    console.log(itemReviewData)
-    this.props.editItemReview(itemReviewData, current_viewed_item_id)
+    console.log(userReviewData)
+    console.log(reviewee_id)
+    this.props.newUserReview(userReviewData, reviewee_id)
   }
 
   render() {
     const {rating, comment} = this.state;
-    const current_user_id = this.props.user_info.user_profile_id;
-    this.state.review_id = this.props.review_id;
 
     const isSignedIn = this.props.is_signed_in;
-    let editItemReviewContent; 
+    let addUserReviewContent; 
 
     console.log(this.props)
     if (isSignedIn) {
-      editItemReviewContent = 
+      addUserReviewContent = 
         <div>
-          <Header as='h5' dividing>
-            Edit Review
+          <Header as='h3' dividing>
+            Add a Review
           </Header>
-            <Form className="edit-item-review-form" onSubmit={ this.handleSubmit }>
+            <Form className="add-user-review-form" onSubmit={ this.handleSubmit }>
               <Form.Field>
                 <label>Rating</label>
+                  <Form.Input name='rating' value={ rating }>
                     <Rating icon='star' Rating={0} maxRating={5} onRate={ this.handleRate }/>
+                  </Form.Input>
               </Form.Field>
               <Form.Field>
                 <label>Comment</label>
-                <Form.Input type = 'comment' placeholder='Edit your review..' name='comment' value={ comment } onChange={this.handleChange} />
+                <Form.Input type = 'comment' placeholder='What did you think about this user?' name='comment' value={ comment } onChange={this.handleChange} />
               </Form.Field>
-              <Form.Button content='Edit' labelPosition='left' icon='edit'/>
+              <Form.Button content='Submit' labelPosition='left' icon='edit'/>
             </Form>
         </div>
     } else {
-      editItemReviewContent = 
+      addUserReviewContent = 
         <div>
           <Header as='h3' dividing>
-            Please sign in/sign up
+            Please sign in/sign up to add a user review
           </Header>
           <div>
             <span>
@@ -91,24 +91,24 @@ class EditItemReviewFormContainer extends Component {
 
     return (
       <div>
-        { editItemReviewContent }
+        { addUserReviewContent }
       </div>
     )
   }
 }
 
-EditItemReviewFormContainer.propTypes = {
-  editItemReview: PropTypes.func.isRequired,
+createUserReviewFormContainer.propTypes = {
+  newUserReview: PropTypes.func.isRequired,
   is_signed_in: PropTypes.bool.isRequired,
   user_info: PropTypes.object.isRequired,
-  review_id: PropTypes.object.isRequired
+  reviewee_id: PropTypes.number.isRequired
+
 }
 
 const mapStateToProps = state => ({
   is_signed_in: state.user.is_signed_in,
   user_info: state.user.user_info,
-  item_id: state.items.item_id
 });
 
  
-export default connect(mapStateToProps, { editItemReview })(EditItemReviewFormContainer);
+export default connect(mapStateToProps, { newUserReview })(createUserReviewFormContainer);
