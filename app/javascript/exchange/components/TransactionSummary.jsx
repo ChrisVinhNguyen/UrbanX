@@ -19,6 +19,8 @@ class TransactionSummary extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleLend = this.handleLend.bind(this);
+    this.handleReturn = this.handleReturn.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleChange(e, { name, value }) {
@@ -39,7 +41,7 @@ class TransactionSummary extends Component {
 
   }
 
-  handleDecline(e, transaction) {
+  handleDelete(e, transaction) {
     this.props.deleteTransaction(transaction, this.props.currentUserId);
   }
 
@@ -47,6 +49,7 @@ class TransactionSummary extends Component {
     let dueDateForm = null;
     let declineButton = null;
     let returnButton = null;
+    let cancelButton = null;
 
     let returnDate = null;
     let lendDate = null;
@@ -85,7 +88,7 @@ class TransactionSummary extends Component {
                 );
 
       declineButton = (
-                        <Button floated="right" onClick={ e => this.handleDecline(e, this.props.transaction) }>
+                        <Button floated="right" onClick={ e => this.handleDelete(e, this.props.transaction) }>
                           Decline
                         </Button>
                       );
@@ -95,6 +98,13 @@ class TransactionSummary extends Component {
                       <Button floated="right" onClick={ e => this.handleReturn(e, this.props.transaction) }>
                         Returned
                       </Button>
+                      );
+    }
+    else if (this.props.transaction.status == 'pending' && this.props.transaction.borrower_id == this.props.currentUserId) {
+      cancelButton = (
+                        <Button floated="right" onClick={ e => this.handleDelete(e, this.props.transaction) }>
+                          Cancel
+                        </Button>
                       );
     }
 
@@ -117,6 +127,7 @@ class TransactionSummary extends Component {
             {dueDate}
             {returnDate}
 
+            {cancelButton}
             {returnButton}
             {dueDateForm}
             {declineButton}

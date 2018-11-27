@@ -14,7 +14,7 @@ class TransactionListComponent extends Component {
     console.log(this.props.filtered_transactions)
     let transactions = this.props.filtered_transactions.map(transaction => {
       return(
-        <TransactionSummary transaction = { transaction } currentUserId = { this.props.currentUserId } />
+        <TransactionSummary key = { transaction.id } transaction = { transaction } currentUserId = { this.props.currentUserId } />
       );
     });
     return (

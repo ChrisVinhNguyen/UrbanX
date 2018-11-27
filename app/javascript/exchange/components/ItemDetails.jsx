@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import axios from 'axios';
 import ItemReviewsContainer from '../containers/ItemReviewsContainer'
-import { getItem, newTransaction } from '../actions/itemsActions';
+import { getItem, newTransaction, deleteTransaction } from '../actions/itemsActions';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Carousel} from 'react-responsive-carousel';
 import { v4 as uuid } from 'uuid';
@@ -20,11 +20,16 @@ class ItemDetails extends Component {
   componentDidMount(){
     this.props.getItem(this.props.match.params.id)
     this.handleBorrow = this.handleBorrow.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
   }
 
   handleBorrow(e) {
     let transaction = {item_id: this.props.item_id, status:'pending'};
     this.props.newTransaction(transaction, this.props.currentUserId);
+  }
+
+  handleCancel(e, transaction) {
+    this.props.deleteTransaction(transaction, this.props.currentUserId);
   }
 
   render() {
@@ -59,11 +64,12 @@ class ItemDetails extends Component {
     let borrowButton = null;
     
     if (this.props.item_details.status = 'available') {
-      if (this.props.filtered_transactions.find(
-        (e) => e.item_id == this.props.item_id && e.borrower_id == this.props.currentUserId && e.status == 'pending')) {
+      let request = this.props.filtered_transactions.find(
+        (e) => e.item_id == this.props.item_id && e.borrower_id == this.props.currentUserId && e.status == 'pending');
+      if (request) {
         borrowButton = (
-          <Button disabled>
-            Request sent
+          <Button onClick={ e => this.handleCancel(e, request) }>
+            Cancel request
           </Button>
           );
       }
@@ -116,6 +122,7 @@ class ItemDetails extends Component {
 ItemDetails.propTypes = {
   getItem: PropTypes.func.isRequired,
   newTransaction: PropTypes.func.isRequired,
+  deleteTransaction: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -126,4 +133,4 @@ const mapStateToProps = state => ({
   currentUserId: state.user.user_info.user_profile_id
 });
 
-export default connect(mapStateToProps, {getItem, newTransaction})(ItemDetails);
+export default connect(mapStateToProps, {getItem, newTransaction, deleteTransaction})(ItemDetails);
