@@ -1,11 +1,12 @@
-import {
-  FILTER_ITEMS,
-  GET_MY_ITEMS,
-  GET_ITEM,
-  GET_MY_TRANSACTIONS,
-  GET_ITEM_REVIEWS,
-  NEW_ITEM
-} from '../actions/types';
+import { FILTER_ITEMS,
+        GET_MY_ITEMS,
+        GET_ITEM,
+        GET_MY_TRANSACTIONS,
+        GET_ITEM_REVIEWS,
+        NEW_ITEM,
+        NEW_TRANSACTION,
+        UPDATE_TRANSACTION} from '../actions/types';
+
 
 
 const initialState = {
@@ -49,6 +50,16 @@ export default function(state = initialState, action) {
       return {
         ...state,
         filtered_transactions: action.filtered_transactions
+      }
+    case NEW_TRANSACTION:
+      return {
+        ...state
+
+      }
+    case UPDATE_TRANSACTION:
+      return {
+        ...state
+
       }
     case NEW_ITEM:
       return {
