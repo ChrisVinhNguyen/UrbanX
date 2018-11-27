@@ -6,6 +6,8 @@ import axios from 'axios';
 import { deleteUserReview } from '../actions/userActions';
 import { connect } from 'react-redux';
 
+import { Comment, Icon } from 'semantic-ui-react'
+
 import SignUpButton from '../components/SignUpButton';
 import SignInButton from '../components/SignInButton';
 
@@ -25,14 +27,9 @@ class DeleteUserReviewContainer extends Component {
 
   render() {
     return (
-      <div>
-        <Popup
-        trigger={<Button color='red' icon='delete' content='Delete Review' />}
-        content={<Button color='green' content='Confirm' onClick={this.handleClick}/>}
-        on='click'
-        position='top right'
-        />
-      </div>
+      <Comment.Action onClick={this.handleClick}>
+        Delete
+      </Comment.Action>
     )
   }
 }

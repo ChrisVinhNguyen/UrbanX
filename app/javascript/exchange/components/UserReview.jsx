@@ -10,7 +10,20 @@ import EditUserReviewFormContainer from '../containers/EditUserReviewFormContain
 import DeleteUserReviewFormContainer from '../containers/DeleteUserReviewFormContainer'
 
 class UserReview extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showEdit: false
+    };
 
+    this.handClick = this.handClick.bind(this);
+  }
+
+
+  handClick() { 
+    this.setState({showEdit: true})
+    console.log(this.state.showEdit) 
+  }
   render() {
     console.log(this.props.user_reviews)
 
@@ -20,6 +33,7 @@ class UserReview extends Component {
     let current_users_review = false; 
     let matchedReview = false; 
     let isOwner = false; 
+    let showEdit = this.state.showEdit;
 
     let reviews = this.props.user_reviews.map(review => {
       if (review.reviewer_id == current_user_id){ hasReviewed = true }
@@ -41,13 +55,15 @@ class UserReview extends Component {
                   <div>{review.updated_at}</div>
                 </Comment.Metadata>
                 <Comment.Text>{review.comment}</Comment.Text>
-                {current_user_id}
                 {current_user_id == review.reviewer_id?
                 <Comment.Actions>
-                  <Comment.Action>
-                    <EditUserReviewFormContainer review_id = {review.id} reviewee_id = {review.reviewee_id}/>
-                    <DeleteUserReviewFormContainer review_id = {review.id} reviewee_id = {review.reviewee_id}/>
-                  </Comment.Action> 
+                  <Comment.Action onClick={this.handClick}>
+                    Edit
+                    {showEdit?  <EditUserReviewFormContainer review_id = {review.id} reviewee_id = {review.reviewee_id}/>
+                  :null
+                  }
+                  </Comment.Action>
+                  <DeleteUserReviewFormContainer review_id = {review.id} reviewee_id = {review.reviewee_id}/>
                 </Comment.Actions>
                 : null
                 }
