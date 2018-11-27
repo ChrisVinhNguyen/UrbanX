@@ -56,7 +56,7 @@ class TransactionsController < ApplicationController
         elsif params[:transaction][:status] =='lent'
           @item.update({:status => 'unavailable'})
         end
-        redirect_to item_transaction_url
+        # redirect_to item_transaction_url
       else
         render 'edit'
       end

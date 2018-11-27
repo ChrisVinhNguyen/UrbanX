@@ -10,23 +10,41 @@ import pic from '../images/macbook.jpg';
 
 
 class TransactionSummary extends Component {
-  handleLend(e, transaction, due_date) {
-    transaction.expiry_date = due_date;
+  constructor(props) {
+    super(props);
+    this.state = {
+      due_date: '',
+      status: this.props.transaction.status
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleLend = this.handleLend.bind(this);
+  }
+
+  handleChange(e, { name, value }) {
+    this.setState({ [name]: value })
+    console.log(this.state.due_date)
+  }
+
+  handleLend(e, transaction) {
+    transaction.expiry_date = this.state.due_date;
     transaction.status = 'lent';
     this.props.updateTransaction(transaction);
+
+    this.setState({ status: 'lent'})
   }
 
   render() {
     let dueDate;
     let due_date;
-    
+
     if (this.props.transaction.status == 'pending' && this.props.transaction.lender_id == this.props.currentUserId) {
       dueDate = (
-                    <Form className="new-item-form" onSubmit={ e => this.handleLend(e, this.props.transaction, due_date) }>
+                    <Form className="new-item-form" onSubmit={ e => this.handleLend(e, this.props.transaction) }>
                       <Form.Field>
                         <label>Due Date</label>
                           <Form.Input type="date" placeholder="Due Date"
-                           name="due_date" value={ due_date } />
+                           name="due_date" value={ due_date } onChange={ this.handleChange }/>
                       </Form.Field>
 
                       <Form.Button floated="right" content="Submit">
