@@ -101,6 +101,6 @@ class TransactionsController < ApplicationController
 
   private
   def transaction_params
-    params.require(:transaction).permit(:status)
+    params.require(:transaction).permit(:status, :expiry_date, :return_date, :lend_date)
   end
 end

@@ -5,27 +5,16 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import pic from '../images/macbook.jpg';
+import TransactionSummary from './TransactionSummary'
 
 class TransactionListComponent extends Component {
+
 
   render() {
     console.log(this.props.filtered_transactions)
     let transactions = this.props.filtered_transactions.map(transaction => {
-      return (
-        <Item>
-          <Item.Image as='a' size = 'medium' src={pic} />
-
-          <Item.Content>
-            <Item.Header size = 'medium'><strong>{transaction.item_name}</strong></Item.Header>
-            <Item.Meta>
-              <p>Status: {transaction.status} </p>
-            </Item.Meta>
-            <Item.Description>
-              <p>Lender: {transaction.lender_name} </p>
-              <p>Borrower: {transaction.borrower_name} </p>
-            </Item.Description>
-          </Item.Content>
-        </Item>
+      return(
+        <TransactionSummary transaction = { transaction } currentUserId = { this.props.currentUserId } />
       );
     });
     return (
@@ -43,7 +32,8 @@ TransactionListComponent.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  filtered_transactions: state.items.filtered_transactions
+  filtered_transactions: state.items.filtered_transactions,
+  currentUserId: state.user.user_info.user_profile_id
 });
 
 export default connect(mapStateToProps, {})(TransactionListComponent);

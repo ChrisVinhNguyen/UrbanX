@@ -1,4 +1,4 @@
-import { FILTER_ITEMS, GET_MY_ITEMS, GET_ITEM, GET_MY_TRANSACTIONS, GET_ITEM_REVIEWS, NEW_ITEM, NEW_ITEM_REVIEW, NEW_TRANSACTION } from './types';
+import { FILTER_ITEMS, GET_MY_ITEMS, GET_ITEM, GET_MY_TRANSACTIONS, GET_ITEM_REVIEWS, NEW_ITEM, NEW_ITEM_REVIEW, NEW_TRANSACTION, UPDATE_TRANSACTION } from './types';
 
 import axios from 'axios';
 
@@ -128,6 +128,26 @@ export const newTransaction = (transaction) => dispatch => {
     console.log(response)
     dispatch({
       type: NEW_TRANSACTION
+    })
+  })
+  .catch(function(error){
+    console.log(error);
+  })
+}
+
+export const updateTransaction = (transaction) => dispatch => {
+  let that = this
+  getCSRFToken();
+  console.log(transaction)
+  axios.put('/items/'+transaction.item_id+'/transactions/'+transaction.id , 
+  {
+    transaction: transaction
+  })
+  .then(function(response){
+    console.log("inside updateTransactions")
+    console.log(response)
+    dispatch({
+      type: UPDATE_TRANSACTION
     })
   })
   .catch(function(error){
