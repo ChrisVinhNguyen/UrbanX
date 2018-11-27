@@ -64,7 +64,7 @@ class ProfileContentContainer extends Component {
             { this.state.activeTab == "My_Items"? <ItemListComponent /> : null} 
             { this.state.activeTab == "My_Transactions"? <TransactionListComponent /> : null} 
             { this.state.activeTab == "My_Contacts"? <p> contact </p>: null} 
-            { this.state.activeTab == "Reviews"? <p> <UserReviewsContainer reviewee_id = {this.props.userProfileId} /> </p>: null} 
+            { this.state.activeTab == "Reviews"? <UserReviewsContainer reviewee_id = {this.props.userProfileId} /> : null} 
             </div>
           </Grid>
         </div>

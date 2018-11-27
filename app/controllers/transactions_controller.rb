@@ -56,7 +56,7 @@ class TransactionsController < ApplicationController
       elsif params[:transaction][:status] == 'completed'
         params[:transaction][:return_date] = DateTime.now
       end
-      
+
       if @transaction.update(transaction_params)
         if params[:transaction][:status] == 'completed'
           @item.update({:status => 'available'})
@@ -76,6 +76,13 @@ class TransactionsController < ApplicationController
     if user_signed_in?
       @item = Item.find(params[:item_id])
       @transaction = @item.transactions.find(params[:id])
+
+      if @current_user == @transaction.lender
+        UserMailer.with(transaction: @transaction).notify_borrower_declined_request.deliver_later
+      elsif @current_user == @transaction.borrower
+        UserMailer.with(transaction: @transaction).notify_lender_cancelled_request.deliver_later
+      end
+      
       @transaction.destroy
     else
       redirect_to new_user_session_path
