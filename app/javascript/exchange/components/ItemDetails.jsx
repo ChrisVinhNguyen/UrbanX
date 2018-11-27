@@ -23,8 +23,8 @@ class ItemDetails extends Component {
   }
 
   handleBorrow(e) {
-    let transaction = {item_id: this.props.item_id, status:'pending'}
-    this.props.newTransaction(transaction)
+    let transaction = {item_id: this.props.item_id, status:'pending'};
+    this.props.newTransaction(transaction);
   }
 
   render() {
@@ -55,6 +55,15 @@ class ItemDetails extends Component {
       carouselItems = null
     }
 
+    let borrowButton = null;
+    
+    if (this.props.item_details.status = 'available') {
+      borrowButton = (
+        <Button onClick={ this.handleBorrow }>
+          Borrow
+        </Button>
+        );
+    }
 
     return (
       <div>
@@ -66,9 +75,8 @@ class ItemDetails extends Component {
           <Item.Header size = 'medium' as='a' href={'items/'+this.props.item_id}><strong>{this.props.item_details.name}</strong></Item.Header>
         <Item.Meta>
           <p>Quantity: {this.props.item_details.quantity}</p>
-          <Button onClick={ this.handleBorrow }>
-            Borrow
-          </Button>
+          
+          {borrowButton}
         </Item.Meta>
         <Item.Description>Description: {this.props.item_details.description}.</Item.Description>
         <Item.Extra>
