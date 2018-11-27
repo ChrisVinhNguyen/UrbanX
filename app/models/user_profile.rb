@@ -17,7 +17,7 @@
 class UserProfile < ApplicationRecord
   validates :first_name, :last_name, :date_of_birth, presence: true
 
-  has_many :user_reviews, dependent: :destroy
+  has_many :user_reviews, dependent: :destroy, foreign_key: :reviewee_id
   belongs_to :user
   has_one_attached :image
   validate :image_type

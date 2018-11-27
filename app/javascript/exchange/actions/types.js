@@ -3,6 +3,11 @@ export const SIGN_UP_USER = 'SIGN_UP_USER';
 export const SIGN_IN_USER = 'SIGN_IN_USER';
 export const SIGN_OUT_USER = 'SIGN_OUT_USER';
 
+export const FETCH_USER_REVIEWS = 'FETCH_USER_REVIEWS';
+export const NEW_USER_REVIEW = 'NEW_USER_REVIEW';
+export const EDIT_USER_REVIEW = 'EDIT_USER_REVIEW';
+export const DELETE_USER_REVIEW = 'DELETE_USER_REVIEW';
+
 
 export const FETCH_PROFILE = 'FETCH_PROFILE';
 export const NEW_PROFILE = 'NEW_PROFILE';
