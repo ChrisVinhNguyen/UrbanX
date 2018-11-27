@@ -24,7 +24,7 @@ class ItemDetails extends Component {
 
   handleBorrow(e) {
     let transaction = {item_id: this.props.item_id, status:'pending'};
-    this.props.newTransaction(transaction);
+    this.props.newTransaction(transaction, this.props.currentUserId);
   }
 
   render() {
@@ -59,10 +59,28 @@ class ItemDetails extends Component {
     let borrowButton = null;
     
     if (this.props.item_details.status = 'available') {
-      borrowButton = (
-        <Button onClick={ this.handleBorrow }>
-          Borrow
-        </Button>
+      if (this.props.filtered_transactions.find(
+        (e) => e.item_id == this.props.item_id && e.borrower_id == this.props.currentUserId && e.status == 'pending')) {
+        borrowButton = (
+          <Button disabled>
+            Request sent
+          </Button>
+          );
+      }
+      else {
+        borrowButton = (
+          <Button onClick={ this.handleBorrow }>
+            Borrow
+          </Button>
+          );
+      }
+    }
+    else {
+      
+        borrowButton = (
+          <Button disabled>
+            Item unavailable
+          </Button>
         );
     }
 
@@ -103,7 +121,9 @@ ItemDetails.propTypes = {
 const mapStateToProps = state => ({
   item_id: state.items.item_id,
   item_details: state.items.item_details,
-  current_viewed_item_reviews: state.items.current_viewed_item_reviews
+  current_viewed_item_reviews: state.items.current_viewed_item_reviews,
+  filtered_transactions: state.items.filtered_transactions,
+  currentUserId: state.user.user_info.user_profile_id
 });
 
 export default connect(mapStateToProps, {getItem, newTransaction})(ItemDetails);

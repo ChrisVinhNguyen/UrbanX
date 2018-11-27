@@ -157,7 +157,7 @@ export const getMyTransactions = (current_user_profile_id) => dispatch => {
   })
 }
 
-export const newTransaction = (transaction) => dispatch => {
+export const newTransaction = (transaction, current_user_profile_id) => dispatch => {
   let that = this
   getCSRFToken();
 
@@ -168,9 +168,9 @@ export const newTransaction = (transaction) => dispatch => {
   .then(function(response){
     console.log("inside newTransactions")
     console.log(response)
-    dispatch({
-      type: NEW_TRANSACTION
-    })
+    dispatch(
+      getMyTransactions(current_user_profile_id)
+    )
   })
   .catch(function(error){
     console.log(error);
@@ -182,6 +182,26 @@ export const updateTransaction = (transaction, current_user_profile_id) => dispa
   getCSRFToken();
   console.log(transaction)
   axios.put('/items/'+transaction.item_id+'/transactions/'+transaction.id , 
+  {
+    transaction: transaction
+  })
+  .then(function(response){
+    console.log("inside updateTransactions")
+    console.log(response)
+    dispatch(
+      getMyTransactions(current_user_profile_id)
+    )
+  })
+  .catch(function(error){
+    console.log(error);
+  })
+}
+
+export const getMyTransactionsForItem = (item_id, current_user_profile_id) => dispatch => {
+  let that = this
+
+  console.log(transaction)
+  axios.get('/items/'+transaction.item_id+'/transactions/'+transaction.id , 
   {
     transaction: transaction
   })
