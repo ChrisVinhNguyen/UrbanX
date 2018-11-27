@@ -59,9 +59,9 @@ export const newItemReview = (item_review, current_viewed_item_id) => dispatch =
   })
   
   .then(function(response){
-    dispatch({
-      type: NEW_ITEM_REVIEW,
-    })
+    dispatch(
+      getItemReviews(current_viewed_item_id)
+    )
   })
   .catch(function(error){
     console.log(error);
@@ -76,9 +76,9 @@ export const editItemReview = (item_review, current_viewed_item_id) => dispatch 
   })
   
   .then(function(response){
-    dispatch({
-      type: EDIT_ITEM_REVIEW,
-    })
+    dispatch(
+      getItemReviews(current_viewed_item_id)
+    )
   })
   .catch(function(error){
     console.log(error);
@@ -94,9 +94,9 @@ export const deleteItemReview = (current_viewed_item_id, review_id) => dispatch 
   })
   
   .then(function(response){
-    dispatch({
-      type: DELETE_ITEM_REVIEW,
-    })
+    dispatch(
+      getItemReviews(current_viewed_item_id)
+    )
   })
   .catch(function(error){
     console.log(error);
@@ -177,7 +177,7 @@ export const newTransaction = (transaction) => dispatch => {
   })
 }
 
-export const updateTransaction = (transaction) => dispatch => {
+export const updateTransaction = (transaction, current_user_profile_id) => dispatch => {
   let that = this
   getCSRFToken();
   console.log(transaction)
@@ -188,9 +188,9 @@ export const updateTransaction = (transaction) => dispatch => {
   .then(function(response){
     console.log("inside updateTransactions")
     console.log(response)
-    dispatch({
-      type: UPDATE_TRANSACTION
-    })
+    dispatch(
+      getMyTransactions(current_user_profile_id)
+    )
   })
   .catch(function(error){
     console.log(error);

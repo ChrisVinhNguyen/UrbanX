@@ -18,8 +18,8 @@ class ItemsReviewsContainer extends Component {
   		this.props.getItemReviews(this.props.current_viewed_item_id)
   	}
   	render() {
-
-    	const { current_viewed_item_reviews } = this.props.current_viewed_item_reviews;
+      console.log("$$$$$$$$$$$$$$$$$")
+      console.log(this.props)
 
     	return (
     		<Comment.Group>

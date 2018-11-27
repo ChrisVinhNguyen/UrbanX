@@ -108,9 +108,9 @@ export const newUserReview = (user_review, reviewee_id) => dispatch => {
     user_review: user_review
   })
   .then(function(response){
-    dispatch({
-      type: NEW_USER_REVIEW
-    })
+    dispatch(
+      getUserReviews(reviewee_id)
+    )
   })
   .catch(function(error){
     console.log(error)
@@ -124,9 +124,9 @@ export const editUserReview = (user_review, reviewee_id) => dispatch => {
     user_review: user_review
   })
   .then(function(response){
-    dispatch({
-      type: EDIT_USER_REVIEW
-    })
+    dispatch(
+      getUserReviews(reviewee_id)
+    )
   })
   .catch(function(error){
     console.log(error)
@@ -141,9 +141,9 @@ export const deleteUserReview = (reviewee_id, review_id) => dispatch => {
     review_id: review_id
   })
   .then(function(response){
-    dispatch({
-      type: DELETE_USER_REVIEW
-    })
+    dispatch(
+      getUserReviews(reviewee_id)
+    )
   })
   .catch(function(error){
     console.log(error)
