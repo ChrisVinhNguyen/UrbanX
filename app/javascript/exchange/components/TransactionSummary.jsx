@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Icon, Image, Form, Item, Label } from 'semantic-ui-react'
 import { Rating, Divider } from 'semantic-ui-react'
 import { Link } from "react-router-dom";
-import { updateTransaction } from '../actions/itemsActions' 
+import { updateTransaction, deleteTransaction } from '../actions/itemsActions' 
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -39,13 +39,20 @@ class TransactionSummary extends Component {
 
   }
 
+  handleDecline(e, transaction) {
+    this.props.deleteTransaction(transaction, this.props.currentUserId);
+  }
+
   render() {
     let dueDateForm = null;
+    let declineButton = null;
     let returnButton = null;
+
     let returnDate = null;
     let lendDate = null;
     let dueDate = null;
     let due_date = this.state.due_date;
+
 
     if (this.props.transaction.status != 'pending') {
       lendDate = (
@@ -76,10 +83,16 @@ class TransactionSummary extends Component {
                       </Form.Button>
                     </Form>
                 );
+
+      declineButton = (
+                        <Button floated="right" onClick={ e => this.handleDecline(e, this.props.transaction) }>
+                          Decline
+                        </Button>
+                      );
     }
     else if (this.props.transaction.status == 'lent' && this.props.transaction.lender_id == this.props.currentUserId) {
       returnButton = (
-                      <Button floated="right" onClick={  e => this.handleReturn(e, this.props.transaction) }>
+                      <Button floated="right" onClick={ e => this.handleReturn(e, this.props.transaction) }>
                         Returned
                       </Button>
                       );
@@ -106,6 +119,7 @@ class TransactionSummary extends Component {
 
             {returnButton}
             {dueDateForm}
+            {declineButton}
           </Item.Description>
         </Item.Content>
       </Item>
@@ -115,7 +129,8 @@ class TransactionSummary extends Component {
 } 
 
 TransactionSummary.propTypes = {
-  updateTransaction: PropTypes.func.isRequired
+  updateTransaction: PropTypes.func.isRequired,
+  deleteTransaction: PropTypes.func.isRequired
 }
 
-export default connect(()=> { return {} }, { updateTransaction })(TransactionSummary);
+export default connect(()=> { return {} }, { updateTransaction, deleteTransaction })(TransactionSummary);

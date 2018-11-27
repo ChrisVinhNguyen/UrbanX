@@ -8,7 +8,8 @@ import { FILTER_ITEMS,
         EDIT_ITEM_REVIEW,
         GET_MY_TRANSACTIONS,
         NEW_TRANSACTION,
-        UPDATE_TRANSACTION } from './types';
+        UPDATE_TRANSACTION,
+        DELETE_TRANSACTION } from './types';
 
 
 import axios from 'axios';
@@ -197,16 +198,16 @@ export const updateTransaction = (transaction, current_user_profile_id) => dispa
   })
 }
 
-export const getMyTransactionsForItem = (item_id, current_user_profile_id) => dispatch => {
+export const deleteTransaction = (transaction, current_user_profile_id) => dispatch => {
   let that = this
-
+  getCSRFToken();
   console.log(transaction)
-  axios.get('/items/'+transaction.item_id+'/transactions/'+transaction.id , 
+  axios.delete('/items/'+transaction.item_id+'/transactions/'+transaction.id , 
   {
     transaction: transaction
   })
   .then(function(response){
-    console.log("inside updateTransactions")
+    console.log("inside deleteTransactions")
     console.log(response)
     dispatch(
       getMyTransactions(current_user_profile_id)
