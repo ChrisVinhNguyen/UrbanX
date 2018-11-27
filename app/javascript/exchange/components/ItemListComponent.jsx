@@ -18,7 +18,7 @@ class ItemListComponent extends Component {
     });
 
     return (
-      <div className="body">
+      <div className="item-list-component">
         <Grid columns={3} divided>
           <Grid.Row>
             {items}
