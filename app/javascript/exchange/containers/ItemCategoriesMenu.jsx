@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
+import { v4 as uuid } from 'uuid';
 import { Link } from "react-router-dom";
 import { Menu } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { filterItems } from '../actions/itemsActions';
 import PropTypes from 'prop-types';
 
+import { ITEM_CATEGORIES } from '../constants/itemCategories';
 
 
 class ItemCategoriesMenu extends Component {
@@ -22,95 +25,25 @@ class ItemCategoriesMenu extends Component {
   } 
 
   render() {
-
     const { cur_category } = this.props;
+
+    const menuItems = _.map(ITEM_CATEGORIES, (value, key) => {
+      const keyVal = uuid();
+      return (
+        <Menu.Item
+          key={ keyVal }
+          name={ value }
+          active={ cur_category === value }
+          onClick={ this.handleCategoryClick }
+        >
+          { value }
+        </Menu.Item>
+      )
+    });
 
     return (
       <Menu secondary fluid widths={11}>
-        <Menu.Item
-          name='All'
-          active={cur_category === 'All'}
-          onClick={this.handleCategoryClick}
-        >
-          All
-        </Menu.Item>
-
-        <Menu.Item name='Electronics' active={cur_category === 'Electronics'} onClick={this.handleCategoryClick}>
-          Electronics
-        </Menu.Item>
-
-        <Menu.Item
-          name='Sports'
-          active={cur_category === 'Sports'}
-          onClick={this.handleCategoryClick}
-        >
-          Sports
-        </Menu.Item>
-
-        <Menu.Item
-          name='Tools'
-          active={cur_category === 'Tools'}
-          onClick={this.handleCategoryClick}
-        >
-          Tools
-        </Menu.Item>
-
-        <Menu.Item
-          name='Music'
-          active={cur_category === 'Music'}
-          onClick={this.handleCategoryClick}
-        >
-          Music
-        </Menu.Item>
-
-        <Menu.Item
-          name='Arts'
-          active={cur_category === 'Arts'}
-          onClick={this.handleCategoryClick}
-        >
-          Arts
-        </Menu.Item>
-
-        <Menu.Item
-          name='Vehicles'
-          active={cur_category === 'Vehicles'}
-          onClick={this.handleCategoryClick}
-        >
-          Vehicles
-        </Menu.Item>
-
-        <Menu.Item
-          name='Clothing'
-          active={cur_category === 'Clothing'}
-          onClick={this.handleCategoryClick}
-        >
-          Clothing
-        </Menu.Item>
-
-        <Menu.Item
-          name='Accessories'
-          active={cur_category === 'Accessories'}
-          onClick={this.handleCategoryClick}
-        >
-          Accessories
-        </Menu.Item>
-
-        <Menu.Item
-          name='Books'
-          active={cur_category === 'Books'}
-          onClick={this.handleCategoryClick}
-        >
-          Books
-        </Menu.Item>
-
-        <Menu.Item
-          name='Others'
-          active={cur_category === 'Others'}
-          onClick={this.handleCategoryClick}
-        >
-          Others
-        </Menu.Item>
-
+        { menuItems }
       </Menu>
     )
   }

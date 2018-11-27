@@ -2,7 +2,7 @@ class ItemReviewsController < ApplicationController
   def create
     if user_signed_in?
       print("inside of create item reviews")
-      print(params[:item_review])
+      print(params)
       @item = Item.find(params[:item_id])
       @item_review = @item.item_reviews.create(item_review_params)
       @item_review.created_at = DateTime.now
@@ -11,7 +11,9 @@ class ItemReviewsController < ApplicationController
       @item_review.owner_id = @current_user.id
       if @item_review.save
         puts("saved successfully")
-        redirect_to item_path(@item)
+        #redirect_to item_path(@item)
+        render :json => {"success" => true}.to_json()
+
       else
         render 'new'
       end
@@ -53,7 +55,7 @@ class ItemReviewsController < ApplicationController
         if @item_review.update(item_review_params)
           puts("saved")
           @item_review.updated_at = DateTime.now
-          redirect_to @item
+          render :json => {"success" => true}.to_json()
         else
           puts("not saved")
           render 'edit'
@@ -80,7 +82,7 @@ class ItemReviewsController < ApplicationController
       @item = Item.find(params[:item_id])
       @item_review = @item.item_reviews.find(params[:id])
       @item_review.destroy
-      redirect_to item_path(@item)
+      render :json => {"success" => true}.to_json()
     else
       redirect_to new_user_session_path
     end

@@ -1,4 +1,4 @@
-import { FETCH_USER, SIGN_UP_USER, SIGN_OUT_USER } from '../actions/types';
+import { FETCH_USER, SIGN_UP_USER, SIGN_IN_USER, SIGN_OUT_USER, NEW_PROFILE } from '../actions/types';
 
 const initialState = {
   is_signed_in: false,
@@ -19,11 +19,22 @@ export default function(state = initialState, action) {
         is_signed_in: true,
         user_info: {}
       }
+    case SIGN_IN_USER:
+      return {
+        ...state,
+        is_signed_in: true,
+        user_info: {}
+      }
     case SIGN_OUT_USER:
       return {
         ...state,
         is_signed_in: false,
         user_info: {}
+      }
+    case NEW_PROFILE: 
+      return {
+        ...state,
+        profile_details: action.profile_details
       }
     default:
       return state;

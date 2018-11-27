@@ -27,8 +27,6 @@ class HeaderProfileContainer extends Component {
   }
 
   render() {
-    console.log(this.props)
-
     const isSignedIn = this.props.is_signed_in;
     let userAuthenticationContent;
 
@@ -39,7 +37,7 @@ class HeaderProfileContainer extends Component {
           <Dropdown icon={null} trigger={trigger} direction='left' floating labeled button pointing>
             <Dropdown.Menu>
               <Dropdown.Item>
-                <Link to={`/items/new`}>
+                <Link to={`/items/add/new`}>
                   Add New Item
                 </Link>
               </Dropdown.Item>

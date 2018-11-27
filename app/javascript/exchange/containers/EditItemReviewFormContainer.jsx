@@ -3,18 +3,19 @@ import PropTypes from 'prop-types';
 
 import { Button, Form, Header, Rating, TextArea } from 'semantic-ui-react';
 import axios from 'axios';
-import { newItemReview } from '../actions/itemsActions';
+import { editItemReview } from '../actions/itemsActions';
 import { connect } from 'react-redux';
 
 import SignUpButton from '../components/SignUpButton';
 import SignInButton from '../components/SignInButton';
 
-class createItemReviewFormContainer extends Component {
+class editItemReviewFormContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       rating: '',
-      comment: ''
+      comment: '',
+      review_id: ''
     };
 
     this.handleRate = this.handleRate.bind(this);
@@ -35,17 +36,20 @@ class createItemReviewFormContainer extends Component {
   handleSubmit(e) {
     console.log(this.state.rating)
     console.log(this.state.comment)
+    console.log(this.state.review_id)
     let itemReviewData = this.state;
     let current_viewed_item_id = this.props.item_id;
 
+
     console.log(this.state)
     console.log(itemReviewData)
-    this.props.newItemReview(itemReviewData, current_viewed_item_id)
+    this.props.editItemReview(itemReviewData, current_viewed_item_id)
   }
 
   render() {
     const {rating, comment} = this.state;
     const current_user_id = this.props.user_info.user_profile_id;
+    this.state.review_id = this.props.review_id;
 
     const isSignedIn = this.props.is_signed_in;
     let addItemReviewContent; 
@@ -54,21 +58,19 @@ class createItemReviewFormContainer extends Component {
     if (isSignedIn) {
       addItemReviewContent = 
         <div>
-          <Header as='h3' dividing>
-            Add a Review
+          <Header as='h5' dividing>
+            Edit Review
           </Header>
             <Form className="add-item-review-form" onSubmit={ this.handleSubmit }>
               <Form.Field>
                 <label>Rating</label>
-                  <Form.Input name='rating' value={ rating }>
                     <Rating icon='star' defaultRating={0} maxRating={5} onRate={ this.handleRate }/>
-                  </Form.Input>
               </Form.Field>
               <Form.Field>
                 <label>Comment</label>
-                <Form.Input type = 'comment' placeholder='What did you think about the item?' name='comment' value={ comment } onChange={this.handleChange} />
+                <Form.Input type = 'comment' placeholder='Edit your review..' name='comment' value={ comment } onChange={this.handleChange} />
               </Form.Field>
-              <Form.Button content='Submit' labelPosition='left' icon='edit'/>
+              <Form.Button content='Edit' labelPosition='left' icon='edit'/>
             </Form>
         </div>
     } else {
@@ -95,10 +97,11 @@ class createItemReviewFormContainer extends Component {
   }
 }
 
-createItemReviewFormContainer.propTypes = {
-  newItemReview: PropTypes.func.isRequired,
+editItemReviewFormContainer.propTypes = {
+  editItemReview: PropTypes.func.isRequired,
   is_signed_in: PropTypes.bool.isRequired,
-  user_info: PropTypes.object.isRequired
+  user_info: PropTypes.object.isRequired,
+  review_id: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -108,4 +111,4 @@ const mapStateToProps = state => ({
 });
 
  
-export default connect(mapStateToProps, { newItemReview })(createItemReviewFormContainer);
+export default connect(mapStateToProps, { editItemReview })(editItemReviewFormContainer);

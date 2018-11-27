@@ -12,18 +12,12 @@ import CreateItemReviewFormContainer from '../containers/CreateItemReviewFormCon
 
 class ItemsReviewsContainer extends Component {
   	componentDidMount(){
-  		console.log("---------")
-  		console.log(this.props)
   		this.props.getItemReviews(this.props.current_viewed_item_id)
   	}
   	componentWillMount(){
-  		console.log("$$$$")
-  		console.log(this.props)
   		this.props.getItemReviews(this.props.current_viewed_item_id)
   	}
   	render() {
-    	console.log('mmmmm', this.props)
-    	console.log(this.props.current_viewed_item_reviews)
 
     	const { current_viewed_item_reviews } = this.props.current_viewed_item_reviews;
 
@@ -35,7 +29,6 @@ class ItemsReviewsContainer extends Component {
             </Header>
             <ItemReview/> 
           </div>
-          <CreateItemReviewFormContainer/>
     		</Comment.Group>
 		);
 	}

@@ -6,7 +6,9 @@ import UserProfile from './UserProfile';
 import UserProfileEditForm from '../containers/UserProfileEditForm';
 import ItemDetails from './ItemDetails';
 import UserSignUpFormContainer from '../containers/UserSignUpFormContainer';
-import ItemCreateFormContainer from '../containers/ItemCreateFormContainer'
+import UserSignInFormContainer from '../containers/UserSignInFormContainer';
+import ItemCreateFormContainer from '../containers/ItemCreateFormContainer';
+import ProfileCreateFormContainer from '../containers/ProfileCreateFormContainer';
 
 
 const About = () => <h2>About</h2>;
@@ -22,6 +24,8 @@ class Body extends Component {
       <div className="body">
     	  <Route path="/" exact component={ ItemListComponent } />
         <Route path="/users/sign_up" exact component={ UserSignUpFormContainer } />
+        <Route path="/users/sign_in" exact component={ UserSignInFormContainer } />
+        <Route path="/user_profiles/new/profile" exact component={ ProfileCreateFormContainer } />
         <Route path="/user_profiles/:id" exact component={ UserProfile } />
         <Route path="/user_profiles/:id/edit" exact component={ UserProfileEditForm } />
         <Route path="/about" component={ About } />
@@ -30,8 +34,8 @@ class Body extends Component {
         <Route path="/site-map" component={ SiteMap } />
         <Route path="/contact-us" component={ ContactUs } />
         <Route path="/faq" component={ FAQ } />
-        <Route path="/items/:id" component={ ItemDetails } />
-        <Route path="/items/new" component={ ItemCreateFormContainer } />
+        <Route path="/items/:id" exact component={ ItemDetails } />
+        <Route path="/items/add/new" exact component={ ItemCreateFormContainer } />
       </div>
     );
   }
