@@ -109,5 +109,4 @@ const mapStateToProps = state => ({
   user_info: state.user.user_info,
 });
 
- 
 export default connect(mapStateToProps, { editUserReview })(EditUserReviewFormContainer);

@@ -13,7 +13,8 @@ import {
 const initialState = {
   is_signed_in: false,
   user_info: {},
-  user_reviews: []
+  user_reviews: [],
+  user_form_backend_error: []
 }
 
 export default function(state = initialState, action) {
@@ -33,8 +34,9 @@ export default function(state = initialState, action) {
     case SIGN_IN_USER:
       return {
         ...state,
-        is_signed_in: true,
-        user_info: {}
+        is_signed_in: action.is_signed_in,
+        user_info: action.user_info,
+        user_form_backend_error: action.user_form_backend_error
       }
     case SIGN_OUT_USER:
       return {
@@ -64,7 +66,6 @@ export default function(state = initialState, action) {
         ...state,
         user_reviews: action.user_reviews
       }
-
     case DELETE_USER_REVIEW:
       return {
         ...state,

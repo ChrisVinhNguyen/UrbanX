@@ -1,4 +1,12 @@
-import { FETCH_USER, SIGN_UP_USER, SIGN_IN_USER, SIGN_OUT_USER, NEW_PROFILE, FETCH_USER_REVIEWS, NEW_USER_REVIEW } from './types';
+import {
+  FETCH_USER,
+  SIGN_UP_USER,
+  SIGN_IN_USER,
+  SIGN_OUT_USER,
+  NEW_PROFILE,
+  FETCH_USER_REVIEWS,
+  NEW_USER_REVIEW
+} from './types';
 
 import axios from 'axios';
 
@@ -42,7 +50,7 @@ export const signInUser = (userData) => dispatch => {
     dispatch(fetchUser());
   })
   .catch(function(error){
-    console.log(error)
+    console.log(error);
   })
 }
 

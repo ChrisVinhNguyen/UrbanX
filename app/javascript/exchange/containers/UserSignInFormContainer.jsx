@@ -54,18 +54,18 @@ class UserSignInFormContainer extends Component {
 
   handleFormErrors() {
     let errorMessages = [];
+    this.setState({
+      emailError: false,
+      passwordError: false,
+    });
 
     if (this.state.email === '') {
       this.setState({ emailError: true })
       errorMessages.push(EMAIL_MISSING);
-    } else {
-      this.setState({ emailError: false })
     }
     if (this.state.password === '') {
       this.setState({ passwordError: true })
       errorMessages.push(PASSWORD_MISSING);
-    } else {
-      this.setState({ passwordError: false })
     }
 
     return errorMessages;
