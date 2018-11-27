@@ -61,7 +61,7 @@ class ProfileContentContainer extends Component {
               </div>
             </div>
             <div class="ui segment">
-            { this.state.activeTab == "My_Items"? <p> <ItemListComponent /> </p>: null} 
+            { this.state.activeTab == "My_Items"? <ItemListComponent /> : null} 
             { this.state.activeTab == "My_Transactions"? <TransactionListComponent /> : null} 
             { this.state.activeTab == "My_Contacts"? <p> contact </p>: null} 
             { this.state.activeTab == "Reviews"? <p> <UserReviewsContainer reviewee_id = {this.props.userProfileId} /> </p>: null} 
