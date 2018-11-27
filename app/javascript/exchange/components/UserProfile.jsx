@@ -13,6 +13,7 @@ class UserProfile extends Component {
   	{
   		viewingMyProfile = true;
   	}
+    console.log(this.props.match.params.id)
     return (
       <div style={{marginBottom: '40px', marginTop: '40px'}} className="user-profile">
         <UserProfileContainer viewingMyProfile={viewingMyProfile} userProfileId = {this.props.match.params.id} /> 

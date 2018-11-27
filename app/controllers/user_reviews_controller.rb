@@ -12,6 +12,7 @@ class UserReviewsController < ApplicationController
         reviewee_id: params[:user_profile_id]
         )
 
+      puts(@current_user.id)
       puts(@user_review.errors.full_messages)
 
       '''
@@ -52,19 +53,18 @@ class UserReviewsController < ApplicationController
   end
 
   def index
-    if user_signed_in?
-      puts(params)
-      @reviewee = UserProfile.find(params[:user_profile_id])
-      @user_reviews = UserReview.where(reviewee_id: params[:user_profile_id])
+    @reviewee = UserProfile.find(params[:user_profile_id])
+    @user_reviews = UserReview.where(reviewee_id: params[:user_profile_id])
 
-      @user_reviews.each do |review| 
-        puts(review)
-      end
-
-      render :json => {"user_reviews" => @user_reviews}.to_json()
-    else 
-      redirect_to new_user_session_path
+    user_reviews_array = []
+    @user_reviews.each do |user_review| 
+      user = User.find(user_review[:reviewer_id])
+      full_name = user.user_profile[:first_name] + " " + user.user_profile[:last_name]
+      user_review_hash = user_review.attributes
+      user_review_hash[:reviewer] = full_name
+      user_reviews_array.push(user_review_hash)
     end
+    render :json => {"user_reviews" => user_reviews_array}.to_json()
   end
 
   def show

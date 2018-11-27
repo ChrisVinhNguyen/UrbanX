@@ -14,6 +14,8 @@ class UserProfileContainer extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props.userProfileId)
+    console.log("$$$$$$$$$$$$")
     axios.get('/user_profiles/' + this.props.userProfileId) 
     .then((response) => {
       console.log(response)
@@ -28,6 +30,8 @@ class UserProfileContainer extends Component {
 
   render() {
     console.log(this.props.viewingMyProfile)
+    console.log(this.state.userProfile)
+    console.log(this.props.userProfileId)
       return (
         <div>
           <Grid columns={2} divided>
