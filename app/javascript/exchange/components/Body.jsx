@@ -3,26 +3,33 @@ import ItemListComponent from './ItemListComponent'
 import { Route } from "react-router-dom";
 
 import UserProfile from './UserProfile';
-import UserProfileEditForm from '../containers/UserProfileEditForm';
 import ItemDetails from './ItemDetails';
+import About from './About';
+import TermsOfService from './TermsOfService';
+import PrivacyPolicy from './PrivacyPolicy';
+import SiteMap from './SiteMap';
+import ContactUs from './ContactUs';
+import FAQ from './FAQ';
+
+import UserProfileEditForm from '../containers/UserProfileEditForm';
 import UserSignUpFormContainer from '../containers/UserSignUpFormContainer';
 import UserSignInFormContainer from '../containers/UserSignInFormContainer';
 import ItemCreateFormContainer from '../containers/ItemCreateFormContainer';
 import ProfileCreateFormContainer from '../containers/ProfileCreateFormContainer';
 
 
-const About = () => <h2>About</h2>;
-const TermsOfService = () => <h2>Terms Of Service</h2>;
-const PrivacyPolicy = () => <h2>Privacy Policy</h2>;
-const SiteMap = () => <h2>Site Map</h2>;
-const ContactUs = () => <h2>Contact Us</h2>;
-const FAQ = () => <h2>FAQ</h2>;
+//const About = () => <h2>About</h2>;
+//const TermsOfService = () => <h2>Terms Of Service</h2>;
+//const PrivacyPolicy = () => <h2>Privacy Policy</h2>;
+//const SiteMap = () => <h2>Site Map</h2>;
+//const ContactUs = () => <h2>Contact Us</h2>;
+//const FAQ = () => <h2>FAQ</h2>;
 
 class Body extends Component {
   render() {
     return (
       <div className="body">
-    	  <Route path="/" exact component={ ItemListComponent } />
+    	<Route path="/" exact component={ ItemListComponent } />
         <Route path="/users/sign_up" exact component={ UserSignUpFormContainer } />
         <Route path="/users/sign_in" exact component={ UserSignInFormContainer } />
         <Route path="/user_profiles/new/profile" exact component={ ProfileCreateFormContainer } />
