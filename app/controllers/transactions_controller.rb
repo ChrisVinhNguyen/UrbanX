@@ -50,6 +50,13 @@ class TransactionsController < ApplicationController
     if user_signed_in?
       @item = Item.find(params[:item_id])
       @transaction = @item.transactions.find(params[:id])
+
+      if params[:transaction][:status] =='lent'
+        params[:transaction][:lend_date] = DateTime.now
+      elsif params[:transaction][:status] == 'completed'
+        params[:transaction][:return_date] = DateTime.now
+      end
+      
       if @transaction.update(transaction_params)
         if params[:transaction][:status] == 'completed'
           @item.update({:status => 'available'})

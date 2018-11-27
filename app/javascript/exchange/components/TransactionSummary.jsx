@@ -34,12 +34,36 @@ class TransactionSummary extends Component {
     this.setState({ status: 'lent'})
   }
 
+  handleReturn(e, transaction) {
+    transaction.status = 'completed';
+    this.props.updateTransaction(transaction);
+
+    this.setState({ status: 'completed'})
+  }
+
   render() {
-    let dueDate;
-    let due_date;
+    let dueDateForm = null;
+    let returnButton = null;
+    let returnDate = null;
+    let lendDate = null;
+    let dueDate = null;
+    if (this.props.transaction.status != 'pending') {
+      lendDate = (
+                <p>Lend Date: {String(this.props.transaction.lend_date).split('T')[0]} </p>
+                );
+
+      dueDate = (
+                <p>Due Date: {String(this.props.transaction.expiry_date).split('T')[0]} </p>
+                );
+      if (this.props.transaction.status == 'completed') {
+        returnDate = (
+                    <p>Return Date: {String(this.props.transaction.return_date).split('T')[0]} </p>
+                    );
+      }
+    }
 
     if (this.props.transaction.status == 'pending' && this.props.transaction.lender_id == this.props.currentUserId) {
-      dueDate = (
+      dueDateForm = (
                     <Form className="new-item-form" onSubmit={ e => this.handleLend(e, this.props.transaction) }>
                       <Form.Field>
                         <label>Due Date</label>
@@ -51,10 +75,14 @@ class TransactionSummary extends Component {
                         Lend
                       </Form.Button>
                     </Form>
-                )
+                );
     }
-    else {
-      dueDate = null;
+    else if (this.props.transaction.status == 'lent' && this.props.transaction.lender_id == this.props.currentUserId) {
+      returnButton = (
+                      <Button floated="right" onClick={  e => this.handleReturn(e, this.props.transaction) }>
+                        Returned
+                      </Button>
+                      );
     }
 
     return (
@@ -72,8 +100,12 @@ class TransactionSummary extends Component {
           <Item.Description>
             <p>Lender: {this.props.transaction.lender_name} </p>
             <p>Borrower: {this.props.transaction.borrower_name} </p>
-
+            {lendDate}
             {dueDate}
+            {returnDate}
+
+            {returnButton}
+            {dueDateForm}
           </Item.Description>
         </Item.Content>
       </Item>
