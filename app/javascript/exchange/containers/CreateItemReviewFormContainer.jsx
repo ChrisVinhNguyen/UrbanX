@@ -61,7 +61,7 @@ class createItemReviewFormContainer extends Component {
               <Form.Field>
                 <label>Rating</label>
                   <Form.Input name='rating' value={ rating }>
-                    <Rating icon='star' Rating={0} maxRating={5} onRate={ this.handleRate }/>
+                    <Rating icon='star' Rating={rating} maxRating={5} onRate={ this.handleRate }/>
                   </Form.Input>
               </Form.Field>
               <Form.Field>

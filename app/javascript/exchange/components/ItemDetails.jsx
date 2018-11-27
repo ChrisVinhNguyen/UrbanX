@@ -28,6 +28,7 @@ class ItemDetails extends Component {
   }
 
   render() {
+    console.log("##############################")
     let numImages = 0
     let url =""
     let carouselItems;
@@ -101,7 +102,8 @@ ItemDetails.propTypes = {
 
 const mapStateToProps = state => ({
   item_id: state.items.item_id,
-  item_details: state.items.item_details
+  item_details: state.items.item_details,
+  current_viewed_item_reviews: state.items.current_viewed_item_reviews
 });
 
 export default connect(mapStateToProps, {getItem, newTransaction})(ItemDetails);
