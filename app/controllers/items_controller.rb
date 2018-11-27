@@ -112,6 +112,15 @@ class ItemsController < ApplicationController
     end
     item_details= @item.attributes
     item_details[:images]= @images
+
+    item_reviews_count = @item.item_reviews.count
+    item_reviews_total = 0
+    @item.item_reviews.each do |item_review|
+      item_reviews_total += item_review.rating
+    end
+    average_rating = item_reviews_total!=0 ? item_reviews_total/item_reviews_count : 'no rating' 
+
+    item_details[:average_rating] = average_rating
     
     render json: item_details
   end

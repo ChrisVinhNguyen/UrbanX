@@ -29,7 +29,7 @@ class ItemReview extends Component {
             </Comment.Author>
             <Comment.Metadata>
               <div>
-                <Rating icon='star' defaultRating={review.rating} maxRating={5} disabled />
+                <Rating icon='star' rating={review.rating} maxRating={5} disabled />
               </div>
               <div>{review.updated_at}</div>
             </Comment.Metadata>

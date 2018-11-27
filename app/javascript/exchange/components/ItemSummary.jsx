@@ -35,7 +35,7 @@ class ItemSummary extends Component {
           Description: { description }.
         </Item.Description>
         <Item.Extra>
-          <Rating icon='star' defaultRating={ average_rating } maxRating={5} disabled />
+          <Rating icon='star' rating={ average_rating } maxRating={5} disabled />
           <Label>
             Rating: { average_rating }
           </Label>

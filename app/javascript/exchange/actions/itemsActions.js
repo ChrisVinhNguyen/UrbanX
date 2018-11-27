@@ -97,8 +97,6 @@ export const getItem = (item_id=item_id) => dispatch => {
 
   axios.get('/items/' + item_id , {})
   .then(function(response){
-    console.log("inside getItem")
-    console.log(response)
     dispatch({
       type: GET_ITEM,
       item_id: item_id,
