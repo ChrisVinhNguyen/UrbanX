@@ -18,7 +18,7 @@ export const fetchUser = () => dispatch => {
 
 export const signUpUser = (userData) => dispatch => {
   getCSRFToken();
-  axios.post('/users',
+  axios.post('/users.json',
   {
     user: userData
   })
@@ -34,7 +34,7 @@ export const signUpUser = (userData) => dispatch => {
 
 export const signInUser = (userData) => dispatch => {
   getCSRFToken();
-  axios.post('/users/sign_in',
+  axios.post('/users/sign_in.json',
   {
     user: userData
   })
@@ -62,7 +62,7 @@ export const newProfile = (profile) => dispatch => {
 
 export const signOutUser = () => dispatch => {
   getCSRFToken();
-  axios.delete('/users/sign_out', {})
+  axios.delete('/users/sign_out.json', {})
   .then(function(response){
     dispatch({
       type: SIGN_OUT_USER
