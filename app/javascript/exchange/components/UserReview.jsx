@@ -31,7 +31,7 @@ class UserReview extends Component {
               <Comment.Content>
                 <Comment.Author>
                   <Link to={'/user_profiles/'+ review.reviewer_id}>
-                    {review.owner}
+                    {review.reviewer}
                   </Link>
                 </Comment.Author>
                 <Comment.Metadata>
