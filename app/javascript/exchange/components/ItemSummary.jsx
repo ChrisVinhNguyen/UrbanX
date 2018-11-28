@@ -26,7 +26,7 @@ class ItemSummary extends Component {
           </Item.Header>
         </Link>
         <Item.Meta>
-          <Link to={ `/user_profiles/${user_profile_id}` }>
+          <Link to={ `/user_profiles_show/${user_profile_id}` }>
             { owner }
           </Link>
           <p>Quantity: { quantity }</p>

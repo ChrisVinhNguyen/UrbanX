@@ -57,11 +57,12 @@ class UserProfileEditForm extends Component {
     }) 
     
     e.preventDefault()
-	this.props.history.push(`/user_profiles/${this.props.match.params.id}`);
+	this.props.history.push(`/user_profiles_show/${this.props.match.params.id}`);
   }
 
   render() {
 	return (
+
 		 <form onSubmit={this.handleSubmit} class="ui form">
 		  <div class="field">
 		    <label>First Name</label>
