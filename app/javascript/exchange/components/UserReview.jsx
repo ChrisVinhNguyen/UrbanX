@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
 
-import { Button, Comment, Form, Header, Rating, Popup } from 'semantic-ui-react'
+import { Button, Comment, Form, Header, Rating, Popup, Segment } from 'semantic-ui-react'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import CreateUserReviewFormContainer from '../containers/CreateUserReviewFormContainer'
@@ -59,7 +59,8 @@ class UserReview extends Component {
                 <Comment.Actions>
                   <Comment.Action onClick={this.handClick}>
                     Edit
-                    {showEdit?  <EditUserReviewFormContainer review_id = {review.id} reviewee_id = {review.reviewee_id}/>
+                  {showEdit?  
+                      <EditUserReviewFormContainer review_id = {review.id} reviewee_id = {review.reviewee_id}/>
                   :null
                   }
                   </Comment.Action>

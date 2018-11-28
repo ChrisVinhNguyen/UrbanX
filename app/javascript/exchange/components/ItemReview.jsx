@@ -22,7 +22,9 @@ class ItemReview extends Component {
 
 
   handClick() { 
-    this.setState({showEdit: true})
+
+    (this.state.showEdit? this.setState({showEdit: false}) : this.setState({showEdit: true}))
+
     console.log(this.state.showEdit) 
   }
 
@@ -52,13 +54,13 @@ class ItemReview extends Component {
             <Comment.Text>{review.comment}</Comment.Text>
             {current_user_id == review.owner_id?
             <Comment.Actions>
-              <Comment.Action onClick={this.handClick}>
+              <Comment.Action onClick={this.handClick} active>
                   Edit
                   {showEdit?  <EditItemReviewFormContainer review_id = {review.id}/>
                   :null
                   }
               </Comment.Action> 
-              <DeleteItemReviewContainer review_id = {review.id}/>
+                <DeleteItemReviewContainer review_id = {review.id}/>
             </Comment.Actions>
             : null
             }

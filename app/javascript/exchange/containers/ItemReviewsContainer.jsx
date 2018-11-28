@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import { Menu, Button, Comment, Form, Header, Rating, TextArea } from 'semantic-ui-react';
+import { Menu, Button, Comment, Form, Header, Rating, TextArea, Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { getItemReviews } from '../actions/itemsActions';
 import { fetchUser } from '../actions/userActions';
@@ -22,14 +22,18 @@ class ItemsReviewsContainer extends Component {
       console.log(this.props)
 
     	return (
-    		<Comment.Group>
-          <div>
-            <Header as='h3' dividing>
-      				Reviews
-            </Header>
-            <ItemReview/> 
-          </div>
-    		</Comment.Group>
+        <Segment.Group>
+          <Segment>
+      		<Comment.Group>
+            <div>
+              <Header as='h3'>
+        				Reviews
+              </Header>
+              <ItemReview/> 
+            </div>
+      		</Comment.Group>
+          </Segment>
+        </Segment.Group>
 		);
 	}
 }
