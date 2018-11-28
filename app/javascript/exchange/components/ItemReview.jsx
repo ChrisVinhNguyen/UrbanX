@@ -52,13 +52,15 @@ class ItemReview extends Component {
               <Comment.Text>{review.comment}</Comment.Text>
               {current_user_id == review.owner_id?
               <Comment.Actions>
-                <Comment.Action onClick={this.handClick} active>
-                    Edit
+                <DeleteItemReviewContainer review_id = {review.id}/>
+                <Comment.Action onClick={this.handClick}> 
+                  Edit
+                </Comment.Action> 
+                  <div>
                     {showEdit?  <EditItemReviewFormContainer review_id = {review.id}/>
                     :null
                     }
-                </Comment.Action> 
-                  <DeleteItemReviewContainer review_id = {review.id}/>
+                  </div>
               </Comment.Actions>
               : null
               }
