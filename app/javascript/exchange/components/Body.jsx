@@ -14,6 +14,7 @@ import FAQ from './FAQ';
 import UserProfileEditForm from '../containers/UserProfileEditForm';
 import UserSignUpFormContainer from '../containers/UserSignUpFormContainer';
 import UserSignInFormContainer from '../containers/UserSignInFormContainer';
+import UserForgotPasswordFormContainer from '../containers/UserForgotPasswordFormContainer';
 import ItemCreateFormContainer from '../containers/ItemCreateFormContainer';
 import ProfileCreateFormContainer from '../containers/ProfileCreateFormContainer';
 
@@ -32,6 +33,7 @@ class Body extends Component {
     	<Route path="/" exact component={ ItemListComponent } />
         <Route path="/users_sign_up" exact component={ UserSignUpFormContainer } />
         <Route path="/users_sign_in" exact component={ UserSignInFormContainer } />
+        <Route path="/users_forgot_password" exact component={ UserForgotPasswordFormContainer } />
         <Route path="/user_profiles/new/profile" exact component={ ProfileCreateFormContainer } />
         <Route path="/user_profiles_show/:id" exact component={ UserProfile } />
         <Route path="/user_profiles_change/:id/edit" exact component={ UserProfileEditForm } />
