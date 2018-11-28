@@ -9,7 +9,8 @@ import { FILTER_ITEMS,
         GET_MY_TRANSACTIONS,
         NEW_TRANSACTION,
         UPDATE_TRANSACTION,
-        DELETE_TRANSACTION } from './types';
+        DELETE_TRANSACTION,
+        GET_MY_TRANSACTIONS_FOR_ITEM } from './types';
 
 
 import axios from 'axios';
@@ -146,7 +147,7 @@ export const getMyTransactions = (current_user_profile_id) => dispatch => {
 
   axios.get('/user_profiles/'+current_user_profile_id+'/transactions' , {})
   .then(function(response){
-    console.log("inside getMyTransactions")
+    console.log("inside getMyTransactions 11111111111111111111111111111111111111111")
     console.log(response)
     dispatch({
       type: GET_MY_TRANSACTIONS,
@@ -172,6 +173,9 @@ export const newTransaction = (transaction, current_user_profile_id) => dispatch
     dispatch(
       getMyTransactions(current_user_profile_id)
     )
+    dispatch(
+      getMyTransactionsForItem(transaction.item_id, current_user_profile_id)
+    )
   })
   .catch(function(error){
     console.log(error);
@@ -191,6 +195,9 @@ export const updateTransaction = (transaction, current_user_profile_id) => dispa
     console.log(response)
     dispatch(
       getMyTransactions(current_user_profile_id)
+    )
+    dispatch(
+      getMyTransactionsForItem(transaction.item_id, current_user_profile_id)
     )
   })
   .catch(function(error){
@@ -212,6 +219,30 @@ export const deleteTransaction = (transaction, current_user_profile_id) => dispa
     dispatch(
       getMyTransactions(current_user_profile_id)
     )
+    dispatch(
+      getMyTransactionsForItem(transaction.item_id, current_user_profile_id)
+    )
+  })
+  .catch(function(error){
+    console.log(error);
+  })
+}
+
+export const getMyTransactionsForItem = (current_item_id, current_user_profile_id) => dispatch => {
+  let that = this
+
+  axios.get('/user_profiles/'+current_user_profile_id+'/my_transactions_for_item' , {
+    params: {
+      current_item_id: current_item_id
+    }
+  })
+  .then(function(response){
+    console.log("inside getMyTransactionsForItem")
+    console.log(response)
+    dispatch({
+      type: GET_MY_TRANSACTIONS_FOR_ITEM,
+      my_transactions_for_current_item: response.data.my_transactions_for_current_item
+    })
   })
   .catch(function(error){
     console.log(error);

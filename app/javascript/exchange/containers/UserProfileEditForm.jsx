@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+
 
 class UserProfileEditForm extends Component {
 	constructor(props) {
 	    super(props);
 	    this.state = {
-	    	first_name: "",
-	    	last_name: "",
-	    	date_of_birth: "",
-	    	location: ""
+	    	first_name: this.props.user_info.first_name,
+	    	last_name: this.props.user_info.last_name,
+	    	date_of_birth: this.props.user_info.date_of_birth,
+	    	location: this.props.user_info.location
 	    };
 	    this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
 	    this.handleLastNameChange = this.handleLastNameChange.bind(this);
@@ -55,11 +57,12 @@ class UserProfileEditForm extends Component {
     }) 
     
     e.preventDefault()
-	this.props.history.push(`/user_profiles/${this.props.match.params.id}`);
+	this.props.history.push(`/user_profiles_show/${this.props.match.params.id}`);
   }
 
   render() {
 	return (
+
 		 <form onSubmit={this.handleSubmit} class="ui form">
 		  <div class="field">
 		    <label>First Name</label>
@@ -103,4 +106,8 @@ class UserProfileEditForm extends Component {
   }
 }
 
-export default UserProfileEditForm;
+const mapStateToProps = state => ({
+  user_info: state.user.user_info
+});
+
+export default connect(mapStateToProps, {})(UserProfileEditForm);

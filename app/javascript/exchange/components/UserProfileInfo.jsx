@@ -33,7 +33,7 @@ class UserProfileInfo extends Component {
           </div>
         </div>
         {this.props.viewingMyProfile ?
-            <Link to={`/user_profiles/${this.props.userProfile.id}/edit`}>
+            <Link to={`/user_profiles_change/${this.props.userProfile.id}/edit`}>
               <button class="ui button">Edit</button>
             </Link>: null}
       </div>
