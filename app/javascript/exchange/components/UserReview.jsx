@@ -57,14 +57,14 @@ class UserReview extends Component {
                 <Comment.Text>{review.comment}</Comment.Text>
                 {current_user_id == review.reviewer_id?
                 <Comment.Actions>
-                  <Comment.Action onClick={this.handClick} active>
+                  <DeleteUserReviewFormContainer review_id = {review.id} reviewee_id = {review.reviewee_id}/>
+                  <Comment.Action onClick={this.handClick}>
                     Edit
+                  </Comment.Action>
                   {showEdit?  
                       <EditUserReviewFormContainer review_id = {review.id} reviewee_id = {review.reviewee_id}/>
                   :null
                   }
-                  </Comment.Action>
-                  <DeleteUserReviewFormContainer review_id = {review.id} reviewee_id = {review.reviewee_id}/>
                 </Comment.Actions>
                 : null
                 }
