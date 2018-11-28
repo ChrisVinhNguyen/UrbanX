@@ -82,7 +82,7 @@ class TransactionsController < ApplicationController
       elsif @current_user == @transaction.borrower
         UserMailer.with(transaction: @transaction).notify_lender_cancelled_request.deliver_later
       end
-      
+
       @transaction.destroy
     else
       redirect_to new_user_session_path
@@ -111,7 +111,6 @@ class TransactionsController < ApplicationController
       redirect_to new_user_session_path
     end
   end
-
 
   private
   def transaction_params

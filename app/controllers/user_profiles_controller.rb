@@ -139,6 +139,30 @@ class UserProfilesController < ApplicationController
   end
 
 
+  def my_transactions_for_item
+
+    if user_signed_in?
+      @user_profile = UserProfile.find(params[:id])
+      if @user_profile.user == @current_user
+        my_transactions_for_current_item = Transaction.where(borrower_id: @user_profile.user_id, 
+          item_id: params[:current_item_id], status: 'pending')
+
+        transactions_array = []
+
+        my_transactions_for_current_item.each do |transaction|
+          transaction_hash = transaction.attributes
+
+          transactions_array.push(transaction_hash)
+        end
+
+        render :json => {"my_transactions_for_current_item" => transactions_array}.to_json()
+      end
+    else
+      redirect_to new_user_session_path
+    end
+  end
+
+
 
   private
   def user_profile_params

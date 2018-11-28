@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :users 
   resources :user_profiles do 
     get 'transactions', :on => :member
+    get 'my_transactions_for_item', :on => :member
     #get 'user_reviews', :on => :member
     resources :user_reviews
     get 'new_contact', :on => :member
