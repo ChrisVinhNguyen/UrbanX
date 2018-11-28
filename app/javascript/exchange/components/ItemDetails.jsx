@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import axios from 'axios';
 import ItemReviewsContainer from '../containers/ItemReviewsContainer'
-import { getItem, newTransaction, deleteTransaction } from '../actions/itemsActions';
+import { getItem, newTransaction, deleteTransaction, getMyTransactionsForItem } from '../actions/itemsActions';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Carousel} from 'react-responsive-carousel';
 import { v4 as uuid } from 'uuid';
@@ -19,6 +19,7 @@ import pic from '../images/macbook.jpg';
 class ItemDetails extends Component {
   componentDidMount(){
     this.props.getItem(this.props.match.params.id)
+    this.props.getMyTransactionsForItem(this.props.match.params.id, this.props.currentUserId);
     this.handleBorrow = this.handleBorrow.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
   }
@@ -62,10 +63,11 @@ class ItemDetails extends Component {
     }
 
     let borrowButton = null;
+    let temp = this.props.filtered_transactions;
     
     if (this.props.item_details.status == 'available' && this.props.currentUserId != this.props.item_details.user_id) {
-      let request = this.props.filtered_transactions.find(
-        (e) => e.item_id == this.props.item_id && e.borrower_id == this.props.currentUserId && e.status == 'pending');
+      let request = this.props.my_transactions_for_current_item.find(
+        (e) => e.item_id == this.props.item_id);
       if (request) {
         borrowButton = (
           <Button onClick={ e => this.handleCancel(e, request) }>
@@ -123,15 +125,17 @@ class ItemDetails extends Component {
 ItemDetails.propTypes = {
   getItem: PropTypes.func.isRequired,
   newTransaction: PropTypes.func.isRequired,
-  deleteTransaction: PropTypes.func.isRequired
+  deleteTransaction: PropTypes.func.isRequired,
+  getMyTransactionsForItem: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
   item_id: state.items.item_id,
   item_details: state.items.item_details,
   current_viewed_item_reviews: state.items.current_viewed_item_reviews,
-  filtered_transactions: state.items.filtered_transactions,
-  currentUserId: state.user.user_info.user_profile_id
+  // filtered_transactions: state.items.filtered_transactions,
+  currentUserId: state.user.user_info.user_profile_id,
+  my_transactions_for_current_item: state.items.my_transactions_for_current_item
 });
 
-export default connect(mapStateToProps, {getItem, newTransaction, deleteTransaction})(ItemDetails);
+export default connect(mapStateToProps, {getItem, newTransaction, deleteTransaction, getMyTransactionsForItem})(ItemDetails);

@@ -9,7 +9,8 @@ import {
   DELETE_ITEM_REVIEW,
   NEW_ITEM,
   NEW_TRANSACTION,
-  UPDATE_TRANSACTION} 
+  UPDATE_TRANSACTION,
+  GET_MY_TRANSACTIONS_FOR_ITEM} 
 from '../actions/types';
 
 
@@ -24,7 +25,8 @@ const initialState = {
   current_viewed_item_reviews: [],
   item_id: null,
   filtered_transactions: [],
-  item_details: []
+  item_details: [], 
+  my_transactions_for_current_item: []
 }
 
 export default function(state = initialState, action) {
@@ -80,6 +82,11 @@ export default function(state = initialState, action) {
       return {
         ...state
 
+      }
+    case GET_MY_TRANSACTIONS_FOR_ITEM:
+      return {
+        ...state,
+        my_transactions_for_current_item: action.my_transactions_for_current_item
       }
     case NEW_ITEM:
       return {
