@@ -22,9 +22,7 @@ class ItemReview extends Component {
 
 
   handClick() { 
-
     (this.state.showEdit? this.setState({showEdit: false}) : this.setState({showEdit: true}))
-
     console.log(this.state.showEdit) 
   }
 
@@ -36,38 +34,38 @@ class ItemReview extends Component {
     let showEdit = this.state.showEdit;
     let reviews = this.props.current_viewed_item_reviews.map(review => {
       if (review.owner_id == current_user_id){ hasReviewed = true }
-      return (
-        <Comment>
-          <Comment.Avatar/>
-          <Comment.Content>
-            <Comment.Author>
-              <Link to={'/user_profiles/'+ review.owner_id}>
-                {review.owner}
-              </Link>
-            </Comment.Author>
-            <Comment.Metadata>
-              <div>
-                <Rating icon='star' rating={review.rating} maxRating={5} disabled />
-              </div>
-              <div>{review.updated_at}</div>
-            </Comment.Metadata>
-            <Comment.Text>{review.comment}</Comment.Text>
-            {current_user_id == review.owner_id?
-            <Comment.Actions>
-              <Comment.Action onClick={this.handClick} active>
-                  Edit
-                  {showEdit?  <EditItemReviewFormContainer review_id = {review.id}/>
-                  :null
-                  }
-              </Comment.Action> 
-                <DeleteItemReviewContainer review_id = {review.id}/>
-            </Comment.Actions>
-            : null
-            }
-          </Comment.Content>
-        </Comment>
-                            );
-                          });
+        return (
+          <Comment>
+            <Comment.Avatar/>
+            <Comment.Content>
+              <Comment.Author>
+                <Link to={'/user_profiles/'+ review.owner_id}>
+                  {review.owner}
+                </Link>
+              </Comment.Author>
+              <Comment.Metadata>
+                <div>
+                  <Rating icon='star' rating={review.rating} maxRating={5} disabled />
+                </div>
+                <div>{review.updated_at}</div>
+              </Comment.Metadata>
+              <Comment.Text>{review.comment}</Comment.Text>
+              {current_user_id == review.owner_id?
+              <Comment.Actions>
+                <Comment.Action onClick={this.handClick} active>
+                    Edit
+                    {showEdit?  <EditItemReviewFormContainer review_id = {review.id}/>
+                    :null
+                    }
+                </Comment.Action> 
+                  <DeleteItemReviewContainer review_id = {review.id}/>
+              </Comment.Actions>
+              : null
+              }
+            </Comment.Content>
+          </Comment>
+        );
+      });
     return (
       <div>
         { reviews }
