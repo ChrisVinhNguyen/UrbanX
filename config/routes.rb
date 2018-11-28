@@ -36,4 +36,6 @@ Rails.application.routes.draw do
     resources :transactions
     delete :delete_image_attachment
   end
+
+  match '*path', to: 'root#index', via: :all
 end

@@ -41,7 +41,7 @@ class Body extends Component {
         <Route path="/site-map" component={ SiteMap } />
         <Route path="/contact-us" component={ ContactUs } />
         <Route path="/faq" component={ FAQ } />
-        <Route path="/items/:id" exact component={ ItemDetails } />
+        <Route path="/items_list/:id" exact component={ ItemDetails } />
         <Route path="/items/add/new" exact component={ ItemCreateFormContainer } />
       </div>
     );
