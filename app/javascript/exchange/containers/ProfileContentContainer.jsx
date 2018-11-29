@@ -45,9 +45,6 @@ class ProfileContentContainer extends Component {
               <a className={`item ${this.state.activeTab == "My_Transactions"? "active" :""}`} onClick = {() => this.handleOnClick("My_Transactions")}>
                 Transactions
               </a>
-              <a className={`item ${this.state.activeTab == "My_Contacts"? "active" :""}`} onClick = {() => this.handleOnClick("My_Contacts")}>
-                Contacts
-              </a>
               <a className={`item ${this.state.activeTab == "Reviews"? "active" :""}`} onClick = {() => this.handleOnClick("Reviews")}>
                 Reviews
               </a>
@@ -63,7 +60,6 @@ class ProfileContentContainer extends Component {
             <div className="ui segment">
             { this.state.activeTab == "My_Items"? <ItemListComponent /> : null} 
             { this.state.activeTab == "My_Transactions"? <TransactionListComponent /> : null} 
-            { this.state.activeTab == "My_Contacts"? <p> contact </p>: null} 
             { this.state.activeTab == "Reviews"? <UserReviewsContainer reviewee_id = {this.props.userProfileId} /> : null} 
             </div>
           </Grid>

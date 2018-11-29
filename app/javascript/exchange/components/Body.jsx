@@ -18,6 +18,8 @@ import UserForgotPasswordFormContainer from '../containers/UserForgotPasswordFor
 import ItemCreateFormContainer from '../containers/ItemCreateFormContainer';
 import ProfileCreateFormContainer from '../containers/ProfileCreateFormContainer';
 
+import '../stylesheets/body.scss';
+
 
 //const About = () => <h2>About</h2>;
 //const TermsOfService = () => <h2>Terms Of Service</h2>;
