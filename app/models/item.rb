@@ -23,9 +23,9 @@ class Item < ApplicationRecord
   has_many :item_reviews, dependent: :destroy
   has_many :transactions
 
-  # has_many_attached :images
-  has_one_attached :image
-  #validate :image_type
+  has_many_attached :images
+  validate :images_type
+
 
 
   def thumbnail input
@@ -34,7 +34,7 @@ class Item < ApplicationRecord
 
 
   private 
-  def image_type
+  def images_type
     if images.attached?
       images.each do |image|
         if !image.content_type.in?(%('image/jpeg image/png image/jpg'))
@@ -48,4 +48,5 @@ class Item < ApplicationRecord
       end
     end
   end
+
 end
