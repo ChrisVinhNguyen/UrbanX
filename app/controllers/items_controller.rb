@@ -123,8 +123,10 @@ class ItemsController < ApplicationController
     # item_details[:images]= @images
     item_details= @item.attributes
     @image
+    #puts(controller.request.format)
     if @item.image.attached?
           @image = url_for(@item.image)
+          puts(url_for(@item.image))
           item_details[:image]= @image
     end
     
