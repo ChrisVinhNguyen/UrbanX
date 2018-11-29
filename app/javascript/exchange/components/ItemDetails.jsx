@@ -65,6 +65,8 @@ class ItemDetails extends Component {
     }
 
     let borrowButton = null;
+    let editButton = null;
+    let deleteButton = null;
     let temp = this.props.filtered_transactions;
     
     if (this.props.item_details.status == 'available' && this.props.currentUserId != this.props.item_details.user_id) {
@@ -95,6 +97,24 @@ class ItemDetails extends Component {
       }
     }
 
+    if (this.props.currentUserId == this.props.item_details.user_id){
+      editButton=(
+        <Button>Edit</Button>
+      )
+      deleteButton=(
+        <Button negative>Delete</Button>
+      )
+    }
+    else {
+      editButton = (
+          <div></div>
+        )
+
+      deleteButton = (
+          <div></div>
+        )
+    }
+
     return (
       <div>
         <Item>
@@ -110,6 +130,8 @@ class ItemDetails extends Component {
           {borrowButton}
         </Item.Meta>
         <Item.Description>Description: {this.props.item_details.description}.</Item.Description>
+        {editButton}
+        {deleteButton}
         <Item.Extra>
           <Rating icon='star' rating={this.props.item_details.average_rating} maxRating={5} disabled />
           <Label>Rating: {this.props.item_details.average_rating}</Label>
