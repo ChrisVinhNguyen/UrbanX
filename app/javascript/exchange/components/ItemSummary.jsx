@@ -14,11 +14,11 @@ class ItemSummary extends Component {
 
     return (
       <Item>
-      <Link to={ `items/${id}` }>
+      <Link to={ `/items_list/${id}` }>
         <Item.Image size ='medium' src={ pic } />
       </Link>
       <Item.Content>
-        <Link to={ `items/${id}` }>
+        <Link to={ `/items_list/${id}` }>
           <Item.Header size = 'medium' onClick={this.handleItemClick}>
             <strong>
               { name }
@@ -26,7 +26,7 @@ class ItemSummary extends Component {
           </Item.Header>
         </Link>
         <Item.Meta>
-          <Link to={ `/user_profiles/${user_profile_id}` }>
+          <Link to={ `/user_profiles_show/${user_profile_id}` }>
             { owner }
           </Link>
           <p>Quantity: { quantity }</p>
@@ -35,7 +35,7 @@ class ItemSummary extends Component {
           Description: { description }.
         </Item.Description>
         <Item.Extra>
-          <Rating icon='star' defaultRating={ average_rating } maxRating={5} disabled />
+          <Rating icon='star' rating={ average_rating } maxRating={5} disabled />
           <Label>
             Rating: { average_rating }
           </Label>

@@ -21,7 +21,9 @@ Rails.application.routes.draw do
   resources :users 
   resources :user_profiles do 
     get 'transactions', :on => :member
-    get 'user_reviews', :on => :member
+    get 'my_transactions_for_item', :on => :member
+    #get 'user_reviews', :on => :member
+    resources :user_reviews
     get 'new_contact', :on => :member
     get 'transactions_requests', :on => :member
     post 'add_contact', :on => :member
@@ -34,4 +36,6 @@ Rails.application.routes.draw do
     resources :transactions
     delete :delete_image_attachment
   end
+
+  match '*path', to: 'root#index', via: :all
 end

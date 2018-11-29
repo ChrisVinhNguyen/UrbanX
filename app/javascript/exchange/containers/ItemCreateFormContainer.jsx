@@ -64,10 +64,9 @@ class ItemCreateFormContainer extends Component {
             <label>Value</label>
             <Form.Input placeholder='Value' name='value' value={ value } onChange={ this.handleChange }  width={10} />
           </Form.Field>
-  
-          
           <Form.Button content='Submit' />
         </Form>
+        <ImageUploadContainer/>
       </div>
     )
   }

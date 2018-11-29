@@ -1,4 +1,17 @@
-import { FILTER_ITEMS, GET_MY_ITEMS, GET_ITEM, NEW_ITEM, GET_ITEM_REVIEWS, DELETE_ITEM_REVIEW, NEW_ITEM_REVIEW, EDIT_ITEM_REVIEW, GET_MY_TRANSACTIONS, NEW_TRANSACTION } from './types';
+import { FILTER_ITEMS,
+        GET_MY_ITEMS,
+        GET_ITEM,
+        NEW_ITEM,
+        GET_ITEM_REVIEWS,
+        DELETE_ITEM_REVIEW, 
+        NEW_ITEM_REVIEW,
+        EDIT_ITEM_REVIEW,
+        GET_MY_TRANSACTIONS,
+        NEW_TRANSACTION,
+        UPDATE_TRANSACTION,
+        DELETE_TRANSACTION,
+        GET_MY_TRANSACTIONS_FOR_ITEM } from './types';
+
 
 import axios from 'axios';
 
@@ -48,9 +61,9 @@ export const newItemReview = (item_review, current_viewed_item_id) => dispatch =
   })
   
   .then(function(response){
-    dispatch({
-      type: NEW_ITEM_REVIEW,
-    })
+    dispatch(
+      getItemReviews(current_viewed_item_id)
+    )
   })
   .catch(function(error){
     console.log(error);
@@ -65,9 +78,9 @@ export const editItemReview = (item_review, current_viewed_item_id) => dispatch 
   })
   
   .then(function(response){
-    dispatch({
-      type: EDIT_ITEM_REVIEW,
-    })
+    dispatch(
+      getItemReviews(current_viewed_item_id)
+    )
   })
   .catch(function(error){
     console.log(error);
@@ -83,9 +96,9 @@ export const deleteItemReview = (current_viewed_item_id, review_id) => dispatch 
   })
   
   .then(function(response){
-    dispatch({
-      type: EDIT_ITEM_REVIEW,
-    })
+    dispatch(
+      getItemReviews(current_viewed_item_id)
+    )
   })
   .catch(function(error){
     console.log(error);
@@ -97,8 +110,6 @@ export const getItem = (item_id=item_id) => dispatch => {
 
   axios.get('/items/' + item_id , {})
   .then(function(response){
-    console.log("inside getItem")
-    console.log(response)
     dispatch({
       type: GET_ITEM,
       item_id: item_id,
@@ -136,7 +147,7 @@ export const getMyTransactions = (current_user_profile_id) => dispatch => {
 
   axios.get('/user_profiles/'+current_user_profile_id+'/transactions' , {})
   .then(function(response){
-    console.log("inside getMyTransactions")
+    console.log("inside getMyTransactions 11111111111111111111111111111111111111111")
     console.log(response)
     dispatch({
       type: GET_MY_TRANSACTIONS,
@@ -148,7 +159,7 @@ export const getMyTransactions = (current_user_profile_id) => dispatch => {
   })
 }
 
-export const newTransaction = (transaction) => dispatch => {
+export const newTransaction = (transaction, current_user_profile_id) => dispatch => {
   let that = this
   getCSRFToken();
 
@@ -159,8 +170,78 @@ export const newTransaction = (transaction) => dispatch => {
   .then(function(response){
     console.log("inside newTransactions")
     console.log(response)
+    dispatch(
+      getMyTransactions(current_user_profile_id)
+    )
+    dispatch(
+      getMyTransactionsForItem(transaction.item_id, current_user_profile_id)
+    )
+  })
+  .catch(function(error){
+    console.log(error);
+  })
+}
+
+export const updateTransaction = (transaction, current_user_profile_id) => dispatch => {
+  let that = this
+  getCSRFToken();
+  console.log(transaction)
+  axios.put('/items/'+transaction.item_id+'/transactions/'+transaction.id , 
+  {
+    transaction: transaction
+  })
+  .then(function(response){
+    console.log("inside updateTransactions")
+    console.log(response)
+    dispatch(
+      getMyTransactions(current_user_profile_id)
+    )
+    dispatch(
+      getMyTransactionsForItem(transaction.item_id, current_user_profile_id)
+    )
+  })
+  .catch(function(error){
+    console.log(error);
+  })
+}
+
+export const deleteTransaction = (transaction, current_user_profile_id) => dispatch => {
+  let that = this
+  getCSRFToken();
+  console.log(transaction)
+  axios.delete('/items/'+transaction.item_id+'/transactions/'+transaction.id , 
+  {
+    transaction: transaction
+  })
+  .then(function(response){
+    console.log("inside deleteTransactions")
+    console.log(response)
+    dispatch(
+      getMyTransactions(current_user_profile_id)
+    )
+    dispatch(
+      getMyTransactionsForItem(transaction.item_id, current_user_profile_id)
+    )
+  })
+  .catch(function(error){
+    console.log(error);
+  })
+}
+
+export const getMyTransactionsForItem = (current_item_id, current_user_profile_id) => dispatch => {
+  let that = this
+
+  axios.get('/user_profiles/'+current_user_profile_id+'/my_transactions_for_item' , {
+    params: {
+      current_item_id: current_item_id
+    }
+  })
+  .then(function(response){
+    console.log("inside getMyTransactionsForItem")
+    console.log(response)
     dispatch({
-      type: NEW_TRANSACTION
+      type: GET_MY_TRANSACTIONS_FOR_ITEM,
+      my_transactions_for_current_item: response.data.my_transactions_for_current_item
     })
   })
   .catch(function(error){

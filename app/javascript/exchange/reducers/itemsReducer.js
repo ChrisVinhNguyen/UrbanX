@@ -4,8 +4,15 @@ import {
   GET_ITEM,
   GET_MY_TRANSACTIONS,
   GET_ITEM_REVIEWS,
-  NEW_ITEM
-} from '../actions/types';
+  NEW_ITEM_REVIEW,
+  EDIT_ITEM_REVIEW,
+  DELETE_ITEM_REVIEW,
+  NEW_ITEM,
+  NEW_TRANSACTION,
+  UPDATE_TRANSACTION,
+  GET_MY_TRANSACTIONS_FOR_ITEM} 
+from '../actions/types';
+
 
 
 const initialState = {
@@ -18,7 +25,8 @@ const initialState = {
   current_viewed_item_reviews: [],
   item_id: null,
   filtered_transactions: [],
-  item_details: []
+  item_details: [], 
+  my_transactions_for_current_item: []
 }
 
 export default function(state = initialState, action) {
@@ -30,6 +38,21 @@ export default function(state = initialState, action) {
         filtered_items: action.filtered_items
       }
     case GET_ITEM_REVIEWS:
+      return {
+        ...state, 
+        current_viewed_item_reviews: action.current_viewed_item_reviews
+      }
+    case NEW_ITEM_REVIEW:
+      return {
+        ...state, 
+        current_viewed_item_reviews: action.current_viewed_item_reviews
+      }
+    case EDIT_ITEM_REVIEW:
+      return {
+        ...state, 
+        current_viewed_item_reviews: action.current_viewed_item_reviews
+      }
+    case DELETE_ITEM_REVIEW:
       return {
         ...state, 
         current_viewed_item_reviews: action.current_viewed_item_reviews
@@ -49,6 +72,21 @@ export default function(state = initialState, action) {
       return {
         ...state,
         filtered_transactions: action.filtered_transactions
+      }
+    case NEW_TRANSACTION:
+      return {
+        ...state
+
+      }
+    case UPDATE_TRANSACTION:
+      return {
+        ...state
+
+      }
+    case GET_MY_TRANSACTIONS_FOR_ITEM:
+      return {
+        ...state,
+        my_transactions_for_current_item: action.my_transactions_for_current_item
       }
     case NEW_ITEM:
       return {

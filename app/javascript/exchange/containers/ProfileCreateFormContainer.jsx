@@ -45,7 +45,7 @@ class ProfileCreateFormContainer extends Component {
           </Form.Field>
           <Form.Field>
             <label>Date of Birth</label>
-            <Form.Input placeholder='Date of Birth' name='date_of_birth' value={ date_of_birth } onChange={ this.handleChange }  width={10} />
+            <Form.Input type = 'Date' placeholder='Date of Birth' name='date_of_birth' value={ date_of_birth } onChange={ this.handleChange }  width={10} />
           </Form.Field>
           <Form.Field>
             <label>Location</label>

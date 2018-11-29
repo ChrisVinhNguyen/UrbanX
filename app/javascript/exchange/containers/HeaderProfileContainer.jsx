@@ -42,7 +42,7 @@ class HeaderProfileContainer extends Component {
                 </Link>
               </Dropdown.Item>
               <Dropdown.Item>
-                <Link to={`/user_profiles/${this.props.user_info.user_profile_id}`}>
+                <Link to={`/user_profiles_show/${this.props.user_info.user_profile_id}`}>
                   View Profile
                 </Link>
               </Dropdown.Item>

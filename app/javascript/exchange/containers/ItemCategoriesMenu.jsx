@@ -42,7 +42,7 @@ class ItemCategoriesMenu extends Component {
     });
 
     return (
-      <Menu secondary fluid widths={11}>
+      <Menu secondary fluid widths={11} className="item-categories-menu">
         { menuItems }
       </Menu>
     )
