@@ -35,21 +35,21 @@ class ItemDetails extends Component {
     console.log(this.props.item_details)
     console.log(this.props)
     console.log("inside item item_details")
-    if (this.props.item_details.images){
-      numImages = this.props.item_details.images.length
-      url = this.props.item_details.images[0]
+    if (this.props.item_details.image){
+      // numImages = this.props.item_details.images.length
+      url = this.props.item_details.image
       console.log("making carousel items")
-      carouselItems = this.props.item_details.images.map(imageSrc => {
-      const keyVal = uuid();
-      console.log("done generating uuid")
-      console.log(imageSrc)
-        return (
-          <div key={keyVal}>
-            <img src={imageSrc} />
-            <p className="legend">{keyVal}</p>
-          </div>
-        )
-      })
+      // carouselItems = this.props.item_details.images.map(imageSrc => {
+      // const keyVal = uuid();
+      // console.log("done generating uuid")
+      // console.log(imageSrc)
+      //   return (
+      //     <div key={keyVal}>
+      //       <img src={imageSrc} />
+      //       <p className="legend">{keyVal}</p>
+      //     </div>
+      //   )
+      // })
     }
     else{
       console.log("COURSEL IS NULL")
@@ -62,6 +62,7 @@ class ItemDetails extends Component {
       <div>
         <Item>
           <Item.Content>
+          <img src= {url}/>
           <Carousel></Carousel>
           {carouselItems ? (<Carousel showThumbs={false} width="50%" selectedItem={1}> {carouselItems} </Carousel>) : null}
 

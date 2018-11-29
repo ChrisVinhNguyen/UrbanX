@@ -1,15 +1,23 @@
 class ItemsController < ApplicationController
   def create
+      puts("creat in itemcontroller")
+      # puts(params)
+      # puts(item_params)
+    
+      
     if user_signed_in?
-
+      puts ("-----------")
+    
       @item = Item.new(item_params)
+      puts ("-----------")
 
       @item.user_id = @current_user.id
       @item.status = "available"
-      
+    
       if @item.save
           redirect_to @item
       else
+        puts(@item.errors.full_messages)
         render :new
       end
     else
@@ -105,13 +113,19 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
     @images = []
-    if @item.images.attached?
-        @item.images.each do |image|
-          @images.push(url_for(image))
-        end   
+    # if @item.images.attached?
+    #     @item.images.each do |image|
+    #       @images.push(url_for(image))
+    #     end   
+    # end
+    # item_details= @item.attributes
+    # item_details[:images]= @images
+    @image
+    if @item.image.attached?
+          @image = url_for(@item.image)
     end
     item_details= @item.attributes
-    item_details[:images]= @images
+    item_details[:image]= @image
     
     render json: item_details
   end
@@ -161,6 +175,6 @@ class ItemsController < ApplicationController
 
 private
   def item_params
-      params.require(:item).permit(:name, :description, :category,  :quantity,  :condition, :value, :user_id, :status, images: [])
+      params.require(:item).permit(:name, :description, :category,  :quantity,  :condition, :value, :user_id, :status , :image ) #images: []
     end
 end

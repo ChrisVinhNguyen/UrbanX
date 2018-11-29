@@ -23,8 +23,9 @@ class Item < ApplicationRecord
   has_many :item_reviews, dependent: :destroy
   has_many :transactions
 
-  has_many_attached :images
-  validate :image_type
+  # has_many_attached :images
+  has_one_attached :image
+  #validate :image_type
 
 
   def thumbnail input
