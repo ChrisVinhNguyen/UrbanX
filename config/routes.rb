@@ -37,5 +37,11 @@ Rails.application.routes.draw do
     delete :delete_image_attachment
   end
 
-  match '*path', to: 'root#index', via: :all
+  match 'about', to: 'root#index', via: :all
+  match 'terms-of-service', to: 'root#index', via: :all
+  match 'privacy-policy', to: 'root#index', via: :all
+  match 'site-map', to: 'root#index', via: :all
+  match 'contact-us', to: 'root#index', via: :all
+  match 'faq', to: 'root#index', via: :all
+
 end
