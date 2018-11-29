@@ -5,6 +5,8 @@ class UserProfilesController < ApplicationController
     if user_signed_in?
 
       @user_profile = UserProfile.new(user_profile_params)
+      @user_profile.created_at = DateTime.now
+      @user_profile.updated_at = DateTime.now 
       @user_profile.user_id = @current_user.id
       if @user_profile.save
           redirect_to @user_profile
