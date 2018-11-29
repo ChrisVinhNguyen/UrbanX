@@ -29,9 +29,9 @@ class NewItemForm extends React.Component{
 	}
 	handleImageChange = (e) => {
 		debugger
-  		// this.setState({ images: Object.values(e.currentTarget.files) });
-  		this.setState({ image: e.currentTarget.files[0] });
-  		console.log(this.state.image)
+  		this.setState({ images: Object.values(e.currentTarget.files) });
+  		// this.setState({ image: e.currentTarget.files[0] });
+  		// console.log(this.state.image)
   		console.log("handleImageChange")
 	}
 	handleCategoryChange = (e) => {
@@ -57,11 +57,11 @@ class NewItemForm extends React.Component{
 		formData.append('item[quantity]', this.state.quantity);
 		formData.append('item[condition]', this.state.condition);
 		formData.append('item[value]', this.state.value);
-		formData.append('item[image]', this.state.image);
 
-		
-		console.log(this.state)
-		console.log(formData)
+		for (const image of this.state.images) {
+	    formData.append('item[images][]', image, image.name);
+	  }
+
 		console.log("below is form data")
 		for (var pair of formData.entries()) {
 		    console.log(pair[0]+ ', ' + pair[1]); 
@@ -85,7 +85,6 @@ class NewItemForm extends React.Component{
 
 
 	render() {
-		
 		console.log(this.state)
 	    return (
 	      <form  onSubmit={this.handleSubmit.bind(this)}>
@@ -141,7 +140,7 @@ class NewItemForm extends React.Component{
 	         <input
 	          type="file"
 	          name="item[image]"
-	          multiple={false}
+	          multiple={true}
 	          onChange={this.handleImageChange}
 	        />
 
@@ -169,15 +168,3 @@ const getCSRFToken = () => {
      axios.defaults.headers.common['X-CSRF-Token'] = csrfToken
   }
 }
-
-
-
- // <label>Upload images</label>
-	//         <input
-	//           type="file"
-	//           name="item[images]"
-	//           multiple={true}
-	//           value={this.state.images}
-	//           onChange={this.handleImageChange}
-	//           direct_upload={true}
-	//         />

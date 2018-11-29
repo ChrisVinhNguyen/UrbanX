@@ -109,7 +109,7 @@ class UserProfileEditForm extends Component {
 		{ !this.state.form_valid ?
 		<div class="ui warning message">
 		  <div class="header">
-		    Missing fields placeholder!!!
+		    All fields are required.
 		  </div>
 		</div>
 		:null}

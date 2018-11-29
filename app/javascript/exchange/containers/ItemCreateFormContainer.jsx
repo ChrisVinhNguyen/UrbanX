@@ -15,12 +15,15 @@ class ItemCreateFormContainer extends Component {
       quantity: '',
       condition: '',
       value: '',
-      user_id: ''
+      user_id: '',
+      images: []
+
 
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateItemState = this.updateItemState.bind(this);
   }
 
   handleChange(e, { name, value }) {
@@ -30,7 +33,45 @@ class ItemCreateFormContainer extends Component {
   handleSubmit(e) {
     let item = this.state;
     item.user_id =this.props.currentUserId;
-    this.props.newItem(item);
+    // this.props.newItem(item);
+    
+    const formData = new FormData();
+    // formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+    formData.append('item[name]', this.state.name);
+    formData.append('item[description]', this.state.description);
+    formData.append('item[category]', this.state.category);
+    formData.append('item[quantity]', this.state.quantity);
+    formData.append('item[condition]', this.state.condition);
+    formData.append('item[value]', this.state.value);
+
+    for (const image of this.state.images) {
+      formData.append('item[images][]', image, image.name);
+    }
+
+    // console.log("below is form data")
+    // for (var pair of formData.entries()) {
+    //     console.log(pair[0]+ ', ' + pair[1]); 
+    // }
+    // debugger
+    $.ajax({
+      url:'/items',
+      method: 'POST',
+      data: formData,
+      contentType: false,
+      processData: false,
+      headers: {
+            'X-CSRFToken': $('meta[name="token"]').attr('content')
+        }
+    }).then(
+    (response) => console.log(response.message),
+    (response) => console.log(response.responseJSON)
+    );
+  }
+  updateItemState(files){
+    this.state.images = files
+    console.log(this.state.images)
+    console.log("this is the new item form images statee ^ ")
+
   }
 
   render() {
@@ -64,9 +105,10 @@ class ItemCreateFormContainer extends Component {
             <label>Value</label>
             <Form.Input placeholder='Value' name='value' value={ value } onChange={ this.handleChange }  width={10} />
           </Form.Field>
+          <UploadButton updateItemState={this.updateItemState}/>
           <Form.Button content='Submit' />
         </Form>
-        <ImageUploadContainer/>
+        
       </div>
     )
   }
