@@ -14,55 +14,28 @@ class ItemSortDropdownContainer extends Component {
     this.handleSelect = this.handleSelect.bind(this);
   }
 
-  // componentWillMount() {
-  //   this.state.original_list = this.props.filtered_items;
-  // }
 
   handleSelect (e, { value }) {
-    console.log(this.props.filtered_items);
-    let cur_list = this.props.filtered_items;
+    let cur_list = this.props.original_list;
+    console.log(this.props.original_list);
 
     if (value == 'Default') {
-      this.props.filterItems(this.props.cur_category);
-      this.props.sortItems(this.props.filtered_items, value);
+      this.props.sortItems(cur_list, value);
     }
 
     else if (value == 'Newest') {
-      const sorted_list = cur_list.sort(
-        (a, b) => new Date(String(b.date_posted).split('T')[0]) - new Date(String(a.date_posted).split('T')[0]));
-
-      console.log(sorted_list);
-      this.props.sortItems(sorted_list, value);
+      this.props.sortItems(cur_list, value);
     }
 
     else if (value == 'Oldest') {
-      const sorted_list = cur_list.sort(
-        (a, b) => new Date(String(a.date_posted).split('T')[0]) - new Date(String(b.date_posted).split('T')[0]));
-
-      console.log(sorted_list);
-      this.props.sortItems(sorted_list, value);
+      this.props.sortItems(cur_list, value);
     }
 
-    console.log(this.props.filtered_items);
-    console.log(this.props.cur_sort);
+    console.log(this.props.original_list);
+    // console.log(this.props.cur_sort);
   } 
 
   render() {
-    // const { cur_category } = this.props;
-
-    // const menuItems = sortOptions.map(ITEM_CATEGORIES, (value, key) => {
-    //   const keyVal = uuid();
-    //   return (
-    //     <Menu.Item
-    //       key={ keyVal }
-    //       name={ value }
-    //       active={ cur_category === value }
-    //       onClick={ this.handleCategoryClick }
-    //     >
-    //       { value }
-    //     </Menu.Item>
-    //   )
-    // });
     let sortOptions = [
       {
         text: 'Default',
@@ -93,14 +66,13 @@ class ItemSortDropdownContainer extends Component {
 }
 
 ItemSortDropdownContainer.propTypes = {
-  filtered_items: PropTypes.array.isRequired,
+  original_list: PropTypes.array.isRequired,
   cur_sort: PropTypes.string.isRequired
 }
 
 const mapStateToProps = state => ({
-  filtered_items: state.items.filtered_items,
-  cur_sort: state.items.cur_sort,
-  cur_category: state.items.cur_category
+  original_list: state.items.original_list,
+  cur_sort: state.items.cur_sort
 });
 
 export default connect(mapStateToProps, { sortItems, filterItems })(ItemSortDropdownContainer);
