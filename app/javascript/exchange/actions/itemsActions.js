@@ -28,7 +28,8 @@ export const filterItems = (cur_category=cur_category) => dispatch => {
     dispatch({
       type: FILTER_ITEMS,
       cur_category: cur_category,
-      filtered_items: response.data.filtered_items
+      filtered_items: response.data.filtered_items,
+      original_list: response.data.filtered_items
     })
   })
   .catch(function(error){
@@ -134,7 +135,8 @@ export const getMyItems = (current_user_profile_id) => dispatch => {
     console.log(response)
     dispatch({
       type: GET_MY_ITEMS,
-      filtered_items: response.data.filtered_items
+      filtered_items: response.data.filtered_items,
+      original_list: response.data.filtered_items
     })
   })
   .catch(function(error){
@@ -274,10 +276,23 @@ const sortItemsR = (sorted_items, cur_sort) => {
   }
 }
 
-export const sortItems = (sorted_items, cur_sort) => {
+export const sortItems = (items_list, cur_sort) => {
   return function (dispatch, getState) {
-    console.log(cur_sort)
-    return dispatch(sortItemsR(sorted_items, cur_sort))
+    let sorted_list;
+    if (!cur_sort || cur_sort == '' || cur_sort == 'Default') {
+      sorted_list = items_list;
+    }
+
+    else if (cur_sort == 'Newest') {
+      sorted_list = [].concat(items_list).sort(
+        (a, b) => new Date(String(b.date_posted).split('T')[0]) - new Date(String(a.date_posted).split('T')[0]));
+    }
+
+    else if (cur_sort == 'Oldest') {
+      sorted_list = [].concat(items_list).sort(
+        (a, b) => new Date(String(a.date_posted).split('T')[0]) - new Date(String(b.date_posted).split('T')[0]));
+    }
+    return dispatch(sortItemsR(sorted_list, cur_sort))
   }
 }
 

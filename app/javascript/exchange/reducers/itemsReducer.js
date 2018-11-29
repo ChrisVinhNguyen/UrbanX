@@ -28,7 +28,8 @@ const initialState = {
   filtered_transactions: [],
   item_details: [], 
   my_transactions_for_current_item: [],
-  cur_sort: ''
+  cur_sort: '',
+  original_list: []
 }
 
 export default function(state = initialState, action) {
@@ -37,7 +38,8 @@ export default function(state = initialState, action) {
       return {
         ...state,
         cur_category: action.cur_category,
-        filtered_items: action.filtered_items
+        filtered_items: action.filtered_items,
+        original_list: action.original_list
       }
     case GET_ITEM_REVIEWS:
       return {
@@ -68,7 +70,8 @@ export default function(state = initialState, action) {
     case GET_MY_ITEMS:
       return {
         ...state,
-        filtered_items: action.filtered_items
+        filtered_items: action.filtered_items,
+        original_list: action.original_list
       }
     case GET_MY_TRANSACTIONS:
       return {

@@ -21,7 +21,7 @@ class ItemCategoriesMenu extends Component {
   }
 
   handleCategoryClick (e, { name }) {
-    this.props.filterItems(name);
+    this.props.filterItems(name, this.props.cur_sort);
   } 
 
   render() {
@@ -55,7 +55,8 @@ ItemCategoriesMenu.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  cur_category: state.items.cur_category
+  cur_category: state.items.cur_category,
+  cur_sort: state.items.cur_sort
 });
 
 export default connect(mapStateToProps, { filterItems })(ItemCategoriesMenu);
