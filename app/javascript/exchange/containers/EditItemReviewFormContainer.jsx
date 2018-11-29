@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 
-import { Button, Form, Header, Rating, TextArea } from 'semantic-ui-react';
+import { Button, Form, Header, Rating, TextArea, Segment} from 'semantic-ui-react';
 import axios from 'axios';
 import { editItemReview } from '../actions/itemsActions';
 import { connect } from 'react-redux';
@@ -57,10 +57,7 @@ class EditItemReviewFormContainer extends Component {
     console.log(this.props)
     if (isSignedIn) {
       editItemReviewContent = 
-        <div>
-          <Header as='h5' dividing>
-            Edit Review
-          </Header>
+        <Segment raised>
             <Form className="edit-item-review-form" onSubmit={ this.handleSubmit }>
               <Form.Field>
                 <label>Rating</label>
@@ -68,11 +65,11 @@ class EditItemReviewFormContainer extends Component {
               </Form.Field>
               <Form.Field>
                 <label>Comment</label>
-                <Form.Input type = 'comment' placeholder='Edit your review..' name='comment' value={ comment } onChange={this.handleChange} />
+                <Form.TextArea type = 'comment' name='comment' placeholder='Edit your review..' value={ comment } onChange={this.handleChange} />
               </Form.Field>
               <Form.Button content='Edit' labelPosition='left' icon='edit'/>
             </Form>
-        </div>
+        </Segment>
     } else {
       editItemReviewContent = 
         <div>

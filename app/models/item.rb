@@ -15,7 +15,7 @@
 #
 
 class Item < ApplicationRecord
-  validates :name, :category, :quantity, :condition, :description, :status, presence: true
+  validates :name, :category, :quantity, :condition, :description, :status, :date_posted, presence: true
   validates :quantity, numericality: { only_integer: true, greater_than: 0}
   validates :value, numericality: { greater_than_or_equal_to: 0}
 
@@ -23,8 +23,9 @@ class Item < ApplicationRecord
   has_many :item_reviews, dependent: :destroy
   has_many :transactions
 
-  has_many_attached :images
-  validate :image_type
+  # has_many_attached :images
+  has_one_attached :image
+  #validate :image_type
 
 
   def thumbnail input

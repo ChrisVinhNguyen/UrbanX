@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { EMAIL_MISSING, PASSWORD_MISSING } from '../constants/formErrors';
 
 
-class UserSignInFormContainer extends Component {
+class UserForgotPasswordFormContainer extends Component {
   constructor() {
     super();
     this.state = {
@@ -96,17 +96,12 @@ class UserSignInFormContainer extends Component {
 
     return (
       <div className="sign-in-form-container">
-        <h1 className="sign-in-form-title">Sign In Form</h1>
+        <h1 className="sign-in-form-title">Forgot Password?</h1>
         <Form className="sign-in-form" onSubmit={ this.handleSubmit } error={ formError }>
           <Form.Field>
             <label>Email</label>
             <Form.Input placeholder='bob.smith@gmail.com' name='email' value={ email } onChange={ this.handleChange }  width={10} error={ emailError } />
           </Form.Field>
-          <Form.Field>
-            <label>Password</label>
-            <Form.Input type='password' name='password' value={ password } onChange={ this.handleChange }  width={10} error={ passwordError } />
-          </Form.Field>
-          <Link to='/users_forgot_password'>Forgot password?</Link>
           { errorMessages.length > 0 ? errorMessage : null }
           <Form.Button content='Submit' />
         </Form>
@@ -115,4 +110,4 @@ class UserSignInFormContainer extends Component {
   }
 }
 
-export default connect(() => { return {} }, { signInUser })(UserSignInFormContainer);
+export default connect(() => { return {} }, {})(UserForgotPasswordFormContainer);

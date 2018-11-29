@@ -38,29 +38,29 @@ class ProfileContentContainer extends Component {
       return (
         <div className="profile-content-container">
         <Grid columns={2} divided>
-            <div class="ui pointing menu">
-              <a class={`item ${this.state.activeTab == "My_Items"? "active" :""}`} onClick = {() => this.handleOnClick("My_Items")} >
+            <div className="ui pointing menu">
+              <a className={`item ${this.state.activeTab == "My_Items"? "active" :""}`} onClick = {() => this.handleOnClick("My_Items")} >
                 Items
               </a>
-              <a class={`item ${this.state.activeTab == "My_Transactions"? "active" :""}`} onClick = {() => this.handleOnClick("My_Transactions")}>
+              <a className={`item ${this.state.activeTab == "My_Transactions"? "active" :""}`} onClick = {() => this.handleOnClick("My_Transactions")}>
                 Transactions
               </a>
-              <a class={`item ${this.state.activeTab == "My_Contacts"? "active" :""}`} onClick = {() => this.handleOnClick("My_Contacts")}>
+              <a className={`item ${this.state.activeTab == "My_Contacts"? "active" :""}`} onClick = {() => this.handleOnClick("My_Contacts")}>
                 Contacts
               </a>
-              <a class={`item ${this.state.activeTab == "Reviews"? "active" :""}`} onClick = {() => this.handleOnClick("Reviews")}>
+              <a className={`item ${this.state.activeTab == "Reviews"? "active" :""}`} onClick = {() => this.handleOnClick("Reviews")}>
                 Reviews
               </a>
-              <div class="right menu">
-                <div class="item">
-                  <div class="ui transparent icon input">
+              <div className="right menu">
+                <div className="item">
+                  <div className="ui transparent icon input">
                     <input type="text" placeholder="Search..."/>
-                    <i class="search link icon"></i>
+                    <i className="search link icon"></i>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="ui segment">
+            <div className="ui segment">
             { this.state.activeTab == "My_Items"? <ItemListComponent /> : null} 
             { this.state.activeTab == "My_Transactions"? <TransactionListComponent /> : null} 
             { this.state.activeTab == "My_Contacts"? <p> contact </p>: null} 

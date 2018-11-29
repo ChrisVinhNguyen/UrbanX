@@ -14,6 +14,7 @@ import FAQ from './FAQ';
 import UserProfileEditForm from '../containers/UserProfileEditForm';
 import UserSignUpFormContainer from '../containers/UserSignUpFormContainer';
 import UserSignInFormContainer from '../containers/UserSignInFormContainer';
+import UserForgotPasswordFormContainer from '../containers/UserForgotPasswordFormContainer';
 import ItemCreateFormContainer from '../containers/ItemCreateFormContainer';
 import ProfileCreateFormContainer from '../containers/ProfileCreateFormContainer';
 
@@ -30,11 +31,12 @@ class Body extends Component {
     return (
       <div className="body">
     	<Route path="/" exact component={ ItemListComponent } />
-        <Route path="/users/sign_up" exact component={ UserSignUpFormContainer } />
-        <Route path="/users/sign_in" exact component={ UserSignInFormContainer } />
+        <Route path="/users_sign_up" exact component={ UserSignUpFormContainer } />
+        <Route path="/users_sign_in" exact component={ UserSignInFormContainer } />
+        <Route path="/users_forgot_password" exact component={ UserForgotPasswordFormContainer } />
         <Route path="/user_profiles/new/profile" exact component={ ProfileCreateFormContainer } />
-        <Route path="/user_profiles/:id" exact component={ UserProfile } />
-        <Route path="/user_profiles/:id/edit" exact component={ UserProfileEditForm } />
+        <Route path="/user_profiles_show/:id" exact component={ UserProfile } />
+        <Route path="/user_profiles_change/:id/edit" exact component={ UserProfileEditForm } />
         <Route path="/about" component={ About } />
         <Route path="/terms-of-service" component={ TermsOfService } />
         <Route path="/privacy-policy" component={ PrivacyPolicy } />

@@ -29,7 +29,7 @@ class UserReviewsContainer extends Component {
     	return (
     		<Comment.Group>
           <div>
-            <Header as='h3' dividing>
+            <Header as='h3'>
       				Reviews
             </Header>
             <UserReview reviewee_id={this.props.reviewee_id}/> 

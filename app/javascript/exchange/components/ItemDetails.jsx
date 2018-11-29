@@ -40,23 +40,25 @@ class ItemDetails extends Component {
     let carouselItems;
     console.log("About to print item details")
     console.log(this.props.item_details)
-    console.log("done printing item_details")
-    console.log("print rating")
-    console.log(this.props.item_details.average_rating)
-    console.log("done printing rating")
+    console.log(this.props)
+    console.log("inside item item_details")
+    if (this.props.item_details.image){
+      // numImages = this.props.item_details.images.length
+      url = this.props.item_details.image
+      console.log("making carousel items")
+      console.log(this.props.item_details)
+      // carouselItems = this.props.item_details.images.map(imageSrc => {
+      // const keyVal = uuid();
+      // console.log("done generating uuid")
+      // console.log(imageSrc)
+      //   return (
+      //     <div key={keyVal}>
+      //       <img src={imageSrc} />
+      //       <p className="legend">{keyVal}</p>
+      //     </div>
+      //   )
+      // })
 
-    if (this.props.item_details.images){
-      numImages = this.props.item_details.images.length
-      url = this.props.item_details.images[0]
-      carouselItems = this.props.item_details.images.map(imageSrc => {
-      const keyVal = uuid();
-        return (
-          <div key={keyVal}>
-            <img src={imageSrc} />
-            <p className="legend">{keyVal}</p>
-          </div>
-        )
-      })
     }
     else{
       carouselItems = null
@@ -97,6 +99,7 @@ class ItemDetails extends Component {
       <div>
         <Item>
           <Item.Content>
+          <img src= {url}/>
           <Carousel></Carousel>
           {carouselItems ? (<Carousel showThumbs={false} width="50%" selectedItem={1}> {carouselItems} </Carousel>) : null}
 

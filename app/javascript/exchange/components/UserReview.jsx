@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
 
-import { Button, Comment, Form, Header, Rating, Popup } from 'semantic-ui-react'
+import { Button, Comment, Form, Header, Rating, Popup, Segment } from 'semantic-ui-react'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import CreateUserReviewFormContainer from '../containers/CreateUserReviewFormContainer'
@@ -21,7 +21,7 @@ class UserReview extends Component {
 
 
   handClick() { 
-    this.setState({showEdit: true})
+    (this.state.showEdit? this.setState({showEdit: false}) : this.setState({showEdit: true}))
     console.log(this.state.showEdit) 
   }
   render() {
@@ -57,13 +57,14 @@ class UserReview extends Component {
                 <Comment.Text>{review.comment}</Comment.Text>
                 {current_user_id == review.reviewer_id?
                 <Comment.Actions>
+                  <DeleteUserReviewFormContainer review_id = {review.id} reviewee_id = {review.reviewee_id}/>
                   <Comment.Action onClick={this.handClick}>
                     Edit
-                    {showEdit?  <EditUserReviewFormContainer review_id = {review.id} reviewee_id = {review.reviewee_id}/>
+                  </Comment.Action>
+                  {showEdit?  
+                      <EditUserReviewFormContainer review_id = {review.id} reviewee_id = {review.reviewee_id}/>
                   :null
                   }
-                  </Comment.Action>
-                  <DeleteUserReviewFormContainer review_id = {review.id} reviewee_id = {review.reviewee_id}/>
                 </Comment.Actions>
                 : null
                 }

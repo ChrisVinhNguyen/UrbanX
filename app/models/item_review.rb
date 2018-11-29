@@ -20,5 +20,7 @@
 #
 
 class ItemReview < ApplicationRecord
-  belongs_to :item 
+	validates :comment, :rating, :owner_id, :created_at, :updated_at, presence: true
+	validates :rating, numericality: true
+	belongs_to :item 
 end

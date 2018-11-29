@@ -1,0 +1,12 @@
+<h1>hi</h1>
+<%= form_with(model: @item, local: true) do |form| %>
+	<%= javascript_pack_tag 'NewItemForm', { item: @item } %>
+
+	<%= content_tag :div, 
+			id: 'item_details',
+			data:{
+		  		item: @item,
+		  		message: "testing message"
+			}.to_json do %>
+	<% end %> 
+<% end %>

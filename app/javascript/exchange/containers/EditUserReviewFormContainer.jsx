@@ -57,20 +57,17 @@ class EditUserReviewFormContainer extends Component {
     if (isSignedIn) {
       editUserReviewContent = 
         <div>
-          <Header as='h5' dividing>
-            Edit Review
-          </Header>
-            <Form className="edit-user-review-form" onSubmit={ this.handleSubmit }>
-              <Form.Field>
-                <label>Rating</label>
-                    <Rating icon='star' Rating={rating} maxRating={5} onRate={ this.handleRate }/>
-              </Form.Field>
-              <Form.Field>
-                <label>Comment</label>
-                <Form.Input type = 'comment' placeholder='Edit your review..' name='comment' value={ comment } onChange={this.handleChange} />
-              </Form.Field>
-              <Form.Button content='Edit' labelPosition='left' icon='edit'/>
-            </Form>
+          <Form className="edit-user-review-form" onSubmit={ this.handleSubmit }>
+            <Form.Field>
+              <label>Rating</label>
+                  <Rating icon='star' Rating={rating} maxRating={5} onRate={ this.handleRate }/>
+            </Form.Field>
+            <Form.Field>
+              <label>Comment</label>
+              <Form.TextArea type = 'comment' placeholder='Edit your review..' name='comment' value={ comment } onChange={this.handleChange} />
+            </Form.Field>
+            <Form.Button content='Edit' labelPosition='left' icon='edit'/>
+          </Form>
         </div>
     } else {
       editUserReviewContent = 
