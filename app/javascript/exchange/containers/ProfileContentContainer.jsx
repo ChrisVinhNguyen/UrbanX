@@ -42,9 +42,11 @@ class ProfileContentContainer extends Component {
               <a className={`item ${this.state.activeTab == "My_Items"? "active" :""}`} onClick = {() => this.handleOnClick("My_Items")} >
                 Items
               </a>
+              {this.props.viewingMyProfile ?
               <a className={`item ${this.state.activeTab == "My_Transactions"? "active" :""}`} onClick = {() => this.handleOnClick("My_Transactions")}>
                 Transactions
-              </a>
+              </a>:null
+              }
               <a className={`item ${this.state.activeTab == "Reviews"? "active" :""}`} onClick = {() => this.handleOnClick("Reviews")}>
                 Reviews
               </a>
