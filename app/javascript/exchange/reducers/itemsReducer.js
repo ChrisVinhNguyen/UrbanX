@@ -10,7 +10,8 @@ import {
   NEW_ITEM,
   NEW_TRANSACTION,
   UPDATE_TRANSACTION,
-  GET_MY_TRANSACTIONS_FOR_ITEM} 
+  GET_MY_TRANSACTIONS_FOR_ITEM,
+  SORT_ITEMS} 
 from '../actions/types';
 
 
@@ -26,7 +27,8 @@ const initialState = {
   item_id: null,
   filtered_transactions: [],
   item_details: [], 
-  my_transactions_for_current_item: []
+  my_transactions_for_current_item: [],
+  cur_sort: ''
 }
 
 export default function(state = initialState, action) {
@@ -93,6 +95,12 @@ export default function(state = initialState, action) {
         ...state,
         item_id: action.item_id,
         item_details: action.item_details
+      }
+    case SORT_ITEMS:
+      return {
+        ...state,
+        cur_sort: action.cur_sort,
+        filtered_items: action.sorted_items
       }
     default:
       return state;

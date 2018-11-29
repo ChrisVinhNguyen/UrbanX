@@ -10,7 +10,8 @@ import { FILTER_ITEMS,
         NEW_TRANSACTION,
         UPDATE_TRANSACTION,
         DELETE_TRANSACTION,
-        GET_MY_TRANSACTIONS_FOR_ITEM } from './types';
+        GET_MY_TRANSACTIONS_FOR_ITEM,
+        SORT_ITEMS } from './types';
 
 
 import axios from 'axios';
@@ -265,6 +266,20 @@ export const newItem = (item) => dispatch => {
   })
 }
 
+const sortItemsR = (sorted_items, cur_sort) => {
+  return{
+    type: 'SORT_ITEMS',
+    cur_sort: cur_sort,
+    sorted_items: sorted_items
+  }
+}
+
+export const sortItems = (sorted_items, cur_sort) => {
+  return function (dispatch, getState) {
+    console.log(cur_sort)
+    return dispatch(sortItemsR(sorted_items, cur_sort))
+  }
+}
 
 
 const getCSRFToken = () => {
