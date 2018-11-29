@@ -7,12 +7,12 @@ import { Link } from "react-router-dom";
 import pic from '../images/macbook.jpg';
 import ActiveStorageProvider from 'react-activestorage-provider';
 import { DirectUpload } from "activestorage"
-import "../../utils/direct_uploads.js"
+// import "../../utils/direct_uploads.js"
 import Dropzone from 'react-dropzone'
 
 
 
-export class UploadButton extends Component {
+export class UploadButtonDropzoneReact extends Component {
 
     constructor(props){
       super(props);
@@ -125,4 +125,4 @@ export class UploadButton extends Component {
 }
 
 
-export default UploadButton;
+export default UploadButtonDropzoneReact;
