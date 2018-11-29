@@ -9,8 +9,8 @@ class ItemsController < ApplicationController
 
       @item.user_id = @current_user.id
       @item.status = "available"
-
       @item.date_posted = DateTime.now
+      
       if @item.save
           redirect_to @item
       else

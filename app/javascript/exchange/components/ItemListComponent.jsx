@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import ItemSummary from './ItemSummary'
+import ItemSortDropdownContainer from '../containers/ItemSortDropdownContainer'
 
 
 class ItemListComponent extends Component {
@@ -19,6 +20,7 @@ class ItemListComponent extends Component {
 
     return (
       <div className="item-list-component">
+        <ItemSortDropdownContainer />
         <Grid columns={3} divided>
           <Grid.Row>
             {items}
@@ -34,7 +36,8 @@ ItemListComponent.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  filtered_items: state.items.filtered_items
+  filtered_items: state.items.filtered_items,
+  cur_sort: state.items.cur_sort
 });
 
 export default connect(mapStateToProps, {})(ItemListComponent);
