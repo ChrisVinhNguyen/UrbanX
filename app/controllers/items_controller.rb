@@ -1,15 +1,11 @@
 class ItemsController < ApplicationController
   def create
       puts("creat in itemcontroller")
-      # puts(params)
-      # puts(item_params)
     
-      
     if user_signed_in?
-      puts ("-----------")
     
       @item = Item.new(item_params)
-      puts ("-----------")
+
 
       @item.user_id = @current_user.id
       @item.status = "available"
@@ -113,20 +109,22 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
-    #@images = []
-    # if @item.images.attached?
-    #     @item.images.each do |image|
-    #       @images.push(url_for(image))
-    #     end   
-    # end
-    # item_details= @item.attributes
-    # item_details[:images]= @images
-    item_details= @item.attributes
-    @image
-    if @item.image.attached?
-          @image = url_for(@item.image)
-          item_details[:image]= @image
+    @images = []
+    if @item.images.attached?
+        @item.images.each do |image|
+          @images.push(url_for(image))
+        end   
     end
+    item_details= @item.attributes
+    item_details[:images]= @images
+
+    # item_details= @item.attributes
+    # @image
+    # if @item.image.attached?
+    #       @image = url_for(@item.image)
+    #       puts("passing image url")
+    #       item_details[:image]= @image
+    # end
     
     
 
@@ -190,6 +188,6 @@ class ItemsController < ApplicationController
 
 private
   def item_params
-      params.require(:item).permit(:name, :description, :category,  :quantity,  :condition, :value, :user_id, :status , :image ) #images: []
+      params.require(:item).permit(:name, :description, :category,  :quantity,  :condition, :value, :user_id, :status , images: [] ) #
     end
 end
