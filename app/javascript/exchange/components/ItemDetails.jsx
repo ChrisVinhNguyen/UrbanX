@@ -30,11 +30,11 @@ class ItemDetails extends Component {
 
   handleBorrow(e) {
     let transaction = {item_id: this.props.item_id, status:'pending'};
-    this.props.newTransaction(transaction, this.props.currentUserId);
+    this.props.newTransaction(transaction, this.props.currentUserId, this.props.cur_status);
   }
 
   handleCancel(e, transaction) {
-    this.props.deleteTransaction(transaction, this.props.currentUserId);
+    this.props.deleteTransaction(transaction, this.props.currentUserId, this.props.cur_status);
   }
 
   render() {
@@ -184,6 +184,7 @@ const mapStateToProps = state => ({
   // filtered_transactions: state.items.filtered_transactions,
   currentUserId: state.user.user_info.user_profile_id,
   my_transactions_for_current_item: state.items.my_transactions_for_current_item,
+  cur_status: state.items.cur_status,
   is_signed_in: state.user.is_signed_in
 });
 

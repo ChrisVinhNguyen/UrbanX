@@ -6,6 +6,8 @@ import { updateTransaction, deleteTransaction } from '../actions/itemsActions'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import '../stylesheets/transaction-summary.scss';
+
 import pic from '../images/macbook.jpg';
 
 
@@ -31,18 +33,18 @@ class TransactionSummary extends Component {
   handleLend(e, transaction) {
     transaction.expiry_date = this.state.due_date;
     transaction.status = 'lent';
-    this.props.updateTransaction(transaction, this.props.currentUserId);
+    this.props.updateTransaction(transaction, this.props.currentUserId, this.props.cur_status);
 
   }
 
   handleReturn(e, transaction) {
     transaction.status = 'completed';
-    this.props.updateTransaction(transaction, this.props.currentUserId);
+    this.props.updateTransaction(transaction, this.props.currentUserId, this.props.cur_status);
 
   }
 
   handleDelete(e, transaction) {
-    this.props.deleteTransaction(transaction, this.props.currentUserId);
+    this.props.deleteTransaction(transaction, this.props.currentUserId, this.props.cur_status);
   }
 
   render() {
@@ -54,6 +56,7 @@ class TransactionSummary extends Component {
     let returnDate = null;
     let lendDate = null;
     let dueDate = null;
+    let dateContainer = null;
     let due_date = this.state.due_date;
 
 
@@ -70,6 +73,14 @@ class TransactionSummary extends Component {
                     <p>Return Date: {String(this.props.transaction.return_date).split('T')[0]} </p>
                     );
       }
+
+      dateContainer = (
+                        <div className="right-date">
+                          {lendDate}
+                          {dueDate}
+                          {returnDate}
+                        </div>
+                      )
     }
 
     if (this.props.transaction.status == 'pending' && this.props.transaction.lender_id == this.props.currentUserId) {
@@ -108,6 +119,7 @@ class TransactionSummary extends Component {
                       );
     }
 
+
     return (
       
       <Item key={ this.props.transaction.id }>
@@ -118,14 +130,19 @@ class TransactionSummary extends Component {
             <strong>{this.props.transaction.item_name}</strong>
           </Item.Header>
           <Item.Meta>
-            <p>Status: {this.props.transaction.status} </p>
           </Item.Meta>
           <Item.Description>
-            <p>Lender: {this.props.transaction.lender_name} </p>
-            <p>Borrower: {this.props.transaction.borrower_name} </p>
-            {lendDate}
-            {dueDate}
-            {returnDate}
+            <p>
+              Status: {this.props.transaction.status == 'lent' ? 'In progress'
+               : this.props.transaction.status.charAt(0).toUpperCase() + this.props.transaction.status.slice(1)} 
+              {dateContainer}
+            </p>
+            <p>
+              Lender: {this.props.transaction.lender_name} 
+            </p>
+            <p>
+              Borrower: {this.props.transaction.borrower_name}
+            </p>
 
             {cancelButton}
             {returnButton}
@@ -144,4 +161,8 @@ TransactionSummary.propTypes = {
   deleteTransaction: PropTypes.func.isRequired
 }
 
-export default connect(()=> { return {} }, { updateTransaction, deleteTransaction })(TransactionSummary);
+const mapStateToProps = state => ({
+  cur_status: state.items.cur_status
+});
+
+export default connect(mapStateToProps, { updateTransaction, deleteTransaction })(TransactionSummary);
