@@ -11,7 +11,6 @@ import SignInButton from '../components/SignInButton';
 import { Dropdown, Image } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
 
-
 class HeaderProfileContainer extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +21,7 @@ class HeaderProfileContainer extends Component {
     this.props.fetchUser();
   }
 
-  onHandleLogoutClick(e) {
+  onHandleLogoutClick() {
     this.props.signOutUser();
   }
 
@@ -36,19 +35,9 @@ class HeaderProfileContainer extends Component {
         <div>
           <Dropdown icon={null} trigger={trigger} direction='left' floating labeled button pointing>
             <Dropdown.Menu>
-              <Dropdown.Item>
-                <Link to={`/items/add/new`}>
-                  Add New Item
-                </Link>
-              </Dropdown.Item>
-              <Dropdown.Item>
-                <Link to={`/user_profiles_show/${this.props.user_info.user_profile_id}`}>
-                  View Profile
-                </Link>
-              </Dropdown.Item>
-              <Dropdown.Item onClick={ this.onHandleLogoutClick }>
-                Logout
-              </Dropdown.Item>
+              <Dropdown.Item as={Link} to='/items/add/new' icon="add" text="Add New Item" />
+              <Dropdown.Item as={Link} to={`/user_profiles_show/${this.props.user_info.user_profile_id}`} icon="user" text="View Profile" />
+              <Dropdown.Item as={Link} to='/' icon="log out" text="Logout" onClick={ this.onHandleLogoutClick } />
             </Dropdown.Menu>
           </Dropdown>
         </div>;

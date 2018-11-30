@@ -37,6 +37,7 @@ yarn-debug.log*
 /config/environments/development.rb
 .env 
 Procfile
+/public/packs/manifest.json
 
 # Ignore Mac DS_Store files
 .DS_Store

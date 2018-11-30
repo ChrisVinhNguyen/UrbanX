@@ -11,7 +11,7 @@ import { DirectUpload } from "activestorage"
 import Dropzone from 'react-dropzone'
 
 
-export class UploadButton extends Component {
+export class UploadMultipleButton extends Component {
 
     constructor(props){
       super(props);
@@ -153,4 +153,4 @@ export class UploadButton extends Component {
 
 
 
-export default UploadButton;
+export default UploadMultipleButton;

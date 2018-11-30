@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id                     :bigint(8)        not null, primary key
+#  admin                  :boolean          default(FALSE)
 #  current_sign_in_at     :datetime
 #  current_sign_in_ip     :inet
 #  email                  :string           default(""), not null
@@ -27,6 +28,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 	has_one :user_profile
 	has_many :items
-	has_many :transactions
+	has_many :transactions, foreign_key: :borrower_id, foreign_key: :lender_id
 
 end
