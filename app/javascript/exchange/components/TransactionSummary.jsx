@@ -33,18 +33,18 @@ class TransactionSummary extends Component {
   handleLend(e, transaction) {
     transaction.expiry_date = this.state.due_date;
     transaction.status = 'lent';
-    this.props.updateTransaction(transaction, this.props.currentUserId);
+    this.props.updateTransaction(transaction, this.props.currentUserId, this.props.cur_status);
 
   }
 
   handleReturn(e, transaction) {
     transaction.status = 'completed';
-    this.props.updateTransaction(transaction, this.props.currentUserId);
+    this.props.updateTransaction(transaction, this.props.currentUserId, this.props.cur_status);
 
   }
 
   handleDelete(e, transaction) {
-    this.props.deleteTransaction(transaction, this.props.currentUserId);
+    this.props.deleteTransaction(transaction, this.props.currentUserId, this.props.cur_status);
   }
 
   render() {
@@ -119,6 +119,7 @@ class TransactionSummary extends Component {
                       );
     }
 
+
     return (
       
       <Item key={ this.props.transaction.id }>
@@ -132,7 +133,8 @@ class TransactionSummary extends Component {
           </Item.Meta>
           <Item.Description>
             <p>
-              Status: {this.props.transaction.status} 
+              Status: {this.props.transaction.status == 'lent' ? 'In progress'
+               : this.props.transaction.status.charAt(0).toUpperCase() + this.props.transaction.status.slice(1)} 
               {dateContainer}
             </p>
             <p>
@@ -159,4 +161,8 @@ TransactionSummary.propTypes = {
   deleteTransaction: PropTypes.func.isRequired
 }
 
-export default connect(()=> { return {} }, { updateTransaction, deleteTransaction })(TransactionSummary);
+const mapStateToProps = state => ({
+  cur_status: state.items.cur_status
+});
+
+export default connect(mapStateToProps, { updateTransaction, deleteTransaction })(TransactionSummary);
