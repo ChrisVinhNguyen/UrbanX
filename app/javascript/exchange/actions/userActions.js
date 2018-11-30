@@ -81,6 +81,20 @@ export const signOutUser = () => dispatch => {
   })
 }
 
+export const sendForgotPasswordEmail = (userData) => dispatch => {
+  getCSRFToken();
+  axios.post('/users/password',
+  {
+    user: userData
+  })
+  .then(function(response){
+    console.log(response);
+  })
+  .catch(function(error){
+    console.log(error);
+  })
+}
+
 // /user_profiles/:user_profile_id/user_reviews(.:format)
 
 export const getUserReviews = (reviewee_id = reviewee_id) => dispatch => {
