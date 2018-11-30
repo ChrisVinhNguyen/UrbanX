@@ -160,7 +160,7 @@ class ItemDetails extends Component {
         </Item.Extra>
       </Item.Content>
         </Item>
-        <ItemReviewsContainer current_viewed_item_id={this.props.match.params.id} test="test"/>
+        <ItemReviewsContainer current_viewed_item_id={this.props.match.params.id} item_owner={this.props.item_details.user_id}/>
           <p>
             Reviews
           </p>

@@ -52,7 +52,7 @@ class UserReview extends Component {
                   <div>
                     <Rating icon='star' rating={review.rating} maxRating={5} disabled />
                   </div>
-                  <div>{review.updated_at}</div>
+                  <div>{String(review.updated_at).split('T')[0]}</div>
                 </Comment.Metadata>
                 <Comment.Text>{review.comment}</Comment.Text>
                 {current_user_id == review.reviewer_id?

@@ -29,7 +29,7 @@ class ItemsReviewsContainer extends Component {
               <Header as='h3'>
         				Reviews
               </Header>
-              <ItemReview/> 
+              <ItemReview owner_id = {this.props.item_owner}/> 
             </div>
       		</Comment.Group>
           </Segment>
