@@ -36,10 +36,11 @@ class ItemReview extends Component {
     console.log(current_user_id)
     console.log(item_owner)
 
-    let cannotReview = false; 
+    let hasReviewed = false; 
+    let isOwner = false;
     let showEdit = this.state.showEdit;
     let reviews = this.props.current_viewed_item_reviews.map(review => {
-      if (review.owner_id == current_user_id){ cannotReview = true }
+      if (review.owner_id == current_user_id){ hasReviewed = true }
         {console.log(review.owner_id)}
         {console.log(current_user_id)}
         {console.log(item_owner)}
@@ -78,12 +79,11 @@ class ItemReview extends Component {
         );
       });
 
-    if(item_owner == current_user_id){cannotReview = true}
-    console.log(cannotReview)
+    if(item_owner == current_user_id){isOwner = true}
     return (
       <div>
         { reviews }
-        {cannotReview? null
+        {(hasReviewed || isOwner)? null
         :<CreateItemReviewFormContainer/>
         }
       </div>
