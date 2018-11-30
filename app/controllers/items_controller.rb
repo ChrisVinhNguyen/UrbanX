@@ -12,7 +12,8 @@ class ItemsController < ApplicationController
       @item.date_posted = DateTime.now
       
       if @item.save
-          redirect_to @item
+          #redirect_to @item
+          render json: @item.id
       else
         puts(@item.errors.full_messages)
         render :new

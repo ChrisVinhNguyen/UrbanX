@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { Button, Checkbox, Form } from 'semantic-ui-react'
 import axios from 'axios';
-import { newItem,getItem } from '../actions/itemsActions';
+import { newItem } from '../actions/itemsActions';
 import { connect } from 'react-redux';
-import { UploadMultipleButton }  from '../components/UploadMultipleButton.js'
+import { UploadButton }  from '../components/UploadButton.js'
 
-class ItemCreateFormContainer extends Component {
+class ItemEditFormContainer extends Component {
   constructor() {
     super();
     this.state = {
@@ -17,6 +17,7 @@ class ItemCreateFormContainer extends Component {
       value: '',
       user_id: '',
       images: []
+
 
     };
 
@@ -33,7 +34,7 @@ class ItemCreateFormContainer extends Component {
     let item = this.state;
     item.user_id =this.props.currentUserId;
     // this.props.newItem(item);
-
+    
     const formData = new FormData();
     // formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
     formData.append('item[name]', this.state.name);
@@ -52,7 +53,6 @@ class ItemCreateFormContainer extends Component {
     //     console.log(pair[0]+ ', ' + pair[1]); 
     // }
     // debugger
-    let newItemId 
     $.ajax({
       url:'/items',
       method: 'POST',
@@ -63,10 +63,10 @@ class ItemCreateFormContainer extends Component {
             'X-CSRFToken': $('meta[name="token"]').attr('content')
         }
     }).then(
-    (response) => this.props.history.push('/items_lists/' + response)
+    (response) => console.log(response.message),
+    (response) => console.log(response.responseJSON)
     );
   }
-
   updateItemState(files){
     this.state.images = files
     console.log(this.state.images)
@@ -105,7 +105,7 @@ class ItemCreateFormContainer extends Component {
             <label>Value</label>
             <Form.Input placeholder='Value' name='value' value={ value } onChange={ this.handleChange }  width={10} />
           </Form.Field>
-          <UploadMultipleButton updateItemState={this.updateItemState}/>
+          <UploadButton updateItemState={this.updateItemState}/>
           <Form.Button content='Submit' />
         </Form>
         
@@ -114,4 +114,4 @@ class ItemCreateFormContainer extends Component {
   }
 }
 
-export default connect(() => { return {} }, { newItem, getItem })(ItemCreateFormContainer)
+export default connect(() => { return {} }, { newItem })(ItemEditFormContainer)
