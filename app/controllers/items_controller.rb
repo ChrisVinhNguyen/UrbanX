@@ -26,8 +26,9 @@ class ItemsController < ApplicationController
   end
 
   def filter
+    search_value = params[:search]
     if (params[:cur_category]=="All")
-      filtered_items = Item.where(status: "available")
+      filtered_items = Item.where("name ilike ? AND status = ?", "%#{search_value}%","available")
     else
       filtered_items = Item.where(category: params[:cur_category], status: "available")
     end

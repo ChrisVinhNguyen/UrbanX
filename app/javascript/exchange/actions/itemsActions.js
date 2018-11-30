@@ -19,16 +19,18 @@ import {
 
 import axios from 'axios';
 
-export const filterItems = (cur_category, cur_sort) => dispatch => {
+export const filterItems = (cur_category, cur_sort, cur_search_value) => dispatch => {
   axios.get('/items/filter', {
     params: {
-      cur_category: cur_category
+      cur_category: cur_category,
+      search: cur_search_value
     }
   })
   .then(function(response){
     dispatch({
       type: FILTER_ITEMS,
       cur_category: cur_category,
+      search_value: cur_search_value,
       filtered_items: response.data.filtered_items,
       original_list: response.data.filtered_items
     })

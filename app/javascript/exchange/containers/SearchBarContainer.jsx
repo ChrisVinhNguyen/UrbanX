@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
-import faker from 'faker'
 import _ from 'lodash'
 import { Search, Grid } from 'semantic-ui-react'
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import { searchItems } from '../actions/itemsActions';
-
-const source = _.times(20, () => ({
-  title: faker.company.companyName(),
-  description: faker.company.catchPhrase(),
-  image: faker.internet.avatar()
-}))
+import { filterItems, searchItems } from '../actions/itemsActions';
 
 
 class SearchBarContainer extends Component {
@@ -36,6 +30,7 @@ class SearchBarContainer extends Component {
 
   handleResultSelect(e, { result }) {
     this.setState({ value: result.title });
+    this.props.filterItems('All', '', result.title)
   }
 
   handleSearchChange(e, { value }){
@@ -60,13 +55,13 @@ class SearchBarContainer extends Component {
         <Grid.Column>
           <Search
             className="header-search"
-            loading={isLoading}
-            onResultSelect={this.handleResultSelect}
-            onSearchChange={_.debounce(this.handleSearchChange, 500, { leading: true })}
-            results={this.props.filtered_item_names_for_search}
-            value={value}
+            loading={ isLoading }
+            onResultSelect={ this.handleResultSelect }
+            onSearchChange={ _.debounce(this.handleSearchChange, 500, { leading: true }) }
+            results={ this.props.filtered_item_names_for_search }
+            value={ value }
             fluid
-            {...this.props}
+            { ...this.props }
           />
         </Grid.Column>
       </Grid>
@@ -74,8 +69,14 @@ class SearchBarContainer extends Component {
   }
 }
 
+SearchBarContainer.propTypes = {
+  filterItems: PropTypes.func.isRequired,
+  searchItems: PropTypes.func.isRequired,
+  filtered_item_names_for_search: PropTypes.array.isRequired
+}
+
 const mapStateToProps = state => ({
   filtered_item_names_for_search: state.items.filtered_item_names_for_search
 });
 
-export default connect(mapStateToProps, { searchItems })(SearchBarContainer);
+export default connect(mapStateToProps, { filterItems, searchItems })(SearchBarContainer);

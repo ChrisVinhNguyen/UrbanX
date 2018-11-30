@@ -40,6 +40,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         cur_category: action.cur_category,
+        search_value: action.cur_search_value,
         filtered_items: action.filtered_items,
         original_list: action.original_list
       }
