@@ -1,24 +1,25 @@
-import { FILTER_ITEMS,
-        GET_MY_ITEMS,
-        GET_ITEM,
-        NEW_ITEM,
-        GET_ITEM_REVIEWS,
-        DELETE_ITEM_REVIEW, 
-        NEW_ITEM_REVIEW,
-        EDIT_ITEM_REVIEW,
-        GET_MY_TRANSACTIONS,
-        NEW_TRANSACTION,
-        UPDATE_TRANSACTION,
-        DELETE_TRANSACTION,
-        GET_MY_TRANSACTIONS_FOR_ITEM,
-        SORT_ITEMS } from './types';
+import {
+  FILTER_ITEMS,
+  SEARCH_ITEMS,
+  GET_MY_ITEMS,
+  GET_ITEM,
+  NEW_ITEM,
+  GET_ITEM_REVIEWS,
+  DELETE_ITEM_REVIEW,
+  NEW_ITEM_REVIEW,
+  EDIT_ITEM_REVIEW,
+  GET_MY_TRANSACTIONS,
+  NEW_TRANSACTION,
+  UPDATE_TRANSACTION,
+  DELETE_TRANSACTION,
+  GET_MY_TRANSACTIONS_FOR_ITEM,
+  SORT_ITEMS
+} from './types';
 
 
 import axios from 'axios';
 
-export const filterItems = (cur_category=cur_category, cur_sort=cur_sort) => dispatch => {
-  let that = this
-
+export const filterItems = (cur_category, cur_sort) => dispatch => {
   axios.get('/items/filter', {
     params: {
       cur_category: cur_category
@@ -40,7 +41,25 @@ export const filterItems = (cur_category=cur_category, cur_sort=cur_sort) => dis
   })
 }
 
-export const getItemReviews = (current_viewed_item_id = current_viewed_item_id) => dispatch => {
+export const searchItems = (searchValue) => dispatch => {
+  axios.get('/items/search', {
+    params: {
+      search: searchValue
+    }
+  })
+  .then(function(response){
+    dispatch({
+      type: SEARCH_ITEMS,
+      search_value: searchValue,
+      filtered_item_names_for_search: response.data.searched_item_names
+    })
+  })
+  .catch(function(error){
+    console.log(error);
+  })
+}
+
+export const getItemReviews = (current_viewed_item_id) => dispatch => {
   console.log(current_viewed_item_id);
   axios.get('/items/' + current_viewed_item_id + '/item_reviews', {
     params: {

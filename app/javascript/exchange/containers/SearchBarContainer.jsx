@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import faker from 'faker'
 import _ from 'lodash'
 import { Search, Grid } from 'semantic-ui-react'
+import { connect } from 'react-redux';
+
+import { searchItems } from '../actions/itemsActions';
 
 const source = _.times(20, () => ({
   title: faker.company.companyName(),
@@ -15,7 +18,6 @@ class SearchBarContainer extends Component {
     super(props);
     this.state = {
       isLoading: false,
-      results: [],
       value: ''
     }
 
@@ -42,18 +44,16 @@ class SearchBarContainer extends Component {
     setTimeout(() => {
       if (this.state.value.length < 1) return this.resetComponent()
 
-      const re = new RegExp(_.escapeRegExp(this.state.value), 'i')
-      const isMatch = result => re.test(result.title)
+      this.props.searchItems(this.state.value)
 
       this.setState({
         isLoading: false,
-        results: _.filter(source, isMatch),
       })
     }, 300)
   }
 
   render() {
-    const { isLoading, value, results } = this.state
+    const { isLoading, value } = this.state
 
     return (
       <Grid className="header-search-container">
@@ -63,7 +63,7 @@ class SearchBarContainer extends Component {
             loading={isLoading}
             onResultSelect={this.handleResultSelect}
             onSearchChange={_.debounce(this.handleSearchChange, 500, { leading: true })}
-            results={results}
+            results={this.props.filtered_item_names_for_search}
             value={value}
             fluid
             {...this.props}
@@ -74,4 +74,8 @@ class SearchBarContainer extends Component {
   }
 }
 
-export default SearchBarContainer;
+const mapStateToProps = state => ({
+  filtered_item_names_for_search: state.items.filtered_item_names_for_search
+});
+
+export default connect(mapStateToProps, { searchItems })(SearchBarContainer);
