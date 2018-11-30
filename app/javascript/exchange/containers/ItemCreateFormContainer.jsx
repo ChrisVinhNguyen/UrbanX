@@ -18,7 +18,6 @@ class ItemCreateFormContainer extends Component {
       user_id: '',
       images: []
 
-
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -67,6 +66,7 @@ class ItemCreateFormContainer extends Component {
     (response) => this.props.history.push('/items_lists/' + response)
     );
   }
+
   updateItemState(files){
     this.state.images = files
     console.log(this.state.images)
