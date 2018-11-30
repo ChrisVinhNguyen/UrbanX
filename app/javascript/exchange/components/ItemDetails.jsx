@@ -17,16 +17,9 @@ import pic from '../images/macbook.jpg';
 
 
 class ItemDetails extends Component {
+
   componentDidMount(){
     console.log("componentDidMount")
-    this.props.getItem(this.props.match.params.id)
-    this.props.getMyTransactionsForItem(this.props.match.params.id, this.props.currentUserId);
-    this.handleBorrow = this.handleBorrow.bind(this);
-    this.handleCancel = this.handleCancel.bind(this);
-  }
-
-  componentWillUpdate(){
-    console.log("componentWillUpdate")
     this.props.getItem(this.props.match.params.id)
     this.props.getMyTransactionsForItem(this.props.match.params.id, this.props.currentUserId);
     this.handleBorrow = this.handleBorrow.bind(this);
@@ -158,6 +151,7 @@ class ItemDetails extends Component {
 
 ItemDetails.propTypes = {
   getItem: PropTypes.func.isRequired,
+  item_details: PropTypes.object.isRequired,
   newTransaction: PropTypes.func.isRequired,
   deleteTransaction: PropTypes.func.isRequired,
   getMyTransactionsForItem: PropTypes.func.isRequired

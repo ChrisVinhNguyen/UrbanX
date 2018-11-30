@@ -62,6 +62,7 @@ export default function(state = initialState, action) {
         current_viewed_item_reviews: action.current_viewed_item_reviews
       }
     case GET_ITEM:
+      console.log("calling reducer")
       return {
         ...state,
         item_id: action.item_id,

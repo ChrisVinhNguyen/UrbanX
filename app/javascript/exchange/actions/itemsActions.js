@@ -112,7 +112,7 @@ export const deleteItemReview = (current_viewed_item_id, review_id) => dispatch 
 
 export const getItem = (item_id=item_id) => dispatch => {
   let that = this
-
+  console.log(item_id)
   axios.get('/items/' + item_id , {})
   .then(function(response){
     dispatch({
@@ -124,6 +124,7 @@ export const getItem = (item_id=item_id) => dispatch => {
   .catch(function(error){
     console.log(error);
   })
+  console.log(item_id)
 }
 
 export const getMyItems = (current_user_profile_id) => dispatch => {
