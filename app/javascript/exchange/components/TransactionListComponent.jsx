@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 import pic from '../images/macbook.jpg';
 import TransactionSummary from './TransactionSummary'
+import TransactionFilterContainer from '../containers/TransactionFilterContainer'
 
 class TransactionListComponent extends Component {
 
@@ -19,6 +20,7 @@ class TransactionListComponent extends Component {
     });
     return (
       <div className="body">
+        <TransactionFilterContainer currentUserId = { this.props.currentUserId } />
         <Item.Group divided>
           {transactions}
         </Item.Group>
