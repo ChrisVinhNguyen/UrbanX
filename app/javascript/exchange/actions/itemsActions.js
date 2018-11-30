@@ -1,33 +1,36 @@
-import { FILTER_ITEMS,
-        GET_MY_ITEMS,
-        GET_ITEM,
-        NEW_ITEM,
-        GET_ITEM_REVIEWS,
-        DELETE_ITEM_REVIEW, 
-        NEW_ITEM_REVIEW,
-        EDIT_ITEM_REVIEW,
-        GET_MY_TRANSACTIONS,
-        NEW_TRANSACTION,
-        UPDATE_TRANSACTION,
-        DELETE_TRANSACTION,
-        GET_MY_TRANSACTIONS_FOR_ITEM,
-        SORT_ITEMS } from './types';
+import {
+  FILTER_ITEMS,
+  SEARCH_ITEMS,
+  GET_MY_ITEMS,
+  GET_ITEM,
+  NEW_ITEM,
+  GET_ITEM_REVIEWS,
+  DELETE_ITEM_REVIEW,
+  NEW_ITEM_REVIEW,
+  EDIT_ITEM_REVIEW,
+  GET_MY_TRANSACTIONS,
+  NEW_TRANSACTION,
+  UPDATE_TRANSACTION,
+  DELETE_TRANSACTION,
+  GET_MY_TRANSACTIONS_FOR_ITEM,
+  SORT_ITEMS
+} from './types';
 
 
 import axios from 'axios';
 
-export const filterItems = (cur_category=cur_category, cur_sort=cur_sort) => dispatch => {
-  let that = this
-
+export const filterItems = (cur_category, cur_sort, cur_search_value) => dispatch => {
   axios.get('/items/filter', {
     params: {
-      cur_category: cur_category
+      cur_category: cur_category,
+      search: cur_search_value
     }
   })
   .then(function(response){
     dispatch({
       type: FILTER_ITEMS,
       cur_category: cur_category,
+      search_value: cur_search_value,
       filtered_items: response.data.filtered_items,
       original_list: response.data.filtered_items
     })
@@ -40,7 +43,25 @@ export const filterItems = (cur_category=cur_category, cur_sort=cur_sort) => dis
   })
 }
 
-export const getItemReviews = (current_viewed_item_id = current_viewed_item_id) => dispatch => {
+export const searchItems = (searchValue) => dispatch => {
+  axios.get('/items/search', {
+    params: {
+      search: searchValue
+    }
+  })
+  .then(function(response){
+    dispatch({
+      type: SEARCH_ITEMS,
+      search_value: searchValue,
+      filtered_item_names_for_search: response.data.searched_item_names
+    })
+  })
+  .catch(function(error){
+    console.log(error);
+  })
+}
+
+export const getItemReviews = (current_viewed_item_id) => dispatch => {
   console.log(current_viewed_item_id);
   axios.get('/items/' + current_viewed_item_id + '/item_reviews', {
     params: {
@@ -149,16 +170,21 @@ export const getMyItems = (current_user_profile_id) => dispatch => {
 
 }
 
-export const getMyTransactions = (current_user_profile_id) => dispatch => {
+export const getMyTransactions = (current_user_profile_id, cur_status) => dispatch => {
   let that = this
 
-  axios.get('/user_profiles/'+current_user_profile_id+'/transactions' , {})
+  axios.get('/user_profiles/'+current_user_profile_id+'/transactions' , {
+    params: {
+      cur_status: cur_status
+    }
+  })
   .then(function(response){
     console.log("inside getMyTransactions 11111111111111111111111111111111111111111")
-    console.log(response)
+    console.log(response.data.filtered_transactions)
     dispatch({
       type: GET_MY_TRANSACTIONS,
-      filtered_transactions: response.data.filtered_transactions
+      filtered_transactions: response.data.filtered_transactions,
+      cur_status: cur_status
     })
   })
   .catch(function(error){

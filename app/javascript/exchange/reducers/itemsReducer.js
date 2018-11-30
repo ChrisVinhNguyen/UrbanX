@@ -1,5 +1,6 @@
 import {
   FILTER_ITEMS,
+  SEARCH_ITEMS,
   GET_MY_ITEMS,
   GET_ITEM,
   GET_MY_TRANSACTIONS,
@@ -21,7 +22,7 @@ const initialState = {
   filtered_items: [],
   search_category: 'All',
   search_value: '',
-  filtered_items_for_search: [],
+  filtered_item_names_for_search: [],
   current_viewed_item_id: null,
   current_viewed_item_reviews: [],
   item_id: null,
@@ -29,7 +30,8 @@ const initialState = {
   item_details: [], 
   my_transactions_for_current_item: [],
   cur_sort: '',
-  original_list: []
+  original_list: [],
+  cur_status: 'All'
 }
 
 export default function(state = initialState, action) {
@@ -38,8 +40,15 @@ export default function(state = initialState, action) {
       return {
         ...state,
         cur_category: action.cur_category,
+        search_value: action.cur_search_value,
         filtered_items: action.filtered_items,
         original_list: action.original_list
+      }
+    case SEARCH_ITEMS:
+      return {
+        ...state,
+        search_value: action.search_value,
+        filtered_item_names_for_search: action.filtered_item_names_for_search,
       }
     case GET_ITEM_REVIEWS:
       return {
@@ -77,7 +86,8 @@ export default function(state = initialState, action) {
     case GET_MY_TRANSACTIONS:
       return {
         ...state,
-        filtered_transactions: action.filtered_transactions
+        filtered_transactions: action.filtered_transactions,
+        cur_status: action.cur_status
       }
     case NEW_TRANSACTION:
       return {

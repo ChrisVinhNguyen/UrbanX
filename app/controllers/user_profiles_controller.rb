@@ -70,20 +70,25 @@ class UserProfilesController < ApplicationController
   def transactions
 
     if user_signed_in?
-      puts params
-      puts '----'
       @user_profile = UserProfile.find(params[:id])
-      puts '==============3'
       if @user_profile.user == @current_user
-        filtered_transactions = Transaction.where(:lender_id => @user_profile.user_id)
+        if params[:cur_status] == 'All'
+          filtered_transactions = Transaction.where(:lender_id => @user_profile.user_id)
         .or(Transaction.where(:borrower_id => @user_profile.user_id))
+        else
+          filtered_transactions = Transaction.where("status = ? AND (lender_id = ? OR borrower_id = ?)", 
+          params[:cur_status], @user_profile.user_id, @user_profile.user_id)
+        end
+
         transactions_array = []
 
         filtered_transactions.each do |transaction|
           transaction_hash = transaction.attributes
           transaction_hash[:item_name] = Item.find(transaction.item_id).name
-          transaction_hash[:lender_name] = UserProfile.where(user_id:transaction.lender_id).first.first_name
-          transaction_hash[:borrower_name] = UserProfile.where(user_id:transaction.borrower_id).first.first_name
+          transaction_hash[:lender_name] = UserProfile.where(user_id:transaction.lender_id).first.first_name + ' ' +
+                                            UserProfile.where(user_id:transaction.lender_id).first.last_name
+          transaction_hash[:borrower_name] = UserProfile.where(user_id:transaction.borrower_id).first.first_name + ' ' +
+                                            UserProfile.where(user_id:transaction.borrower_id).first.last_name
 
           transactions_array.push(transaction_hash)
         end
