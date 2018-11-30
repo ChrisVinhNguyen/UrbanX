@@ -59,10 +59,23 @@ class TransactionFilterContainer extends Component {
         value: 'Completed'
       }
     ];
+    let cur_selected;
+    if (this.props.cur_status == 'All') {
+      cur_selected = sortOptions[0].value;
+    }
+    else if (this.props.cur_status == 'pending') {
+      cur_selected = sortOptions[1].value;
+    }
+    else if (this.props.cur_status == 'lent') {
+      cur_selected = sortOptions[2].value;
+    }
+    else if (this.props.cur_status == 'completed') {
+      cur_selected = sortOptions[3].value;
+    }
     return (
       <div>
         <p align="right">
-          <Dropdown selection defaultValue={sortOptions[0].value} direction="left" options={sortOptions} onChange={ this.handleSelect }/>
+          <Dropdown selection defaultValue={cur_selected} direction="left" options={sortOptions} onChange={ this.handleSelect }/>
         </p>
       </div>
     )
