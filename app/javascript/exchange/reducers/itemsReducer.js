@@ -29,7 +29,7 @@ const initialState = {
   filtered_transactions: [],
   item_details: [], 
   my_transactions_for_current_item: [],
-  cur_sort: '',
+  cur_sort: 'Default',
   original_list: [],
   cur_status: 'All'
 }
