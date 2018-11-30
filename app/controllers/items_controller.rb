@@ -1,7 +1,5 @@
 class ItemsController < ApplicationController
   def create
-      puts("creat in itemcontroller")
-    
     if user_signed_in?
     
       @item = Item.new(item_params)
@@ -28,8 +26,9 @@ class ItemsController < ApplicationController
   end
 
   def filter
+    search_value = params[:search]
     if (params[:cur_category]=="All")
-      filtered_items = Item.where(status: "available")
+      filtered_items = Item.where("name ilike ? AND status = ?", "%#{search_value}%","available")
     else
       filtered_items = Item.where(category: params[:cur_category], status: "available")
     end
@@ -91,17 +90,13 @@ class ItemsController < ApplicationController
 
 
   def search
-    @item_name = params[:item][:search]
-    #@items= Item.find(params[:item])
-    #@items = Item.where(name: @item_name)
-    @items = Item.where("name ilike ? AND status = ?", "%#{@item_name}%","available")
+    search_value = params[:search]
 
+    searched_item_names = Item.where("name ilike ? AND status = ?", "%#{search_value}%","available").pluck(:name)
+    searched_item_names_array = searched_item_names.map { |item_name| { title: item_name }}
+    unique_searched_item_names_array = searched_item_names_array.uniq
 
-    @items.each do |item|
-      puts item.name
-      puts item.description
-    end
-
+    render json: { "searched_item_names" => unique_searched_item_names_array }.to_json
   end
 
   def index
@@ -189,6 +184,6 @@ class ItemsController < ApplicationController
 
 private
   def item_params
-      params.require(:item).permit(:name, :description, :category,  :quantity,  :condition, :value, :user_id, :status , images: [] ) #
-    end
+    params.require(:item).permit(:name, :description, :category,  :quantity,  :condition, :value, :user_id, :status , images: [] ) #
+  end
 end
