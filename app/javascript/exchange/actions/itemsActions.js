@@ -16,7 +16,7 @@ import { FILTER_ITEMS,
 
 import axios from 'axios';
 
-export const filterItems = (cur_category=cur_category) => dispatch => {
+export const filterItems = (cur_category=cur_category, cur_sort=cur_sort) => dispatch => {
   let that = this
 
   axios.get('/items/filter', {
@@ -31,6 +31,9 @@ export const filterItems = (cur_category=cur_category) => dispatch => {
       filtered_items: response.data.filtered_items,
       original_list: response.data.filtered_items
     })
+    dispatch(
+      sortItems(response.data.filtered_items, cur_sort)
+    )
   })
   .catch(function(error){
     console.log(error);
@@ -279,6 +282,8 @@ const sortItemsR = (sorted_items, cur_sort) => {
 export const sortItems = (items_list, cur_sort) => {
   return function (dispatch, getState) {
     let sorted_list;
+
+    console.log(items_list[0].date_posted);
     if (!cur_sort || cur_sort == '' || cur_sort == 'Default') {
       sorted_list = items_list;
     }
