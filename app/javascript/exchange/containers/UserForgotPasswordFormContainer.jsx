@@ -4,10 +4,10 @@ import axios from 'axios';
 import { Link } from "react-router-dom";
 import { Button, Checkbox, Form, Message } from 'semantic-ui-react';
 
-import { signInUser } from '../actions/userActions';
+import { sendForgotPasswordEmail } from '../actions/userActions';
 import { connect } from 'react-redux';
 
-import { EMAIL_MISSING, PASSWORD_MISSING } from '../constants/formErrors';
+import { EMAIL_MISSING, INVALID_EMAIL_FORMAT } from '../constants/formErrors';
 
 
 class UserForgotPasswordFormContainer extends Component {
@@ -15,9 +15,7 @@ class UserForgotPasswordFormContainer extends Component {
     super();
     this.state = {
       email: '',
-      password: '',
       emailError: false,
-      passwordError: false,
       errorMessages: [],
       formError: false
     };
@@ -46,34 +44,36 @@ class UserForgotPasswordFormContainer extends Component {
 
     let userData = {
       email: this.state.email,
-      password: this.state.password
     }
 
-    this.props.signInUser(userData);
-    this.props.history.push("/");
+    this.props.sendForgotPasswordEmail(userData);
   }
 
   handleFormErrors() {
     let errorMessages = [];
     this.setState({
       emailError: false,
-      passwordError: false,
     });
 
     if (this.state.email === '') {
       this.setState({ emailError: true })
       errorMessages.push(EMAIL_MISSING);
     }
-    if (this.state.password === '') {
-      this.setState({ passwordError: true })
-      errorMessages.push(PASSWORD_MISSING);
+    if (!this.validateEmail(this.state.email)) {
+      this.setState({ emailError: true })
+      errorMessages.push(INVALID_EMAIL_FORMAT);
     }
 
     return errorMessages;
+  };
+
+  validateEmail(email) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
   }
 
   render() {
-    const { email, password, emailError, passwordError, errorMessages, formError } = this.state
+    const { email, emailError, errorMessages, formError } = this.state
 
     const errorMessageContent = this.state.errorMessages.map(message => {
       const keyVal = uuid();
@@ -103,11 +103,11 @@ class UserForgotPasswordFormContainer extends Component {
             <Form.Input placeholder='bob.smith@gmail.com' name='email' value={ email } onChange={ this.handleChange }  width={10} error={ emailError } />
           </Form.Field>
           { errorMessages.length > 0 ? errorMessage : null }
-          <Form.Button content='Submit' />
+          <Form.Button content='Send Instructions' />
         </Form>
       </div>
     )
   }
 }
 
-export default connect(() => { return {} }, {})(UserForgotPasswordFormContainer);
+export default connect(() => { return {} }, { sendForgotPasswordEmail })(UserForgotPasswordFormContainer);

@@ -1,7 +1,7 @@
 // Generic Form Errors
 export const EMAIL_MISSING = 'Your email is missing';
 export const PASSWORD_MISSING = 'Your password is missing';
-export const INVALID_EMAIL = 'This is an invalid email';
+export const INVALID_EMAIL_FORMAT = 'This is an invalid email format';
 
 // Sign Up Form Errors
 export const PASSWORD_CONFIRMATION_MISSING = 'Your confirmation password is missing';

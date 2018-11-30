@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 
 import {
   EMAIL_MISSING,
+  INVALID_EMAIL_FORMAT,
   PASSWORD_MISSING,
   PASSWORD_CONFIRMATION_MISSING,
   PASSWORD_MISMATCH,
@@ -72,8 +73,10 @@ class UserSignUpFormContainer extends Component {
     if (this.state.email === '') {
       this.setState({ emailError: true });
       errorMessages.push(EMAIL_MISSING);
-    } else {
-      this.setState({ emailError: false });
+    }
+    if (!this.validateEmail(this.state.email)) {
+      this.setState({ emailError: true })
+      errorMessages.push(INVALID_EMAIL_FORMAT);
     }
     if (this.state.password === '') {
       this.setState({ passwordError: true });
@@ -93,6 +96,11 @@ class UserSignUpFormContainer extends Component {
     }
 
     return errorMessages;
+  }
+
+  validateEmail(email) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
   }
 
   render() {
