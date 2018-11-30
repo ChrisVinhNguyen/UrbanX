@@ -43,5 +43,20 @@ Rails.application.routes.draw do
   match 'site-map', to: 'root#index', via: :all
   match 'contact-us', to: 'root#index', via: :all
   match 'faq', to: 'root#index', via: :all
+  
+  match 'items_list/:id', to: 'root#index', via: :all
+  match 'user_profiles_show/:id', to: 'root#index', via: :all
+  match 'users_sign_up', to: 'root#index', via: :all
+  match 'users_sign_in', to: 'root#index', via: :all
+  match 'users_forgot_password', to: 'root#index', via: :all
+  match 'user_profiles/new/profile', to: 'root#index', via: :all
+  match 'user_profiles_change/:id/edit', to: 'root#index', via: :all
+  match 'items_list/:id', to: 'root#index', via: :all
+  match 'items/add/new', to: 'root#index', via: :all
+
+
+
+
+
 
 end

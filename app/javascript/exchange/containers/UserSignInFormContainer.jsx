@@ -7,7 +7,7 @@ import { Button, Checkbox, Form, Message } from 'semantic-ui-react';
 import { signInUser } from '../actions/userActions';
 import { connect } from 'react-redux';
 
-import { EMAIL_MISSING, PASSWORD_MISSING } from '../constants/formErrors';
+import { EMAIL_MISSING, INVALID_EMAIL_FORMAT, PASSWORD_MISSING } from '../constants/formErrors';
 
 
 class UserSignInFormContainer extends Component {
@@ -64,12 +64,21 @@ class UserSignInFormContainer extends Component {
       this.setState({ emailError: true })
       errorMessages.push(EMAIL_MISSING);
     }
+    if (!this.validateEmail(this.state.email)) {
+      this.setState({ emailError: true })
+      errorMessages.push(INVALID_EMAIL_FORMAT);
+    }
     if (this.state.password === '') {
       this.setState({ passwordError: true })
       errorMessages.push(PASSWORD_MISSING);
     }
 
     return errorMessages;
+  }
+
+  validateEmail(email) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
   }
 
   render() {
