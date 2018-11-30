@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Button, Checkbox, Form } from 'semantic-ui-react'
 import axios from 'axios';
-import { newItem } from '../actions/itemsActions';
+import { newItem,getItem } from '../actions/itemsActions';
 import { connect } from 'react-redux';
-import { UploadButton }  from '../components/UploadButton.js'
+import { UploadMultipleButton }  from '../components/UploadMultipleButton.js'
 
 class ItemCreateFormContainer extends Component {
   constructor() {
@@ -34,7 +34,7 @@ class ItemCreateFormContainer extends Component {
     let item = this.state;
     item.user_id =this.props.currentUserId;
     // this.props.newItem(item);
-    
+
     const formData = new FormData();
     // formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
     formData.append('item[name]', this.state.name);
@@ -53,6 +53,7 @@ class ItemCreateFormContainer extends Component {
     //     console.log(pair[0]+ ', ' + pair[1]); 
     // }
     // debugger
+    let newItemId 
     $.ajax({
       url:'/items',
       method: 'POST',
@@ -63,8 +64,7 @@ class ItemCreateFormContainer extends Component {
             'X-CSRFToken': $('meta[name="token"]').attr('content')
         }
     }).then(
-    (response) => console.log(response.message),
-    (response) => console.log(response.responseJSON)
+    (response) => this.props.history.push('/items_lists/' + response)
     );
   }
   updateItemState(files){
@@ -105,7 +105,7 @@ class ItemCreateFormContainer extends Component {
             <label>Value</label>
             <Form.Input placeholder='Value' name='value' value={ value } onChange={ this.handleChange }  width={10} />
           </Form.Field>
-          <UploadButton updateItemState={this.updateItemState}/>
+          <UploadMultipleButton updateItemState={this.updateItemState}/>
           <Form.Button content='Submit' />
         </Form>
         
@@ -114,4 +114,4 @@ class ItemCreateFormContainer extends Component {
   }
 }
 
-export default connect(() => { return {} }, { newItem })(ItemCreateFormContainer)
+export default connect(() => { return {} }, { newItem, getItem })(ItemCreateFormContainer)
