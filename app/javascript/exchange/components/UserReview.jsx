@@ -37,7 +37,6 @@ class UserReview extends Component {
 
     let reviews = this.props.user_reviews.map(review => {
       if (review.reviewer_id == current_user_id){ hasReviewed = true }
-      if (review.reviewee_id == current_user_id){ isOwner = true }
       return (
         <div>
             <Comment>
@@ -73,11 +72,13 @@ class UserReview extends Component {
         </div>
       );
     });
+
+    if(this.props.reviewee_id == current_user_id){isOwner = true}
     return (
       <div>
         { reviews }
-        {!(hasReviewed || isOwner)? <CreateUserReviewFormContainer reviewee_id = {this.props.reviewee_id}/>
-        :null
+        { (hasReviewed || isOwner)? null
+        :<CreateUserReviewFormContainer reviewee_id = {this.props.reviewee_id}/>
         }
       </div>
     );
