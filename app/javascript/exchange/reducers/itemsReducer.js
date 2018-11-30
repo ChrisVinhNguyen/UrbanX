@@ -29,7 +29,8 @@ const initialState = {
   item_details: [], 
   my_transactions_for_current_item: [],
   cur_sort: '',
-  original_list: []
+  original_list: [],
+  cur_status: 'All'
 }
 
 export default function(state = initialState, action) {
@@ -76,7 +77,8 @@ export default function(state = initialState, action) {
     case GET_MY_TRANSACTIONS:
       return {
         ...state,
-        filtered_transactions: action.filtered_transactions
+        filtered_transactions: action.filtered_transactions,
+        cur_status: action.cur_status
       }
     case NEW_TRANSACTION:
       return {

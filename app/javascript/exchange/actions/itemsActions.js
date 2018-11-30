@@ -148,16 +148,21 @@ export const getMyItems = (current_user_profile_id) => dispatch => {
 
 }
 
-export const getMyTransactions = (current_user_profile_id) => dispatch => {
+export const getMyTransactions = (current_user_profile_id, cur_status) => dispatch => {
   let that = this
 
-  axios.get('/user_profiles/'+current_user_profile_id+'/transactions' , {})
+  axios.get('/user_profiles/'+current_user_profile_id+'/transactions' , {
+    params: {
+      cur_status: cur_status
+    }
+  })
   .then(function(response){
     console.log("inside getMyTransactions 11111111111111111111111111111111111111111")
-    console.log(response)
+    console.log(response.data.filtered_transactions)
     dispatch({
       type: GET_MY_TRANSACTIONS,
-      filtered_transactions: response.data.filtered_transactions
+      filtered_transactions: response.data.filtered_transactions,
+      cur_status: cur_status
     })
   })
   .catch(function(error){

@@ -21,7 +21,7 @@ class ProfileContentContainer extends Component {
 
   componentWillMount() {
     this.props.getMyItems(this.props.userProfileId);
-    this.props.getMyTransactions(this.props.userProfileId);
+    this.props.getMyTransactions(this.props.userProfileId, 'All');
     console.log(this.props.userProfileId)
     console.log("=============================")
   }
