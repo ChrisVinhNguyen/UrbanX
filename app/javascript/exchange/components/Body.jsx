@@ -12,6 +12,7 @@ import ContactUs from './ContactUs';
 import FAQ from './FAQ';
 
 import UserProfileEditForm from '../containers/UserProfileEditForm';
+import ItemDetailsContainer from '../containers/ItemDetailsContainer'
 import UserSignUpFormContainer from '../containers/UserSignUpFormContainer';
 import UserSignInFormContainer from '../containers/UserSignInFormContainer';
 import UserForgotPasswordFormContainer from '../containers/UserForgotPasswordFormContainer';
@@ -46,12 +47,12 @@ class Body extends Component {
         <Route path="/site-map" component={ SiteMap } />
         <Route path="/contact-us" component={ ContactUs } />
         <Route path="/faq" component={ FAQ } />
-        <Route path="/items_list/:id" exact component={ ItemDetails } />
+        <Route path="/items_list/:id" exact component={ ItemDetailsContainer } />
         <Route path="/items/add/new" exact component={ ItemCreateFormContainer } />
         <Route path="/items_list/:id/edit" component={ ItemEditFormContainer } />
         <Route path="/items/:item_id/delete_image" component= {ItemEditFormContainer} />
         <Route path="/items/edit/:item_id" component= {ItemEditFormContainer} />
-        <Route path="/items/delete/:item_id" component= {ItemDetails} />
+        <Route path="/items/delete/:item_id" component= {ItemDetailsContainer} />
       </div>
     );
   }
