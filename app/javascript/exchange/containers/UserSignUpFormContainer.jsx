@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { v4 as uuid } from 'uuid';
-import { Grid, Button, Checkbox, Form, Message } from 'semantic-ui-react'
+import { Grid, Button, Checkbox, Form, Message } from 'semantic-ui-react';
 import axios from 'axios';
 import { signUpUser } from '../actions/userActions';
 import { connect } from 'react-redux';
@@ -12,10 +12,13 @@ import {
   PASSWORD_MISSING,
   PASSWORD_CONFIRMATION_MISSING,
   PASSWORD_MISMATCH,
-  INVALID_PASSWORD_LENGTH
+  INVALID_PASSWORD_LENGTH,
+  DID_NOT_AGREE_TO_TERMS_AND_CONDITIONS
 } from '../constants/formErrors';
 
-import '../stylesheets/user-sign-up-form-container.scss'
+import TermsAndConditionsModalContent from '../components/TermsAndConditionsModalContent';
+
+import '../stylesheets/user-sign-up-form-container.scss';
 
 
 class UserSignUpFormContainer extends Component {
@@ -25,20 +28,32 @@ class UserSignUpFormContainer extends Component {
       email: '',
       password: '',
       password_confirmation: '',
+      agreeToTermsAndConditions: false,
       emailError: false,
       passwordError: false,
       password_confirmationError: false,
+      agreeToTermsAndConditionsError: false,
       errorMessages: [],
       formError: false
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
+    this.handleModalAgreement = this.handleModalAgreement.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleFormErrors = this.handleFormErrors.bind(this);
   }
 
   handleChange(e, { name, value }) {
-    this.setState({ [name]: value })
+    this.setState({ [name]: value });
+  }
+
+  handleToggle() {
+    this.setState({ agreeToTermsAndConditions: !this.state.agreeToTermsAndConditions });
+  }
+
+  handleModalAgreement(agreeToTermsAndConditions) {
+    this.setState({ agreeToTermsAndConditions: agreeToTermsAndConditions });
   }
 
   handleSubmit(e) {
@@ -69,7 +84,8 @@ class UserSignUpFormContainer extends Component {
     this.setState({
       emailError: false,
       passwordError: false,
-      password_confirmationError: false
+      password_confirmationError: false,
+      agreeToTermsAndConditionsError: false
     });
 
     if (this.state.email === '') {
@@ -96,6 +112,10 @@ class UserSignUpFormContainer extends Component {
       this.setState({ passwordError: true, password_confirmationError: true });
       errorMessages.push(PASSWORD_MISMATCH);
     }
+    if (this.state.agreeToTermsAndConditions != true ) {
+      this.setState({ agreeToTermsAndConditionsError: true });
+      errorMessages.push(DID_NOT_AGREE_TO_TERMS_AND_CONDITIONS);
+    }
 
     return errorMessages;
   }
@@ -106,7 +126,18 @@ class UserSignUpFormContainer extends Component {
   }
 
   render() {
-    const { email, password, password_confirmation, emailError, passwordError, password_confirmationError, errorMessages, formError } = this.state;
+    const {
+      email,
+      password,
+      password_confirmation,
+      agreeToTermsAndConditions,
+      emailError,
+      passwordError,
+      password_confirmationError,
+      agreeToTermsAndConditionsError,
+      errorMessages,
+      formError
+    } = this.state;
 
     const errorMessageContent = this.state.errorMessages.map(message => {
       const keyVal = uuid();
@@ -146,10 +177,16 @@ class UserSignUpFormContainer extends Component {
                   <label>Password Confirmation</label>
                   <Form.Input type='password'  name='password_confirmation' value={ password_confirmation } onChange={ this.handleChange } error={ password_confirmationError } />
                 </Form.Field>
-                <Form.Field>
-                  <Checkbox />
-                  I agree to the 
-                  <a className="sign-up-form-terms-of-service">Terms and Conditions</a>
+                <Form.Field error={ agreeToTermsAndConditionsError }>
+                  <Checkbox
+                    name='agreeToTermsAndConditions'
+                    checked={ agreeToTermsAndConditions }
+                    onChange={ this.handleToggle }
+                    label={
+                      <label>I agree to the </label>
+                    }
+                  />
+                  <TermsAndConditionsModalContent handleModalAgreement={ this.handleModalAgreement } />
                 </Form.Field>
                 { errorMessages.length > 0 ? errorMessage : null }
                 <Form.Button content='Submit' />

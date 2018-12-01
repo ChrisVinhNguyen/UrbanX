@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { v4 as uuid } from 'uuid';
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import { Button, Checkbox, Form, Message } from 'semantic-ui-react';
+import { Button, Checkbox, Form, Message, Grid } from 'semantic-ui-react';
 
 import { sendForgotPasswordEmail } from '../actions/userActions';
 import { connect } from 'react-redux';
 
 import { EMAIL_MISSING, INVALID_EMAIL_FORMAT } from '../constants/formErrors';
+
+import '../stylesheets/user-forgot-password-form-container.scss';
 
 
 class UserForgotPasswordFormContainer extends Component {
@@ -95,16 +97,22 @@ class UserForgotPasswordFormContainer extends Component {
     );
 
     return (
-      <div className="sign-in-form-container">
-        <h1 className="sign-in-form-title">Forgot Password?</h1>
-        <Form className="sign-in-form" onSubmit={ this.handleSubmit } error={ formError }>
-          <Form.Field>
-            <label>Email</label>
-            <Form.Input placeholder='bob.smith@gmail.com' name='email' value={ email } onChange={ this.handleChange }  width={10} error={ emailError } />
-          </Form.Field>
-          { errorMessages.length > 0 ? errorMessage : null }
-          <Form.Button content='Send Instructions' />
-        </Form>
+      <div className="forgot-password-form-container">
+        <h1 className="forgot-password-form-title">Forgot Password?</h1>
+        <Grid>
+          <Grid.Row centered>
+            <Grid.Column width={6}>
+              <Form className="forgot-password-form" onSubmit={ this.handleSubmit } error={ formError }>
+                <Form.Field>
+                  <label>Email</label>
+                  <Form.Input placeholder='bob.smith@gmail.com' name='email' value={ email } onChange={ this.handleChange } error={ emailError } />
+                </Form.Field>
+                { errorMessages.length > 0 ? errorMessage : null }
+                <Form.Button content='Send Instructions' />
+              </Form>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       </div>
     )
   }
