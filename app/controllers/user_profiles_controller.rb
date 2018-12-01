@@ -54,17 +54,19 @@ class UserProfilesController < ApplicationController
   end
 
   def show
-    @user_profile = UserProfile.find(params[:id])
-    @user_reviews = UserReview.where(reviewee_id: @user_profile.user_id)
-    @contact_names = []
-    @user_profile.contact_list.each do |contact_id|
-      contact_profile = UserProfile.find(contact_id)
-      @contact_names.insert(contact_id.to_i,contact_profile.first_name + " " + contact_profile.last_name)
+    # gets used inside erb files
+    # @user_profile = UserProfile.find(params[:id])
+    # @user_reviews = UserReview.where(reviewee_id: @user_profile.user_id)
+
+    context_params = {
+      profile_id: params[:id]
+    }
+
+    result = GetUserProfileInformation.call(context_params)
+
+    if result.success?
+      render json: result.profile_info_hash
     end
-    profile_hash = @user_profile.attributes
-    profile_hash[:contact_list] = @contact_names
-    profile_hash[:email] = @user_profile.user.email
-    render json: profile_hash
   end
 
   def transactions
