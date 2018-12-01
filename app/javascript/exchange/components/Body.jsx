@@ -3,7 +3,6 @@ import ItemListComponent from './ItemListComponent'
 import { Route } from "react-router-dom";
 
 import UserProfile from './UserProfile';
-import ItemDetails from './ItemDetails';
 import About from './About';
 import TermsOfService from './TermsOfService';
 import PrivacyPolicy from './PrivacyPolicy';
