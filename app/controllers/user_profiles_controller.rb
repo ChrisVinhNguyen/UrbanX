@@ -67,6 +67,10 @@ class UserProfilesController < ApplicationController
     result = GetUserProfileInformation.call(context_params)
 
     if result.success?
+      if result.user_profile.image.attached?
+        result.profile_info_hash[:image] = url_for(result.user_profile.image)
+        result.profile_info_hash[:image_attachment_id] = result.user_profile.image.id
+      end
       render json: result.profile_info_hash
     end
   end
