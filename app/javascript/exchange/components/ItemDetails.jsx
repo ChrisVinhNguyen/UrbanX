@@ -46,6 +46,9 @@ class ItemDetails extends Component {
     (response) => console.log(response.message),
     (response) => console.log(response.responseJSON)
     );
+
+    console.log(this.props.match.params.id)
+    this.props.history.push("/")
   }
 
   render() {
@@ -56,6 +59,7 @@ class ItemDetails extends Component {
     console.log("About to print item details")
     console.log(this.props.item_details)
     console.log(this.props)
+    console.log(this.props.currentUserId)
     console.log("inside item item_details")
     if (this.props.item_details.images){
       numImages = this.props.item_details.images.length
@@ -175,10 +179,7 @@ class ItemDetails extends Component {
         </Item.Extra>
       </Item.Content>
         </Item>
-        <ItemReviewsContainer current_viewed_item_id={this.props.match.params.id} item_owner={this.props.item_details.user_id}/>
-          <p>
-            Reviews
-          </p>
+        <ItemReviewsContainer current_viewed_item_id={this.props.match.params.id} item_owner={this.props.currentUserId}/>
       </div>
     );
   }

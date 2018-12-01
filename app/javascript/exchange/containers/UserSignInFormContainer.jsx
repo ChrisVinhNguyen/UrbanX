@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { v4 as uuid } from 'uuid';
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import { Button, Checkbox, Form, Message } from 'semantic-ui-react';
+import { Button, Checkbox, Form, Message, Grid } from 'semantic-ui-react';
 
 import { signInUser } from '../actions/userActions';
 import { connect } from 'react-redux';
 
 import { EMAIL_MISSING, INVALID_EMAIL_FORMAT, PASSWORD_MISSING } from '../constants/formErrors';
+
+import '../stylesheets/user-sign-in-form-container.scss';
 
 
 class UserSignInFormContainer extends Component {
@@ -106,19 +108,27 @@ class UserSignInFormContainer extends Component {
     return (
       <div className="sign-in-form-container">
         <h1 className="sign-in-form-title">Sign In Form</h1>
-        <Form className="sign-in-form" onSubmit={ this.handleSubmit } error={ formError }>
-          <Form.Field>
-            <label>Email</label>
-            <Form.Input placeholder='bob.smith@gmail.com' name='email' value={ email } onChange={ this.handleChange }  width={10} error={ emailError } />
-          </Form.Field>
-          <Form.Field>
-            <label>Password</label>
-            <Form.Input type='password' name='password' value={ password } onChange={ this.handleChange }  width={10} error={ passwordError } />
-          </Form.Field>
-          <Link to='/users_forgot_password'>Forgot password?</Link>
-          { errorMessages.length > 0 ? errorMessage : null }
-          <Form.Button content='Submit' />
-        </Form>
+        <Grid>
+          <Grid.Row centered>
+            <Grid.Column width={6}>
+              <Form className="sign-in-form" onSubmit={ this.handleSubmit } error={ formError }>
+                <Form.Field>
+                  <label>Email</label>
+                  <Form.Input placeholder='bob.smith@gmail.com' name='email' value={ email } onChange={ this.handleChange } error={ emailError } />
+                </Form.Field>
+                <Form.Field>
+                  <label>Password</label>
+                  <Form.Input type='password' name='password' value={ password } onChange={ this.handleChange } error={ passwordError } />
+                </Form.Field>
+                <div className="forgot-password-link">
+                  <Link to='/users_forgot_password'>Forgot password?</Link>
+                </div>
+                { errorMessages.length > 0 ? errorMessage : null }
+                <Form.Button content='Submit' />
+              </Form>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       </div>
     )
   }

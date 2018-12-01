@@ -49,7 +49,7 @@ class ItemReview extends Component {
             <Comment.Avatar/>
             <Comment.Content>
               <Comment.Author>
-                <Link to={'/user_profiles/'+ review.owner_id}>
+                <Link to={'/user_profiles_show/'+ review.owner_profile_id}>
                   {review.owner}
                 </Link>
               </Comment.Author>
@@ -78,6 +78,8 @@ class ItemReview extends Component {
           </Comment>
         );
       });
+
+    console.log(reviews)
 
     if(item_owner == current_user_id){isOwner = true}
     return (

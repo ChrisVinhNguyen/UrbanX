@@ -20,7 +20,7 @@ class ProfileContentContainer extends Component {
   }
 
   componentWillMount() {
-    this.props.getMyItems(this.props.userProfileId);
+    this.props.getMyItems(this.props.userProfileId, this.props.cur_sort);
     this.props.getMyTransactions(this.props.userProfileId, 'All');
     console.log(this.props.userProfileId)
     console.log("=============================")
@@ -29,7 +29,7 @@ class ProfileContentContainer extends Component {
   componentDidMount() {
     this._isMounted = true;
     window.onpopstate = ()=> {
-        this.props.filterItems('All');
+        this.props.filterItems('All', this.props.cur_sort);
       }
   }
 
@@ -74,5 +74,8 @@ ProfileContentContainer.propTypes = {
   getMyTransactions: PropTypes.func.isRequired,
 }
 
+const mapStateToProps = state => ({
+  cur_sort: state.items.cur_sort
+});
 
-export default connect(() => {return {}}, { filterItems,getMyItems, getMyTransactions })(ProfileContentContainer);
+export default connect(mapStateToProps, { filterItems,getMyItems, getMyTransactions })(ProfileContentContainer);
