@@ -49,8 +49,7 @@ class Body extends Component {
         <Route path="/items_list/:id" exact component={ ItemDetails } />
         <Route path="/items/add/new" exact component={ ItemCreateFormContainer } />
         <Route path="/items_list/:id/edit" component={ ItemEditFormContainer } />
-        <Route path="/items/:id/delete_image_blob" component= {ItemEditFormContainer} />
-        <Route path="/items/:id/delete_image_attachment" component= {ItemEditFormContainer} />
+        <Route path="/items/:item_id/delete_image" component= {ItemEditFormContainer} />
       </div>
     );
   }

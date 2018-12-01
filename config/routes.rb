@@ -38,7 +38,7 @@ Rails.application.routes.draw do
     resources :transactions
     member  do
       delete :delete_image_attachment
-      delete :delete_image_blob
+      delete :delete_image
     end
   end
 

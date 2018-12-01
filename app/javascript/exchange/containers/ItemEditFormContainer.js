@@ -76,15 +76,12 @@ class ItemEditFormContainer extends Component {
     console.log("this is the edit item form images statee ^ ")
 
   }
-  deleteImage(image_blob_id, index){
+  deleteImage(image_attachment, index){
     console.log("deleting image")
-    console.log(image_blob_id)
-    const formData = new FormData()
-    formData.append('image_blob_id',image_blob_id)
-    var data = image_blob_id
+    var data = image_attachment
 // delete_image_attachment
       $.ajax({
-      url:`/items/${image_blob_id}/delete_image_blob`,
+      url:`/items/${image_attachment}/delete_image`,
       method: 'DELETE',
       data: data
     }).then(
@@ -100,16 +97,18 @@ class ItemEditFormContainer extends Component {
     let image_blob_id = 0
     let imageHtml;
 
-    if (this.props.item_details.image_blob_ids){
-      numImages = this.props.item_details.image_blob_ids.length
+    if (this.props.item_details.image_attachments_id){
+      numImages = this.props.item_details.image_attachments_id.length
       url = this.props.item_details.image
-      image_blob_id = this.props.item_details.image
 
+
+      console.log("----")
+      console.log("----")
       imageHtml = this.props.item_details.images.map((imageSrc, index) => {
         return (
           <div >
             <img src={imageSrc} />
-            <Button onClick={() => {this.deleteImage(this.props.item_details.image_blob_ids[index], index)}}>
+            <Button onClick={() => {this.deleteImage(this.props.item_details.image_attachments_id[index], index)}}>
               Delete
             </Button>
           </div>

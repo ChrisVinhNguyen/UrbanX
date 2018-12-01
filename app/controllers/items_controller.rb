@@ -106,16 +106,17 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
     @images = []
-    @image_blob_ids = []
+    @image_attachments_id = []
     if @item.images.attached?
         @item.images.each do |image|
           @images.push(url_for(image))
-          @image_blob_ids.push(image.blob.id)
+          @image_attachments_id.push(image.id)
         end   
+        
     end
     item_details= @item.attributes
     item_details[:images]= @images
-    item_details[:image_blob_ids] = @image_blob_ids
+    item_details[:image_attachments_id] = @image_attachments_id
 
     item_reviews_count = @item.item_reviews.count
     item_reviews_total = 0
@@ -173,10 +174,10 @@ class ItemsController < ApplicationController
     redirect_back(fallback_location: items_path)
   end
 
-  def delete_image_blob
-    @image = ActiveStorage::Blob.find(params[:id])
+  def delete_image
+    @image = ActiveStorage::Attachment.find(params[:id])
     @image.purge_later
-    redirect_back(fallback_location: items_path)
+    # redirect_back(fallback_location: items_path)
   end
 
 
