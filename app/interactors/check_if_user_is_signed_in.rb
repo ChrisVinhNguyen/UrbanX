@@ -1,4 +1,4 @@
-class CheckIfUserIsSignedIn
+class CheckIfUserIsSignedIn < ApplicationController
   include Interactor
 
   def call
