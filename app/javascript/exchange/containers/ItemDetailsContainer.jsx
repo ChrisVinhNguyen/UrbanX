@@ -5,19 +5,19 @@ import { Rating, Divider } from 'semantic-ui-react'
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import axios from 'axios';
-import ItemReviewsContainer from '../containers/ItemReviewsContainer'
+import ItemReviewsContainer from './ItemReviewsContainer'
 import { getItem } from '../actions/itemsActions';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Carousel} from 'react-responsive-carousel';
 import { v4 as uuid } from 'uuid';
 import PropTypes from 'prop-types';
-
-import ItemDetailsBorrowContainer from '../containers/ItemDetailsBorrowContainer';
+import ItemDetailsComponent from '../components/ItemDetailsComponent';
+import ItemDetailsBorrowContainer from './ItemDetailsBorrowContainer';
 
 import pic from '../images/macbook.jpg';
 
 
-class ItemDetails extends Component {
+class ItemDetailsContainer extends Component {
 
   componentDidMount(){
     console.log("componentDidMount")
@@ -97,35 +97,23 @@ class ItemDetails extends Component {
     }
 
     return (
-      <div>
-        <Item>
-          <Item.Content>
-          
-          <Carousel></Carousel>
-          {carouselItems ? (<Carousel showThumbs={false} width="50%" selectedItem={1}> {carouselItems} </Carousel>) : null}
-
-          <Item.Header size = 'medium' as='a' href={'items/'+this.props.item_id}><strong>{this.props.item_details.name}</strong></Item.Header>
-        <Item.Meta>
-          <p>Quantity: {this.props.item_details.quantity}</p>
-          
-          <ItemDetailsBorrowContainer item_id={ this.props.match.params.id} currentUserId={ this.props.currentUserId } />
-        </Item.Meta>
-        <Item.Description>Description: {this.props.item_details.description}.</Item.Description>
-        {editButton}
-        {deleteButton}
-        <Item.Extra>
-          <Rating icon='star' rating={this.props.item_details.average_rating} maxRating={5} disabled />
-          <Label>Rating: {this.props.item_details.average_rating}</Label>
-        </Item.Extra>
-      </Item.Content>
-        </Item>
-        <ItemReviewsContainer current_viewed_item_id={this.props.match.params.id} item_owner={this.props.item_details.user_id}/>
-      </div>
+      <ItemDetailsComponent 
+      item_id_prop={this.props.item_id} 
+      item_name_prop={this.props.item_details.name} 
+      item_quantity_prop={this.props.item_details.quantity} 
+      item_match_param_id_prop={this.props.match.params.id} 
+      current_user_id_prop={this.props.currentUserId}
+      item_description_prop={this.props.item_details.description} 
+      item_avg_rating_prop={this.props.item_details.average_rating} 
+      item_details_user_id_prop={this.props.item_details.user_id} 
+      carousel_items_prop={carouselItems}
+      edit_button_prop={editButton}
+      delete_button_prop={deleteButton}/>
     );
   }
 }
 
-ItemDetails.propTypes = {
+ItemDetailsContainer.propTypes = {
   getItem: PropTypes.func.isRequired,
   item_details: PropTypes.object.isRequired,
   newTransaction: PropTypes.func.isRequired,
@@ -144,4 +132,4 @@ const mapStateToProps = state => ({
   is_signed_in: state.user.is_signed_in
 });
 
-export default connect(mapStateToProps, {getItem})(ItemDetails);
+export default connect(mapStateToProps, {getItem})(ItemDetailsContainer);
