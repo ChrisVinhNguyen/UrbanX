@@ -31,10 +31,9 @@ class ItemReview extends Component {
 
     const current_user_id = this.props.user_info.user_profile_id;
 
-    const item_owner = this.props.owner_id;
+    const item_owner_user_id = this.props.item_owner_user_id;
 
     console.log(current_user_id)
-    console.log(item_owner)
 
     let hasReviewed = false; 
     let isOwner = false;
@@ -43,7 +42,7 @@ class ItemReview extends Component {
       if (review.owner_id == current_user_id){ hasReviewed = true }
         {console.log(review.owner_id)}
         {console.log(current_user_id)}
-        {console.log(item_owner)}
+        {console.log(item_owner_user_id)}
         return (
           <Comment>
             <Comment.Avatar/>
@@ -80,8 +79,10 @@ class ItemReview extends Component {
       });
 
     console.log(reviews)
-
-    if(item_owner == current_user_id){isOwner = true}
+    console.log(this.props.item_owner_user_id)
+    console.log(item_owner_user_id)
+    console.log(current_user_id)
+    if(item_owner_user_id == current_user_id){isOwner = true}
     return (
       <div>
         { reviews }
