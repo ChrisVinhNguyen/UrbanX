@@ -69,6 +69,9 @@ class ItemEditFormContainer extends Component {
     (response) => console.log(response.message),
     (response) => console.log(response.responseJSON)
     );
+
+    console.log(this.props.match.params.id)
+    this.props.history.push("/items_list/" + this.props.match.params.id)
   }
   updateItemState(files){
     this.state.images = files
