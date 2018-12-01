@@ -26,6 +26,7 @@ class ItemDetails extends Component {
     this.props.getMyTransactionsForItem(this.props.match.params.id, this.props.currentUserId);
     this.handleBorrow = this.handleBorrow.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
 
   handleBorrow(e) {
@@ -35,6 +36,16 @@ class ItemDetails extends Component {
 
   handleCancel(e, transaction) {
     this.props.deleteTransaction(transaction, this.props.currentUserId, this.props.cur_status);
+  }
+
+  deleteItem(){
+    $.ajax({
+      url: `/items/${this.props.match.params.id}`,
+      method: 'DELETE'
+    }).then(
+    (response) => console.log(response.message),
+    (response) => console.log(response.responseJSON)
+    );
   }
 
   render() {
@@ -128,7 +139,7 @@ class ItemDetails extends Component {
         </Button>
       )
       deleteButton=(
-        <Button negative>Delete</Button>
+        <Button negative onClick={this.deleteItem}>Delete</Button>
       )
     }
     else {
