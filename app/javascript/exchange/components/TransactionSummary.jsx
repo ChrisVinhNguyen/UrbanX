@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { Button, Icon, Image, Form, Item, Label } from 'semantic-ui-react'
 import { Rating, Divider } from 'semantic-ui-react'
 import { Link } from "react-router-dom";
-import { updateTransaction, deleteTransaction } from '../actions/itemsActions' 
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
+import TransactionSummaryActionContainer from '../containers/TransactionSummaryActionContainer.jsx';
 
 import '../stylesheets/transaction-summary.scss';
 
@@ -12,52 +13,11 @@ import pic from '../images/macbook.jpg';
 
 
 class TransactionSummary extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      due_date: '',
-      status: this.props.transaction.status
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleLend = this.handleLend.bind(this);
-    this.handleReturn = this.handleReturn.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
-  }
-
-  handleChange(e, { name, value }) {
-    this.setState({ [name]: value })
-    console.log(this.state.due_date)
-  }
-
-  handleLend(e, transaction) {
-    transaction.expiry_date = this.state.due_date;
-    transaction.status = 'lent';
-    this.props.updateTransaction(transaction, this.props.currentUserId, this.props.cur_status);
-
-  }
-
-  handleReturn(e, transaction) {
-    transaction.status = 'completed';
-    this.props.updateTransaction(transaction, this.props.currentUserId, this.props.cur_status);
-
-  }
-
-  handleDelete(e, transaction) {
-    this.props.deleteTransaction(transaction, this.props.currentUserId, this.props.cur_status);
-  }
-
   render() {
-    let dueDateForm = null;
-    let declineButton = null;
-    let returnButton = null;
-    let cancelButton = null;
-
     let returnDate = null;
     let lendDate = null;
     let dueDate = null;
     let dateContainer = null;
-    let due_date = this.state.due_date;
 
 
     if (this.props.transaction.status != 'pending') {
@@ -83,43 +43,6 @@ class TransactionSummary extends Component {
                       )
     }
 
-    if (this.props.transaction.status == 'pending' && this.props.transaction.lender_id == this.props.currentUserId) {
-      dueDateForm = (
-                    <Form className="new-item-form" onSubmit={ e => this.handleLend(e, this.props.transaction) }>
-                      <Form.Field>
-                        <label>Due Date</label>
-                          <Form.Input type="date" placeholder="Due Date"
-                           name="due_date" value={ due_date } onChange={ this.handleChange }/>
-                      </Form.Field>
-
-                      <Form.Button floated="right" content="Submit">
-                        Lend
-                      </Form.Button>
-                    </Form>
-                );
-
-      declineButton = (
-                        <Button floated="right" onClick={ e => this.handleDelete(e, this.props.transaction) }>
-                          Decline
-                        </Button>
-                      );
-    }
-    else if (this.props.transaction.status == 'lent' && this.props.transaction.lender_id == this.props.currentUserId) {
-      returnButton = (
-                      <Button floated="right" onClick={ e => this.handleReturn(e, this.props.transaction) }>
-                        Returned
-                      </Button>
-                      );
-    }
-    else if (this.props.transaction.status == 'pending' && this.props.transaction.borrower_id == this.props.currentUserId) {
-      cancelButton = (
-                        <Button floated="right" onClick={ e => this.handleDelete(e, this.props.transaction) }>
-                          Cancel
-                        </Button>
-                      );
-    }
-
-
     return (
       
       <Item key={ this.props.transaction.id }>
@@ -144,10 +67,7 @@ class TransactionSummary extends Component {
               Borrower: {this.props.transaction.borrower_name}
             </p>
 
-            {cancelButton}
-            {returnButton}
-            {dueDateForm}
-            {declineButton}
+            <TransactionSummaryActionContainer transaction = {this.props.transaction} />
           </Item.Description>
         </Item.Content>
       </Item>
@@ -156,13 +76,8 @@ class TransactionSummary extends Component {
   }
 } 
 
-TransactionSummary.propTypes = {
-  updateTransaction: PropTypes.func.isRequired,
-  deleteTransaction: PropTypes.func.isRequired
-}
-
 const mapStateToProps = state => ({
   cur_status: state.items.cur_status
 });
 
-export default connect(mapStateToProps, { updateTransaction, deleteTransaction })(TransactionSummary);
+export default connect(mapStateToProps, {})(TransactionSummary);
