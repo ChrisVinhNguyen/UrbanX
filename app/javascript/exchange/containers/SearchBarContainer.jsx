@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import _ from 'lodash'
-import { Search, Grid } from 'semantic-ui-react'
+import { Search, Grid, Button, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -12,25 +11,34 @@ class SearchBarContainer extends Component {
     super(props);
     this.state = {
       isLoading: false,
+      openResultsMenu: false,
       value: ''
     }
 
     this.resetComponent = this.resetComponent.bind(this);
     this.handleResultSelect = this.handleResultSelect.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleSearchChange = this.handleSearchChange.bind(this);
   }
 
   resetComponent() {
     this.setState({
       isLoading: false,
-      results: [],
+      openResultsMenu: false,
       value: ''
     })
   }
 
   handleResultSelect(e, { result }) {
-    this.setState({ value: result.title });
+    this.setState({ openResultsMenu: false, value: result.title });
     this.props.filterItems('All', '', result.title)
+  }
+
+  handleKeyPress(e){
+    if (e.key === 'Enter') {
+      this.setState({ openResultsMenu: false, value: this.state.value })
+      this.props.filterItems('All', '', this.state.value)
+    }
   }
 
   handleSearchChange(e, { value }){
@@ -43,12 +51,13 @@ class SearchBarContainer extends Component {
 
       this.setState({
         isLoading: false,
+        openResultsMenu: true
       })
     }, 300)
   }
 
   render() {
-    const { isLoading, value } = this.state
+    const { isLoading, openResultsMenu, value } = this.state
 
     return (
       <Grid className="header-search-container">
@@ -61,6 +70,8 @@ class SearchBarContainer extends Component {
             results={ this.props.filtered_item_names_for_search }
             value={ value }
             fluid
+            open={ openResultsMenu }
+            onKeyPress={ this.handleKeyPress }
             { ...this.props }
           />
         </Grid.Column>
