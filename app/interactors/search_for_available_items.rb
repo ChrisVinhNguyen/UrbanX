@@ -1,5 +1,5 @@
 class SearchForAvailableItems
   include Interactor::Organizer
 
-  organize SearchForItem, CreateUniqueListOfItemTitles
+  organize SearchForItems, CreateUniqueListOfItemTitles
 end

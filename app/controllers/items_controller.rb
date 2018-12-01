@@ -26,76 +26,36 @@ class ItemsController < ApplicationController
   end
 
   def filter
-    search_value = params[:search]
-    if (params[:cur_category]=="All")
-      filtered_items = Item.where("name ilike ? AND status = ?", "%#{search_value}%","available")
-    else
-      filtered_items = Item.where(category: params[:cur_category], status: "available")
+    context_params = {
+      search_value: params[:search],
+      item_status: "available",
+      category: params[:cur_category]
+    }
+
+    result = FilterItemsList.call(context_params)
+
+    if result.success?
+      render :json => { "filtered_items" => result.items_summary_array }
     end
-
-    items_array = []
-
-    filtered_items.each do |item|
-      user = User.find(item[:user_id])
-      full_name = user.user_profile[:first_name] + " " + user.user_profile[:last_name]
-      item_hash = item.attributes
-      item_hash[:owner] = full_name
-      item_hash[:user_profile_id] = user.user_profile.id
-
-      item_reviews_count = item.item_reviews.count
-      item_reviews_total = 0
-      item.item_reviews.each do |item_review|
-        item_reviews_total += item_review.rating
-      end
-      average_rating = item_reviews_total!=0 ? item_reviews_total/item_reviews_count : 'no rating' 
-      item_description = item.description
-
-      item_hash[:average_rating] = average_rating
-      item_hash[:description] = item_description
-
-      items_array.push(item_hash)
-    end
-
-    render :json => {"filtered_items" => items_array}.to_json()
   end
 
   def myItems
-    user_profile = UserProfile.find(params[:current_user_profile_id])
-    filtered_items = Item.where(user_id: user_profile.user_id)
-    items_array = []
+    context_params = {
+      profile_id: params[:current_user_profile_id],
+    }
 
-    filtered_items.each do |item|
-      user = User.find(item[:user_id])
-      full_name = user.user_profile[:first_name] + " " + user.user_profile[:last_name]
-      item_hash = item.attributes
-      item_hash[:owner] = full_name
-      item_hash[:user_profile_id] = user.user_profile.id
+    result = GetProfileItemsList.call(context_params)
 
-      item_reviews_count = item.item_reviews.count
-      item_reviews_total = 0
-      item.item_reviews.each do |item_review|
-        item_reviews_total += item_review.rating
-      end
-      average_rating = item_reviews_total!=0 ? item_reviews_total/item_reviews_count : 'no rating' 
-      item_description = item.description
-
-      item_hash[:average_rating] = average_rating
-      item_hash[:description] = item_description
-
-      items_array.push(item_hash)
+    if result.success?
+      render :json => { "filtered_items" => result.items_summary_array }
     end
-
-    render :json => {"filtered_items" => items_array}.to_json()
   end
 
-
   def search
-    search_value = params[:search]
-    status = "available"
-
     context_params = {
-      search_value: search_value,
-      item_status: status
+      search_value: params[:search],
+      item_status: "available",
+      category: "All"
     }
 
     result = SearchForAvailableItems.call(context_params)
