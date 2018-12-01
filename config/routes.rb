@@ -30,7 +30,7 @@ Rails.application.routes.draw do
     post 'add_contact', :on => :member
     post 'remove_contact', :on => :member
     delete :delete_image_attachment
-    delete :delete_image_blob
+    delete :delete_image
   end
 
   resources :items do 

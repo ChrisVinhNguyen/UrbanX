@@ -33,8 +33,8 @@ class UserProfilesController < ApplicationController
 
   def update
     @user_profile = UserProfile.find(params[:id])
-    puts params
-    if @user_profile.update(params.require(:params).permit(:first_name, :last_name, :date_of_birth,  :location,  :contact_list, :image))
+    # puts params
+    if @user_profile.update(user_profile_params)
       render :json => {"saved_successfull" => true}
     else
       render 'edit'
@@ -64,6 +64,10 @@ class UserProfilesController < ApplicationController
     profile_hash = @user_profile.attributes
     profile_hash[:contact_list] = @contact_names
     profile_hash[:email] = @user_profile.user.email
+    if @user_profile.image.attached?
+        profile_hash[:image] = url_for(@user_profile.image)
+        profile_hash[:image_attachment_id] = @user_profile.image.id
+    end
     render json: profile_hash
   end
 
@@ -143,6 +147,12 @@ class UserProfilesController < ApplicationController
     @image = @user_profile.image
     @image.purge_later
     redirect_to @user_profile
+  end
+
+  def delete_image
+    @image = ActiveStorage::Attachment.find(params[:id])
+    @image.purge_later
+    # redirect_back(fallback_location: items_path)
   end
 
 

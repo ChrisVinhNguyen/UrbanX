@@ -11,25 +11,26 @@ import { DirectUpload } from "activestorage"
 import Dropzone from 'react-dropzone'
 
 
-export class UploadMultipleButton extends Component {
+export class UploadSingleButton extends Component {
 
     constructor(props){
       super(props);
       this.state= {
-        files:[]
+        file: null
 
       }
 
       this.djsConfig = {
-            addRemoveLinks: true,
+            addRemoveLinks: false,
             params: {
                 myParameter: "I'm a parameter!"
             },
-            uploadMultiple: true,
+            uploadMultiple: false,
             autoProcessQueue: false,
             autoQueue: false,
             maxFileSize: 15,
-            paramName: "images"
+            paramName: "images",
+            acceptedFiles: "image/*"
 
 
       };
@@ -37,10 +38,12 @@ export class UploadMultipleButton extends Component {
       this.componentConfig = {
             iconFiletypes: ['.jpg', '.png', '.jpeg'],
             showFiletypeIcon: true,
-            postUrl: '/items'
+            postUrl: '/user_profile'
       };
-    }
 
+
+      this.dropzone = null;
+    }
 
     render(){
       
@@ -48,40 +51,40 @@ export class UploadMultipleButton extends Component {
       const djsConfig = this.djsConfig;
 
       var eventHandlers = { init: dz => this.dropzone = dz,
-                            addedfile: (files) => this.updateFilesState(files),
+                            addedfile: (file) => this.updateFileState(file),
                             removedfile: (file) => this.removeFile(file),
-                            drop: (files) => this.updateFilesState(files)
+                            drop: (file) => this.updateFileState(file)
 
       }
+
+
+
       return(
 
               <DropzoneComponent config={config}
                                   eventHandlers={eventHandlers}
                                   djsConfig={djsConfig}  >
-                                <div class="dz-message" data-dz-message><span>Upload Images</span></div>
+                                <div class="dz-message" data-dz-message><span>Upload Image</span></div>
                                 
-              </DropzoneComponent>
+                </DropzoneComponent>
+
+
       )
     }
-    updateFilesState(files){
-        var currentFiles = this.state.files;
-         console.log(currentFiles)
-        // Push file(s) from function parameters to `currentFiles` array
-        const newFiles = files;
-        console.log(newFiles)
-        currentFiles.push(newFiles);
-        
 
-        // Assign files dropped into component into state
+
+    updateFileState(file){
+      
         this.setState({
-         files: currentFiles
+         file: file
         });
-        console.log(this.state.files)
-        this.props.updateItemState(this.state.files)
+        console.log(this.state.file)
+        this.props.updateImageState(this.state.file)
         console.log("done updateFilesState")
 
 
     }
+
     removeFile(file){
       var currentFiles = this.state.files;
 
@@ -93,8 +96,8 @@ export class UploadMultipleButton extends Component {
       }
 
       console.log("after removing")
-      console.log(this.state.files)
-      this.props.updateItemState(this.state.files)
+      console.log(this.state.file)
+      this.props.updateItemState(this.state.file)
     }
   
 }
@@ -102,4 +105,4 @@ export class UploadMultipleButton extends Component {
 
 
 
-export default UploadMultipleButton;
+export default UploadSingleButton;
