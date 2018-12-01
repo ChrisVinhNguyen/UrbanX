@@ -57,8 +57,8 @@ class ItemEditFormContainer extends Component {
     // debugger
     console.log("doing PATCH")
     $.ajax({
-      url:'/items',
-      method: 'PATCH',
+      url: `/items/${this.props.match.params.id}`,
+      method: 'PUT',
       data: formData,
       contentType: false,
       processData: false,
@@ -107,7 +107,7 @@ class ItemEditFormContainer extends Component {
       imageHtml = this.props.item_details.images.map((imageSrc, index) => {
         return (
           <div >
-            <img src={imageSrc} />
+            <img src={imageSrc} width="400"/>
             <Button onClick={() => {this.deleteImage(this.props.item_details.image_attachments_id[index], index)}}>
               Delete
             </Button>
@@ -118,7 +118,7 @@ class ItemEditFormContainer extends Component {
     }
     return (
       <div className="new-item-form-container">
-        <h1 className="new-item-form-title">Sign Up Form</h1>
+        <h1 className="new-item-form-title">Edit Item</h1>
         <Form className="new-item-form" >
           <Form.Field>
             <label>Name</label>
