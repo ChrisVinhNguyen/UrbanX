@@ -3,15 +3,16 @@
 # Table name: transactions
 #
 #  id          :bigint(8)        not null, primary key
-#  item_id     :integer
-#  borrower_id :integer
-#  lender_id   :integer
+#  expiry_date :datetime
+#  item_name   :string
 #  lend_date   :datetime
 #  return_date :datetime
-#  expiry_date :datetime
 #  status      :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  borrower_id :integer
+#  item_id     :integer
+#  lender_id   :integer
 #
 
 class Transaction < ApplicationRecord

@@ -32,6 +32,10 @@ class TransactionFilterContainer extends Component {
       this.props.getMyTransactions(this.props.currentUserId, 'lent');
     }
 
+    else if (value == 'Overdue') {
+      this.props.getMyTransactions(this.props.currentUserId, 'overdue');
+    }
+
     else if (value == 'Completed') {
       this.props.getMyTransactions(this.props.currentUserId, 'completed');
     }
@@ -55,6 +59,10 @@ class TransactionFilterContainer extends Component {
         value: 'In progress'
       },
       {
+        text: 'Overdue',
+        value: 'Overdue'
+      },
+      {
         text: 'Completed',
         value: 'Completed'
       }
@@ -69,8 +77,11 @@ class TransactionFilterContainer extends Component {
     else if (this.props.cur_status == 'lent') {
       cur_selected = sortOptions[2].value;
     }
-    else if (this.props.cur_status == 'completed') {
+    else if (this.props.cur_status == 'overdue') {
       cur_selected = sortOptions[3].value;
+    }
+    else if (this.props.cur_status == 'completed') {
+      cur_selected = sortOptions[4].value;
     }
     return (
       <div>

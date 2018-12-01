@@ -18,6 +18,7 @@ class TransactionsController < ApplicationController
       @transaction = @item.transactions.create(transaction_params)
       @transaction.lender = @item.user
       @transaction.borrower = @current_user
+      @transaction.item_name = @item.name
       if @transaction.save
         UserMailer.with(transaction: @transaction).notify_lender.deliver_later
         redirect_to @item
