@@ -148,7 +148,7 @@ export const getItem = (item_id=item_id) => dispatch => {
   console.log(item_id)
 }
 
-export const getMyItems = (current_user_profile_id) => dispatch => {
+export const getMyItems = (current_user_profile_id, cur_sort) => dispatch => {
   let that = this
   console.log(current_user_profile_id);
   axios.get('/items/myItems', {
@@ -163,6 +163,9 @@ export const getMyItems = (current_user_profile_id) => dispatch => {
       filtered_items: response.data.filtered_items,
       original_list: response.data.filtered_items
     })
+    dispatch(
+      sortItems(response.data.filtered_items, cur_sort)
+    )
   })
   .catch(function(error){
     console.log(error);
@@ -313,6 +316,7 @@ export const sortItems = (items_list, cur_sort) => {
     console.log(items_list[0].date_posted);
     if (!cur_sort || cur_sort == '' || cur_sort == 'Default') {
       sorted_list = items_list;
+      cur_sort = 'Default';
     }
 
     else if (cur_sort == 'Newest') {
