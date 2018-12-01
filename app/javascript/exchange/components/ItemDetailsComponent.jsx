@@ -41,7 +41,7 @@ class ItemDetailsComponent extends Component {
         </Item.Extra>
       </Item.Content>
         </Item>
-        <ItemReviewsContainer current_viewed_item_id={this.props.item_match_param_id_prop} item_owner_profile_id={this.props.item_owner_profile_id}/>
+        <ItemReviewsContainer current_viewed_item_id={this.props.item_match_param_id_prop} item_owner_profile_id={this.props.item_owner_profile_id} item_owner_user_id={this.props.item_details_user_id_prop}/>
       </div>
     );
   }
