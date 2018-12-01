@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { v4 as uuid } from 'uuid';
-import { Button, Checkbox, Form, Message } from 'semantic-ui-react'
+import { Grid, Button, Checkbox, Form, Message } from 'semantic-ui-react'
 import axios from 'axios';
 import { signUpUser } from '../actions/userActions';
 import { connect } from 'react-redux';
@@ -14,6 +14,8 @@ import {
   PASSWORD_MISMATCH,
   INVALID_PASSWORD_LENGTH
 } from '../constants/formErrors';
+
+import '../stylesheets/user-sign-up-form-container.scss'
 
 
 class UserSignUpFormContainer extends Component {
@@ -128,27 +130,33 @@ class UserSignUpFormContainer extends Component {
     return (
       <div className="sign-up-form-container">
         <h1 className="sign-up-form-title">Sign Up Form</h1>
-        <Form className="sign-up-form" onSubmit={ this.handleSubmit } error={ formError }>
-          <Form.Field>
-            <label>Email</label>
-            <Form.Input placeholder='bob.smith@gmail.com' name='email' value={ email } onChange={ this.handleChange }  width={10} error={ emailError } />
-          </Form.Field>
-          <Form.Field>
-            <label>Password (6 characters minimum)</label>
-            <Form.Input type='password' name='password' value={ password } onChange={ this.handleChange }  width={10} error={ passwordError } />
-          </Form.Field>
-          <Form.Field>
-            <label>Password Confirmation</label>
-            <Form.Input type='password'  name='password_confirmation' value={ password_confirmation } onChange={ this.handleChange }  width={10} error={ password_confirmationError } />
-          </Form.Field>
-          <Form.Field>
-            <Checkbox />
-            I agree to the 
-            <a className="sign-up-form-terms-of-service">Terms and Conditions</a>
-          </Form.Field>
-          { errorMessages.length > 0 ? errorMessage : null }
-          <Form.Button content='Submit' />
-        </Form>
+        <Grid>
+          <Grid.Row centered>
+            <Grid.Column width={6}>
+              <Form className="sign-up-form" onSubmit={ this.handleSubmit } error={ formError }>
+                <Form.Field>
+                  <label>Email</label>
+                  <Form.Input placeholder='bob.smith@gmail.com' name='email' value={ email } onChange={ this.handleChange } error={ emailError } />
+                </Form.Field>
+                <Form.Field>
+                  <label>Password (6 characters minimum)</label>
+                  <Form.Input type='password' name='password' value={ password } onChange={ this.handleChange } error={ passwordError } />
+                </Form.Field>
+                <Form.Field>
+                  <label>Password Confirmation</label>
+                  <Form.Input type='password'  name='password_confirmation' value={ password_confirmation } onChange={ this.handleChange } error={ password_confirmationError } />
+                </Form.Field>
+                <Form.Field>
+                  <Checkbox />
+                  I agree to the 
+                  <a className="sign-up-form-terms-of-service">Terms and Conditions</a>
+                </Form.Field>
+                { errorMessages.length > 0 ? errorMessage : null }
+                <Form.Button content='Submit' />
+              </Form>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       </div>
     )
   }
