@@ -91,12 +91,18 @@ class ItemsController < ApplicationController
 
   def search
     search_value = params[:search]
+    status = "available"
 
-    searched_item_names = Item.where("name ilike ? AND status = ?", "%#{search_value}%","available").pluck(:name)
-    searched_item_names_array = searched_item_names.map { |item_name| { title: item_name }}
-    unique_searched_item_names_array = searched_item_names_array.uniq
+    context_params = {
+      search_value: search_value,
+      item_status: status
+    }
 
-    render json: { "searched_item_names" => unique_searched_item_names_array }.to_json
+    result = SearchForAvailableItems.call(context_params)
+
+    if result.success?
+      render json: { "searched_item_names" => result.item_names_array }
+    end
   end
 
   def index
@@ -106,25 +112,17 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
     @images = []
+    @image_attachments_id = []
     if @item.images.attached?
         @item.images.each do |image|
           @images.push(url_for(image))
+          @image_attachments_id.push(image.id)
         end   
+        
     end
     item_details= @item.attributes
     item_details[:images]= @images
-
-    # item_details= @item.attributes
-    # @image
-    # if @item.image.attached?
-    #       @image = url_for(@item.image)
-    #       puts("passing image url")
-    #       item_details[:image]= @image
-    # end
-    
-    
-
-    #item_details[:images]= @images
+    item_details[:image_attachments_id] = @image_attachments_id
 
     item_reviews_count = @item.item_reviews.count
     item_reviews_total = 0
@@ -142,6 +140,7 @@ class ItemsController < ApplicationController
   def edit
     if user_signed_in?
       @item = Item.find(params[:id])
+      puts(params)
       if @item.user_id != @current_user.id
         redirect_to items_path
       end
@@ -181,6 +180,13 @@ class ItemsController < ApplicationController
     @image.purge_later
     redirect_back(fallback_location: items_path)
   end
+
+  def delete_image
+    @image = ActiveStorage::Attachment.find(params[:id])
+    @image.purge_later
+    # redirect_back(fallback_location: items_path)
+  end
+
 
 private
   def item_params

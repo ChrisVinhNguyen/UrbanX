@@ -30,12 +30,16 @@ Rails.application.routes.draw do
     post 'add_contact', :on => :member
     post 'remove_contact', :on => :member
     delete :delete_image_attachment
+    delete :delete_image_blob
   end
 
   resources :items do 
     resources :item_reviews
     resources :transactions
-    delete :delete_image_attachment
+    member  do
+      delete :delete_image_attachment
+      delete :delete_image
+    end
   end
 
   match 'about', to: 'root#index', via: :all

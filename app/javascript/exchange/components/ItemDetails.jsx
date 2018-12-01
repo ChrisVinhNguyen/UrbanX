@@ -26,6 +26,7 @@ class ItemDetails extends Component {
     this.props.getMyTransactionsForItem(this.props.match.params.id, this.props.currentUserId);
     this.handleBorrow = this.handleBorrow.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
 
   handleBorrow(e) {
@@ -35,6 +36,19 @@ class ItemDetails extends Component {
 
   handleCancel(e, transaction) {
     this.props.deleteTransaction(transaction, this.props.currentUserId, this.props.cur_status);
+  }
+
+  deleteItem(){
+    $.ajax({
+      url: `/items/${this.props.match.params.id}`,
+      method: 'DELETE'
+    }).then(
+    (response) => console.log(response.message),
+    (response) => console.log(response.responseJSON)
+    );
+
+    console.log(this.props.match.params.id)
+    this.props.history.push("/")
   }
 
   render() {
@@ -121,10 +135,14 @@ class ItemDetails extends Component {
 
     if (this.props.currentUserId == this.props.item_details.user_id){
       editButton=(
-        <Button>Edit</Button>
+        <Button>
+          <Link to={`/items_list/${this.props.match.params.id}/edit`}>
+          Edit
+          </Link>
+        </Button>
       )
       deleteButton=(
-        <Button negative>Delete</Button>
+        <Button negative onClick={this.deleteItem}>Delete</Button>
       )
     }
     else {
@@ -161,9 +179,6 @@ class ItemDetails extends Component {
       </Item.Content>
         </Item>
         <ItemReviewsContainer current_viewed_item_id={this.props.match.params.id} item_owner={this.props.item_details.user_id}/>
-          <p>
-            Reviews
-          </p>
       </div>
     );
   }

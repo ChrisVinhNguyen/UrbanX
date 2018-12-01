@@ -79,6 +79,8 @@ class ItemReview extends Component {
         );
       });
 
+    console.log(reviews)
+
     if(item_owner == current_user_id){isOwner = true}
     return (
       <div>
