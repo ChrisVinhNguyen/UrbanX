@@ -61,7 +61,7 @@ class UserProfilesController < ApplicationController
     # @user_reviews = UserReview.where(reviewee_id: @user_profile.user_id)
 
     context_params = {
-      user_profile_params: params[:id]
+      profile_id: params[:id]
     }
 
     result = GetUserProfileInformation.call(context_params)
