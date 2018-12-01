@@ -111,25 +111,16 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
     @images = []
+    @image_blob_ids = []
     if @item.images.attached?
         @item.images.each do |image|
           @images.push(url_for(image))
+          @image_blob_ids.push(image.blob.id)
         end   
     end
     item_details= @item.attributes
     item_details[:images]= @images
-
-    # item_details= @item.attributes
-    # @image
-    # if @item.image.attached?
-    #       @image = url_for(@item.image)
-    #       puts("passing image url")
-    #       item_details[:image]= @image
-    # end
-    
-    
-
-    #item_details[:images]= @images
+    item_details[:image_blob_ids] = @image_blob_ids
 
     item_reviews_count = @item.item_reviews.count
     item_reviews_total = 0
@@ -186,6 +177,13 @@ class ItemsController < ApplicationController
     @image.purge_later
     redirect_back(fallback_location: items_path)
   end
+
+  def delete_image_blob
+    @image = ActiveStorage::Blob.find(params[:id])
+    @image.purge_later
+    redirect_back(fallback_location: items_path)
+  end
+
 
 private
   def item_params

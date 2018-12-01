@@ -25,14 +25,6 @@ class ItemDetails extends Component {
     this.handleCancel = this.handleCancel.bind(this);
   }
 
-  componentWillUpdate(){
-    console.log("componentWillUpdate")
-    this.props.getItem(this.props.match.params.id)
-    this.props.getMyTransactionsForItem(this.props.match.params.id, this.props.currentUserId);
-    this.handleBorrow = this.handleBorrow.bind(this);
-    this.handleCancel = this.handleCancel.bind(this);
-  }
-
   handleBorrow(e) {
     let transaction = {item_id: this.props.item_id, status:'pending'};
     this.props.newTransaction(transaction, this.props.currentUserId);
@@ -108,7 +100,11 @@ class ItemDetails extends Component {
 
     if (this.props.currentUserId == this.props.item_details.user_id){
       editButton=(
-        <Button>Edit</Button>
+        <Button>
+          <Link to={`/items_list/${this.props.match.params.id}/edit`}>
+          Edit
+          </Link>
+        </Button>
       )
       deleteButton=(
         <Button negative>Delete</Button>

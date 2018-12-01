@@ -16,6 +16,7 @@ import UserSignUpFormContainer from '../containers/UserSignUpFormContainer';
 import UserSignInFormContainer from '../containers/UserSignInFormContainer';
 import UserForgotPasswordFormContainer from '../containers/UserForgotPasswordFormContainer';
 import ItemCreateFormContainer from '../containers/ItemCreateFormContainer';
+import ItemEditFormContainer from '../containers/ItemEditFormContainer';
 import ProfileCreateFormContainer from '../containers/ProfileCreateFormContainer';
 
 import '../stylesheets/body.scss';
@@ -32,7 +33,7 @@ class Body extends Component {
   render() {
     return (
       <div className="body">
-    	<Route path="/" exact component={ ItemListComponent } />
+        <Route path="/" exact component={ ItemListComponent } />
         <Route path="/users_sign_up" exact component={ UserSignUpFormContainer } />
         <Route path="/users_sign_in" exact component={ UserSignInFormContainer } />
         <Route path="/users_forgot_password" exact component={ UserForgotPasswordFormContainer } />
@@ -47,6 +48,9 @@ class Body extends Component {
         <Route path="/faq" component={ FAQ } />
         <Route path="/items_list/:id" exact component={ ItemDetails } />
         <Route path="/items/add/new" exact component={ ItemCreateFormContainer } />
+        <Route path="/items_list/:id/edit" component={ ItemEditFormContainer } />
+        <Route path="/items/:id/delete_image_blob" component= {ItemEditFormContainer} />
+        <Route path="/items/:id/delete_image_attachment" component= {ItemEditFormContainer} />
       </div>
     );
   }
