@@ -11,8 +11,8 @@ class CreateUserProfileInfoHash
       profile_info_hash[:contact_list] = context.contact_names
       profile_info_hash[:email] = context.user_profile.user.email
       if context.user_profile.image.attached?
-        profile_hash[:image] = url_for(context.user_profile.image)
-        profile_hash[:image_attachment_id] = context.user_profile.image.id
+        profile_info_hash[:image] = url_for(context.user_profile.image)
+        profile_info_hash[:image_attachment_id] = context.user_profile.image.id
       end
 
       context.profile_info_hash = profile_info_hash
