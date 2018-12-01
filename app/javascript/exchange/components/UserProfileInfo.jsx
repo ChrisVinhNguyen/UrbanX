@@ -15,10 +15,18 @@ class UserProfileInfo extends Component {
 
   render() {
   	console.log(this.props)
+    let url=""
+    if (this.props.userProfile.image){
+      url = this.props.userProfile.image;
+    }
+    else{
+      url = Logo
+    }
+
     return (
       <div className="ui card user-profile-container">
         <div className="image">
-          <img src={Logo}/>
+          <img src={url? url : Logo}/>
         </div>
         <div className="content">
           <a className="header">{this.props.userProfile.first_name + " " + this.props.userProfile.last_name}</a>

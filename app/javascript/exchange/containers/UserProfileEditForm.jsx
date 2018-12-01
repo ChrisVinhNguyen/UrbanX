@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { Button, Form } from 'semantic-ui-react'
+import { UploadSingleButton }  from '../components/UploadSingleButton.js';
 
 
 class UserProfileEditForm extends Component {
@@ -12,6 +13,7 @@ class UserProfileEditForm extends Component {
 	    	last_name: this.props.user_info.last_name,
 	    	date_of_birth: this.props.user_info.date_of_birth,
 	    	location: this.props.user_info.location,
+	    	image: null,
 	    	form_valid: true
 	    };
 	    this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
@@ -19,6 +21,7 @@ class UserProfileEditForm extends Component {
 	    this.handleDateOfBirthChange = this.handleDateOfBirthChange.bind(this);
 	    this.handleLocationChange = this.handleLocationChange.bind(this);
 	    this.handleSubmit = this.handleSubmit.bind(this);
+	    this.updateImageState = this.updateImageState.bind(this);
 
 	    if(!this.state.first_name || !this.state.last_name || !this.state.date_of_birth || !this.state.location )
 	    {
@@ -28,6 +31,11 @@ class UserProfileEditForm extends Component {
 
 	componentWillMount() {
     console.log(this.props)
+  }
+  updateImageState(file){
+  	this.state.image = file;
+  	console.log("USERPROFILEUPDATEIMAGESTATE")
+  	console.log(this.state.image)
   }
 
   handleFirstNameChange(e) {
@@ -86,15 +94,44 @@ class UserProfileEditForm extends Component {
     	window.alert("Missing Fields")
     }
     else{
-	    axios.put(`/user_profiles/${this.props.match.params.id}`, {
-	    	params:userData
-	      })
-	    .then(function(response) {
+	    // axios.put(`/user_profiles/${this.props.match.params.id}`, {
+	    // 	params:userData
+	    //   })
+	    // .then(function(response) {
 	      
-	      })
-	     	.catch(function(error){
-	      console.log(error);
-	    })
+	    //   })
+	    //  	.catch(function(error){
+	    //   console.log(error);
+	    // })
+	    const formData = new FormData();
+	    // formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+	    formData.append('user_profile[first_name]', this.state.first_name);
+	    formData.append('user_profile[last_name]', this.state.last_name);
+	    formData.append('user_profile[date_of_birth]', this.state.date_of_birth);
+	    formData.append('user_profile[location]', this.state.location);
+	    if(this.state.image) {
+	      formData.append('user_profile[image]', this.state.image, this.state.image.name);
+	    }
+
+	    console.log("below is form data")
+	    for (var pair of formData.entries()) {
+	        console.log(pair[0]+ ', ' + pair[1]); 
+	    }
+	    // debugger
+	    console.log("doing PATCH")
+	    $.ajax({
+	      url: `/user_profiles/${this.props.match.params.id}`,
+	      method: 'PUT',
+	      data: formData,
+	      contentType: false,
+	      processData: false,
+	      headers: {
+	            'X-CSRFToken': $('meta[name="token"]').attr('content')
+	        }
+	    }).then(
+	    (response) => console.log(response.message),
+	    (response) => console.log(response.responseJSON)
+	    );
 	    
 	    e.preventDefault()
 		this.props.history.push(`/user_profiles_show/${this.props.match.params.id}`);
@@ -150,6 +187,7 @@ class UserProfileEditForm extends Component {
 		    	onChange = {this.handleLocationChange}
 		    	placeholder="Location"/>
 		  </Form.Field>
+		  <UploadSingleButton updateImageState={this.updateImageState}/>
 		  <Form.Button content = 'Submit'/>
 		</Form>
 		</div>
