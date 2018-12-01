@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import { v4 as uuid } from 'uuid';
-import { Link } from "react-router-dom";
 import { Menu } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { filterItems } from '../actions/itemsActions';
+import { Router, Route, Link, Redirect } from 'react-router-dom';
+import { withRouter } from "react-router";
 import PropTypes from 'prop-types';
 
 import { ITEM_CATEGORIES } from '../constants/itemCategories';
@@ -17,11 +18,12 @@ class ItemCategoriesMenu extends Component {
   }
 
   componentWillMount() {
-    this.props.filterItems('All');
+    this.props.filterItems('All', 'Default');
   }
 
   handleCategoryClick (e, { name }) {
     this.props.filterItems(name, this.props.cur_sort);
+    this.props.history.push("/");
   } 
 
   render() {
@@ -59,4 +61,4 @@ const mapStateToProps = state => ({
   cur_sort: state.items.cur_sort
 });
 
-export default connect(mapStateToProps, { filterItems })(ItemCategoriesMenu);
+export default withRouter(connect(mapStateToProps, { filterItems })(ItemCategoriesMenu));

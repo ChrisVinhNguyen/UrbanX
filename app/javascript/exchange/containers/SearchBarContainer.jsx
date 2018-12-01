@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import faker from 'faker'
 import _ from 'lodash'
 import { Search, Grid } from 'semantic-ui-react'
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-const source = _.times(20, () => ({
-  title: faker.company.companyName(),
-  description: faker.company.catchPhrase(),
-  image: faker.internet.avatar()
-}))
+import { filterItems, searchItems } from '../actions/itemsActions';
 
 
 class SearchBarContainer extends Component {
@@ -15,7 +12,6 @@ class SearchBarContainer extends Component {
     super(props);
     this.state = {
       isLoading: false,
-      results: [],
       value: ''
     }
 
@@ -34,6 +30,7 @@ class SearchBarContainer extends Component {
 
   handleResultSelect(e, { result }) {
     this.setState({ value: result.title });
+    this.props.filterItems('All', '', result.title)
   }
 
   handleSearchChange(e, { value }){
@@ -42,31 +39,29 @@ class SearchBarContainer extends Component {
     setTimeout(() => {
       if (this.state.value.length < 1) return this.resetComponent()
 
-      const re = new RegExp(_.escapeRegExp(this.state.value), 'i')
-      const isMatch = result => re.test(result.title)
+      this.props.searchItems(this.state.value)
 
       this.setState({
         isLoading: false,
-        results: _.filter(source, isMatch),
       })
     }, 300)
   }
 
   render() {
-    const { isLoading, value, results } = this.state
+    const { isLoading, value } = this.state
 
     return (
       <Grid className="header-search-container">
         <Grid.Column>
           <Search
             className="header-search"
-            loading={isLoading}
-            onResultSelect={this.handleResultSelect}
-            onSearchChange={_.debounce(this.handleSearchChange, 500, { leading: true })}
-            results={results}
-            value={value}
+            loading={ isLoading }
+            onResultSelect={ this.handleResultSelect }
+            onSearchChange={ _.debounce(this.handleSearchChange, 500, { leading: true }) }
+            results={ this.props.filtered_item_names_for_search }
+            value={ value }
             fluid
-            {...this.props}
+            { ...this.props }
           />
         </Grid.Column>
       </Grid>
@@ -74,4 +69,14 @@ class SearchBarContainer extends Component {
   }
 }
 
-export default SearchBarContainer;
+SearchBarContainer.propTypes = {
+  filterItems: PropTypes.func.isRequired,
+  searchItems: PropTypes.func.isRequired,
+  filtered_item_names_for_search: PropTypes.array.isRequired
+}
+
+const mapStateToProps = state => ({
+  filtered_item_names_for_search: state.items.filtered_item_names_for_search
+});
+
+export default connect(mapStateToProps, { filterItems, searchItems })(SearchBarContainer);

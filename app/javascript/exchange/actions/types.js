@@ -18,6 +18,7 @@ export const NEW_ITEM_REVIEW = 'NEW_ITEM_REVIEW';
 export const EDIT_ITEM_REVIEW = 'EDIT_ITEM_REVIEW';
 
 export const FILTER_ITEMS = 'FILTER_ITEMS';
+export const SEARCH_ITEMS = 'SEARCH_ITEMS';
 export const GET_ITEM = 'GET_ITEM';
 export const GET_MY_ITEMS = 'GET_MY_ITEMS';
 export const SORT_ITEMS = 'SORT_ITEMS';

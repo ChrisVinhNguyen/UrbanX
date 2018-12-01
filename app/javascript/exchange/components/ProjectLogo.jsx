@@ -12,7 +12,7 @@ class ProjectLogo extends Component {
     this.handleOnClick = this.handleOnClick.bind(this);
   }
   handleOnClick() {
-    this.props.filterItems('All');
+    this.props.filterItems('All', this.props.cur_sort);
   }
 
   render() {
@@ -30,4 +30,8 @@ ProjectLogo.propTypes = {
   filterItems: PropTypes.func.isRequired,
 }
 
-export default connect(() => { return {} }, { filterItems })(ProjectLogo);
+const mapStateToProps = state => ({
+  cur_sort: state.items.cur_sort
+});
+
+export default connect(mapStateToProps, { filterItems })(ProjectLogo);

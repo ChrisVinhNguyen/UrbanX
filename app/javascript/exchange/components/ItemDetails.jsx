@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { Button, Icon, Image, Item, Label } from 'semantic-ui-react'
+import { Button, Icon, Image, Item, Label, Header } from 'semantic-ui-react'
 import { Rating, Divider } from 'semantic-ui-react'
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
@@ -12,11 +12,14 @@ import {Carousel} from 'react-responsive-carousel';
 import { v4 as uuid } from 'uuid';
 import PropTypes from 'prop-types';
 
+import SignUpButton from '../components/SignUpButton';
+import SignInButton from '../components/SignInButton';
 
 import pic from '../images/macbook.jpg';
 
 
 class ItemDetails extends Component {
+
   componentDidMount(){
     console.log("componentDidMount")
     this.props.getItem(this.props.match.params.id)
@@ -27,11 +30,11 @@ class ItemDetails extends Component {
 
   handleBorrow(e) {
     let transaction = {item_id: this.props.item_id, status:'pending'};
-    this.props.newTransaction(transaction, this.props.currentUserId);
+    this.props.newTransaction(transaction, this.props.currentUserId, this.props.cur_status);
   }
 
   handleCancel(e, transaction) {
-    this.props.deleteTransaction(transaction, this.props.currentUserId);
+    this.props.deleteTransaction(transaction, this.props.currentUserId, this.props.cur_status);
   }
 
   render() {
@@ -68,34 +71,52 @@ class ItemDetails extends Component {
     let borrowButton = null;
     let editButton = null;
     let deleteButton = null;
-    let temp = this.props.filtered_transactions;
-    
-    if (this.props.item_details.status == 'available' && this.props.currentUserId != this.props.item_details.user_id) {
-      let request = this.props.my_transactions_for_current_item.find(
-        (e) => e.item_id == this.props.item_id);
-      if (request) {
-        borrowButton = (
-          <Button onClick={ e => this.handleCancel(e, request) }>
-            Cancel request
-          </Button>
-          );
+
+
+    if (this.props.is_signed_in) {
+      if (this.props.item_details.status == 'available' && this.props.currentUserId != this.props.item_details.user_id) {
+        let request = this.props.my_transactions_for_current_item.find(
+          (e) => e.item_id == this.props.item_id);
+        if (request) {
+          borrowButton = (
+            <Button onClick={ e => this.handleCancel(e, request) }>
+              Cancel request
+            </Button>
+            );
+        }
+        else {
+          borrowButton = (
+            <Button onClick={ this.handleBorrow }>
+              Borrow
+            </Button>
+            );
+        }
       }
       else {
-        borrowButton = (
-          <Button onClick={ this.handleBorrow }>
-            Borrow
-          </Button>
+        if (this.props.currentUserId != this.props.item_details.user_id) {
+          borrowButton = (
+            <Button disabled>
+              Item unavailable
+            </Button>
           );
+        }
       }
     }
     else {
-      if (this.props.currentUserId != this.props.item_details.user_id) {
-        borrowButton = (
-          <Button disabled>
-            Item unavailable
-          </Button>
-        );
-      }
+      borrowButton = (
+        <div>
+          <Header as='h3' dividing>
+            Please sign in/sign up to borrow
+          </Header>
+          <div>
+            <span>
+              <SignUpButton />
+              or
+              <SignInButton />
+            </span>
+          </div>
+        </div>
+        )
     }
 
     if (this.props.currentUserId == this.props.item_details.user_id){
@@ -143,7 +164,7 @@ class ItemDetails extends Component {
         </Item.Extra>
       </Item.Content>
         </Item>
-        <ItemReviewsContainer current_viewed_item_id={this.props.match.params.id} test="test"/>
+        <ItemReviewsContainer current_viewed_item_id={this.props.match.params.id} item_owner={this.props.item_details.user_id}/>
           <p>
             Reviews
           </p>
@@ -154,6 +175,7 @@ class ItemDetails extends Component {
 
 ItemDetails.propTypes = {
   getItem: PropTypes.func.isRequired,
+  item_details: PropTypes.object.isRequired,
   newTransaction: PropTypes.func.isRequired,
   deleteTransaction: PropTypes.func.isRequired,
   getMyTransactionsForItem: PropTypes.func.isRequired
@@ -165,7 +187,9 @@ const mapStateToProps = state => ({
   current_viewed_item_reviews: state.items.current_viewed_item_reviews,
   // filtered_transactions: state.items.filtered_transactions,
   currentUserId: state.user.user_info.user_profile_id,
-  my_transactions_for_current_item: state.items.my_transactions_for_current_item
+  my_transactions_for_current_item: state.items.my_transactions_for_current_item,
+  cur_status: state.items.cur_status,
+  is_signed_in: state.user.is_signed_in
 });
 
 export default connect(mapStateToProps, {getItem, newTransaction, deleteTransaction, getMyTransactionsForItem})(ItemDetails);
