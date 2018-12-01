@@ -84,15 +84,24 @@ class UserProfilesController < ApplicationController
           filtered_transactions = Transaction.where(:lender_id => @user_profile.user_id)
         .or(Transaction.where(:borrower_id => @user_profile.user_id))
         else
-          filtered_transactions = Transaction.where("status = ? AND (lender_id = ? OR borrower_id = ?)", 
-          params[:cur_status], @user_profile.user_id, @user_profile.user_id)
+          if params[:cur_status] == 'overdue'
+            filtered_transactions = Transaction.where("status = ? AND expiry_date < ? AND (lender_id = ? OR borrower_id = ?)", 
+              'lent', DateTime.now, @user_profile.user_id, @user_profile.user_id)
+          else
+            filtered_transactions = Transaction.where("status = ? AND (lender_id = ? OR borrower_id = ?)", 
+              params[:cur_status], @user_profile.user_id, @user_profile.user_id)
+          end
         end
 
         transactions_array = []
 
         filtered_transactions.each do |transaction|
           transaction_hash = transaction.attributes
-          transaction_hash[:item_name] = Item.find(transaction.item_id).name
+          if Item.exists?(id: transaction.item_id)
+            transaction_hash[:item_name] = Item.find(transaction.item_id).name
+          else
+            transaction_hash[:item_name] = transaction.item_name
+          end
           transaction_hash[:lender_name] = UserProfile.where(user_id:transaction.lender_id).first.first_name + ' ' +
                                             UserProfile.where(user_id:transaction.lender_id).first.last_name
           transaction_hash[:borrower_name] = UserProfile.where(user_id:transaction.borrower_id).first.first_name + ' ' +
