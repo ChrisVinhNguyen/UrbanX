@@ -6,14 +6,13 @@ import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import axios from 'axios';
 import ItemReviewsContainer from '../containers/ItemReviewsContainer'
-import { getItem, newTransaction, deleteTransaction, getMyTransactionsForItem } from '../actions/itemsActions';
+import { getItem } from '../actions/itemsActions';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Carousel} from 'react-responsive-carousel';
 import { v4 as uuid } from 'uuid';
 import PropTypes from 'prop-types';
 
-import SignUpButton from '../components/SignUpButton';
-import SignInButton from '../components/SignInButton';
+import ItemDetailsBorrowContainer from '../containers/ItemDetailsBorrowContainer';
 
 import pic from '../images/macbook.jpg';
 
@@ -23,19 +22,7 @@ class ItemDetails extends Component {
   componentDidMount(){
     console.log("componentDidMount")
     this.props.getItem(this.props.match.params.id)
-    this.props.getMyTransactionsForItem(this.props.match.params.id, this.props.currentUserId);
-    this.handleBorrow = this.handleBorrow.bind(this);
-    this.handleCancel = this.handleCancel.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
-  }
-
-  handleBorrow(e) {
-    let transaction = {item_id: this.props.item_id, status:'pending'};
-    this.props.newTransaction(transaction, this.props.currentUserId, this.props.cur_status);
-  }
-
-  handleCancel(e, transaction) {
-    this.props.deleteTransaction(transaction, this.props.currentUserId, this.props.cur_status);
   }
 
   deleteItem(){
@@ -82,56 +69,10 @@ class ItemDetails extends Component {
       carouselItems = null
     }
 
-    let borrowButton = null;
     let editButton = null;
     let deleteButton = null;
 
 
-    if (this.props.is_signed_in) {
-      if (this.props.item_details.status == 'available' && this.props.currentUserId != this.props.item_details.user_id) {
-        let request = this.props.my_transactions_for_current_item.find(
-          (e) => e.item_id == this.props.item_id);
-        if (request) {
-          borrowButton = (
-            <Button onClick={ e => this.handleCancel(e, request) }>
-              Cancel request
-            </Button>
-            );
-        }
-        else {
-          borrowButton = (
-            <Button onClick={ this.handleBorrow }>
-              Borrow
-            </Button>
-            );
-        }
-      }
-      else {
-        if (this.props.currentUserId != this.props.item_details.user_id) {
-          borrowButton = (
-            <Button disabled>
-              Item unavailable
-            </Button>
-          );
-        }
-      }
-    }
-    else {
-      borrowButton = (
-        <div>
-          <Header as='h3' dividing>
-            Please sign in/sign up to borrow
-          </Header>
-          <div>
-            <span>
-              <SignUpButton />
-              or
-              <SignInButton />
-            </span>
-          </div>
-        </div>
-        )
-    }
 
     if (this.props.currentUserId == this.props.item_details.user_id){
       editButton=(
@@ -167,7 +108,7 @@ class ItemDetails extends Component {
         <Item.Meta>
           <p>Quantity: {this.props.item_details.quantity}</p>
           
-          {borrowButton}
+          <ItemDetailsBorrowContainer item_id={ this.props.match.params.id} currentUserId={ this.props.currentUserId } />
         </Item.Meta>
         <Item.Description>Description: {this.props.item_details.description}.</Item.Description>
         {editButton}
@@ -203,4 +144,4 @@ const mapStateToProps = state => ({
   is_signed_in: state.user.is_signed_in
 });
 
-export default connect(mapStateToProps, {getItem, newTransaction, deleteTransaction, getMyTransactionsForItem})(ItemDetails);
+export default connect(mapStateToProps, {getItem})(ItemDetails);
