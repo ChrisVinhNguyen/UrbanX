@@ -3,16 +3,18 @@ class UserProfilesController < ApplicationController
 
   def create
     if user_signed_in?
+      context_params = {
+        user_profile_params: user_profile_params,
+        current_user: current_user
+      }
 
-      @user_profile = UserProfile.new(user_profile_params)
-      @user_profile.created_at = DateTime.now
-      @user_profile.updated_at = DateTime.now 
-      @user_profile.user_id = @current_user.id
-      if @user_profile.save
-          redirect_to @user_profile
-      else
-        render :new
+      result = CreateNewUserProfile.call(context_params)
+
+      if result.success?
+        render json: result.profile_info_hash
       end
+    else
+      render :new
     end
   end
 
