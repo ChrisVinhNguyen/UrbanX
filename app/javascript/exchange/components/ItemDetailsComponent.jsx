@@ -17,6 +17,7 @@ import pic from '../images/macbook.jpg';
 class ItemDetailsComponent extends Component {
 
   render() {
+    console.log(this.props)
     return (
       <div>
         <Item>
@@ -40,7 +41,7 @@ class ItemDetailsComponent extends Component {
         </Item.Extra>
       </Item.Content>
         </Item>
-        <ItemReviewsContainer current_viewed_item_id={this.props.item_match_param_id_prop} item_owner={this.props.item_details_user_id_prop}/>
+        <ItemReviewsContainer current_viewed_item_id={this.props.item_match_param_id_prop} item_owner_profile_id={this.props.item_owner_profile_id}/>
       </div>
     );
   }
