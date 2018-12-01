@@ -91,12 +91,18 @@ class ItemsController < ApplicationController
 
   def search
     search_value = params[:search]
+    status = "available"
 
-    searched_item_names = Item.where("name ilike ? AND status = ?", "%#{search_value}%","available").pluck(:name)
-    searched_item_names_array = searched_item_names.map { |item_name| { title: item_name }}
-    unique_searched_item_names_array = searched_item_names_array.uniq
+    context_params = {
+      search_value: search_value,
+      item_status: status
+    }
 
-    render json: { "searched_item_names" => unique_searched_item_names_array }.to_json
+    result = SearchForAvailableItems.call(context_params)
+
+    if result.success?
+      render json: { "searched_item_names" => result.item_names_array }
+    end
   end
 
   def index
