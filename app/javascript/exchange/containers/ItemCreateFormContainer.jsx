@@ -90,7 +90,7 @@ class ItemCreateFormContainer extends Component {
 
     return (
       <div className="new-item-form-container">
-        <h1 className="new-item-form-title">Sign Up Form</h1>
+        <h1 className="new-item-form-title">New Item Form</h1>
         <Form className="new-item-form" onSubmit={ this.handleSubmit }>
           <Form.Field>
             <label>Name</label>
