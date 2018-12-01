@@ -18,7 +18,7 @@ class ItemCategoriesMenu extends Component {
   }
 
   componentWillMount() {
-    this.props.filterItems('All');
+    this.props.filterItems('All', 'Default');
   }
 
   handleCategoryClick (e, { name }) {
