@@ -30,10 +30,20 @@ class ItemReview extends Component {
     console.log(this.props.current_viewed_item_reviews)
 
     const current_user_id = this.props.user_info.user_profile_id;
+
+    const item_owner = this.props.owner_id;
+
+    console.log(current_user_id)
+    console.log(item_owner)
+
     let hasReviewed = false; 
+    let isOwner = false;
     let showEdit = this.state.showEdit;
     let reviews = this.props.current_viewed_item_reviews.map(review => {
       if (review.owner_id == current_user_id){ hasReviewed = true }
+        {console.log(review.owner_id)}
+        {console.log(current_user_id)}
+        {console.log(item_owner)}
         return (
           <Comment>
             <Comment.Avatar/>
@@ -47,7 +57,7 @@ class ItemReview extends Component {
                 <div>
                   <Rating icon='star' rating={review.rating} maxRating={5} disabled />
                 </div>
-                <div>{review.updated_at}</div>
+                <div>{String(review.updated_at).split('T')[0]}</div>
               </Comment.Metadata>
               <Comment.Text>{review.comment}</Comment.Text>
               {current_user_id == review.owner_id?
@@ -68,11 +78,13 @@ class ItemReview extends Component {
           </Comment>
         );
       });
+
+    if(item_owner == current_user_id){isOwner = true}
     return (
       <div>
         { reviews }
-        {!hasReviewed? <CreateItemReviewFormContainer/>
-        :null
+        {(hasReviewed || isOwner)? null
+        :<CreateItemReviewFormContainer/>
         }
       </div>
     );
@@ -86,6 +98,7 @@ ItemReview.propTypes = {
 
 const mapStateToProps = state => ({
   user_info: state.user.user_info,
+  item_details: state.items.item_details,
   current_viewed_item_reviews: state.items.current_viewed_item_reviews
 });
 

@@ -133,7 +133,7 @@ export const deleteItemReview = (current_viewed_item_id, review_id) => dispatch 
 
 export const getItem = (item_id=item_id) => dispatch => {
   let that = this
-
+  console.log(item_id)
   axios.get('/items/' + item_id , {})
   .then(function(response){
     dispatch({
@@ -145,6 +145,7 @@ export const getItem = (item_id=item_id) => dispatch => {
   .catch(function(error){
     console.log(error);
   })
+  console.log(item_id)
 }
 
 export const getMyItems = (current_user_profile_id) => dispatch => {
@@ -191,7 +192,7 @@ export const getMyTransactions = (current_user_profile_id, cur_status) => dispat
   })
 }
 
-export const newTransaction = (transaction, current_user_profile_id) => dispatch => {
+export const newTransaction = (transaction, current_user_profile_id, cur_status) => dispatch => {
   let that = this
   getCSRFToken();
 
@@ -203,7 +204,7 @@ export const newTransaction = (transaction, current_user_profile_id) => dispatch
     console.log("inside newTransactions")
     console.log(response)
     dispatch(
-      getMyTransactions(current_user_profile_id)
+      getMyTransactions(current_user_profile_id, cur_status)
     )
     dispatch(
       getMyTransactionsForItem(transaction.item_id, current_user_profile_id)
@@ -214,7 +215,7 @@ export const newTransaction = (transaction, current_user_profile_id) => dispatch
   })
 }
 
-export const updateTransaction = (transaction, current_user_profile_id) => dispatch => {
+export const updateTransaction = (transaction, current_user_profile_id, cur_status) => dispatch => {
   let that = this
   getCSRFToken();
   console.log(transaction)
@@ -226,7 +227,7 @@ export const updateTransaction = (transaction, current_user_profile_id) => dispa
     console.log("inside updateTransactions")
     console.log(response)
     dispatch(
-      getMyTransactions(current_user_profile_id)
+      getMyTransactions(current_user_profile_id, cur_status)
     )
     dispatch(
       getMyTransactionsForItem(transaction.item_id, current_user_profile_id)
@@ -237,7 +238,7 @@ export const updateTransaction = (transaction, current_user_profile_id) => dispa
   })
 }
 
-export const deleteTransaction = (transaction, current_user_profile_id) => dispatch => {
+export const deleteTransaction = (transaction, current_user_profile_id, cur_status) => dispatch => {
   let that = this
   getCSRFToken();
   console.log(transaction)
@@ -249,7 +250,7 @@ export const deleteTransaction = (transaction, current_user_profile_id) => dispa
     console.log("inside deleteTransactions")
     console.log(response)
     dispatch(
-      getMyTransactions(current_user_profile_id)
+      getMyTransactions(current_user_profile_id, cur_status)
     )
     dispatch(
       getMyTransactionsForItem(transaction.item_id, current_user_profile_id)

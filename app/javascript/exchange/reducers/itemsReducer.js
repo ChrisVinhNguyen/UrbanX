@@ -29,7 +29,7 @@ const initialState = {
   filtered_transactions: [],
   item_details: [], 
   my_transactions_for_current_item: [],
-  cur_sort: '',
+  cur_sort: 'Default',
   original_list: [],
   cur_status: 'All'
 }
@@ -71,6 +71,7 @@ export default function(state = initialState, action) {
         current_viewed_item_reviews: action.current_viewed_item_reviews
       }
     case GET_ITEM:
+      console.log("calling reducer")
       return {
         ...state,
         item_id: action.item_id,

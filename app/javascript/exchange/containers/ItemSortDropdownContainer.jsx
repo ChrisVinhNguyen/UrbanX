@@ -54,11 +54,22 @@ class ItemSortDropdownContainer extends Component {
       //   value: 'Average Rating'
       // }
     ];
+    let cur_selected;
+    if (this.props.cur_sort == 'Default') {
+      cur_selected = sortOptions[0].value;
+    }
+    else if (this.props.cur_sort == 'Newest') {
+      cur_selected = sortOptions[1].value;
+    }
+    else if (this.props.cur_sort == 'Oldest') {
+      cur_selected = sortOptions[2].value;
+    }
+    
     return (
       <div>
         <p align="right">
           Sort by{'  '}
-          <Dropdown inline defaultValue={sortOptions[0].value} direction="left" options={sortOptions} onChange={ this.handleSelect }/>
+          <Dropdown inline defaultValue={cur_selected} direction="left" options={sortOptions} onChange={ this.handleSelect }/>
         </p>
       </div>
     )

@@ -3,8 +3,10 @@ import { Button, Checkbox, Form } from 'semantic-ui-react'
 import axios from 'axios';
 import { newItem,getItem } from '../actions/itemsActions';
 import { connect } from 'react-redux';
-import { UploadMultipleButton }  from '../components/UploadMultipleButton.js'
+import { UploadMultipleButton }  from '../components/UploadMultipleButton.js';
+import { Router, Route, Link, Redirect } from 'react-router-dom';
 
+import * as actions from '../actions/itemsActions';
 class ItemCreateFormContainer extends Component {
   constructor() {
     super();
@@ -16,8 +18,7 @@ class ItemCreateFormContainer extends Component {
       condition: '',
       value: '',
       user_id: '',
-      images: []
-
+      images: [], 
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -53,6 +54,7 @@ class ItemCreateFormContainer extends Component {
     // }
     // debugger
     let newItemId 
+
     $.ajax({
       url:'/items',
       method: 'POST',
@@ -63,9 +65,18 @@ class ItemCreateFormContainer extends Component {
             'X-CSRFToken': $('meta[name="token"]').attr('content')
         }
     }).then(
-    (response) => this.props.history.push('/items_lists/' + response)
-    );
-  }
+      (response) => {this.props.history.push("/items_list/" + response),
+        this.props.getItem(response)
+        console.log("after history")
+      }
+    )
+    console.log(this.state.response)
+
+    //this.props.history.push("/items_list/93");
+
+}
+
+
 
   updateItemState(files){
     this.state.images = files
@@ -114,4 +125,8 @@ class ItemCreateFormContainer extends Component {
   }
 }
 
-export default connect(() => { return {} }, { newItem, getItem })(ItemCreateFormContainer)
+const mapStateToProps = state => ({
+  item_id: state.items.item_id
+});
+
+export default connect(mapStateToProps, { newItem, getItem })(ItemCreateFormContainer);

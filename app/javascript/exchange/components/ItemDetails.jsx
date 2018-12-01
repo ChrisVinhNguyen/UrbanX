@@ -19,6 +19,7 @@ import pic from '../images/macbook.jpg';
 
 
 class ItemDetails extends Component {
+
   componentDidMount(){
     console.log("componentDidMount")
     this.props.getItem(this.props.match.params.id)
@@ -27,21 +28,13 @@ class ItemDetails extends Component {
     this.handleCancel = this.handleCancel.bind(this);
   }
 
-  componentWillUpdate(){
-    console.log("componentWillUpdate")
-    this.props.getItem(this.props.match.params.id)
-    this.props.getMyTransactionsForItem(this.props.match.params.id, this.props.currentUserId);
-    this.handleBorrow = this.handleBorrow.bind(this);
-    this.handleCancel = this.handleCancel.bind(this);
-  }
-
   handleBorrow(e) {
     let transaction = {item_id: this.props.item_id, status:'pending'};
-    this.props.newTransaction(transaction, this.props.currentUserId);
+    this.props.newTransaction(transaction, this.props.currentUserId, this.props.cur_status);
   }
 
   handleCancel(e, transaction) {
-    this.props.deleteTransaction(transaction, this.props.currentUserId);
+    this.props.deleteTransaction(transaction, this.props.currentUserId, this.props.cur_status);
   }
 
   render() {
@@ -167,7 +160,7 @@ class ItemDetails extends Component {
         </Item.Extra>
       </Item.Content>
         </Item>
-        <ItemReviewsContainer current_viewed_item_id={this.props.match.params.id} test="test"/>
+        <ItemReviewsContainer current_viewed_item_id={this.props.match.params.id} item_owner={this.props.item_details.user_id}/>
           <p>
             Reviews
           </p>
@@ -178,6 +171,7 @@ class ItemDetails extends Component {
 
 ItemDetails.propTypes = {
   getItem: PropTypes.func.isRequired,
+  item_details: PropTypes.object.isRequired,
   newTransaction: PropTypes.func.isRequired,
   deleteTransaction: PropTypes.func.isRequired,
   getMyTransactionsForItem: PropTypes.func.isRequired
@@ -190,6 +184,7 @@ const mapStateToProps = state => ({
   // filtered_transactions: state.items.filtered_transactions,
   currentUserId: state.user.user_info.user_profile_id,
   my_transactions_for_current_item: state.items.my_transactions_for_current_item,
+  cur_status: state.items.cur_status,
   is_signed_in: state.user.is_signed_in
 });
 
