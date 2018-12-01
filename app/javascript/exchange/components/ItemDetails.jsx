@@ -46,6 +46,9 @@ class ItemDetails extends Component {
     (response) => console.log(response.message),
     (response) => console.log(response.responseJSON)
     );
+
+    console.log(this.props.match.params.id)
+    this.props.history.push("/")
   }
 
   render() {
@@ -176,9 +179,6 @@ class ItemDetails extends Component {
       </Item.Content>
         </Item>
         <ItemReviewsContainer current_viewed_item_id={this.props.match.params.id} item_owner={this.props.item_details.user_id}/>
-          <p>
-            Reviews
-          </p>
       </div>
     );
   }
