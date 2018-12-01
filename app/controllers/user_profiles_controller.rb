@@ -69,14 +69,6 @@ class UserProfilesController < ApplicationController
     if result.success?
       render json: result.profile_info_hash
     end
-    profile_hash = @user_profile.attributes
-    profile_hash[:contact_list] = @contact_names
-    profile_hash[:email] = @user_profile.user.email
-    if @user_profile.image.attached?
-        profile_hash[:image] = url_for(@user_profile.image)
-        profile_hash[:image_attachment_id] = @user_profile.image.id
-    end
-    render json: profile_hash
   end
 
   def transactions
