@@ -6,7 +6,7 @@ import UserProfileInfo from '../components/UserProfileInfo'
 import ItemListComponent from '../components/ItemListComponent'
 import TransactionListComponent from '../components/TransactionListComponent'
 import UserReviewsContainer from '../containers/UserReviewsContainer'
-import { getMyItems , getMyTransactions} from '../actions/itemsActions' 
+import { getMyItems , getMyTransactions, filterItems} from '../actions/itemsActions' 
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -24,6 +24,13 @@ class ProfileContentContainer extends Component {
     this.props.getMyTransactions(this.props.userProfileId, 'All');
     console.log(this.props.userProfileId)
     console.log("=============================")
+  }
+
+  componentDidMount() {
+    this._isMounted = true;
+    window.onpopstate = ()=> {
+        this.props.filterItems('All');
+      }
   }
 
   handleOnClick(activeTab){
@@ -50,14 +57,6 @@ class ProfileContentContainer extends Component {
               <a className={`item ${this.state.activeTab == "Reviews"? "active" :""}`} onClick = {() => this.handleOnClick("Reviews")}>
                 Reviews
               </a>
-              <div className="right menu">
-                <div className="item">
-                  <div className="ui transparent icon input">
-                    <input type="text" placeholder="Search..."/>
-                    <i className="search link icon"></i>
-                  </div>
-                </div>
-              </div>
             </div>
             <div className="ui segment">
             { this.state.activeTab == "My_Items"? <ItemListComponent /> : null} 
@@ -70,9 +69,10 @@ class ProfileContentContainer extends Component {
 }
 }
 ProfileContentContainer.propTypes = {
+  filterItems: PropTypes.func.isRequired,
   getMyItems: PropTypes.func.isRequired,
   getMyTransactions: PropTypes.func.isRequired,
 }
 
 
-export default connect(() => {return {}}, { getMyItems, getMyTransactions })(ProfileContentContainer);
+export default connect(() => {return {}}, { filterItems,getMyItems, getMyTransactions })(ProfileContentContainer);
