@@ -35,7 +35,7 @@ class ItemDetailsContainer extends Component {
     );
 
     console.log(this.props.match.params.id);
-    this.props.filterItems('All', 'Default', '');
+    this.props.filterItems('All', this.props.cur_sort, '');
     this.props.history.push("/");
 
   }
@@ -54,7 +54,6 @@ class ItemDetailsContainer extends Component {
         return (
           <div key={keyVal}>
             <img src={imageSrc} />
-            <p className="legend">{keyVal}</p>
           </div>
         )
       })
@@ -148,7 +147,7 @@ const mapStateToProps = state => ({
   currentUserId: state.user.user_info.user_id,
   currentUserProfileId: state.user.user_info.user_profile_id,
   my_transactions_for_current_item: state.items.my_transactions_for_current_item,
-  cur_status: state.items.cur_status,
+  cur_sort: state.items.cur_sort,
   is_signed_in: state.user.is_signed_in
 });
 

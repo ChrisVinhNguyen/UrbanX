@@ -14,7 +14,7 @@ class ItemDetailsBorrowContainer extends Component {
   constructor(props) {
   	super(props);
     if (this.props.currentUserId) {
-      this.props.getMyTransactionsForItem(this.props.item_id, this.props.currentUserId);
+      this.props.getMyTransactionsForItem(this.props.item_id, this.props.userProfileId);
     }
     this.handleBorrow = this.handleBorrow.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
@@ -22,7 +22,7 @@ class ItemDetailsBorrowContainer extends Component {
 
   componentWillUpdate(prevProps) {
     if (this.props.currentUserId != prevProps.currentUserId) {
-      this.props.getMyTransactionsForItem(prevProps.item_id, prevProps.currentUserId);
+      this.props.getMyTransactionsForItem(prevProps.item_id, prevProps.userProfileId);
     }
   }
 

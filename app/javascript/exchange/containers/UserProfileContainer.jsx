@@ -5,6 +5,11 @@ import { Grid } from 'semantic-ui-react'
 import UserProfileInfo from '../components/UserProfileInfo';
 import ProfileContentContainer from '../containers/ProfileContentContainer';
 
+import { getMyItems , getMyTransactions, filterItems} from '../actions/itemsActions' 
+import {getUserReviews} from '../actions/userActions'
+import PropTypes from 'prop-types';
+
+import { connect } from 'react-redux';
 
 class UserProfileContainer extends Component {
   constructor() {
@@ -15,6 +20,7 @@ class UserProfileContainer extends Component {
   }
 
   componentDidMount() {
+    console.log("calling did mount")
     axios.get('/user_profiles/' + this.props.userProfileId) 
     .then((response) => {
       this.setState({
@@ -27,10 +33,8 @@ class UserProfileContainer extends Component {
   }
 
   componentWillUpdate(prevProps){
-    console.log('inside componentWillUpdate-------')
-    console.log(prevProps)
-    console.log(this.props)
     if (prevProps.userProfileId !== this.props.userProfileId) {
+      console.log("prev = cur")
       axios.get('/user_profiles/' + prevProps.userProfileId)
       .then((response) => {
         console.log(response)
@@ -42,7 +46,6 @@ class UserProfileContainer extends Component {
         console.log(error);
       })
     }
-    console.log('inside componentWillUpdate-------')
   }
 
   render() {
@@ -50,11 +53,17 @@ class UserProfileContainer extends Component {
       <div>
         <Grid columns={2} divided>
           <UserProfileInfo viewingMyProfile = {this.props.viewingMyProfile} userProfile={this.state.userProfile} />
-          <ProfileContentContainer viewingMyProfile = {this.props.viewingMyProfile} userProfileId={this.props.userProfileId} />
+          <ProfileContentContainer viewingMyProfile = {this.props.viewingMyProfile} userProfileId={this.props.userProfileId}/>
         </Grid>
       </div>
     );
   }
 }
 
-export default UserProfileContainer;
+UserProfileContainer.propTypes = {
+  filterItems: PropTypes.func.isRequired,
+  getMyItems: PropTypes.func.isRequired,
+  getUserReviews: PropTypes.func.isRequired,
+  getMyTransactions: PropTypes.func.isRequired,
+}
+export default connect(() => {return{}}, { filterItems, getMyItems, getUserReviews, getMyTransactions })(UserProfileContainer);

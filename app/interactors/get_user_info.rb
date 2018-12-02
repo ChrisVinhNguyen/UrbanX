@@ -20,7 +20,7 @@ class GetUserInfo
         "location" => user_profile.location,
         "contact_list" => user_profile.contact_list
       }
-
+      context.user_profile = user_profile
       context.user_info = user_info
     else
       context.fail!(message: "user is not signed in")
