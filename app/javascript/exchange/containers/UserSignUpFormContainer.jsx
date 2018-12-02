@@ -199,4 +199,8 @@ class UserSignUpFormContainer extends Component {
   }
 }
 
-export default connect(() => { return {} }, { signUpUser })(UserSignUpFormContainer);
+const mapStateToProps = state => ({
+  user_form_backend_error: state.items.user_form_backend_error,
+});
+
+export default connect(mapStateToProps, { signUpUser })(UserSignUpFormContainer);
