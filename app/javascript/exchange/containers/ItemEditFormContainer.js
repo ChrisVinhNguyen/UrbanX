@@ -67,7 +67,9 @@ class ItemEditFormContainer extends Component {
             'X-CSRFToken': $('meta[name="token"]').attr('content')
         }
     }).then(
-    (response) => this.props.getItem(response)
+    (response) => {
+        this.props.getItem(response.id)
+      }
     );
 
     console.log(this.props.match.params.id)
