@@ -23,7 +23,7 @@ class ItemListComponent extends Component {
     return (
       <div className="item-list-component">
         <ItemSortDropdownContainer />
-        <Grid columns={3} divided>
+        <Grid columns={3} padded relaxed='very' divided='vertically'>
           <Grid.Row>
             {items}
           </Grid.Row>
