@@ -105,6 +105,7 @@ class UserProfilesController < ApplicationController
             end
           else
             transaction_hash[:item_name] = transaction.item_name
+            transaction_hash[:deleted] = true
           end
           transaction_hash[:lender_name] = UserProfile.where(user_id:transaction.lender_id).first.first_name + ' ' +
                                             UserProfile.where(user_id:transaction.lender_id).first.last_name

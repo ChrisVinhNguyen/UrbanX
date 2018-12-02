@@ -1,5 +1,9 @@
-.right-date {
+/*.right-date {
 	display: inline-block;
-	float: right;
+	column-count: 3;
 	padding-right: 40%;
+}*/
+
+.transaction-summary {
+	column-count: 2;
 }

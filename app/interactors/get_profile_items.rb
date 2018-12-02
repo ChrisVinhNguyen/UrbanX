@@ -12,6 +12,12 @@ class GetProfileItems
 
       user_profile = user_profile_repo.find_by_id(context.profile_id)
       items = item_repo.find_all_user_items(user_profile.user_id)
+      puts("=======-=========")
+      puts(context)
+      puts(user_profile)
+      puts("$$$$$$")
+      puts(items)
+      puts("=======-=========")
 
       context.items = items
     else

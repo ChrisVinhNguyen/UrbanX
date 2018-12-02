@@ -31,13 +31,13 @@ class SearchBarContainer extends Component {
 
   handleResultSelect(e, { result }) {
     this.setState({ openResultsMenu: false, value: result.title });
-    this.props.filterItems('All', '', result.title)
+    this.props.filterItems('All', this.props.cur_sort, result.title)
   }
 
   handleKeyPress(e){
     if (e.key === 'Enter') {
       this.setState({ openResultsMenu: false, value: this.state.value })
-      this.props.filterItems('All', '', this.state.value)
+      this.props.filterItems('All', this.props.cur_sort, this.state.value)
     }
   }
 
@@ -84,11 +84,13 @@ class SearchBarContainer extends Component {
 SearchBarContainer.propTypes = {
   filterItems: PropTypes.func.isRequired,
   searchItems: PropTypes.func.isRequired,
-  filtered_item_names_for_search: PropTypes.array.isRequired
+  filtered_item_names_for_search: PropTypes.array.isRequired,
+  cur_sort: PropTypes.string.isRequired
 }
 
 const mapStateToProps = state => ({
-  filtered_item_names_for_search: state.items.filtered_item_names_for_search
+  filtered_item_names_for_search: state.items.filtered_item_names_for_search,
+  cur_sort: state.items.cur_sort
 });
 
 export default connect(mapStateToProps, { filterItems, searchItems })(SearchBarContainer);
