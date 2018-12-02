@@ -13,6 +13,7 @@ class CreateNewUserProfile
       user_profile.created_at = DateTime.now
       user_profile.updated_at = DateTime.now 
       user_profile.user_id = context.current_user.id
+      user_profile.points = 0
 
       if user_profile_repo.save(user_profile)
         context.user_profile = user_profile
