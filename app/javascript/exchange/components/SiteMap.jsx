@@ -14,7 +14,7 @@ class SiteMap extends Component {
     return (
       <div>
         <Container>
-          <Header as='h2'>SiteMap</Header>
+          <Header as='h2'>Site Map</Header>
           <p>
             Domestic dogs inherited complex behaviors, such as bite inhibition, from their wolf
             ancestors, which would have been pack hunters with complex body language. These
