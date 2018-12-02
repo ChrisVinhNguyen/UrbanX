@@ -27,8 +27,9 @@ class UserReview extends Component {
   render() {
     console.log(this.props.user_reviews)
 
-    const current_user_id = this.props.user_info.user_profile_id;
-
+    const current_user_profile_id = this.props.user_info.user_profile_id;
+    const current_user_id = this.props.user_info.user_id;
+    
     let hasReviewed = false; 
     let current_users_review = false; 
     let matchedReview = false; 
@@ -36,14 +37,15 @@ class UserReview extends Component {
     let showEdit = this.state.showEdit;
 
     let reviews = this.props.user_reviews.map(review => {
-      if (review.reviewer_id == current_user_id){ hasReviewed = true }
+      console.log(review.reviewer_id)
+      if (review.reviewer_id == current_user_profile_id){ hasReviewed = true }
       return (
         <div>
             <Comment>
               <Comment.Avatar/>
               <Comment.Content>
                 <Comment.Author>
-                  <Link to={'/user_profiles/'+ review.reviewer_id}>
+                  <Link to={'/user_profiles_show/'+ review.reviewer_id}>
                     {review.reviewer}
                   </Link>
                 </Comment.Author>
@@ -54,7 +56,7 @@ class UserReview extends Component {
                   <div>{String(review.updated_at).split('T')[0]}</div>
                 </Comment.Metadata>
                 <Comment.Text>{review.comment}</Comment.Text>
-                {current_user_id == review.reviewer_id?
+                {current_user_profile_id == review.reviewer_id?
                 <Comment.Actions>
                   <DeleteUserReviewFormContainer review_id = {review.id} reviewee_id = {review.reviewee_id}/>
                   <Comment.Action onClick={this.handClick}>
@@ -73,7 +75,9 @@ class UserReview extends Component {
       );
     });
 
-    if(this.props.reviewee_id == current_user_id){isOwner = true}
+    console.log(current_user_profile_id)
+    console.log(this.props.reviewee_id)
+    if(this.props.reviewee_id == current_user_profile_id){isOwner = true}
     return (
       <div>
         { reviews }
