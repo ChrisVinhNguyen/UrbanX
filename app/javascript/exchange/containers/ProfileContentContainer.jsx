@@ -7,6 +7,7 @@ import ItemListComponent from '../components/ItemListComponent'
 import TransactionListComponent from '../components/TransactionListComponent'
 import UserReviewsContainer from '../containers/UserReviewsContainer'
 import { getMyItems , getMyTransactions, filterItems} from '../actions/itemsActions' 
+import {getUserReviews} from '../actions/userActions'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -24,6 +25,20 @@ class ProfileContentContainer extends Component {
     this.props.getMyTransactions(this.props.userProfileId, 'All');
     console.log(this.props.userProfileId)
     console.log("=============================")
+  }
+
+  componentWillUpdate(prevProps){
+    console.log('inside componentWillUpdate-------')
+    console.log(prevProps)
+    console.log(this.props)
+    if (prevProps.userProfileId !== this.props.userProfileId) {
+      this.props.getMyItems(prevProps.userProfileId, this.props.cur_sort);
+      this.props.getMyTransactions(prevProps.userProfileId, 'All');
+      this.props.getUserReviews(prevProps.userProfileId);
+      this.setState({
+        activeTab: "My_Items" 
+      });
+    }
   }
 
   componentDidMount() {
@@ -71,6 +86,7 @@ class ProfileContentContainer extends Component {
 ProfileContentContainer.propTypes = {
   filterItems: PropTypes.func.isRequired,
   getMyItems: PropTypes.func.isRequired,
+  getUserReviews: PropTypes.func.isRequired,
   getMyTransactions: PropTypes.func.isRequired,
 }
 
@@ -78,4 +94,4 @@ const mapStateToProps = state => ({
   cur_sort: state.items.cur_sort
 });
 
-export default connect(mapStateToProps, { filterItems,getMyItems, getMyTransactions })(ProfileContentContainer);
+export default connect(mapStateToProps, { filterItems, getMyItems, getUserReviews, getMyTransactions })(ProfileContentContainer);
