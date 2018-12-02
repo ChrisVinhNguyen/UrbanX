@@ -17,5 +17,4 @@ export const INVALID_EMAIL_OR_PASSWORD = 'Invalid email or password';
 export const FIRSTNAME_MISSING = 'Your first name is missing';
 export const LASTNAME_MISSING = 'Your last name is missing';
 export const LOCATION_MISSING = 'Your location is missing';
-
-
+export const DOB_MISSING = 'Your date of birth is missing';
