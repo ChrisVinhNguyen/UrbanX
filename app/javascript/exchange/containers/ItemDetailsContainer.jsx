@@ -54,7 +54,6 @@ class ItemDetailsContainer extends Component {
         return (
           <div key={keyVal}>
             <img src={imageSrc} />
-            <p className="legend">{keyVal}</p>
           </div>
         )
       })
