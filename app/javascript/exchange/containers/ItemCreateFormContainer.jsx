@@ -5,6 +5,8 @@ import { newItem,getItem } from '../actions/itemsActions';
 import { connect } from 'react-redux';
 import { UploadMultipleButton }  from '../components/UploadMultipleButton.js';
 import { Router, Route, Link, Redirect } from 'react-router-dom';
+import { Dropdown } from 'semantic-ui-react'
+
 
 import * as actions from '../actions/itemsActions';
 
@@ -27,12 +29,16 @@ class ItemCreateFormContainer extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCategoryChange = this.handleCategoryChange.bind(this)
     this.updateItemState = this.updateItemState.bind(this);
   }
 
   handleChange(e, { name, value }) {
+    console.log(this.state)
     this.setState({ [name]: value })
   }
+
+  handleCategoryChange = (e, { value }) => this.setState({ ['category']: value })
 
   handleSubmit(e) {
     let item = this.state;
@@ -70,15 +76,15 @@ class ItemCreateFormContainer extends Component {
         }
     }).then(
       (response) => {this.props.history.push("/items_list/" + response),
-        this.props.getItem(response),
+        this.props.getItem(response)
         console.log("after history")
       }
     )
     console.log(this.state.response)
+
     //this.props.history.push("/items_list/93");
 
 }
-
 
 
   updateItemState(files){
@@ -90,6 +96,13 @@ class ItemCreateFormContainer extends Component {
 
   render() {
     const { name, description, category, quantity,condition,value, user_id  } = this.state
+    var categoryOptions = [
+      {text: 'Electronics', value: 'Electronics'}, {text: 'Books', value: 'Books'}, {text: 'Sports', value: 'Sports'}, {text: 'Tools', value: 'Tools'}, {text: 'Music', value: 'Music'}, {text: 'Vehicles', value: 'Vehicles'}, {text: 'Clothing', value: 'Clothing'}, {text: 'Accessories', value: 'Accessories'}
+    ]
+
+    var conditionOptions = [
+      {text: 'Brand New', value: 'Brand New'}, {text: 'Excellent', value: 'Excellent'}, {text: 'Good', value: 'Good'}, {text: 'Fair', value: 'Fair'}, {text: 'Worn Out', value: 'Worn out'}
+    ]
 
     return (
       <div className="new-item-form-container">
@@ -108,7 +121,13 @@ class ItemCreateFormContainer extends Component {
                 </Form.Field>
                 <Form.Field>
                   <label>Category</label>
-                  <Form.Input placeholder='Category' name='category' value={ category } onChange={ this.handleChange } />
+                  <Dropdown 
+                    options={categoryOptions}
+                    placeholder='Choose a category'
+                    selection
+                    name='category'
+                    value={category}
+                    onChange={ this.handleChange } />
                 </Form.Field>
                 <Form.Field>
                   <label>Quantity</label>
@@ -116,7 +135,13 @@ class ItemCreateFormContainer extends Component {
                 </Form.Field>
                 <Form.Field>
                   <label>Condition</label>
-                  <Form.Input placeholder='Condition' name='condition' value={ condition } onChange={ this.handleChange } />
+                  <Dropdown 
+                    options={conditionOptions}
+                    placeholder='Choose a category'
+                    selection
+                    name='condition'
+                    value={condition}
+                    onChange={ this.handleChange } />
                 </Form.Field>
                 <Form.Field>
                   <label>Value</label>
