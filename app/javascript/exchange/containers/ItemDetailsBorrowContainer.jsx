@@ -13,9 +13,17 @@ import SignInButton from '../components/SignInButton';
 class ItemDetailsBorrowContainer extends Component {
   constructor(props) {
   	super(props);
-    this.props.getMyTransactionsForItem(this.props.item_id, this.props.userProfileId);
+    if (this.props.currentUserId) {
+      this.props.getMyTransactionsForItem(this.props.item_id, this.props.currentUserId);
+    }
     this.handleBorrow = this.handleBorrow.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
+  }
+
+  componentWillUpdate(prevProps) {
+    if (this.props.currentUserId != prevProps.currentUserId) {
+      this.props.getMyTransactionsForItem(prevProps.item_id, prevProps.currentUserId);
+    }
   }
 
   handleBorrow(e) {

@@ -17,7 +17,6 @@ import pic from '../images/macbook.jpg';
 class ItemDetailsComponent extends Component {
 
   render() {
-    console.log(this.props)
     return (
       <div>
         <Item>
@@ -30,7 +29,7 @@ class ItemDetailsComponent extends Component {
         <Item.Meta>
           <p>Quantity: {this.props.item_quantity_prop}</p>
           
-          <ItemDetailsBorrowContainer item_id={ this.props.item_match_param_id_prop} currentUserId={ this.props.current_user_id_prop } userProfileId={ this.props.user_profile_id_prop }/>
+          <ItemDetailsBorrowContainer item_id={ this.props.item_match_param_id_prop} currentUserId={ this.props.current_user_id_prop } userProfileId={ this.props.item_owner_profile_id }/>
         </Item.Meta>
         <Item.Description>Description: {this.props.item_description_prop}.</Item.Description>
         {this.props.active_transactions_msg_prop}

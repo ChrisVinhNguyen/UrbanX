@@ -115,7 +115,7 @@ class ItemDetailsContainer extends Component {
       item_quantity_prop={this.props.item_details.quantity} 
       item_match_param_id_prop={this.props.match.params.id} 
       current_user_id_prop={this.props.currentUserId}
-      user_profile_id_prop={this.props.userProfileId}
+      item_owner_profile_id = {this.props.currentUserProfileId}
       item_description_prop={this.props.item_details.description} 
       item_avg_rating_prop={this.props.item_details.average_rating} 
       item_details_user_id_prop={this.props.item_details.user_id} 
@@ -141,7 +141,7 @@ const mapStateToProps = state => ({
   current_viewed_item_reviews: state.items.current_viewed_item_reviews,
   // filtered_transactions: state.items.filtered_transactions,
   currentUserId: state.user.user_info.user_id,
-  userProfileId: state.user.user_info.user_profile_id,
+  currentUserProfileId: state.user.user_info.user_profile_id,
   my_transactions_for_current_item: state.items.my_transactions_for_current_item,
   cur_status: state.items.cur_status,
   is_signed_in: state.user.is_signed_in
