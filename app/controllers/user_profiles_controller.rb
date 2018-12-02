@@ -174,8 +174,8 @@ class UserProfilesController < ApplicationController
     if user_signed_in?
       @user_profile = UserProfile.find(params[:id])
       if @user_profile.user == @current_user
-        my_transactions_for_current_item = Transaction.where(borrower_id: @user_profile.user_id, 
-          item_id: params[:current_item_id], status: 'pending')
+        my_transactions_for_current_item = Transaction.where("status != ? AND (lender_id = ? OR borrower_id = ?) AND item_id = ?", 
+          'completed', @user_profile.user_id, @user_profile.user_id, params[:current_item_id])
 
         transactions_array = []
 

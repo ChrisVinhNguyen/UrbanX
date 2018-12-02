@@ -33,7 +33,7 @@ class ItemDetailsBorrowContainer extends Component {
   	if (this.props.is_signed_in) {
       if (this.props.item_details.status == 'available' && this.props.currentUserId != this.props.item_details.user_id) {
         let request = this.props.my_transactions_for_current_item.find(
-          (e) => e.item_id == this.props.item_id);
+          (e) => e.status == 'pending' && e.borrower_id == this.props.currentUserId);
         if (request) {
           borrowButton = (
             <Button onClick={ e => this.handleCancel(e, request) }>

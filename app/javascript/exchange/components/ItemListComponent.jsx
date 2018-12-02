@@ -4,8 +4,9 @@ import { Grid, Divider } from 'semantic-ui-react'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import ItemSummary from './ItemSummary'
-import ItemSortDropdownContainer from '../containers/ItemSortDropdownContainer'
+import ItemSummary from './ItemSummary';
+import ItemSortDropdownContainer from '../containers/ItemSortDropdownContainer';
+import NoItemResults from './NoItemResults';
 
 
 class ItemListComponent extends Component {
@@ -27,6 +28,7 @@ class ItemListComponent extends Component {
             {items}
           </Grid.Row>
         </Grid>
+        { this.props.filtered_items.length == 0 ? <NoItemResults /> : null }
       </div>
     );
   }

@@ -71,20 +71,40 @@ class ItemDetailsContainer extends Component {
 
     let editButton = null;
     let deleteButton = null;
+    let activeTransactionsMsg = null;
 
 
-
+    let activeTransaction = this.props.my_transactions_for_current_item.find(
+          (e) => e.lender_id == this.props.currentUserId);
     if (this.props.currentUserId == this.props.item_details.user_id){
-      editButton=(
-        <Button>
-          <Link to={`/items_list/${this.props.match.params.id}/edit`}>
-          Edit
-          </Link>
-        </Button>
-      )
-      deleteButton=(
-        <Button negative onClick={this.deleteItem}>Delete</Button>
-      )
+      if (!activeTransaction) {
+        editButton=(
+          <Button>
+            <Link to={`/items_list/${this.props.match.params.id}/edit`}>
+            Edit
+            </Link>
+          </Button>
+        )
+        deleteButton=(
+          <Button negative onClick={this.deleteItem}>Delete</Button>
+        )
+      }
+      else {
+        activeTransactionsMsg= (
+            <div>
+              <strong>You may not edit or delete an item while there are active transactions involving the item. Please decline or finish them.</strong>
+              <br/>
+            </div>
+            );
+        editButton=(
+            <Button disabled>
+              Edit
+            </Button>
+        )
+        deleteButton=(
+          <Button disabled negative>Delete</Button>
+        )
+      }
     }
     else {
       editButton = (
@@ -108,7 +128,8 @@ class ItemDetailsContainer extends Component {
       item_details_user_id_prop={this.props.item_details.user_id} 
       carousel_items_prop={carouselItems}
       edit_button_prop={editButton}
-      delete_button_prop={deleteButton}/>
+      delete_button_prop={deleteButton}
+      active_transactions_msg_prop={activeTransactionsMsg}/>
     );
   }
 }
