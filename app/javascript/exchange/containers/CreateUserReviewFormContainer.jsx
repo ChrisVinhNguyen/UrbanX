@@ -39,11 +39,13 @@ class createUserReviewFormContainer extends Component {
     let userReviewData = this.state;
     let current_viewed_item_id = this.props.item_id;
     let reviewee_id = this.props.reviewee_id;
+    let reviewer_id = this.props.user_info.user_profile_id;
 
     console.log(this.state)
     console.log(userReviewData)
     console.log(reviewee_id)
-    this.props.newUserReview(userReviewData, reviewee_id)
+    console.log(reviewer_id)
+    this.props.newUserReview(userReviewData, reviewee_id, reviewer_id)
   }
 
   render() {

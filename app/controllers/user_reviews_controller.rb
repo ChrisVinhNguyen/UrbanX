@@ -1,15 +1,15 @@
 class UserReviewsController < ApplicationController
   def create
     if user_signed_in?
-      @reviewee = UserProfile.find(params[:user_profile_id])
+      @reviewee = UserProfile.find(params[:reviewee_id])
       puts(params)
       @user_review = @reviewee.user_reviews.create(
         rating: params[:user_review][:rating],
         comment: params[:user_review][:comment],
         created_at: DateTime.now,
         updated_at: DateTime.now,
-        reviewer_id: @current_user.id,
-        reviewee_id: params[:user_profile_id]
+        reviewer_id: params[:reviewer_id],
+        reviewee_id: params[:reviewee_id]
         )
 
       puts(@current_user.id)
