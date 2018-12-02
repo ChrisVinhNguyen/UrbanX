@@ -33,6 +33,7 @@ class ItemDetailsComponent extends Component {
           <ItemDetailsBorrowContainer item_id={ this.props.item_match_param_id_prop} currentUserId={ this.props.current_user_id_prop } />
         </Item.Meta>
         <Item.Description>Description: {this.props.item_description_prop}.</Item.Description>
+        {this.props.active_transactions_msg_prop}
         {this.props.edit_button_prop}
         {this.props.delete_button_prop}
         <Item.Extra>
