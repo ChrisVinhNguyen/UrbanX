@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Icon, Image, Item, Label } from 'semantic-ui-react'
+import { Button, Icon, Image, Item, Label, Card } from 'semantic-ui-react'
 import { Rating, Divider } from 'semantic-ui-react'
 import { Link } from "react-router-dom";
 import { getItem } from '../actions/itemsActions';
@@ -13,37 +13,32 @@ class ItemSummary extends Component {
     const { id, name, user_profile_id, owner, quantity, description, average_rating } = this.props.item;
 
     return (
-      <Item>
-      <Link to={ `/items_list/${id}` }>
-        <Item.Image size ='medium' src={ pic } />
-      </Link>
-      <Item.Content>
+      <Card centered>
         <Link to={ `/items_list/${id}` }>
-          <Item.Header size = 'medium' onClick={this.handleItemClick}>
-            <strong>
-              { name }
-            </strong>
-          </Item.Header>
+          <Image size='medium' src='https://react.semantic-ui.com/images/wireframe/image.png' />
         </Link>
-        <Item.Meta>
-          <Link to={ `/user_profiles_show/${user_profile_id}` }>
-            { owner }
-          </Link>
-          <p>Quantity: { quantity }</p>
-        </Item.Meta>
-        <Item.Description>
-          Description: { description }.
-        </Item.Description>
-        <Item.Extra>
+        <Card.Content>
+          <Card.Header>
+            <Link to={ `/items_list/${id}` }>{ name }</Link>
+          </Card.Header>
+          <Card.Meta>
+            <Link to={ `/user_profiles_show/${user_profile_id}` }>
+              <span className='owner-name'>{ owner }</span>
+            </Link>
+          </Card.Meta>
+          <Card.Meta>
+            <span className='owner-name'>Quantity: { quantity }</span>
+          </Card.Meta>
+          <Card.Description>{ description }</Card.Description>
+        </Card.Content>
+        <Card.Content extra>
           <Rating icon='star' rating={ average_rating } maxRating={5} disabled />
-          <Label>
-            Rating: { average_rating }
-          </Label>
-        </Item.Extra>
-      </Item.Content>
-      <Divider/>
-    </Item>
-    );
+           <Label>
+             Rating: { average_rating }
+           </Label>
+        </Card.Content>
+      </Card>
+    )
   }
 } 
 
