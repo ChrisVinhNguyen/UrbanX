@@ -45,11 +45,12 @@ class ProfileCreateFormContainer extends Component {
         contentType: false,
         processData: false,
       }).then(
-      (response) => console.log(response.message),
+      (response) => {
+        this.props.fetchUser()
+      },
       (response) => console.log(response.responseJSON)
       );
 
-    this.props.fetchUser();
     this.props.history.push('/');
   }
 

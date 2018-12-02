@@ -116,10 +116,12 @@ export const getUserReviews = (reviewee_id = reviewee_id) => dispatch => {
 }
 
 // /user_profiles/:user_profile_id/user_reviews/new(.:format) 
-export const newUserReview = (user_review, reviewee_id) => dispatch => {
+export const newUserReview = (user_review, reviewee_id, reviewer_id) => dispatch => {
   getCSRFToken();
   axios.post('/user_profiles/' + reviewee_id + '/user_reviews/',
   {
+    reviewee_id: reviewee_id,
+    reviewer_id: reviewer_id,
     user_review: user_review
   })
   .then(function(response){

@@ -303,6 +303,7 @@
         width: 54px;
         height: 54px; }
     .dropzone .dz-preview.dz-processing .dz-progress {
+      display: none !important;
       opacity: 1;
       -webkit-transition: all 0.2s linear;
       -moz-transition: all 0.2s linear;
@@ -310,6 +311,7 @@
       -o-transition: all 0.2s linear;
       transition: all 0.2s linear; }
     .dropzone .dz-preview.dz-complete .dz-progress {
+      display: none !important;
       opacity: 0;
       -webkit-transition: opacity 0.4s ease-in;
       -moz-transition: opacity 0.4s ease-in;
@@ -317,6 +319,7 @@
       -o-transition: opacity 0.4s ease-in;
       transition: opacity 0.4s ease-in; }
     .dropzone .dz-preview:not(.dz-processing) .dz-progress {
+      display: none !important;
       -webkit-animation: pulse 6s ease infinite;
       -moz-animation: pulse 6s ease infinite;
       -ms-animation: pulse 6s ease infinite;
@@ -338,6 +341,7 @@
       border-radius: 8px;
       overflow: hidden; }
       .dropzone .dz-preview .dz-progress .dz-upload {
+        display: none !important;
         background: #333;
         background: linear-gradient(to bottom, #666, #444);
         position: absolute;

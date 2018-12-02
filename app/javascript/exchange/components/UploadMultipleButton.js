@@ -21,15 +21,13 @@ export class UploadMultipleButton extends Component {
       }
 
       this.djsConfig = {
-            addRemoveLinks: true,
-            params: {
-                myParameter: "I'm a parameter!"
-            },
+            addRemoveLinks: false,
             uploadMultiple: true,
             autoProcessQueue: false,
             autoQueue: false,
             maxFileSize: 15,
-            paramName: "images"
+            paramName: "images",
+            acceptedFiles: "image/*"
 
 
       };
@@ -58,7 +56,7 @@ export class UploadMultipleButton extends Component {
               <DropzoneComponent config={config}
                                   eventHandlers={eventHandlers}
                                   djsConfig={djsConfig}  >
-                                <div class="dz-message" data-dz-message><span>Upload Images</span></div>
+                                <div className="dz-message" data-dz-message><span>Upload Images</span></div>
                                 
               </DropzoneComponent>
       )
