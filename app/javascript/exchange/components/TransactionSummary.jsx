@@ -9,7 +9,6 @@ import TransactionSummaryActionContainer from '../containers/TransactionSummaryA
 
 import '../stylesheets/transaction-summary.scss';
 
-import pic from '../images/macbook.jpg';
 
 
 class TransactionSummary extends Component {
@@ -50,7 +49,7 @@ class TransactionSummary extends Component {
     return (
       
       <Item key={ this.props.transaction.id }>
-        <Item.Image as='a' size = 'medium' src={this.props.transaction.image? this.props.transaction.image : pic} />
+        <Item.Image as='a' size = 'medium' src={this.props.transaction.image? this.props.transaction.image : "https://react.semantic-ui.com/images/wireframe/image.png"} />
 
         <Item.Content>
           <Item.Header size = 'medium'>
