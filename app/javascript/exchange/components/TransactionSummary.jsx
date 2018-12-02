@@ -46,7 +46,7 @@ class TransactionSummary extends Component {
     return (
       
       <Item key={ this.props.transaction.id }>
-        <Item.Image as='a' size = 'medium' src={pic} />
+        <Item.Image as='a' size = 'medium' src={this.props.transaction.image? this.props.transaction.image : pic} />
 
         <Item.Content>
           <Item.Header size = 'medium'>
