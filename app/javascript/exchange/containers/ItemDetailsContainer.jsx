@@ -66,47 +66,49 @@ class ItemDetailsContainer extends Component {
     let deleteButton = null;
     let activeTransactionsMsg = null;
 
-    let activeTransaction = this.props.my_transactions_for_current_item.find(
-          (e) => e.lender_id == this.props.currentUserId);
-    if (this.props.currentUserId == this.props.item_details.user_id){
-      if (!activeTransaction) {
-        editButton=(
-          <Button>
-            <Link to={`/items_list/${this.props.match.params.id}/edit`}>
-            Edit
-            </Link>
-          </Button>
-        )
-        deleteButton=(
-          <Button negative onClick={this.deleteItem}>Delete</Button>
-        )
+    if (this.props.is_signed_in) {
+      let activeTransaction = this.props.my_transactions_for_current_item.find(
+            (e) => e.lender_id == this.props.currentUserId);
+      if (this.props.currentUserId == this.props.item_details.user_id){
+        if (!activeTransaction) {
+          editButton=(
+            <Button>
+              <Link to={`/items_list/${this.props.match.params.id}/edit`}>
+              Edit
+              </Link>
+            </Button>
+          )
+          deleteButton=(
+            <Button negative onClick={this.deleteItem}>Delete</Button>
+          )
+        }
+        else {
+          activeTransactionsMsg= (
+              <div>
+                <strong>You may not edit or delete an item while there are active transactions involving the item. Please decline or finish them.</strong>
+                <br/>
+              </div>
+              );
+          editButton=(
+              <Button disabled>
+                Edit
+              </Button>
+          )
+          deleteButton=(
+            <Button disabled negative>Delete</Button>
+          )
+        }
       }
       else {
-        activeTransactionsMsg= (
-            <div>
-              <strong>You may not edit or delete an item while there are active transactions involving the item. Please decline or finish them.</strong>
-              <br/>
-            </div>
-            );
-        editButton=(
-            <Button disabled>
-              Edit
-            </Button>
-        )
-        deleteButton=(
-          <Button disabled negative>Delete</Button>
-        )
-      }
-    }
-    else {
-      editButton = (
-          <div></div>
-        )
+        editButton = (
+            <div></div>
+          )
 
-      deleteButton = (
-          <div></div>
-        )
-    }
+        deleteButton = (
+            <div></div>
+          )
+      }
+  }
 
     return (
       <ItemDetailsComponent 
