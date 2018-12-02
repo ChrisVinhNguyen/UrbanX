@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import {getItem } from '../actions/itemsActions';
 import { connect } from 'react-redux';
 import { UploadMultipleButton }  from '../components/UploadMultipleButton.js'
+import { Dropdown } from 'semantic-ui-react'
 
 import '../stylesheets/item-edit-form-container.scss';
 
@@ -31,6 +32,7 @@ class ItemEditFormContainer extends Component {
 
   handleChange(e, { name, value }) {
     this.setState({ [name]: value })
+    console.log(this.state)
   }
 
   handleSubmit(e) {
@@ -67,7 +69,9 @@ class ItemEditFormContainer extends Component {
             'X-CSRFToken': $('meta[name="token"]').attr('content')
         }
     }).then(
-    (response) => this.props.getItem(response)
+    (response) => {
+        this.props.getItem(response.id)
+      }
     );
 
     console.log(this.props.match.params.id)
@@ -95,6 +99,13 @@ class ItemEditFormContainer extends Component {
 
   render() {
     const { name, description, category, quantity,condition,value, user_id  } = this.state
+    var categoryOptions = [
+      {text: 'Electronics', value: 'Electronics'}, {text: 'Books', value: 'Books'}, {text: 'Sports', value: 'Sports'}, {text: 'Tools', value: 'Tools'}, {text: 'Music', value: 'Music'}, {text: 'Vehicles', value: 'Vehicles'}, {text: 'Clothing', value: 'Clothing'}, {text: 'Accessories', value: 'Accessories'}, {text: 'Others', value: 'Others'}
+    ]
+
+    var conditionOptions = [
+      {text: 'Brand New', value: 'Brand New'}, {text: 'Excellent', value: 'Excellent'}, {text: 'Good', value: 'Good'}, {text: 'Fair', value: 'Fair'}, {text: 'Worn Out', value: 'Worn out'}
+    ]
     let numImages = 0
     let url =""
     let image_blob_id = 0
@@ -136,7 +147,12 @@ class ItemEditFormContainer extends Component {
                 </Form.Field>
                 <Form.Field>
                   <label>Category</label>
-                  <Form.Input placeholder='Category' name='category' value={ category } onChange={ this.handleChange } />
+                  <Dropdown 
+                    options={categoryOptions}
+                    selection
+                    name='category'
+                    value={category}
+                    onChange={ this.handleChange } />
                 </Form.Field>
                 <Form.Field>
                   <label>Quantity</label>
@@ -144,7 +160,13 @@ class ItemEditFormContainer extends Component {
                 </Form.Field>
                 <Form.Field>
                   <label>Condition</label>
-                  <Form.Input placeholder='Condition' name='condition' value={ condition } onChange={ this.handleChange } />
+                  <Dropdown 
+                    options={conditionOptions}
+                    placeholder='Choose a category'
+                    selection
+                    name='condition'
+                    value={condition}
+                    onChange={ this.handleChange } />
                 </Form.Field>
                 <Form.Field>
                   <label>Value</label>
