@@ -18,6 +18,7 @@ class TransactionSummary extends Component {
     let lendDate = null;
     let dueDate = null;
     let dateContainer = null;
+    let itemName = null;
 
 
     if (this.props.transaction.status != 'pending') {
@@ -43,6 +44,17 @@ class TransactionSummary extends Component {
                       )
     }
 
+    if (this.props.transaction.deleted) {
+      itemName = <strong>{this.props.transaction.item_name} (Removed by owner)</strong>;
+    }
+    else {
+      itemName = (
+                  <Link to={ `/items_list/${this.props.transaction.item_id}` }>
+                    <strong>{this.props.transaction.item_name}</strong>
+                  </Link>
+                );
+    }
+
     return (
       
       <Item key={ this.props.transaction.id }>
@@ -50,7 +62,7 @@ class TransactionSummary extends Component {
 
         <Item.Content>
           <Item.Header size = 'medium'>
-            <strong>{this.props.transaction.item_name}</strong>
+            {itemName}
           </Item.Header>
           <Item.Meta>
           </Item.Meta>
