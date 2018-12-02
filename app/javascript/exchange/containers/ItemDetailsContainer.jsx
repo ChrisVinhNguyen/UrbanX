@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import axios from 'axios';
 import ItemReviewsContainer from './ItemReviewsContainer'
-import { getItem } from '../actions/itemsActions';
+import { getItem, filterItems } from '../actions/itemsActions';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Carousel} from 'react-responsive-carousel';
 import { v4 as uuid } from 'uuid';
@@ -31,11 +31,13 @@ class ItemDetailsContainer extends Component {
       method: 'DELETE'
     }).then(
     (response) => console.log(response.message),
-    (response) => console.log(response.responseJSON)
+    (response) => console.log(response.responseJSON)  
     );
 
-    console.log(this.props.match.params.id)
-    this.props.history.push("/")
+    console.log(this.props.match.params.id);
+    this.props.filterItems('All', 'Default', '');
+    this.props.history.push("/");
+
   }
 
   render() {
@@ -131,6 +133,7 @@ class ItemDetailsContainer extends Component {
 
 ItemDetailsContainer.propTypes = {
   getItem: PropTypes.func.isRequired,
+  filterItems: PropTypes.func.isRequired,
   item_details: PropTypes.object.isRequired,
   newTransaction: PropTypes.func.isRequired,
   deleteTransaction: PropTypes.func.isRequired,
@@ -149,4 +152,4 @@ const mapStateToProps = state => ({
   is_signed_in: state.user.is_signed_in
 });
 
-export default connect(mapStateToProps, {getItem})(ItemDetailsContainer);
+export default connect(mapStateToProps, {getItem, filterItems})(ItemDetailsContainer);
