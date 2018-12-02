@@ -8,6 +8,11 @@ class AuthenticateUserController < ApplicationController
       result = GetUserInfo.call(context_params)
 
       if result.success?
+        
+        if result.user_profile.image.attached?
+            result.user_info[:image] = url_for(result.user_profile.image)
+        end
+
         render :json => { "is_signed_in" => true, "user_info" => result.user_info }.to_json()
       end
     else
