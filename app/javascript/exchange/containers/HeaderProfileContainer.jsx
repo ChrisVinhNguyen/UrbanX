@@ -40,8 +40,9 @@ class HeaderProfileContainer extends Component {
     const isSignedIn = this.props.is_signed_in;
     let userAuthenticationContent;
 
+
     if(isSignedIn) {
-      const trigger = <span>{this.props.user_info.full_name} <Image src={ Logo } avatar /></span>;
+      const trigger = <span>{this.props.user_info.full_name} <Image src={this.props.user_info.image? this.props.user_info.image :Logo } avatar /></span>;
       userAuthenticationContent =
         <div>
           <Dropdown icon={null} trigger={trigger} direction='left' floating labeled button pointing>
