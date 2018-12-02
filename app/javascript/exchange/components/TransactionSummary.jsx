@@ -18,6 +18,7 @@ class TransactionSummary extends Component {
     let lendDate = null;
     let dueDate = null;
     let dateContainer = null;
+    let itemName = null;
 
 
     if (this.props.transaction.status != 'pending') {
@@ -33,14 +34,17 @@ class TransactionSummary extends Component {
                     <p>Return Date: {String(this.props.transaction.return_date).split('T')[0]} </p>
                     );
       }
+    }
 
-      dateContainer = (
-                        <div className="right-date">
-                          {lendDate}
-                          {dueDate}
-                          {returnDate}
-                        </div>
-                      )
+    if (this.props.transaction.deleted) {
+      itemName = <strong>{this.props.transaction.item_name} (Removed by owner)</strong>;
+    }
+    else {
+      itemName = (
+                  <Link to={ `/items_list/${this.props.transaction.item_id}` }>
+                    <strong>{this.props.transaction.item_name}</strong>
+                  </Link>
+                );
     }
 
     return (
@@ -50,22 +54,26 @@ class TransactionSummary extends Component {
 
         <Item.Content>
           <Item.Header size = 'medium'>
-            <strong>{this.props.transaction.item_name}</strong>
+            {itemName}
           </Item.Header>
           <Item.Meta>
           </Item.Meta>
           <Item.Description>
-            <p>
-              Status: {this.props.transaction.status == 'lent' ? 'In progress'
-               : this.props.transaction.status.charAt(0).toUpperCase() + this.props.transaction.status.slice(1)} 
-              {dateContainer}
-            </p>
-            <p>
-              Lender: {this.props.transaction.lender_name} 
-            </p>
-            <p>
-              Borrower: {this.props.transaction.borrower_name}
-            </p>
+            <div className="transaction-summary">
+              <p>
+                Status: {this.props.transaction.status == 'lent' ? 'In progress'
+                 : this.props.transaction.status.charAt(0).toUpperCase() + this.props.transaction.status.slice(1)} 
+              </p>
+              <p>
+                Lender: {this.props.transaction.lender_name} 
+              </p>
+              <p>
+                Borrower: {this.props.transaction.borrower_name}
+              </p>
+              {lendDate}
+              {dueDate}
+              {returnDate}
+            </div>
 
             <TransactionSummaryActionContainer transaction = {this.props.transaction} />
           </Item.Description>

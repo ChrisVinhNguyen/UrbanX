@@ -33,7 +33,6 @@ class ItemsController < ApplicationController
     }
 
     result = FilterItemsList.call(context_params)
-    puts(result)
 
     if result.success?
       result.items.each_with_index do |resultItem, index|
@@ -43,7 +42,6 @@ class ItemsController < ApplicationController
                 @images.push(url_for(image))
               end
           end   
-          puts(@images)
           result.items_summary_array[index][:images] = @images
       end
       render :json => { "filtered_items" => result.items_summary_array }
