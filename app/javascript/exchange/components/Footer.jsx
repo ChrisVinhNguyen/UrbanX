@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Segment } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
-import ProjectLogo from './ProjectLogo';
+import ProjectLogo from './ProjectLogoInverted';
 
 class Footer extends Component {
   render() {
