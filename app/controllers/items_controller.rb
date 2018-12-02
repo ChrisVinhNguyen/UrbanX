@@ -58,6 +58,16 @@ class ItemsController < ApplicationController
     result = GetProfileItemsList.call(context_params)
 
     if result.success?
+      result.items.each_with_index do |resultItem, index|
+          @images = []
+          if resultItem.images.attached?
+              resultItem.images.each do |image|
+                @images.push(url_for(image))
+              end
+          end   
+          puts(@images)
+          result.items_summary_array[index][:images] = @images
+      end
       render :json => { "filtered_items" => result.items_summary_array }
     end
   end
