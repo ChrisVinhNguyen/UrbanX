@@ -98,7 +98,11 @@ class UserProfilesController < ApplicationController
         filtered_transactions.each do |transaction|
           transaction_hash = transaction.attributes
           if Item.exists?(id: transaction.item_id)
-            transaction_hash[:item_name] = Item.find(transaction.item_id).name
+            @item = Item.find(transaction.item_id)
+            transaction_hash[:item_name] = @item.name
+            if @item.images.attached?
+              transaction_hash[:image] = url_for(@item.images[0])
+            end
           else
             transaction_hash[:item_name] = transaction.item_name
           end
