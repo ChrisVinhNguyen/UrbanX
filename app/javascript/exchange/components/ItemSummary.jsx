@@ -14,7 +14,7 @@ class ItemSummary extends Component {
 
     let url;
 
-    if (this.props.item.images.length > 0){
+    if (this.props.item.images && this.props.item.images.length > 0){
       url = this.props.item.images[0];
     }
     else {
