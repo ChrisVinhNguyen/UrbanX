@@ -29,18 +29,18 @@ class TransactionSummaryLendContainer extends Component {
   handleLend(e, transaction) {
     transaction.expiry_date = this.state.due_date;
     transaction.status = 'lent';
-    this.props.updateTransaction(transaction, this.props.currentUserId, this.props.cur_status);
+    this.props.updateTransaction(transaction, this.props.userProfileId, this.props.cur_status);
 
   }
 
   handleReturn(e, transaction) {
     transaction.status = 'completed';
-    this.props.updateTransaction(transaction, this.props.currentUserId, this.props.cur_status);
+    this.props.updateTransaction(transaction, this.props.userProfileId, this.props.cur_status);
 
   }
-  
+
   handleDelete(e, transaction) {
-    this.props.deleteTransaction(transaction, this.props.currentUserId, this.props.cur_status);
+    this.props.deleteTransaction(transaction, this.props.userProfileId, this.props.cur_status);
   }
 
   render() {
@@ -103,7 +103,8 @@ TransactionSummaryLendContainer.propTypes = {
 
 const mapStateToProps = state => ({
   cur_status: state.items.cur_status,
-  currentUserId: state.user.user_info.user_profile_id
+  currentUserId: state.user.user_info.user_id,
+  userProfileId: state.user.user_info.user_profile_id
 });
 
 export default connect(mapStateToProps, { updateTransaction, deleteTransaction })(TransactionSummaryLendContainer);

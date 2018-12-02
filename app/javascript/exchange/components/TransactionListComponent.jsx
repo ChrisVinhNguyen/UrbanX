@@ -15,12 +15,12 @@ class TransactionListComponent extends Component {
     console.log(this.props.filtered_transactions)
     let transactions = this.props.filtered_transactions.map(transaction => {
       return(
-        <TransactionSummary key = { transaction.id } transaction = { transaction } currentUserId = { this.props.currentUserId } />
+        <TransactionSummary key = { transaction.id } transaction = { transaction } />
       );
     });
     return (
       <div className="body">
-        <TransactionFilterContainer currentUserId = { this.props.currentUserId } />
+        <TransactionFilterContainer userProfileId = { this.props.userProfileId } />
         <Item.Group divided>
           {transactions}
         </Item.Group>
@@ -35,7 +35,7 @@ TransactionListComponent.propTypes = {
 
 const mapStateToProps = state => ({
   filtered_transactions: state.items.filtered_transactions,
-  currentUserId: state.user.user_info.user_profile_id
+  userProfileId: state.user.user_info.user_profile_id
 });
 
 export default connect(mapStateToProps, {})(TransactionListComponent);
