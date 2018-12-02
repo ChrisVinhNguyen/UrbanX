@@ -1,10 +1,13 @@
-import React, { Component } from 'react'
-import { Button, Checkbox, Form } from 'semantic-ui-react'
+import React, { Component } from 'react';
+import { Button, Checkbox, Form, Grid } from 'semantic-ui-react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import {getItem } from '../actions/itemsActions';
 import { connect } from 'react-redux';
 import { UploadMultipleButton }  from '../components/UploadMultipleButton.js'
+
+import '../stylesheets/item-edit-form-container.scss';
+
 
 class ItemEditFormContainer extends Component {
   constructor(props) {
@@ -18,8 +21,6 @@ class ItemEditFormContainer extends Component {
       value: this.props.item_details.value,
       user_id: this.props.item_details.user_id,
       images: []
-
-
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -120,38 +121,43 @@ class ItemEditFormContainer extends Component {
 
     }
     return (
-      <div className="new-item-form-container">
-        <h1 className="new-item-form-title">Edit Item</h1>
-        <Form className="new-item-form" >
-          <Form.Field>
-            <label>Name</label>
-            <Form.Input placeholder='Name' name='name' value={ name } onChange={ this.handleChange }  width={10} />
-          </Form.Field>
-          <Form.Field>
-            <label>Description</label>
-            <Form.Input placeholder='Description' name='description' value={ description } onChange={ this.handleChange }  width={10} />
-          </Form.Field>
-          <Form.Field>
-            <label>Category</label>
-            <Form.Input placeholder='Category' name='category' value={ category } onChange={ this.handleChange }  width={10} />
-          </Form.Field>
-          <Form.Field>
-            <label>Quantity</label>
-            <Form.Input placeholder='Quantity' name='quantity' value={ quantity } onChange={ this.handleChange }  width={10} />
-          </Form.Field>
-          <Form.Field>
-            <label>Condition</label>
-            <Form.Input placeholder='Condition' name='condition' value={ condition } onChange={ this.handleChange }  width={10} />
-          </Form.Field>
-          <Form.Field>
-            <label>Value</label>
-            <Form.Input placeholder='Value' name='value' value={ value } onChange={ this.handleChange }  width={10} />
-          </Form.Field>
-          <UploadMultipleButton updateItemState={this.updateItemState}/>
-          {imageHtml ? (imageHtml) :  <div></div> }
-          <Form.Button content='Submit' onClick= {this.handleSubmit} />
-        </Form>
-        
+      <div className="item-edit-form-container">
+        <h1 className="item-edit-form-title">Edit Item</h1>
+        <Grid>
+          <Grid.Row centered>
+            <Grid.Column width={6}>
+              <Form className="item-edit-form">
+                <Form.Field>
+                  <label>Name</label>
+                  <Form.Input placeholder='Name' name='name' value={ name } onChange={ this.handleChange } />
+                </Form.Field>
+                <Form.Field>
+                  <label>Description</label>
+                  <Form.Input placeholder='Description' name='description' value={ description } onChange={ this.handleChange } />
+                </Form.Field>
+                <Form.Field>
+                  <label>Category</label>
+                  <Form.Input placeholder='Category' name='category' value={ category } onChange={ this.handleChange } />
+                </Form.Field>
+                <Form.Field>
+                  <label>Quantity</label>
+                  <Form.Input placeholder='Quantity' name='quantity' value={ quantity } onChange={ this.handleChange } />
+                </Form.Field>
+                <Form.Field>
+                  <label>Condition</label>
+                  <Form.Input placeholder='Condition' name='condition' value={ condition } onChange={ this.handleChange } />
+                </Form.Field>
+                <Form.Field>
+                  <label>Value</label>
+                  <Form.Input placeholder='Value' name='value' value={ value } onChange={ this.handleChange } />
+                </Form.Field>
+                <UploadMultipleButton updateItemState={this.updateItemState}/>
+                {imageHtml ? (imageHtml) :  <div></div> }
+                <Form.Button content='Submit' onClick= {this.handleSubmit} />
+              </Form>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       </div>
     )
   }
