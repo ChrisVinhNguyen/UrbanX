@@ -70,7 +70,6 @@ class ItemsController < ApplicationController
   end
 
   def show
-    puts(params[:id])
     context_params = {
       item_id: params[:id]
     }
@@ -78,8 +77,6 @@ class ItemsController < ApplicationController
     result = ShowItem.call(context_params)
 
     if result.success?
-      puts("successfully showed item")
-      puts(result.item)
       render json: result.item
     end
   end
@@ -126,20 +123,32 @@ class ItemsController < ApplicationController
 
   def update
     if user_signed_in?
-      @item = Item.find(params[:id])
-      if @item.user_id = @current_user.id
+      context_params = {
+      item_id: params[:id],
+      item_params: item_params
+      } 
 
-        if @item.update(item_params)
-          redirect_to @item
-        else
-          render 'edit'
-        end
+      result = UpdateItem.call(context_params)
+      if result.success?
+        render json: result.item
       end
     else
-        redirect_to new_user_session_path
+      redirect_to new_user_session_path
+    end
   end
+      
+      #@item = Item.find(params[:id])
+      #if @item.user_id = @current_user.id
 
-  end
+        #if @item.update(item_params)
+          #redirect_to @item
+        #else
+          #render 'edit'
+        #end
+      #end
+    #else
+        #redirect_to new_user_session_path
+  #end
 
   def destroy
     if user_signed_in?
