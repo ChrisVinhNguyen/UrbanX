@@ -10,12 +10,22 @@ import pic from '../images/macbook.jpg';
 
 class ItemSummary extends Component {
   render() {
-    const { id, name, user_profile_id, owner, quantity, description, average_rating } = this.props.item;
+    const { id, name, user_profile_id, owner, quantity, description, average_rating, images} = this.props.item;
+    let url=""
+    if (this.props.item.images){
+      url = this.props.item.images;
+    }
+    else{
+      url = "https://react.semantic-ui.com/images/wireframe/image.png"
+    } 
+    
+    console.log("URL IS :")
+    console.log(this.props.item)
 
     return (
       <Card centered>
         <Link to={ `/items_list/${id}` }>
-          <Image size='medium' src='https://react.semantic-ui.com/images/wireframe/image.png' />
+          <Image size='medium' src={url} />
         </Link>
         <Card.Content>
           <Card.Header>

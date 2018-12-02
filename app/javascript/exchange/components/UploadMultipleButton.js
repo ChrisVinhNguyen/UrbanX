@@ -21,15 +21,13 @@ export class UploadMultipleButton extends Component {
       }
 
       this.djsConfig = {
-            addRemoveLinks: true,
-            params: {
-                myParameter: "I'm a parameter!"
-            },
+            addRemoveLinks: false,
             uploadMultiple: true,
             autoProcessQueue: false,
             autoQueue: false,
             maxFileSize: 15,
-            paramName: "images"
+            paramName: "images",
+            acceptedFiles: "image/*"
 
 
       };

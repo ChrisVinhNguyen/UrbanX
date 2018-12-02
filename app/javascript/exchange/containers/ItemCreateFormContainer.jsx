@@ -65,9 +65,6 @@ class ItemCreateFormContainer extends Component {
       data: formData,
       contentType: false,
       processData: false,
-      headers: {
-            'X-CSRFToken': $('meta[name="token"]').attr('content')
-        }
     }).then(
       (response) => {this.props.history.push("/items_list/" + response),
         this.props.getItem(response)
