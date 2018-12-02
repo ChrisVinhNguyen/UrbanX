@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { newProfile } from '../actions/userActions';
+import { newProfile, fetchUser } from '../actions/userActions';
 import { connect } from 'react-redux';
 import { Button, Checkbox, Form, Grid } from 'semantic-ui-react'
 import { UploadSingleButton }  from '../components/UploadSingleButton.js';
@@ -49,6 +49,7 @@ class ProfileCreateFormContainer extends Component {
       (response) => console.log(response.responseJSON)
       );
 
+    this.props.fetchUser();
     this.props.history.push('/');
   }
 
@@ -97,4 +98,4 @@ class ProfileCreateFormContainer extends Component {
   }
 }
 
-export default connect(() => { return {} }, { newProfile })(ProfileCreateFormContainer)
+export default connect(() => { return {} }, { newProfile, fetchUser })(ProfileCreateFormContainer)
