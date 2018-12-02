@@ -57,7 +57,8 @@ class SearchBarContainer extends Component {
   }
 
   render() {
-    const { isLoading, openResultsMenu, value } = this.state
+    const { isLoading, openResultsMenu, value } = this.state;
+    const { filterItems, searchItems, filtered_item_names_for_search, ...newProps } = this.props;
 
     return (
       <Grid className="header-search-container">
@@ -67,12 +68,12 @@ class SearchBarContainer extends Component {
             loading={ isLoading }
             onResultSelect={ this.handleResultSelect }
             onSearchChange={ _.debounce(this.handleSearchChange, 500, { leading: true }) }
-            results={ this.props.filtered_item_names_for_search }
+            results={ filtered_item_names_for_search }
             value={ value }
             fluid
             open={ openResultsMenu }
             onKeyPress={ this.handleKeyPress }
-            { ...this.props }
+            { ...newProps }
           />
         </Grid.Column>
       </Grid>
