@@ -13,18 +13,18 @@ import SignInButton from '../components/SignInButton';
 class ItemDetailsBorrowContainer extends Component {
   constructor(props) {
   	super(props);
-    this.props.getMyTransactionsForItem(this.props.item_id, this.props.currentUserId);
+    this.props.getMyTransactionsForItem(this.props.item_id, this.props.userProfileId);
     this.handleBorrow = this.handleBorrow.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
   }
 
   handleBorrow(e) {
     let transaction = {item_id: this.props.item_id, status:'pending'};
-    this.props.newTransaction(transaction, this.props.currentUserId, this.props.cur_status);
+    this.props.newTransaction(transaction, this.props.userProfileId, this.props.cur_status);
   }
 
   handleCancel(e, transaction) {
-    this.props.deleteTransaction(transaction, this.props.currentUserId, this.props.cur_status);
+    this.props.deleteTransaction(transaction, this.props.userProfileId, this.props.cur_status);
   }
 
   render() {

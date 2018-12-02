@@ -21,23 +21,23 @@ class TransactionFilterContainer extends Component {
     console.log(this.props.filtered_transactions);
 
     if (value == 'All') {
-      this.props.getMyTransactions(this.props.currentUserId, value);
+      this.props.getMyTransactions(this.props.userProfileId, value);
     }
 
     else if (value == 'Pending') {
-      this.props.getMyTransactions(this.props.currentUserId, 'pending');
+      this.props.getMyTransactions(this.props.userProfileId, 'pending');
     }
 
     else if (value == 'In progress') {
-      this.props.getMyTransactions(this.props.currentUserId, 'lent');
+      this.props.getMyTransactions(this.props.userProfileId, 'lent');
     }
 
     else if (value == 'Overdue') {
-      this.props.getMyTransactions(this.props.currentUserId, 'overdue');
+      this.props.getMyTransactions(this.props.userProfileId, 'overdue');
     }
 
     else if (value == 'Completed') {
-      this.props.getMyTransactions(this.props.currentUserId, 'completed');
+      this.props.getMyTransactions(this.props.userProfileId, 'completed');
     }
 
     console.log(this.props.filtered_transactions);
