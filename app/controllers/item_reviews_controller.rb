@@ -32,15 +32,21 @@ class ItemReviewsController < ApplicationController
     @item_reviews = @item.item_reviews
 
     item_reviews_array = []
-    @item_reviews.each do |item_review|
+    @item_reviews.each_with_index do |item_review, index|
       owner = User.find(item_review[:owner_id])
       full_name = owner.user_profile[:first_name] + " " + owner.user_profile[:last_name]
-
-      owner_profile_id = UserProfile.where(user_id: item_review.owner_id).first.id
+      @user = UserProfile.where(user_id: item_review.owner_id).first
+      owner_profile_id = @user.id
 
       item_review_hash = item_review.attributes
       item_review_hash[:owner] = full_name
       item_review_hash[:owner_profile_id] = owner_profile_id
+
+      if @user.image.attached?
+          item_review_hash[:image] = url_for(@user.image)
+      end
+
+
       item_reviews_array.push(item_review_hash)
     end
     render :json => {"current_viewed_item_reviews" => item_reviews_array}.to_json()

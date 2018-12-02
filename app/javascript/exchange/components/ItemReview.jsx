@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import CreateItemReviewFormContainer from '../containers/CreateItemReviewFormContainer'
 import EditItemReviewFormContainer from '../containers/EditItemReviewFormContainer'
 import DeleteItemReviewContainer from '../containers/DeleteItemReviewContainer'
+import pic from '../images/macbook.jpg';
 
 class ItemReview extends Component {
 
@@ -40,12 +41,11 @@ class ItemReview extends Component {
     let showEdit = this.state.showEdit;
     let reviews = this.props.current_viewed_item_reviews.map(review => {
       if (review.owner_id == current_user_id){ hasReviewed = true }
-        {console.log(review.owner_id)}
-        {console.log(current_user_id)}
-        {console.log(item_owner_user_id)}
+        console.log(review)
+        console.log("This is review")
         return (
           <Comment>
-            <Comment.Avatar/>
+            <Comment.Avatar src= {review.image? review.image :pic}/>
             <Comment.Content>
               <Comment.Author>
                 <Link to={'/user_profiles_show/'+ review.owner_profile_id}>
