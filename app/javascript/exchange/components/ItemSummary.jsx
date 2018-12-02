@@ -11,16 +11,15 @@ import pic from '../images/macbook.jpg';
 class ItemSummary extends Component {
   render() {
     const { id, name, user_profile_id, owner, quantity, description, average_rating, images} = this.props.item;
-    let url=""
-    if (this.props.item.images){
-      url = this.props.item.images;
+
+    let url;
+
+    if (this.props.item.images.length > 0){
+      url = this.props.item.images[0];
     }
-    else{
+    else {
       url = "https://react.semantic-ui.com/images/wireframe/image.png"
     } 
-    
-    console.log("URL IS :")
-    console.log(this.props.item)
 
     return (
       <Card centered>
