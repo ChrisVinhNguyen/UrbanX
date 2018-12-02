@@ -27,16 +27,16 @@ class ItemReview extends Component {
   }
 
   render() {
-    console.log(this.props.current_viewed_item_reviews)
+    console.log(this.props.current_user_id)
 
-    const current_user_id = this.props.user_info.user_profile_id;
 
     const item_owner_user_id = this.props.item_owner_user_id;
-
-    console.log(current_user_id)
+    const item_owner_profile_id = this.props.item_owner_profile_id;
+    const current_user_id = this.props.current_user_id;
 
     let hasReviewed = false; 
     let isOwner = false;
+
     let showEdit = this.state.showEdit;
     let reviews = this.props.current_viewed_item_reviews.map(review => {
       if (review.owner_id == current_user_id){ hasReviewed = true }
@@ -95,12 +95,12 @@ class ItemReview extends Component {
 }
 
 ItemReview.propTypes = {
-  user_info: PropTypes.object.isRequired,
+  current_user_id: PropTypes.number.isRequired,
   current_viewed_item_reviews: PropTypes.array.isRequired
 }
 
 const mapStateToProps = state => ({
-  user_info: state.user.user_info,
+  current_user_id: state.user.user_info.user_id,
   item_details: state.items.item_details,
   current_viewed_item_reviews: state.items.current_viewed_item_reviews
 });

@@ -39,23 +39,16 @@ class ItemDetailsContainer extends Component {
   }
 
   render() {
-    console.log("##############################")
     let numImages = 0
     let url =""
     let carouselItems;
-    console.log("About to print item details")
-    console.log(this.props.item_details)
-    console.log(this.props)
-    console.log("inside item item_details")
+
     if (this.props.item_details.images){
       numImages = this.props.item_details.images.length
       url = this.props.item_details.image
-      console.log("making carousel items")
-      console.log(this.props.item_details)
+
       carouselItems = this.props.item_details.images.map(imageSrc => {
       const keyVal = uuid();
-      console.log("done generating uuid")
-      console.log(imageSrc)
         return (
           <div key={keyVal}>
             <img src={imageSrc} />
@@ -63,16 +56,15 @@ class ItemDetailsContainer extends Component {
           </div>
         )
       })
-
     }
-    else{
+
+    else {
       carouselItems = null
     }
 
     let editButton = null;
     let deleteButton = null;
     let activeTransactionsMsg = null;
-
 
     let activeTransaction = this.props.my_transactions_for_current_item.find(
           (e) => e.lender_id == this.props.currentUserId);
@@ -123,6 +115,7 @@ class ItemDetailsContainer extends Component {
       item_quantity_prop={this.props.item_details.quantity} 
       item_match_param_id_prop={this.props.match.params.id} 
       current_user_id_prop={this.props.currentUserId}
+      item_owner_profile_id = {this.props.currentUserProfileId}
       item_description_prop={this.props.item_details.description} 
       item_avg_rating_prop={this.props.item_details.average_rating} 
       item_details_user_id_prop={this.props.item_details.user_id} 
@@ -147,7 +140,8 @@ const mapStateToProps = state => ({
   item_details: state.items.item_details,
   current_viewed_item_reviews: state.items.current_viewed_item_reviews,
   // filtered_transactions: state.items.filtered_transactions,
-  currentUserId: state.user.user_info.user_profile_id,
+  currentUserId: state.user.user_info.user_id,
+  currentUserProfileId: state.user.user_info.user_profile_id,
   my_transactions_for_current_item: state.items.my_transactions_for_current_item,
   cur_status: state.items.cur_status,
   is_signed_in: state.user.is_signed_in

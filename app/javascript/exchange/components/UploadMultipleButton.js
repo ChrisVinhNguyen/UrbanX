@@ -56,7 +56,7 @@ export class UploadMultipleButton extends Component {
               <DropzoneComponent config={config}
                                   eventHandlers={eventHandlers}
                                   djsConfig={djsConfig}  >
-                                <div class="dz-message" data-dz-message><span>Upload Images</span></div>
+                                <div className="dz-message" data-dz-message><span>Upload Images</span></div>
                                 
               </DropzoneComponent>
       )

@@ -67,12 +67,11 @@ class ItemCreateFormContainer extends Component {
       processData: false,
     }).then(
       (response) => {this.props.history.push("/items_list/" + response),
-        this.props.getItem(response)
+        this.props.getItem(response),
         console.log("after history")
       }
     )
     console.log(this.state.response)
-
     //this.props.history.push("/items_list/93");
 
 }
