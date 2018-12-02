@@ -70,46 +70,46 @@ class ItemsController < ApplicationController
   end
 
   def show
-    context_params = {
-      item_id: params[:id]
-    }
+  #   context_params = {
+  #     item_id: params[:id]
+  #   }
 
-    result = ShowItem.call(context_params)
+  #   result = ShowItem.call(context_params)
 
-    if result.success?
-      render json: result.item
-    end
-  end
+  #   if result.success?
+  #     render json: result.item
+  #   end
+  # end
 
     
-    #@item = Item.find(params[:id])
-    #images = []
-    #@image_attachments_id = []
-    #if @item.images.attached?
-        #@item.images.each do |image|
-          #@images.push(url_for(image))
-          #@image_attachments_id.push(image.id)
-        #end   
+    @item = Item.find(params[:id])
+    @images = []
+    @image_attachments_id = []
+    if @item.images.attached?
+        @item.images.each do |image|
+          @images.push(url_for(image))
+          @image_attachments_id.push(image.id)
+        end   
         
-    #end
-    #item_details= @item.attributes
-    #item_details[:images]= @images
-    #item_details[:image_attachments_id] = @image_attachments_id
+    end
+    item_details= @item.attributes
+    item_details[:images]= @images
+    item_details[:image_attachments_id] = @image_attachments_id
 
-    #item_reviews_count = @item.item_reviews.count
-    #item_reviews_total = 0
-    #@item.item_reviews.each do |item_review|
-      #item_reviews_total += item_review.rating
-    #end
+    item_reviews_count = @item.item_reviews.count
+    item_reviews_total = 0
+    @item.item_reviews.each do |item_review|
+      item_reviews_total += item_review.rating
+    end
     
 
-   # average_rating = item_reviews_total!=0 ? item_reviews_total/item_reviews_count : 'no rating' 
+   average_rating = item_reviews_total!=0 ? item_reviews_total/item_reviews_count : 'no rating' 
 
-    #item_details[:average_rating] = average_rating
+    item_details[:average_rating] = average_rating
 
     
-    #render json: item_details
- # end
+    render json: item_details
+ end
     
   def edit
     if user_signed_in?

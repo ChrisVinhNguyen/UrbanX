@@ -17,6 +17,17 @@ class HeaderProfileContainer extends Component {
     this.onHandleLogoutClick = this.onHandleLogoutClick.bind(this);
   }
 
+  //componentWillUpdate(){
+    //console.log("fetching user")
+    //this.props.fetchUser();
+  //}
+
+  //componentDidUpdate(){
+    //console.log("updating header profile container")
+    //this.props.fetchUser();
+  //}
+
+
   componentWillMount() {
     this.props.fetchUser();
   }

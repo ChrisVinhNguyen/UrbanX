@@ -18,6 +18,7 @@ export const fetchUser = () => dispatch => {
       is_signed_in: response.data.is_signed_in,
       user_info: response.data.user_info
     })
+    console.log(response.data.user_info)
   })
   .catch(function(error){
     console.log(error);
