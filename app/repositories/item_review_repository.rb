@@ -12,7 +12,11 @@ class ItemReviewRepository
   end
 
   def save(item_review)
-    item_review.save
+    if item_review.save
+      puts("saved")
+    else
+      puts(item_review.errors.full_messages)
+    end
   end
 
   def delete(item_review)

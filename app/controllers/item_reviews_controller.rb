@@ -2,36 +2,38 @@ class ItemReviewsController < ApplicationController
   def create
     if user_signed_in?
 
-      ## Refactored 
-      # context_params = {
-      #   item_id: params[:item_id],
-      #   item_review_params: item_review_params
-      # }
+      # Refactored 
+      context_params = {
+        item_id: params[:item_id],
+        item_review_params: item_review_params,
+        owner_id: @current_user.id
+      }
 
-      # result = CreateNewItemReview.call(context_params)
-      # if result.success?
-      #   render json: result.item
-      # end
-
-
-      print("inside of create item reviews")
-      print(params)
-      @item = Item.find(params[:item_id])
-      @item_review = @item.item_reviews.create(item_review_params)
-      @item_review.created_at = DateTime.now
-      @item_review.updated_at = DateTime.now 
-      #map the user who created the review for this item       
-      @item_review.owner_id = @current_user.id
-      if @item_review.save
-        puts("saved successfully")
-        #redirect_to item_path(@item)
+      result = CreateNewItemReview.call(context_params)
+      if result.success?
         render :json => {"success" => true}.to_json()
-
-      else
-        render 'new'
       end
-    else
-      redirect_to new_user_session_path
+
+
+    #   print("inside of create item reviews")
+    #   print(params)
+    #   @item = Item.find(params[:item_id])
+    #   @item_review = @item.item_reviews.create(item_review_params)
+    #   @item_review.created_at = DateTime.now
+    #   @item_review.updated_at = DateTime.now 
+    #   #map the user who created the review for this item       
+    #   @item_review.owner_id = @current_user.id
+    #   if @item_review.save
+    #     puts("saved successfully")
+    #     #redirect_to item_path(@item)
+    #     render :json => {"success" => true}.to_json()
+
+    #   else
+    #     render 'new'
+    #   end
+    # else
+    #   redirect_to new_user_session_path
+    # end
     end
   end
 
