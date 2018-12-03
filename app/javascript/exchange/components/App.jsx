@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
-import { Route, Link } from "react-router-dom";
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
 
-import axios from 'axios';
 import Header from './Header';
 import Body from './Body';
 import Footer from './Footer';
-import UserProfile from './UserProfile';
 
 import store from '../store';
-
 
 
 class App extends Component {
