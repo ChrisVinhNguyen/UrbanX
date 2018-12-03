@@ -1,10 +1,10 @@
 class UserReviewRepository
-  def all_user_reviews_for_this_user(item)
-    item_reviews = item.item_reviews
+  def all_user_reviews_for_this_user(reviewee)
+    user_reviews = reviewee.user_reviews
   end
 
   def new_user_review(reviewee, attributes)
-		item_review = reviewee.user_reviews.create(attributes)
+		user_review = reviewee.user_reviews.create(attributes)
   end
 
   def update(item_review, updated_attributes)
@@ -15,16 +15,11 @@ class UserReviewRepository
   	user_review.save
   end
 
-  def delete(item_review)
-    item_review.destroy
+  def delete(user_review)
+    user_review.destroy
   end
 
-  def find_by_id(item, id)
-    #puts(item.inspect)
-    puts("========")
-    puts(id)
-    puts("========")
-    #puts(item.item_reviews.inspect)
-  	item_review = item.item_reviews.find(id)  
+  def find_by_id(reviewee, id)
+  	user_review = reviewee.user_reviews.find(id)  
   end
 end

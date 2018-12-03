@@ -151,10 +151,20 @@ class UserReviewsController < ApplicationController
 
   def destroy
     if user_signed_in?
-      @reviewee = UserProfile.find(params[:user_profile_id])
-      @user_review = @reviewee.user_reviews.find(params[:id])
-      @user_review.destroy
-      render :json => {"success" => true}.to_json()
+      # Refactored 
+      context_params = {
+        profile_id: params[:user_profile_id],
+        user_review_id: params[:id]
+      }
+
+      result = DeleteUserReview.call(context_params)
+      if result.success?
+        render :json => {"success" => true}.to_json()
+      end
+      # @reviewee = UserProfile.find(params[:user_profile_id])
+      # @user_review = @reviewee.user_reviews.find(params[:id])
+      # @user_review.destroy
+      # render :json => {"success" => true}.to_json()
     else
       redirect_to new_user_session_path
     end
