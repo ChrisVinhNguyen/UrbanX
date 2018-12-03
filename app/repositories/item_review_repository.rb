@@ -24,6 +24,11 @@ class ItemReviewRepository
   end
 
   def find_by_id(item, id)
+    #puts(item.inspect)
+    puts("========")
+    puts(id)
+    puts("========")
+    #puts(item.item_reviews.inspect)
   	item_review = item.item_reviews.find(id)  
   end
 end

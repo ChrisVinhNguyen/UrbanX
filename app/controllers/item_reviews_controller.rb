@@ -73,33 +73,34 @@ class ItemReviewsController < ApplicationController
   def update
     if user_signed_in?
 
-      ## Refactored 
-      # context_params = {
-      #   item_id: params[:item_id],
-      #   item_review_params: item_review_params,
-      #   item_review_id: params[:id]
-      # }
+      # Refactored 
+      puts(params)
+      context_params = {
+        item_id: params[:item_id],
+        item_review_params: item_review_params,
+        item_review_id: params[:id]
+      }
 
-      # result = EditItemReview.call(context_params)
-      # if result.success?
-      #   render json: result.item
-      # end
-
-      @item = Item.find(params[:item_id])
-      @item_review = @item.item_reviews.find(params[:id])
-      #check if current user is allowed to edit
-      if @item_review.owner_id == @current_user.id
-        if @item_review.update(item_review_params)
-          puts("saved")
-          @item_review.updated_at = DateTime.now
-          render :json => {"success" => true}.to_json()
-        else
-          puts("not saved")
-          render 'edit'
-        end
-      else
-        render 'edit'
+      result = EditItemReview.call(context_params)
+      if result.success?
+        render json: result.item
       end
+
+      # @item = Item.find(params[:item_id])
+      # @item_review = @item.item_reviews.find(params[:id])
+      # #check if current user is allowed to edit
+      # if @item_review.owner_id == @current_user.id
+      #   if @item_review.update(item_review_params)
+      #     puts("saved")
+      #     @item_review.updated_at = DateTime.now
+      #     render :json => {"success" => true}.to_json()
+      #   else
+      #     puts("not saved")
+      #     render 'edit'
+      #   end
+      # else
+      #   render 'edit'
+      # end
     else
       redirect_to new_user_session_path
     end
@@ -117,21 +118,21 @@ class ItemReviewsController < ApplicationController
   def destroy
     if user_signed_in?
 
-      ## Refactored 
-      # context_params = {
-      #   item_id: params[:item_id],
-      #   item_review_id: params[:id]
-      # }
+      # Refactored 
+      context_params = {
+        item_id: params[:item_id],
+        item_review_id: params[:id]
+      }
 
-      # result = DeleteItemReview.call(context_params)
-      # if result.success?
-      #   render json: result.item
-      # end
+      result = DeleteItemReview.call(context_params)
+      if result.success?
+        render json: result.item
+      end
 
-      @item = Item.find(params[:item_id])
-      @item_review = @item.item_reviews.find(params[:id])
-      @item_review.destroy
-      render :json => {"success" => true}.to_json()
+      # @item = Item.find(params[:item_id])
+      # @item_review = @item.item_reviews.find(params[:id])
+      # @item_review.destroy
+      # render :json => {"success" => true}.to_json()
     else
       redirect_to new_user_session_path
     end
