@@ -39,8 +39,10 @@ class ItemDetailsComponent extends Component {
       <div>
         <Item>
           <Item.Content>
-          {this.props.item_images_prop ? imageGallery : null}
-
+          { this.props.item_images_prop && this.props.item_images_prop.length > 0 ?
+            imageGallery :
+            <Image size='medium' src="https://react.semantic-ui.com/images/wireframe/image.png" />
+          }
           <Item.Header size = 'medium' as='a' ><strong>{this.props.item_name_prop}</strong></Item.Header>
         <Item.Meta>
           <p>Quantity: {this.props.item_quantity_prop}</p>
