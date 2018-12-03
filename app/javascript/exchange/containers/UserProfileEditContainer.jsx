@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { Button, Form, Message } from 'semantic-ui-react'
+import { Button, Form, Message, Grid } from 'semantic-ui-react';
 import { UploadSingleButton }  from '../components/UploadSingleButton.js';
 import { v4 as uuid } from 'uuid';
 
 import { fetchUser } from '../actions/userActions';
 import { FIRSTNAME_MISSING, LASTNAME_MISSING, DOB_MISSING, LOCATION_MISSING } from '../constants/formErrors';
+
+import '../stylesheets/user-profile-edit-form-container.scss';
 
 
 class UserProfileEditContainer extends Component {
@@ -189,55 +191,62 @@ class UserProfileEditContainer extends Component {
 
   console.log(imageHtml)
   return (
-    <div> 
-     <Form class="ui form">
-      <Form.Field>
-        <label>First Name</label>
-        <Form.Input 
-          type="text" 
-          name="post[first_name]" 
-          value={this.state.first_name} 
-          onChange = {this.handleFirstNameChange}
-          placeholder="First Name"/>
-      </Form.Field>
-      <Form.Field>
-        <label>Last Name</label>
-        <Form.Input 
-          type="text" 
-          name="past[last_name]" 
-          value = {this.state.last_name}
-          onChange = {this.handleLastNameChange}
-          placeholder="Last Name"/>
-      </Form.Field>
-      <Form.Field>
-      <label>Date of Birth</label>
-        <Form.Input 
-          type="Date" 
-          name="post[date_of_birth]" 
-          value={this.state.date_of_birth}
-          onChange = {this.handleDateOfBirthChange}
-          placeholder="Date of Birth"/>
-      </Form.Field>
-      <Form.Field>
-        <label>Location</label>
-        <Form.Input 
-          type="text" 
-          name="post[location]" 
-          value={this.state.location}
-          onChange = {this.handleLocationChange}
-          placeholder="Location"/>
-      </Form.Field>
-      <UploadSingleButton updateImageState={this.updateImageState}/>
-      {imageHtml ? imageHtml : <div></div>}
-      { this.state.formError ?
-        <div class="ui negative message">
-          <div class="header">
-            All fields are required.
-          </div>
-        </div>
-      :null}
-      <Form.Button content = 'Submit' onClick={this.handleSubmit}/>
-    </Form>
+    <div className="user-profile-edit-form-container">
+      <h1 className="user-profile-edit-form-title">Edit User Profile Form</h1>
+      <Grid>
+        <Grid.Row centered>
+          <Grid.Column width={6}>
+            <Form className="user-profile-edit-form">
+              <Form.Field>
+                <label>First Name</label>
+                <Form.Input
+                  type="text"
+                  name="post[first_name]"
+                  value={this.state.first_name}
+                  onChange = {this.handleFirstNameChange}
+                  placeholder="First Name"/>
+              </Form.Field>
+              <Form.Field>
+                <label>Last Name</label>
+                <Form.Input
+                  type="text"
+                  name="past[last_name]"
+                  value = {this.state.last_name}
+                  onChange = {this.handleLastNameChange}
+                  placeholder="Last Name"/>
+              </Form.Field>
+              <Form.Field>
+              <label>Date of Birth</label>
+                <Form.Input
+                  type="Date"
+                  name="post[date_of_birth]"
+                  value={this.state.date_of_birth}
+                  onChange = {this.handleDateOfBirthChange}
+                  placeholder="Date of Birth"/>
+              </Form.Field>
+              <Form.Field>
+                <label>Location</label>
+                <Form.Input
+                  type="text"
+                  name="post[location]"
+                  value={this.state.location}
+                  onChange = {this.handleLocationChange}
+                  placeholder="Location"/>
+              </Form.Field>
+              <UploadSingleButton updateImageState={ this.updateImageState }/>
+              { imageHtml ? imageHtml : <div></div> }
+              { this.state.formError ?
+                <div class="ui negative message">
+                  <div class="header">
+                    All fields are required.
+                  </div>
+                </div>
+              : null}
+              <Form.Button content = 'Submit' onClick={ this.handleSubmit }/>
+            </Form>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     </div>
     );
   }
