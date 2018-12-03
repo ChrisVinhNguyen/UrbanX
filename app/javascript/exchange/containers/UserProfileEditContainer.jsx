@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { Button, Form } from 'semantic-ui-react'
+import { Button, Form, Message } from 'semantic-ui-react'
 import { UploadSingleButton }  from '../components/UploadSingleButton.js';
+import { v4 as uuid } from 'uuid';
 
 import { fetchUser } from '../actions/userActions';
+import { FIRSTNAME_MISSING, LASTNAME_MISSING, DOB_MISSING, LOCATION_MISSING } from '../constants/formErrors';
 
 
 class UserProfileEditContainer extends Component {
@@ -16,7 +18,12 @@ class UserProfileEditContainer extends Component {
         date_of_birth: this.props.user_info.date_of_birth,
         location: this.props.user_info.location,
         image: this.props.user_info.image,
-        form_valid: true
+        firstnameError: false,
+        lastnameError: false,
+        locationError: false,
+        dobError: false,
+        errorMessages: [],
+        formError: false
       };
       this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
       this.handleLastNameChange = this.handleLastNameChange.bind(this);
@@ -25,11 +32,6 @@ class UserProfileEditContainer extends Component {
       this.deleteImage = this.deleteImage.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
       this.updateImageState = this.updateImageState.bind(this);
-
-      if(!this.state.first_name || !this.state.last_name || !this.state.date_of_birth || !this.state.location )
-      {
-        this.setState({ form_valid: e.target.value })
-      }
     }
 
   componentWillMount() {
@@ -41,60 +43,37 @@ class UserProfileEditContainer extends Component {
 
   handleFirstNameChange(e) {
     this.setState({ first_name: e.target.value })
-    if(!e.target.value  || !this.state.last_name || !this.state.date_of_birth || !this.state.location )
-    {
-      this.setState({ form_valid: false })
-    }
-    else{
-      this.setState({ form_valid: true })
-    }
-    
     console.log(this.state);
   }
 
   handleLastNameChange(e) {
     this.setState({ last_name: e.target.value });
-    if(!e.target.value || !this.state.first_name || !this.state.date_of_birth || !this.state.location )
-    {
-      this.setState({ form_valid: false })
-    }
-    else{
-      this.setState({ form_valid: true })
-    }
     console.log(this.state);
   }
 
   handleDateOfBirthChange(e) {
     this.setState({ date_of_birth: e.target.value });
-    if(!e.target.value || !this.state.last_name || !this.state.first_name || !this.state.location )
-    {
-      this.setState({ form_valid: false })
-    }
-    else{
-      this.setState({ form_valid: true })
-    }
     console.log(this.state);
   }
 
   handleLocationChange(e) {
     this.setState({ location: e.target.value });
-    if(!e.target.value || !this.state.last_name || !this.state.date_of_birth || !this.state.first_name )
-    {
-      this.setState({ form_valid: false })
-    }
-    else{
-      this.setState({ form_valid: true })
-    }
     console.log(this.state);
   }
 
   handleSubmit(e) {
     let userData = this.state;
-    if(!this.state.form_valid)
-    {
-      window.alert("Missing Fields")
-    }
+    const errorMessages = this.handleFormErrors();
+
+    if (errorMessages.length > 0) {
+      this.setState({
+        formError: true,
+        errorMessages: errorMessages
+      })
+      return
+    } 
     else{
+      this.setState({ formError: false })
       const formData = new FormData();
       formData.append('user_profile[first_name]', this.state.first_name);
       formData.append('user_profile[last_name]', this.state.last_name);
@@ -104,11 +83,6 @@ class UserProfileEditContainer extends Component {
         formData.append('user_profile[image]', this.state.image, this.state.image.name);
       }
 
-      // console.log("below is form data")
-      // for (var pair of formData.entries()) {
-      //     console.log(pair[0]+ ', ' + pair[1]); 
-      // }
-      
       console.log("doing PUT")
       $.ajax({
         url: `/user_profiles/${this.props.match.params.id}`,
@@ -130,6 +104,35 @@ class UserProfileEditContainer extends Component {
 
     }
 
+  }
+
+  handleFormErrors() {
+    let errorMessages = [];
+    this.setState({
+      firstnameError: false,
+      lastnameError: false,
+      locationError: false,
+      dobError: false
+    });
+
+    if (this.state.first_name === '') {
+      this.setState({ firstnameError: true })
+      errorMessages.push(FIRSTNAME_MISSING);
+    }
+    if (this.state.last_name === '') {
+      this.setState({ lastnameError: true })
+      errorMessages.push(LASTNAME_MISSING);
+    }
+    if (this.state.date_of_birth === '') {
+      this.setState({ dobError: true })
+      errorMessages.push(DOB_MISSING);
+    }
+    if (this.state.location === '') {
+      this.setState({ locationError: true })
+      errorMessages.push(LOCATION_MISSING);
+    }
+
+    return errorMessages;
   }
 
   deleteImage(image_attachment){
@@ -163,16 +166,30 @@ class UserProfileEditContainer extends Component {
     
   }
 
+  const { first_name, last_name, date_of_birth, location,firstnameError, lastnameError, dobError, locationError, errorMessages, formError } = this.state;
+
+  const errorMessageContent = this.state.errorMessages.map(message => {
+    const keyVal = uuid();
+    return (
+      <li key={ keyVal }>{message}</li>
+    )
+  });
+
+  const errorMessage = (
+    <Message
+      error
+      header='Form Error(s)'
+      content={
+        <ul>
+          {errorMessageContent}
+        </ul>
+      }
+    />
+  );
+
   console.log(imageHtml)
   return (
     <div> 
-    { !this.state.form_valid ?
-    <div class="ui warning message">
-      <div class="header">
-        All fields are required.
-      </div>
-    </div>
-    :null}
      <Form class="ui form">
       <Form.Field>
         <label>First Name</label>
@@ -212,6 +229,13 @@ class UserProfileEditContainer extends Component {
       </Form.Field>
       <UploadSingleButton updateImageState={this.updateImageState}/>
       {imageHtml ? imageHtml : <div></div>}
+      { this.state.formError ?
+        <div class="ui negative message">
+          <div class="header">
+            All fields are required.
+          </div>
+        </div>
+      :null}
       <Form.Button content = 'Submit' onClick={this.handleSubmit}/>
     </Form>
     </div>
