@@ -42,6 +42,9 @@ class ProfileContentContainer extends Component {
     window.onpopstate = () => {
         this.props.filterItems('All', this.props.cur_sort);
       }
+    window.onload = () => {
+        this.props.getMyItems(this.props.userProfileId, this.props.cur_sort);
+      }
   }
 
   handleOnClick(activeTab) {

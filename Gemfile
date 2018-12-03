@@ -41,7 +41,7 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveStorage variant
  gem 'mini_magick', '~> 4.8'
  gem 'image_processing', '~> 1.2'
- gem 'aws-sdk' 
+ gem "aws-sdk-s3", require: false
 
  gem "interactor", "~> 3.0"
 
