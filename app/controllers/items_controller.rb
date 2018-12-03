@@ -8,6 +8,10 @@ class ItemsController < ApplicationController
       @item.user_id = @current_user.id
       @item.status = "available"
       @item.date_posted = DateTime.now
+
+      @user_profile = UserProfile.find(current_user.user_profile.id)
+      @user_profile.points = @user_profile.points + 1
+      @user_profile.save
       
       if @item.save
           #redirect_to @item

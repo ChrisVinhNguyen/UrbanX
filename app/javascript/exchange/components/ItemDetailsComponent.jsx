@@ -22,10 +22,10 @@ class ItemDetailsComponent extends Component {
         <Item>
           <Item.Content>
           
-          <Carousel></Carousel>
-          {this.props.carousel_items_prop ? (<Carousel showThumbs={false} width="50%" selectedItem={1}> {this.props.carousel_items_prop} </Carousel>) : null}
+          
+          {this.props.carousel_items_prop ? (<Carousel width ="30%" dynamicHeight={true} showThumbs={false} showStatus={false} selectedItem={1}> {this.props.carousel_items_prop} </Carousel>) : null}
 
-          <Item.Header size = 'medium' as='a' href={'items/'+this.props.item_id_prop}><strong>{this.props.item_name_prop}</strong></Item.Header>
+          <Item.Header size = 'medium' as='a' ><strong>{this.props.item_name_prop}</strong></Item.Header>
         <Item.Meta>
           <p>Quantity: {this.props.item_quantity_prop}</p>
           
