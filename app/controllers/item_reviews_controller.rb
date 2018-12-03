@@ -60,8 +60,7 @@ class ItemReviewsController < ApplicationController
       if @user.image.attached?
           item_review_hash[:image] = rails_blob_url(@user.image)
       end
-
-
+      
       item_reviews_array.push(item_review_hash)
     end
     render :json => {"current_viewed_item_reviews" => item_reviews_array}.to_json()

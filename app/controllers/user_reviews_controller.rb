@@ -74,8 +74,15 @@ class UserReviewsController < ApplicationController
     @user_reviews.each do |user_review| 
       user = User.find(user_review[:reviewer_id])
       full_name = user.user_profile[:first_name] + " " + user.user_profile[:last_name]
+      @user = UserProfile.where(user_id: user_review.reviewer_id).first
       user_review_hash = user_review.attributes
       user_review_hash[:reviewer] = full_name
+
+      if @user.image.attached?
+          puts("has image")
+          user_review_hash[:image] = rails_blob_url(@user.image)
+      end
+
       user_reviews_array.push(user_review_hash)
     end
     render :json => {"user_reviews" => user_reviews_array}.to_json()

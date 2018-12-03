@@ -38,7 +38,7 @@ class UserReview extends Component {
       return (
         <div>
             <Comment>
-              <Comment.Avatar/>
+            <Comment.Avatar src= {review.image? review.image :pic}/>
               <Comment.Content>
                 <Comment.Author>
                   <Link to={'/user_profiles_show/'+ review.reviewer_id}>
