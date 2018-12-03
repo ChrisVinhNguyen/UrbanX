@@ -16,6 +16,7 @@ class SearchForItems
       end
 
       context.items = items
+      puts(context.items.inspect())
     else
       context.fail!(message: "invalid context params")
     end

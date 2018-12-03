@@ -1,5 +1,5 @@
 class FilterItemsList
   include Interactor::Organizer
 
-  organize SearchForItems, AddItemSummaryInfo
+  organize SearchForItems, PaginateItemResults, AddItemSummaryInfo
 end
