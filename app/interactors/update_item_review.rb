@@ -1,4 +1,4 @@
-class EditItemReviewInfo
+class UpdateItemReview
   include Interactor
 
   def validate_context(context)
