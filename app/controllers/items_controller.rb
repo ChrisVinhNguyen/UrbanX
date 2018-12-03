@@ -8,6 +8,10 @@ class ItemsController < ApplicationController
       @item.user_id = @current_user.id
       @item.status = "available"
       @item.date_posted = DateTime.now
+
+      @user_profile = UserProfile.find(current_user.user_profile.id)
+      @user_profile.points = @user_profile.points + 1
+      @user_profile.save
       
       if @item.save
           #redirect_to @item
@@ -26,10 +30,12 @@ class ItemsController < ApplicationController
   end
 
   def filter
+    puts(params[:page_number])
     context_params = {
       search_value: params[:search],
       item_status: "available",
-      category: params[:cur_category]
+      category: params[:cur_category], 
+      page_number: params[:page_number]
     }
 
     result = FilterItemsList.call(context_params)
@@ -44,7 +50,7 @@ class ItemsController < ApplicationController
           end   
           result.items_summary_array[index][:images] = @images
       end
-      render :json => { "filtered_items" => result.items_summary_array }
+      render :json => { "filtered_items" => result.items_summary_array, "total_pages" => result.total_pages }
     end
   end
 
@@ -79,10 +85,11 @@ class ItemsController < ApplicationController
       search_value: params[:search],
       item_status: "available",
       category: "All"
-    }
+      }
 
     result = SearchForAvailableItems.call(context_params)
-
+    puts("!!!!!!!!!!!!!!!!!!")
+    puts(result)
     if result.success?
       render json: { "searched_item_names" => result.item_names_array }
     end

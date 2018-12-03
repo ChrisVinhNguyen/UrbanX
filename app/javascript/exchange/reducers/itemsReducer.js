@@ -31,7 +31,8 @@ const initialState = {
   my_transactions_for_current_item: [],
   cur_sort: 'Default',
   original_list: [],
-  cur_status: 'All'
+  cur_status: 'All',
+  total_pages: 1
 }
 
 export default function(state = initialState, action) {
@@ -42,7 +43,8 @@ export default function(state = initialState, action) {
         cur_category: action.cur_category,
         search_value: action.cur_search_value,
         filtered_items: action.filtered_items,
-        original_list: action.original_list
+        original_list: action.original_list,
+        total_pages: action.total_pages
       }
     case SEARCH_ITEMS:
       return {

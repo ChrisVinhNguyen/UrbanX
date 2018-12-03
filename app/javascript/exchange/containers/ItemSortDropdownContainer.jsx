@@ -5,6 +5,7 @@ import { sortItems, filterItems } from '../actions/itemsActions';
 
 import PropTypes from 'prop-types';
 
+import '../stylesheets/item-sort-dropdown-container.scss';
 
 
 class ItemSortDropdownContainer extends Component {
@@ -66,7 +67,7 @@ class ItemSortDropdownContainer extends Component {
     }
     
     return (
-      <div>
+      <div className="sort-container">
         <p align="right">
           Sort by{'  '}
           <Dropdown inline defaultValue={cur_selected} direction="left" options={sortOptions} onChange={ this.handleSelect }/>

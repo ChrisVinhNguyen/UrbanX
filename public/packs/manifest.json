@@ -3,11 +3,15 @@
   "NewItemForm.js.map": "/packs/NewItemForm-0f357d55cfe7c082b5e5.js.map",
   "application.js": "/packs/application-2ec10dfe605439e25979.js",
   "application.js.map": "/packs/application-2ec10dfe605439e25979.js.map",
-  "exchange.css": "/packs/exchange-33452867fca91806516f3f77fc9389da.css",
-  "exchange.css.map": "/packs/exchange-33452867fca91806516f3f77fc9389da.css.map",
-  "exchange.js": "/packs/exchange-0234509167c6ac55d2f6.js",
-  "exchange.js.map": "/packs/exchange-0234509167c6ac55d2f6.js.map",
+  "exchange.css": "/packs/exchange-1b996a43486846107733212b8d6362f4.css",
+  "exchange.css.map": "/packs/exchange-1b996a43486846107733212b8d6362f4.css.map",
+  "exchange.js": "/packs/exchange-f3a9dbda3fd77392d31f.js",
+  "exchange.js.map": "/packs/exchange-f3a9dbda3fd77392d31f.js.map",
   "exchange/images/doge-logo-transparent-background.png": "/packs/exchange/images/doge-logo-transparent-background-46efb6b132359fffe2b27a2afad41aec.png",
   "exchange/images/logo2.png": "/packs/exchange/images/logo2-22a41a177e256587d1565b45d0c6b0b5.png",
-  "exchange/images/macbook.jpg": "/packs/exchange/images/macbook-357bf8312f7085ec9db8113e28615cb3.jpg"
+  "exchange/images/macbook.jpg": "/packs/exchange/images/macbook-357bf8312f7085ec9db8113e28615cb3.jpg",
+  "exchange/images/bronze.png": "/packs/exchange/images/bronze-92f22480681a584b0fb170ae79a04864.png",
+  "exchange/images/gold.png": "/packs/exchange/images/gold-46ccc6f56d5de80fdd10c74b379653bf.png",
+  "exchange/images/logo_inverted.png": "/packs/exchange/images/logo_inverted-d4effffcfcce7a221bb391cf6317332b.png",
+  "exchange/images/silver.png": "/packs/exchange/images/silver-3263a62cf6a2b7b0393894b4b0d3749f.png"
 }
