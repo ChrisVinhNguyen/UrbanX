@@ -3,6 +3,7 @@ import { v4 as uuid } from 'uuid';
 import { Grid, Button, Checkbox, Form, Message } from 'semantic-ui-react';
 import axios from 'axios';
 import { signUpUser } from '../actions/userActions';
+import { displayFlash } from '../actions/flashActions';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 
@@ -77,6 +78,13 @@ class UserSignUpFormContainer extends Component {
 
     this.props.signUpUser(userData);
     this.props.history.push('/user_profiles/new/profile');
+
+    this.displayMessage('Signed up successfully.', 'positive');
+  }
+
+  displayMessage(flash_message, pos_or_neg) {
+    this.props.displayFlash(flash_message, true, pos_or_neg);
+    setTimeout(this.props.displayFlash, 2000, '', false, pos_or_neg);
   }
 
   handleFormErrors() {
@@ -203,4 +211,4 @@ const mapStateToProps = state => ({
   user_form_backend_error: state.items.user_form_backend_error,
 });
 
-export default connect(mapStateToProps, { signUpUser })(UserSignUpFormContainer);
+export default connect(mapStateToProps, { signUpUser, displayFlash })(UserSignUpFormContainer);

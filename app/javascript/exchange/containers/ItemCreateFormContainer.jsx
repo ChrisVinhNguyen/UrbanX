@@ -8,6 +8,7 @@ import { Router, Route, Link, Redirect } from 'react-router-dom';
 import { Dropdown } from 'semantic-ui-react'
 import { v4 as uuid } from 'uuid';
 import * as actions from '../actions/itemsActions';
+import { displayFlash } from '../actions/flashActions';
 import '../stylesheets/item-create-form-container.scss';
 import { ITEMNAME_MISSING, DESCRIPTION_MISSING, CATEGORY_MISSING, QUANTITY_MISSING, CONDITION_MISSING, VALUE_MISSING, QUANTITY_NOTNUMBER, VALUE_NOTNUMBER } from '../constants/formErrors';
 
@@ -102,7 +103,13 @@ class ItemCreateFormContainer extends Component {
 
     //this.props.history.push("/items_list/93");
 
-}
+    this.displayMessage('Item added successfully', 'positive');
+  }
+
+  displayMessage(flash_message, pos_or_neg) {
+    this.props.displayFlash(flash_message, true, pos_or_neg);
+    setTimeout(this.props.displayFlash, 2000, '', false, pos_or_neg);
+  }
 
 
 handleFormErrors() {
@@ -252,4 +259,4 @@ const mapStateToProps = state => ({
   item_id: state.items.item_id
 });
 
-export default connect(mapStateToProps, { newItem, getItem })(ItemCreateFormContainer);
+export default connect(mapStateToProps, { newItem, getItem, displayFlash })(ItemCreateFormContainer);

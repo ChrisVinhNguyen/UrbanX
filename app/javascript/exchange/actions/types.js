@@ -31,3 +31,6 @@ export const GET_MY_TRANSACTIONS_FOR_ITEM = 'GET_MY_TRANSACTIONS_FOR_ITEM';
 
 
 export const NEW_ITEM = 'NEW_ITEM';
+
+
+export const DISPLAY_FLASH = 'DISPLAY_FLASH';
