@@ -43,7 +43,7 @@ class ItemReviewsController < ApplicationController
       item_review_hash[:owner_profile_id] = owner_profile_id
 
       if @user.image.attached?
-          item_review_hash[:image] = url_for(@user.image)
+          item_review_hash[:image] = rails_blob_url(@user.image)
       end
 
 

@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "NewItemForm.js": "/packs/NewItemForm-b980e82b8e4f4f20cd06.js",
   "NewItemForm.js.map": "/packs/NewItemForm-b980e82b8e4f4f20cd06.js.map",
   "application.js": "/packs/application-2e41e2223d2b324f02ae.js",
@@ -7,6 +8,17 @@
   "exchange.css.map": "/packs/exchange-33ac60c12254558ecc6f7ce45df87872.css.map",
   "exchange.js": "/packs/exchange-88497c1dc327b2296386.js",
   "exchange.js.map": "/packs/exchange-88497c1dc327b2296386.js.map",
+=======
+  "NewItemForm.js": "/packs/NewItemForm-82fc0efac0ef5cb113f1.js",
+  "NewItemForm.js.map": "/packs/NewItemForm-82fc0efac0ef5cb113f1.js.map",
+  "application.js": "/packs/application-c61da447b44f3261e7eb.js",
+  "application.js.map": "/packs/application-c61da447b44f3261e7eb.js.map",
+  "exchange.css": "/packs/exchange-33ac60c12254558ecc6f7ce45df87872.css",
+  "exchange.css.map": "/packs/exchange-33ac60c12254558ecc6f7ce45df87872.css.map",
+  "exchange.js": "/packs/exchange-a94b8c2f09557664e54a.js",
+  "exchange.js.map": "/packs/exchange-a94b8c2f09557664e54a.js.map",
+  "exchange/images/bronze.png": "/packs/exchange/images/bronze-92f22480681a584b0fb170ae79a04864.png",
+>>>>>>> 958cd2a278cf075cc8569f619a8c561d9ac47f12
   "exchange/images/doge-logo-transparent-background.png": "/packs/exchange/images/doge-logo-transparent-background-46efb6b132359fffe2b27a2afad41aec.png",
   "exchange/images/logo2.png": "/packs/exchange/images/logo2-22a41a177e256587d1565b45d0c6b0b5.png",
   "exchange/images/macbook.jpg": "/packs/exchange/images/macbook-357bf8312f7085ec9db8113e28615cb3.jpg",

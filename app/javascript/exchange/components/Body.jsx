@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ItemListComponent from './ItemListComponent'
+import ItemListComponent from './ItemListComponent';
 import { Route } from "react-router-dom";
 
 import UserProfile from './UserProfile';
@@ -11,7 +11,7 @@ import ContactUs from './ContactUs';
 import FAQ from './FAQ';
 
 import UserProfileEditContainer from '../containers/UserProfileEditContainer';
-import ItemDetailsContainer from '../containers/ItemDetailsContainer'
+import ItemDetailsContainer from '../containers/ItemDetailsContainer';
 import UserSignUpFormContainer from '../containers/UserSignUpFormContainer';
 import UserSignInFormContainer from '../containers/UserSignInFormContainer';
 import UserForgotPasswordFormContainer from '../containers/UserForgotPasswordFormContainer';
@@ -21,13 +21,6 @@ import ProfileCreateFormContainer from '../containers/ProfileCreateFormContainer
 
 import '../stylesheets/body.scss';
 
-
-//const About = () => <h2>About</h2>;
-//const TermsOfService = () => <h2>Terms Of Service</h2>;
-//const PrivacyPolicy = () => <h2>Privacy Policy</h2>;
-//const SiteMap = () => <h2>Site Map</h2>;
-//const ContactUs = () => <h2>Contact Us</h2>;
-//const FAQ = () => <h2>FAQ</h2>;
 
 class Body extends Component {
   render() {
