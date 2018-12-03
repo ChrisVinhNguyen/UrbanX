@@ -15,9 +15,9 @@ class ContactUs extends Component {
       <div>
         <Container>
           <Header as='h2'>Contact Us</Header>
-            <strong>
+            <p>
               Email us at urbanx444@gmail.com
-            </strong>
+            </p>
         </Container>
       </div>
     )
