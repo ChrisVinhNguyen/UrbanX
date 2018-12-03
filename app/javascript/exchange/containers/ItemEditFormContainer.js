@@ -106,15 +106,9 @@ class ItemEditFormContainer extends Component {
     var conditionOptions = [
       {text: 'Brand New', value: 'Brand New'}, {text: 'Excellent', value: 'Excellent'}, {text: 'Good', value: 'Good'}, {text: 'Fair', value: 'Fair'}, {text: 'Worn Out', value: 'Worn out'}
     ]
-    let numImages = 0
-    let url =""
-    let image_blob_id = 0
     let imageHtml;
 
     if (this.props.item_details.image_attachments_id){
-      numImages = this.props.item_details.image_attachments_id.length
-      url = this.props.item_details.image
-
 
       console.log("----")
       console.log("----")

@@ -10,7 +10,7 @@ import SiteMap from './SiteMap';
 import ContactUs from './ContactUs';
 import FAQ from './FAQ';
 
-import UserProfileEditForm from '../containers/UserProfileEditForm';
+import UserProfileEditContainer from '../containers/UserProfileEditContainer';
 import ItemDetailsContainer from '../containers/ItemDetailsContainer'
 import UserSignUpFormContainer from '../containers/UserSignUpFormContainer';
 import UserSignInFormContainer from '../containers/UserSignInFormContainer';
@@ -39,7 +39,8 @@ class Body extends Component {
         <Route path="/users_forgot_password" exact component={ UserForgotPasswordFormContainer } />
         <Route path="/user_profiles/new/profile" exact component={ ProfileCreateFormContainer } />
         <Route path="/user_profiles_show/:id" exact component={ UserProfile } />
-        <Route path="/user_profiles_change/:id/edit" exact component={ UserProfileEditForm } />
+        <Route path="/user_profiles_change/:id/edit" exact component={ UserProfileEditContainer } />
+        <Route path="/user_profiles/:user_profile_id/delete_image" exact component={ UserProfileEditContainer } />
         <Route path="/about" component={ About } />
         <Route path="/terms-of-service" component={ TermsOfService } />
         <Route path="/privacy-policy" component={ PrivacyPolicy } />

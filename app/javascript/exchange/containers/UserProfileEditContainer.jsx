@@ -7,7 +7,7 @@ import { UploadSingleButton }  from '../components/UploadSingleButton.js';
 import { fetchUser } from '../actions/userActions';
 
 
-class UserProfileEditForm extends Component {
+class UserProfileEditContainer extends Component {
   constructor(props) {
       super(props);
       this.state = {
@@ -15,13 +15,14 @@ class UserProfileEditForm extends Component {
         last_name: this.props.user_info.last_name,
         date_of_birth: this.props.user_info.date_of_birth,
         location: this.props.user_info.location,
-        image: null,
+        image: this.props.user_info.image,
         form_valid: true
       };
       this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
       this.handleLastNameChange = this.handleLastNameChange.bind(this);
       this.handleDateOfBirthChange = this.handleDateOfBirthChange.bind(this);
       this.handleLocationChange = this.handleLocationChange.bind(this);
+      this.deleteImage = this.deleteImage.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
       this.updateImageState = this.updateImageState.bind(this);
 
@@ -36,8 +37,6 @@ class UserProfileEditForm extends Component {
   }
   updateImageState(file){
     this.state.image = file;
-    console.log("USERPROFILEUPDATEIMAGESTATE")
-    console.log(this.state.image)
   }
 
   handleFirstNameChange(e) {
@@ -96,17 +95,7 @@ class UserProfileEditForm extends Component {
       window.alert("Missing Fields")
     }
     else{
-      // axios.put(`/user_profiles/${this.props.match.params.id}`, {
-      //  params:userData
-      //   })
-      // .then(function(response) {
-        
-      //   })
-      //    .catch(function(error){
-      //   console.log(error);
-      // })
       const formData = new FormData();
-      // formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
       formData.append('user_profile[first_name]', this.state.first_name);
       formData.append('user_profile[last_name]', this.state.last_name);
       formData.append('user_profile[date_of_birth]', this.state.date_of_birth);
@@ -115,11 +104,11 @@ class UserProfileEditForm extends Component {
         formData.append('user_profile[image]', this.state.image, this.state.image.name);
       }
 
-      console.log("below is form data")
-      for (var pair of formData.entries()) {
-          console.log(pair[0]+ ', ' + pair[1]); 
-      }
-      // debugger
+      // console.log("below is form data")
+      // for (var pair of formData.entries()) {
+      //     console.log(pair[0]+ ', ' + pair[1]); 
+      // }
+      
       console.log("doing PATCH")
       $.ajax({
         url: `/user_profiles/${this.props.match.params.id}`,
@@ -143,7 +132,38 @@ class UserProfileEditForm extends Component {
 
   }
 
+  deleteImage(image_attachment){
+    var data = image_attachment
+      $.ajax({
+      url:`/user_profiles/${image_attachment}/delete_image`,
+      method: 'DELETE',
+      data: data
+    }).then(
+    (response) => console.log(response.message),
+    (response) => console.log(response.responseJSON)
+    );
+  }
+
   render() {
+
+  let imageHtml;
+  console.log(this.props.user_info)
+  if (this.props.user_info.image_attachment_id){
+    console.log("iNDISSDEIF ")
+    imageHtml = 
+      
+          <div >
+            <img src={this.props.user_info.image} width="400"/>
+            <Button onClick={() => {this.deleteImage(this.props.user_info.image_attachment_id)}}>
+              Delete
+            </Button>
+          </div>
+        
+    
+    
+  }
+
+  console.log(imageHtml)
   return (
     <div> 
     { !this.state.form_valid ?
@@ -153,7 +173,7 @@ class UserProfileEditForm extends Component {
       </div>
     </div>
     :null}
-     <Form onSubmit={this.handleSubmit} class="ui form">
+     <Form class="ui form">
       <Form.Field>
         <label>First Name</label>
         <Form.Input 
@@ -191,7 +211,8 @@ class UserProfileEditForm extends Component {
           placeholder="Location"/>
       </Form.Field>
       <UploadSingleButton updateImageState={this.updateImageState}/>
-      <Form.Button content = 'Submit'/>
+      {imageHtml ? imageHtml : <div></div>}
+      <Form.Button content = 'Submit' onClick={this.handleSubmit}/>
     </Form>
     </div>
     );
@@ -202,4 +223,4 @@ const mapStateToProps = state => ({
   user_info: state.user.user_info
 });
 
-export default connect(mapStateToProps, { fetchUser })(UserProfileEditForm);
+export default connect(mapStateToProps, { fetchUser })(UserProfileEditContainer);
