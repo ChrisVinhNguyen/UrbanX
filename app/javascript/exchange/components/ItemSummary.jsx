@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Icon, Image, Item, Label, Card } from 'semantic-ui-react'
-import { Rating, Divider } from 'semantic-ui-react'
+import { Button, Icon, Image, Item, Label, Card } from 'semantic-ui-react';
+import { Rating, Divider } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
 import { getItem } from '../actions/itemsActions';
 import { connect } from 'react-redux';

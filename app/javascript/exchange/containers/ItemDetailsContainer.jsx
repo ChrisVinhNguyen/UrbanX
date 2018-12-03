@@ -1,26 +1,22 @@
-
 import React, { Component } from 'react';
-import { Button, Icon, Image, Item, Label, Header } from 'semantic-ui-react'
-import { Rating, Divider } from 'semantic-ui-react'
+import { Button, Icon } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import axios from 'axios';
-import ItemReviewsContainer from './ItemReviewsContainer'
-import { getItem, filterItems } from '../actions/itemsActions';
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import {Carousel} from 'react-responsive-carousel';
-import { v4 as uuid } from 'uuid';
 import PropTypes from 'prop-types';
-import ItemDetailsComponent from '../components/ItemDetailsComponent';
-import ItemDetailsBorrowContainer from './ItemDetailsBorrowContainer';
 
 import pic from '../images/macbook.jpg';
 
+import { getItem, filterItems } from '../actions/itemsActions';
+
+import ItemDetailsComponent from '../components/ItemDetailsComponent';
+
+import ItemDetailsBorrowContainer from './ItemDetailsBorrowContainer';
+import ItemReviewsContainer from './ItemReviewsContainer';
+
 
 class ItemDetailsContainer extends Component {
-
   componentDidMount(){
-    console.log("componentDidMount")
     this.props.getItem(this.props.match.params.id)
     this.deleteItem = this.deleteItem.bind(this);
   }
@@ -34,7 +30,6 @@ class ItemDetailsContainer extends Component {
     (response) => console.log(response.responseJSON)  
     );
 
-    console.log(this.props.match.params.id);
     this.props.filterItems('All', this.props.cur_sort, '');
     this.props.history.push("/");
 
@@ -43,7 +38,6 @@ class ItemDetailsContainer extends Component {
   render() {
     let numImages = 0
     let url =""
-    let carouselItems;
     let processedImages = []
 
     if (this.props.item_details.images){  
@@ -144,7 +138,6 @@ const mapStateToProps = state => ({
   item_id: state.items.item_id,
   item_details: state.items.item_details,
   current_viewed_item_reviews: state.items.current_viewed_item_reviews,
-  // filtered_transactions: state.items.filtered_transactions,
   currentUserId: state.user.user_info.user_id,
   currentUserProfileId: state.user.user_info.user_profile_id,
   my_transactions_for_current_item: state.items.my_transactions_for_current_item,
@@ -152,4 +145,4 @@ const mapStateToProps = state => ({
   is_signed_in: state.user.is_signed_in
 });
 
-export default connect(mapStateToProps, {getItem, filterItems})(ItemDetailsContainer);
+export default connect(mapStateToProps, { getItem, filterItems })(ItemDetailsContainer);
