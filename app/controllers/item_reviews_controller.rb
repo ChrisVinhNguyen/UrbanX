@@ -1,6 +1,19 @@
 class ItemReviewsController < ApplicationController
   def create
     if user_signed_in?
+
+      ## Refactored 
+      # context_params = {
+      #   item_id: params[:item_id],
+      #   item_review_params: item_review_params
+      # }
+
+      # result = CreateNewItemReview.call(context_params)
+      # if result.success?
+      #   render json: result.item
+      # end
+
+
       print("inside of create item reviews")
       print(params)
       @item = Item.find(params[:item_id])
