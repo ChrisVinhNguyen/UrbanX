@@ -82,6 +82,7 @@ class ItemReviewsController < ApplicationController
       # if result.success?
       #   render json: result.item
       # end
+
       @item = Item.find(params[:item_id])
       @item_review = @item.item_reviews.find(params[:id])
       #check if current user is allowed to edit
@@ -113,6 +114,18 @@ class ItemReviewsController < ApplicationController
 
   def destroy
     if user_signed_in?
+
+      ## Refactored 
+      # context_params = {
+      #   item_id: params[:item_id],
+      #   item_review_id: params[:id]
+      # }
+
+      # result = DeleteItemReview.call(context_params)
+      # if result.success?
+      #   render json: result.item
+      # end
+
       @item = Item.find(params[:item_id])
       @item_review = @item.item_reviews.find(params[:id])
       @item_review.destroy
