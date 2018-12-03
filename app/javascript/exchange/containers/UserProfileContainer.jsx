@@ -48,9 +48,13 @@ class UserProfileContainer extends Component {
   render() {
     return (
       <div>
-        <Grid columns={2} divided>
-          <UserProfileInfo viewingMyProfile = {this.props.viewingMyProfile} userProfile={this.state.userProfile} />
-          <ProfileContentContainer viewingMyProfile = {this.props.viewingMyProfile} userProfileId={this.props.userProfileId} />
+        <Grid>
+          <Grid.Column width={4}>
+            <UserProfileInfo viewingMyProfile={this.props.viewingMyProfile} userProfile={this.state.userProfile} />
+          </Grid.Column>
+          <Grid.Column width={11}>
+            <ProfileContentContainer viewingMyProfile={this.props.viewingMyProfile} userProfileId={this.props.userProfileId} />
+          </Grid.Column>
         </Grid>
       </div>
     );
