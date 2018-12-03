@@ -1,53 +1,49 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import { Menu, Button, Comment, Form, Header, Rating, TextArea } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { getUserReviews, fetchUser } from '../actions/userActions';
-
 import PropTypes from 'prop-types';
+import { Menu, Button, Comment, Form, Header, Rating, TextArea } from 'semantic-ui-react';
+
+import { getUserReviews } from '../actions/userActions';
+
 import UserReview from '../components/UserReview'
+import NoUserReviewsResults from '../components/NoUserReviewsResults';
 
 
 class UserReviewsContainer extends Component {
-  	constructor(props){
+    constructor(props){
       super(props);
-  		console.log("---------")
-  		console.log(this.props)
-  		this.props.getUserReviews(this.props.reviewee_id)
-  	}
-  	/**componentWillMount(){
-  		console.log("$$$$")
-  		console.log(this.props)
-  		this.props.getUserReviews()
-  	}**/
-  	render() {
-    	console.log('mmmmm', this.props)
-    	console.log(this.props.user_reviews)
+      this.props.getUserReviews(this.props.reviewee_id)
+    }
+
+    render() {
+      console.log('mmmmm', this.props)
+      console.log(this.props.user_reviews)
 
       const reviewee_id = this.props.reviewee_id;
 
-    	return (
-    		<Comment.Group>
+      return (
+        <Comment.Group>
           <div>
             <Header as='h3'>
-      				Reviews
+              Reviews
             </Header>
-            <UserReview reviewee_id={this.props.reviewee_id}/> 
+            <UserReview reviewee_id={this.props.reviewee_id}/>
+            { this.props.user_reviews.length == 0 ? <NoUserReviewsResults /> : null }
           </div>
-    		</Comment.Group>
-		);
-	}
+        </Comment.Group>
+    );
+  }
 }
 
-
 UserReviewsContainer.propTypes = {
-	getUserReviews: PropTypes.func.isRequired,
-	user_reviews: PropTypes.array.isRequired,
+  getUserReviews: PropTypes.func.isRequired,
+  user_reviews: PropTypes.array.isRequired,
   reviewee_id: PropTypes.number.isRequired
 }
 
 const mapStateToProps = state => ({
-	getUserReviews: state.user.getUserReviews
+  user_reviews: state.user.user_reviews
 });
 
 export default connect(mapStateToProps, { getUserReviews })(UserReviewsContainer);

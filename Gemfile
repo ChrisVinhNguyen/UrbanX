@@ -28,6 +28,7 @@ gem 'webpacker'
 gem 'devise'
 gem 'react-rails'
 
+
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -40,6 +41,7 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveStorage variant
  gem 'mini_magick', '~> 4.8'
  gem 'image_processing', '~> 1.2'
+ gem "aws-sdk-s3", require: false
 
  gem "interactor", "~> 3.0"
 

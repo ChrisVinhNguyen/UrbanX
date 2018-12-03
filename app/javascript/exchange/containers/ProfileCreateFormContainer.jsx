@@ -30,7 +30,6 @@ class ProfileCreateFormContainer extends Component {
         formError: false
       };
 
-
       this.handleSubmit = this.handleSubmit.bind(this);
       this.handleChange = this.handleChange.bind(this);
       this.updateImageState = this.updateImageState.bind(this);

@@ -4,6 +4,7 @@
   "dependencies": {
     "@rails/webpacker": "3.5",
     "activestorage": "^5.2.1",
+    "aws-sdk": "^2.368.0",
     "axios": "^0.18.0",
     "babel-preset-react": "^6.24.1",
     "faker": "^4.1.0",
@@ -15,6 +16,7 @@
     "react-dropzone": "^7.0.1",
     "react-dropzone-component": "^3.2.0",
     "react-flash-message": "^1.0.2",
+    "react-image-gallery": "^0.8.12",
     "react-img-carousel": "^1.4.1",
     "react-rails": "^0.2.5",
     "react-redux": "^5.1.1",

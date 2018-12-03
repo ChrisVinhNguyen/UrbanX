@@ -56,9 +56,10 @@ Rails.application.routes.draw do
   match 'users_forgot_password', to: 'root#index', via: :all
   match 'user_profiles/new/profile', to: 'root#index', via: :all
   match 'user_profiles_change/:id/edit', to: 'root#index', via: :all
+  match 'user_profiles/:id/delete_image', to: 'root#index', via: :all
   match 'items_list/:id', to: 'root#index', via: :all
   match 'items/add/new', to: 'root#index', via: :all
-    match 'items/edit/:item_id', to: 'root#index', via: :all
+  match 'items/edit/:item_id', to: 'root#index', via: :all
   match 'items/delete/:item_id', to: 'root#index', via: :all
   match 'items/:item_id/delete_image', to: 'root#index', via: :all
 

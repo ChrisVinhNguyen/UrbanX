@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Grid, Divider } from 'semantic-ui-react'
+import { Grid, Divider } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import ItemSummary from './ItemSummary';
+import NoItemResults from './NoItemResults';
 import ItemSortDropdownContainer from '../containers/ItemSortDropdownContainer';
 import PaginationContainer from '../containers/PaginationContainer';
-import NoItemResults from './NoItemResults';
+
+import '../stylesheets/item-list-component.scss';
 
 
 class ItemListComponent extends Component {
@@ -20,7 +22,6 @@ class ItemListComponent extends Component {
       );
     });
 
-    console.log(this.props)
     return (
       <div className="item-list-component">
         <ItemSortDropdownContainer />
@@ -30,7 +31,9 @@ class ItemListComponent extends Component {
           </Grid.Row>
         </Grid>
         { this.props.filtered_items.length == 0 ? <NoItemResults /> : null }
-        <PaginationContainer/>
+        <div className="pagination-container">
+          <PaginationContainer/>
+        </div>
       </div>
     );
   }

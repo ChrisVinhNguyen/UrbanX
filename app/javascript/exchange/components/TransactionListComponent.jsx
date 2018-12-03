@@ -8,6 +8,9 @@ import pic from '../images/macbook.jpg';
 import TransactionSummary from './TransactionSummary'
 import TransactionFilterContainer from '../containers/TransactionFilterContainer'
 
+import NoTransactionResults from '../components/NoTransactionResults';
+
+
 class TransactionListComponent extends Component {
 
 
@@ -24,6 +27,7 @@ class TransactionListComponent extends Component {
         <Item.Group divided>
           {transactions}
         </Item.Group>
+        { this.props.filtered_transactions.length == 0 ? <NoTransactionResults /> : null }
       </div>
     );
   }

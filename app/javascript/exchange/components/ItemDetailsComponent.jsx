@@ -1,30 +1,48 @@
 import React, { Component } from 'react';
 import { Button, Icon, Image, Item, Label, Header } from 'semantic-ui-react'
-import { Rating, Divider } from 'semantic-ui-react'
+import { Rating, Divider, Grid } from 'semantic-ui-react'
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import axios from 'axios';
 import ItemReviewsContainer from '../containers/ItemReviewsContainer'
 import { getItem } from '../actions/itemsActions';
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import {Carousel} from 'react-responsive-carousel';
+// import "react-responsive-carousel/lib/styles/carousel.min.css";
+// import {Carousel} from 'react-responsive-carousel';
+import ImageGallery from 'react-image-gallery';
 import { v4 as uuid } from 'uuid';
 import PropTypes from 'prop-types';
 import ItemDetailsContainer from '../containers/ItemDetailsContainer'
 import ItemDetailsBorrowContainer from '../containers/ItemDetailsBorrowContainer';
 import pic from '../images/macbook.jpg';
+import "react-image-gallery/styles/css/image-gallery.css";
+// import '../stylesheets/image-gallery.css';
+
 
 class ItemDetailsComponent extends Component {
-
   render() {
+    const imageGallery = (
+      <ImageGallery items={this.props.item_images_prop}
+        showFullscreenButton={false}
+        useBrowserFullscreen={false}
+        showThumbnails={false}
+        showIndex={false}
+        showBullets={false}
+        showPlayButton={false}
+        autoPlay={true}
+        lazyLoad={true}
+        slideDuration={450}
+        slideInterval={8000}
+      />
+    );
+
     return (
       <div>
         <Item>
           <Item.Content>
-          
-          
-          {this.props.carousel_items_prop ? (<Carousel width ="30%" dynamicHeight={true} showThumbs={false} showStatus={false} selectedItem={1}> {this.props.carousel_items_prop} </Carousel>) : null}
-
+          { this.props.item_images_prop && this.props.item_images_prop.length > 0 ?
+            imageGallery :
+            <Image size='medium' src="https://react.semantic-ui.com/images/wireframe/image.png" />
+          }
           <Item.Header size = 'medium' as='a' ><strong>{this.props.item_name_prop}</strong></Item.Header>
         <Item.Meta>
           <p>Quantity: {this.props.item_quantity_prop}</p>

@@ -150,12 +150,13 @@ export const getItem = (item_id=item_id) => dispatch => {
   console.log(item_id)
 }
 
-export const getMyItems = (current_user_profile_id, cur_sort) => dispatch => {
+export const getMyItems = (current_user_profile_id, cur_sort, page_number) => dispatch => {
   let that = this
   console.log(current_user_profile_id);
   axios.get('/items/myItems', {
     params: {
-      current_user_profile_id: current_user_profile_id
+      current_user_profile_id: current_user_profile_id,
+      page_number: page_number 
     }
   })
   .then(function(response){
@@ -163,7 +164,8 @@ export const getMyItems = (current_user_profile_id, cur_sort) => dispatch => {
     dispatch({
       type: GET_MY_ITEMS,
       filtered_items: response.data.filtered_items,
-      original_list: response.data.filtered_items
+      original_list: response.data.filtered_items,
+      total_pages: response.data.total_pages
     })
     dispatch(
       sortItems(response.data.filtered_items, cur_sort)

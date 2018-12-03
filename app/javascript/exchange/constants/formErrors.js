@@ -18,3 +18,18 @@ export const FIRSTNAME_MISSING = 'Your first name is missing';
 export const LASTNAME_MISSING = 'Your last name is missing';
 export const LOCATION_MISSING = 'Your location is missing';
 export const DOB_MISSING = 'Your date of birth is missing';
+
+//Item creation errors
+export const ITEMNAME_MISSING = 'The item name is missing'
+export const DESCRIPTION_MISSING = 'The item description is missing'
+export const CATEGORY_MISSING = 'The item category is missing'
+export const QUANTITY_MISSING = 'The quantity of item is missing'
+export const CONDITION_MISSING = 'The condition of the item is missing'
+export const VALUE_MISSING = 'The value of the item is missing'
+
+export const QUANTITY_NOTNUMBER = 'The quantity must be a number'
+export const VALUE_NOTNUMBER = 'The value must be a number'
+
+
+
+

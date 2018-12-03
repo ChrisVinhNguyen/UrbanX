@@ -83,7 +83,8 @@ export default function(state = initialState, action) {
       return {
         ...state,
         filtered_items: action.filtered_items,
-        original_list: action.original_list
+        original_list: action.original_list,
+        total_pages: action.total_pages
       }
     case GET_MY_TRANSACTIONS:
       return {

@@ -1,27 +1,23 @@
-
 import React, { Component } from 'react';
-import { Button, Icon, Image, Item, Label, Header } from 'semantic-ui-react'
-import { Rating, Divider } from 'semantic-ui-react'
+import { Button, Icon } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import axios from 'axios';
-import ItemReviewsContainer from './ItemReviewsContainer'
-import { getItem, filterItems } from '../actions/itemsActions';
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import {Carousel} from 'react-responsive-carousel';
-import { v4 as uuid } from 'uuid';
 import PropTypes from 'prop-types';
-import ItemDetailsComponent from '../components/ItemDetailsComponent';
-import ItemDetailsBorrowContainer from './ItemDetailsBorrowContainer';
 import { displayFlash } from '../actions/flashActions';
 
 import pic from '../images/macbook.jpg';
 
+import { getItem, filterItems } from '../actions/itemsActions';
+
+import ItemDetailsComponent from '../components/ItemDetailsComponent';
+
+import ItemDetailsBorrowContainer from './ItemDetailsBorrowContainer';
+import ItemReviewsContainer from './ItemReviewsContainer';
+
 
 class ItemDetailsContainer extends Component {
-
   componentDidMount(){
-    console.log("componentDidMount")
     this.props.getItem(this.props.match.params.id)
     this.deleteItem = this.deleteItem.bind(this);
   }
@@ -35,7 +31,6 @@ class ItemDetailsContainer extends Component {
     (response) => console.log(response.responseJSON)  
     );
 
-    console.log(this.props.match.params.id);
     this.props.filterItems('All', this.props.cur_sort, '');
     this.props.history.push("/");
 
@@ -50,24 +45,24 @@ class ItemDetailsContainer extends Component {
   render() {
     let numImages = 0
     let url =""
-    let carouselItems;
+    let processedImages = []
 
-    if (this.props.item_details.images){
-      numImages = this.props.item_details.images.length
-      url = this.props.item_details.image
+    if (this.props.item_details.images){  
+      
+      this.props.item_details.images.map(imageSrc =>{
+        
+        const imageObject = {
+          original:imageSrc,
+          thumbnail:imageSrc
+        }
 
-      carouselItems = this.props.item_details.images.map(imageSrc => {
-      const keyVal = uuid();
-        return (
-          <div key={keyVal}>
-            <img src={imageSrc} />
-          </div>
-        )
-      })
+        processedImages.push(imageObject)
+      })  
+
     }
 
     else {
-      carouselItems = null
+      processedImages = null
     }
 
     let editButton = null;
@@ -129,7 +124,7 @@ class ItemDetailsContainer extends Component {
       item_description_prop={this.props.item_details.description} 
       item_avg_rating_prop={this.props.item_details.average_rating} 
       item_details_user_id_prop={this.props.item_details.user_id} 
-      carousel_items_prop={carouselItems}
+      item_images_prop={processedImages}
       edit_button_prop={editButton}
       delete_button_prop={deleteButton}
       active_transactions_msg_prop={activeTransactionsMsg}/>
@@ -150,7 +145,6 @@ const mapStateToProps = state => ({
   item_id: state.items.item_id,
   item_details: state.items.item_details,
   current_viewed_item_reviews: state.items.current_viewed_item_reviews,
-  // filtered_transactions: state.items.filtered_transactions,
   currentUserId: state.user.user_info.user_id,
   currentUserProfileId: state.user.user_info.user_profile_id,
   my_transactions_for_current_item: state.items.my_transactions_for_current_item,

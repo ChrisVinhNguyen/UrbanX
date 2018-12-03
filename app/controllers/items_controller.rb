@@ -14,7 +14,6 @@ class ItemsController < ApplicationController
       @user_profile.save
       
       if @item.save
-          #redirect_to @item
           render json: @item.id
       else
         puts(@item.errors.full_messages)
@@ -45,7 +44,7 @@ class ItemsController < ApplicationController
           @images = []
           if resultItem.images.attached?
               resultItem.images.each do |image|
-                @images.push(url_for(image))
+                @images.push(rails_blob_url(image))
               end
           end   
           result.items_summary_array[index][:images] = @images
@@ -57,8 +56,8 @@ class ItemsController < ApplicationController
   def myItems
     context_params = {
       profile_id: params[:current_user_profile_id],
+      page_number: params[:page_number]
     }
-
     result = GetProfileItemsList.call(context_params)
 
     if result.success?
@@ -68,15 +67,14 @@ class ItemsController < ApplicationController
           @images = []
           if resultItem.images.attached?
               resultItem.images.each do |image|
-                @images.push(url_for(image))
+                @images.push(rails_blob_url(image))
               end
           end   
           puts(@images)
           result.items_summary_array[index][:images] = @images
           puts(result.items_summary_array)
-          puts("111111111111111111")
       end
-      render :json => { "filtered_items" => result.items_summary_array }
+      render :json => { "filtered_items" => result.items_summary_array , "total_pages" => result.total_pages }
     end
   end
 
@@ -117,7 +115,7 @@ class ItemsController < ApplicationController
     @image_attachments_id = []
     if @item.images.attached?
         @item.images.each do |image|
-          @images.push(url_for(image))
+          @images.push(rails_blob_url(image))
           @image_attachments_id.push(image.id)
         end   
         

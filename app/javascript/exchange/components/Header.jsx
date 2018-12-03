@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import ProjectLogo from './ProjectLogo';
-import ItemCategoriesMenu from '../containers/ItemCategoriesMenu'
+import ItemCategoriesMenu from '../containers/ItemCategoriesMenu';
 import SearchBarContainer from '../containers/SearchBarContainer';
 import HeaderProfileContainer from '../containers/HeaderProfileContainer';
 import FlashMessageContainer from '../containers/FlashMessageContainer';
@@ -21,7 +21,7 @@ class Header extends Component {
           <SearchBarContainer />
           <HeaderProfileContainer />
         </div>
-        <div>
+        <div className="header-bottom">
           <ItemCategoriesMenu />
         </div>
         
