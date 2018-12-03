@@ -9,7 +9,8 @@ class AddItemSummaryInfo
     if validate_context(context)
       item_review_repo = ItemReviewRepository.new
       item_review = item_review_repo.new_item_review(context.item, context.item_review_params)
-
+      item_review.created_at = DateTime.now
+      item_review.updated_at = DateTime.now 
       context.item_review = item_review
     else
       context.fail!(message: "invalid context params")
