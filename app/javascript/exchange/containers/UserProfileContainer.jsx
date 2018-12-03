@@ -20,7 +20,6 @@ class UserProfileContainer extends Component {
   }
 
   componentDidMount() {
-    console.log("calling did mount")
     axios.get('/user_profiles/' + this.props.userProfileId) 
     .then((response) => {
       this.setState({
@@ -34,10 +33,8 @@ class UserProfileContainer extends Component {
 
   componentWillUpdate(prevProps){
     if (prevProps.userProfileId !== this.props.userProfileId) {
-      console.log("prev = cur")
       axios.get('/user_profiles/' + prevProps.userProfileId)
       .then((response) => {
-        console.log(response)
         this.setState({
           userProfile: response.data
         })
@@ -53,7 +50,7 @@ class UserProfileContainer extends Component {
       <div>
         <Grid columns={2} divided>
           <UserProfileInfo viewingMyProfile = {this.props.viewingMyProfile} userProfile={this.state.userProfile} />
-          <ProfileContentContainer viewingMyProfile = {this.props.viewingMyProfile} userProfileId={this.props.userProfileId}/>
+          <ProfileContentContainer viewingMyProfile = {this.props.viewingMyProfile} userProfileId={this.props.userProfileId} />
         </Grid>
       </div>
     );
@@ -66,4 +63,5 @@ UserProfileContainer.propTypes = {
   getUserReviews: PropTypes.func.isRequired,
   getMyTransactions: PropTypes.func.isRequired,
 }
-export default connect(() => {return{}}, { filterItems, getMyItems, getUserReviews, getMyTransactions })(UserProfileContainer);
+
+export default connect(() => { return{} }, { filterItems, getMyItems, getUserReviews, getMyTransactions })(UserProfileContainer);

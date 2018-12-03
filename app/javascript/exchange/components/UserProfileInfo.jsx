@@ -1,65 +1,64 @@
 import React, { Component } from 'react';
-import UserProfileContainer from '../containers/UserProfileContainer'
 import { Link } from "react-router-dom";
+import { Button, Icon, Image, Label, Card } from 'semantic-ui-react';
 
 import Logo from '../images/macbook.jpg';
 import Bronze from '../images/bronze.png';
 import Silver from '../images/silver.png';
 import Gold from '../images/gold.png';
 
+import UserProfileContainer from '../containers/UserProfileContainer';
+
+import '../stylesheets/user-profile-info.scss';
+
+
 class UserProfileInfo extends Component {
-  handleEditOnClick(e){
-    console.log('inside handleEditOnClick!!!');
-  }
-
-  handleAddContactOnClick(e){
-    console.log('inside handleAddContactOnClick!!!');
-  }
-
   render() {
-  	console.log(this.props)
-    let url=""
-    if (this.props.userProfile.image){
+    let url;
+
+    if (this.props.userProfile.image) {
       url = this.props.userProfile.image;
     }
-    else{
-      url = Logo
+    else {
+      url = "https://react.semantic-ui.com/images/wireframe/image.png";
     }
 
     return (
-      <div className="ui card user-profile-container">
-        <div className="image">
-          <img src={url? url : Logo}/>
-        </div>
-        <div className="content">
-          <a className="header">{this.props.userProfile.first_name + " " + this.props.userProfile.last_name}</a>
-          <div className="meta">
-            <span className="date">{this.props.userProfile.location}</span>
-          </div>
-          <div className="meta">
-            <span className="date">Birthday: {this.props.userProfile.date_of_birth}</span>
-          </div>
-          <div className="meta">
-            <span className="date">Email: {this.props.userProfile.email}</span>
-          </div>
-          <div className="meta">
-          {10 < this.props.userProfile.points && this.props.userProfile.points <= 50 ?
-            <img src={Bronze}/>: null}
-          </div>
-          <div className="meta">
-          {50 < this.props.userProfile.points && this.props.userProfile.points <= 100 ?
-            <img src={Silver}/>: null}
-          </div>
-          <div className="meta">
-          {100 < this.props.userProfile.points ?
-            <img src={Gold}/>: null}
-          </div>
-        </div>
-        {this.props.viewingMyProfile ?
+      <Card className="user-profile-container-card" centered>
+        <Image size='medium' src={ url } />
+        <Card.Content className="user-profile-content">
+          <Card.Header>
+            { this.props.userProfile.first_name + " " + this.props.userProfile.last_name }
+          </Card.Header>
+          <Card.Meta>
+            <span className='owner-name'>Email: { this.props.userProfile.email }</span>
+          </Card.Meta>
+          <Card.Meta>
+            <span className='owner-name'>Birthday: { this.props.userProfile.date_of_birth }</span>
+          </Card.Meta>
+          <Card.Meta>
+            <span className='owner-name'>Location: { this.props.userProfile.location }</span>
+          </Card.Meta>
+          <Card.Meta>
+            { this.props.userProfile.points >=10 && this.props.userProfile.points < 50 ?
+            <Image src={ Bronze } /> : null }
+          </Card.Meta>
+          <Card.Meta>
+            { this.props.userProfile.points >= 50 && this.props.userProfile.points < 100 ?
+            <Image src={ Silver } /> : null }
+          </Card.Meta>
+          <Card.Meta>
+            { this.props.userProfile.points >= 100 ?
+            <Image src={ Gold } /> : null }
+          </Card.Meta>
+        </Card.Content>
+        { this.props.viewingMyProfile ?
+          <Card.Content extra>
             <Link to={`/user_profiles_change/${this.props.userProfile.id}/edit`}>
-              <button className="ui button">Edit</button>
-            </Link>: null}
-      </div>
+              <Button className="edit-profile-button">Edit</Button>
+            </Link>
+        </Card.Content> : null }
+      </Card>
     );
   }
 }
