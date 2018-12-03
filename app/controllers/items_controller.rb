@@ -44,7 +44,7 @@ class ItemsController < ApplicationController
           @images = []
           if resultItem.images.attached?
               resultItem.images.each do |image|
-                @images.push(url_for(image))
+                @images.push(rails_blob_url(image))
               end
           end   
           result.items_summary_array[index][:images] = @images
@@ -67,7 +67,7 @@ class ItemsController < ApplicationController
           @images = []
           if resultItem.images.attached?
               resultItem.images.each do |image|
-                @images.push(url_for(image))
+                @images.push(rails_blob_url(image))
               end
           end   
           puts(@images)
@@ -116,7 +116,7 @@ class ItemsController < ApplicationController
     @image_attachments_id = []
     if @item.images.attached?
         @item.images.each do |image|
-          @images.push(url_for(image))
+          @images.push(rails_blob_url(image))
           @image_attachments_id.push(image.id)
         end   
         
