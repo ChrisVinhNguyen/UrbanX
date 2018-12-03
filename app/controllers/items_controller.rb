@@ -14,7 +14,6 @@ class ItemsController < ApplicationController
       @user_profile.save
       
       if @item.save
-          #redirect_to @item
           render json: @item.id
       else
         puts(@item.errors.full_messages)

@@ -21,17 +21,21 @@ import "react-image-gallery/styles/css/image-gallery.css";
 class ItemDetailsComponent extends Component {
 
   render() {
-    console.log(this.props.item_images_prop)
-    console.log("ItemDetailsComponent")
+
     return (
       <div>
         <Item>
           <Item.Content>
           
           {this.props.item_images_prop ? <ImageGallery items={this.props.item_images_prop} 
-          showFullscreenButton={false} showThumbnails={false} 
-          showIndex={true} 
-          showBullets={true}
+          showFullscreenButton={false}
+          useBrowserFullscreen={false}
+          showThumbnails={false} 
+          showIndex={false} 
+          showBullets={false}
+          showPlayButton={false}
+          autoPlay={false}
+          lazyLoad={true}
           /> : null}
 
           <Item.Header size = 'medium' as='a' ><strong>{this.props.item_name_prop}</strong></Item.Header>
