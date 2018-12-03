@@ -12,11 +12,7 @@ class ItemReviewRepository
   end
 
   def save(item_review)
-    if item_review.save
-      puts("saved")
-    else
-      puts(item_review.errors.full_messages)
-    end
+    item_review.save
   end
 
   def delete(item_review)
@@ -24,11 +20,6 @@ class ItemReviewRepository
   end
 
   def find_by_id(item, id)
-    #puts(item.inspect)
-    puts("========")
-    puts(id)
-    puts("========")
-    #puts(item.item_reviews.inspect)
   	item_review = item.item_reviews.find(id)  
   end
 end

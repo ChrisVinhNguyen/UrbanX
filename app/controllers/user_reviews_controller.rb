@@ -1,41 +1,55 @@
 class UserReviewsController < ApplicationController
   def create
     if user_signed_in?
-      @reviewee = UserProfile.find(params[:reviewee_id])
-      puts(params)
-      @user_review = @reviewee.user_reviews.create(
-        rating: params[:user_review][:rating],
-        comment: params[:user_review][:comment],
-        created_at: DateTime.now,
-        updated_at: DateTime.now,
+
+      # Refactored 
+      context_params = {
+        profile_id: params[:reviewee_id],
         reviewer_id: params[:reviewer_id],
-        reviewee_id: params[:reviewee_id]
-        )
+        reviewee_id: params[:reviewee_id],
+        user_review_params: user_review_params
+      }
 
-      puts(@current_user.id)
-      puts(@user_review.errors.full_messages)
-
-      '''
-      @user_review.created_at = DateTime.now
-      @user_review.updated_at = DateTime.now
-      @user_review.reviewer_id = @current_user.id
-      @user_review.reviewee_id = @reviewee.id
-
-
-      @user_profile = UserProfile.find_by user_id: (params[:user_review][:reviewee_id])
-      user_review_params = permit_user_review_params
-      user_review_params[:rating] = user_review_params[:rating]
-      user_review_params[:reviewer_id] = @current_user.id
-      user_review_params[:reviewee_id] = @user_profile.user_id
-      user_review_params[:created_at] = DateTime.now
-      user_review_params[:updated_at] = DateTime.now
-      @user_review = UserReview.new(user_review_params)
-      '''
-      if @user_review.save
+      result = CreateNewUserReview.call(context_params)
+      if result.success?
         render :json => {"success" => true}.to_json()
-      else
-        puts("failed to create new user review")
       end
+
+      # @reviewee = UserProfile.find(params[:reviewee_id])
+      # puts(params)
+      # @user_review = @reviewee.user_reviews.create(
+      #   rating: params[:user_review][:rating],
+      #   comment: params[:user_review][:comment],
+      #   created_at: DateTime.now,
+      #   updated_at: DateTime.now,
+      #   reviewer_id: params[:reviewer_id],
+      #   reviewee_id: params[:reviewee_id]
+      #   )
+
+      # puts(@current_user.id)
+      # puts(@user_review.errors.full_messages)
+
+      # '''
+      # @user_review.created_at = DateTime.now
+      # @user_review.updated_at = DateTime.now
+      # @user_review.reviewer_id = @current_user.id
+      # @user_review.reviewee_id = @reviewee.id
+
+
+      # @user_profile = UserProfile.find_by user_id: (params[:user_review][:reviewee_id])
+      # user_review_params = permit_user_review_params
+      # user_review_params[:rating] = user_review_params[:rating]
+      # user_review_params[:reviewer_id] = @current_user.id
+      # user_review_params[:reviewee_id] = @user_profile.user_id
+      # user_review_params[:created_at] = DateTime.now
+      # user_review_params[:updated_at] = DateTime.now
+      # @user_review = UserReview.new(user_review_params)
+      # '''
+      # if @user_review.save
+      #   render :json => {"success" => true}.to_json()
+      # else
+      #   puts("failed to create new user review")
+      # end
     else
       redirect_to new_user_session_path
     end

@@ -2,7 +2,7 @@ class AddItemReviewInfo
   include Interactor
 
   def validate_context(context)
-    %i[item item_review_params owner_id].all? {|key| context.instance_values["table"].key? key}
+    %i[user_profile item_review_params owner_id].all? {|key| context.instance_values["table"].key? key}
   end
 
   def call
