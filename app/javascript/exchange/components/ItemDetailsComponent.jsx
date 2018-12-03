@@ -21,8 +21,7 @@ import "react-image-gallery/styles/css/image-gallery.css";
 class ItemDetailsComponent extends Component {
 
   render() {
-    console.log(this.props.item_images_prop)
-    console.log("ItemDetailsComponent")
+
     return (
       <div>
         <Item>

@@ -57,7 +57,7 @@ class UserProfilesController < ApplicationController
 
   def show
     # gets used inside erb files
-    # @user_profile = UserProfile.find(params[:id])
+    @user_profile = UserProfile.find(params[:id])
     # @user_reviews = UserReview.where(reviewee_id: @user_profile.user_id)
 
     context_params = {
@@ -168,7 +168,7 @@ class UserProfilesController < ApplicationController
   end
 
   def delete_image
-    @image = ActiveStorage::Attachment.find(params[:id])
+    @image = ActiveStorage::Attachment.find(params[:user_profile_id])
     @image.purge_later
     # redirect_back(fallback_location: items_path)
   end

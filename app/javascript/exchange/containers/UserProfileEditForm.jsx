@@ -15,7 +15,7 @@ class UserProfileEditForm extends Component {
         last_name: this.props.user_info.last_name,
         date_of_birth: this.props.user_info.date_of_birth,
         location: this.props.user_info.location,
-        image: null,
+        image: this.props.user_info.image,
         form_valid: true
       };
       this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
@@ -36,8 +36,6 @@ class UserProfileEditForm extends Component {
   }
   updateImageState(file){
     this.state.image = file;
-    console.log("USERPROFILEUPDATEIMAGESTATE")
-    console.log(this.state.image)
   }
 
   handleFirstNameChange(e) {
@@ -96,17 +94,7 @@ class UserProfileEditForm extends Component {
       window.alert("Missing Fields")
     }
     else{
-      // axios.put(`/user_profiles/${this.props.match.params.id}`, {
-      //  params:userData
-      //   })
-      // .then(function(response) {
-        
-      //   })
-      //    .catch(function(error){
-      //   console.log(error);
-      // })
       const formData = new FormData();
-      // formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
       formData.append('user_profile[first_name]', this.state.first_name);
       formData.append('user_profile[last_name]', this.state.last_name);
       formData.append('user_profile[date_of_birth]', this.state.date_of_birth);
@@ -115,11 +103,11 @@ class UserProfileEditForm extends Component {
         formData.append('user_profile[image]', this.state.image, this.state.image.name);
       }
 
-      console.log("below is form data")
-      for (var pair of formData.entries()) {
-          console.log(pair[0]+ ', ' + pair[1]); 
-      }
-      // debugger
+      // console.log("below is form data")
+      // for (var pair of formData.entries()) {
+      //     console.log(pair[0]+ ', ' + pair[1]); 
+      // }
+      
       console.log("doing PATCH")
       $.ajax({
         url: `/user_profiles/${this.props.match.params.id}`,

@@ -11,6 +11,7 @@ class AuthenticateUserController < ApplicationController
         
         if result.user_profile.image.attached?
             result.user_info[:image] = url_for(result.user_profile.image)
+            result.user_info[:image_attachment_id] = result.user_profile.image.id
         end
 
         render :json => { "is_signed_in" => true, "user_info" => result.user_info }.to_json()
