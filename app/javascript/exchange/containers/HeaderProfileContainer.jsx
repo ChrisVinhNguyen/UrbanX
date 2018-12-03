@@ -1,32 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchUser, signOutUser } from '../actions/userActions';
+import { Dropdown, Image } from 'semantic-ui-react';
+import { Link } from "react-router-dom";
 
-import Logo from '../images/doge-logo-transparent-background.png';
+import { fetchUser, signOutUser } from '../actions/userActions';
 
 import SignUpButton from '../components/SignUpButton';
 import SignInButton from '../components/SignInButton';
 
-import { Dropdown, Image } from 'semantic-ui-react';
-import { Link } from "react-router-dom";
 
 class HeaderProfileContainer extends Component {
   constructor(props) {
     super(props);
     this.onHandleLogoutClick = this.onHandleLogoutClick.bind(this);
   }
-
-  //componentWillUpdate(){
-    //console.log("fetching user")
-    //this.props.fetchUser();
-  //}
-
-  //componentDidUpdate(){
-    //console.log("updating header profile container")
-    //this.props.fetchUser();
-  //}
-
 
   componentWillMount() {
     this.props.fetchUser();
@@ -42,7 +30,7 @@ class HeaderProfileContainer extends Component {
 
 
     if(isSignedIn) {
-      const trigger = <span>{this.props.user_info.full_name} <Image src={this.props.user_info.image? this.props.user_info.image :Logo } avatar /></span>;
+      const trigger = <span>{this.props.user_info.full_name} <Image src={this.props.user_info.image ? this.props.user_info.image : "https://react.semantic-ui.com/images/wireframe/image.png" } avatar /></span>;
       userAuthenticationContent =
         <div>
           <Dropdown icon={null} trigger={trigger} direction='left' floating labeled button pointing>
