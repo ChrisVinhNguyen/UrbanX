@@ -1,5 +1,5 @@
 class EditItemReview
   include Interactor::Organizer
 
-  organize FindItem, EditItemReviewInfo
+  organize FindItem, UpdateItemReview
 end
