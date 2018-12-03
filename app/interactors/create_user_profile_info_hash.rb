@@ -8,7 +8,7 @@ class CreateUserProfileInfoHash
   def call
     if validate_context(context)
       profile_info_hash = context.user_profile.attributes
-      profile_info_hash[:contact_list] = context.contact_names
+      profile_info_hash[:contact_list] = context.contact_list
       profile_info_hash[:email] = context.user_profile.user.email
 
       context.profile_info_hash = profile_info_hash
