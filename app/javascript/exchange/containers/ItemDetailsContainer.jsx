@@ -44,23 +44,24 @@ class ItemDetailsContainer extends Component {
     let numImages = 0
     let url =""
     let carouselItems;
+    let processedImages = []
 
-    if (this.props.item_details.images){
-      numImages = this.props.item_details.images.length
-      url = this.props.item_details.image
+    if (this.props.item_details.images){  
+      
+      this.props.item_details.images.map(imageSrc =>{
+        
+        const imageObject = {
+          original:imageSrc,
+          thumbnail:imageSrc
+        }
 
-      carouselItems = this.props.item_details.images.map(imageSrc => {
-      const keyVal = uuid();
-        return (
-          <div key={keyVal}>
-            <img src={imageSrc} />
-          </div>
-        )
-      })
+        processedImages.push(imageObject)
+      })  
+
     }
 
     else {
-      carouselItems = null
+      processedImages = null
     }
 
     let editButton = null;
@@ -122,7 +123,7 @@ class ItemDetailsContainer extends Component {
       item_description_prop={this.props.item_details.description} 
       item_avg_rating_prop={this.props.item_details.average_rating} 
       item_details_user_id_prop={this.props.item_details.user_id} 
-      carousel_items_prop={carouselItems}
+      item_images_prop={processedImages}
       edit_button_prop={editButton}
       delete_button_prop={deleteButton}
       active_transactions_msg_prop={activeTransactionsMsg}/>
