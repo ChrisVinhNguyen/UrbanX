@@ -30,7 +30,9 @@ class ItemListComponent extends Component {
           </Grid.Row>
         </Grid>
         { this.props.filtered_items.length == 0 ? <NoItemResults /> : null }
-        <PaginationContainer/>
+        <div className="pagination-container">
+          <PaginationContainer/>
+        </div>
       </div>
     );
   }
