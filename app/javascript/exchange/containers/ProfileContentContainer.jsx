@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Menu, Segment } from 'semantic-ui-react';
 
 import { getMyItems, getMyTransactions, filterItems } from '../actions/itemsActions' ;
 import { getUserReviews } from '../actions/userActions'
@@ -49,28 +49,35 @@ class ProfileContentContainer extends Component {
   }
 
   render() {
-    console.log(this.props.viewingMyProfile)
-      return (
-        <div className="profile-content-container">
+
+    const { activeTab } = this.state;
+
+    return (
+      <div className="profile-content-container">
         <Grid columns={2} divided>
-          <div className="ui pointing menu">
-            <a className={`item ${this.state.activeTab == "My_Items"? "active" :""}`} onClick = {() => this.handleOnClick("My_Items")} >
-              Items
-            </a>
-            {this.props.viewingMyProfile ?
-            <a className={`item ${this.state.activeTab == "My_Transactions"? "active" :""}`} onClick = {() => this.handleOnClick("My_Transactions")}>
-              Transactions
-            </a>:null
-            }
-            <a className={`item ${this.state.activeTab == "Reviews"? "active" :""}`} onClick = {() => this.handleOnClick("Reviews")}>
-              Reviews
-            </a>
-          </div>
-          <div className="ui segment">
-          { this.state.activeTab == "My_Items"? <ItemListComponent /> : null }
-          { this.state.activeTab == "My_Transactions"? <TransactionListComponent /> : null }
-          { this.state.activeTab == "Reviews"? <UserReviewsContainer reviewee_id = {this.props.userProfileId} /> : null }
-          </div>
+          <Menu pointing>
+            <Menu.Item
+              name='My Items'
+              active={activeTab === 'My_Items'}
+              onClick={() => this.handleOnClick('My_Items')}
+            />
+            <Menu.Item
+              name='My Transactions'
+              active={activeTab === 'My_Transactions'}
+              onClick={() => this.handleOnClick('My_Transactions')}
+            />
+            <Menu.Item
+              name='My Reviews'
+              active={activeTab === 'Reviews'}
+              onClick={() => this.handleOnClick('Reviews')}
+            />
+          </Menu>
+
+          <Segment>
+            { this.state.activeTab == 'My_Items'? <ItemListComponent /> : null }
+            { this.state.activeTab == 'My_Transactions'? <TransactionListComponent /> : null }
+            { this.state.activeTab == 'Reviews'? <UserReviewsContainer reviewee_id={this.props.userProfileId} /> : null }
+          </Segment>
         </Grid>
       </div>
     );
