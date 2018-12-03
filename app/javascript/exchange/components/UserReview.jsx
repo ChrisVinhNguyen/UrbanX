@@ -9,6 +9,7 @@ import CreateUserReviewFormContainer from '../containers/CreateUserReviewFormCon
 import EditUserReviewFormContainer from '../containers/EditUserReviewFormContainer'
 import DeleteUserReviewFormContainer from '../containers/DeleteUserReviewFormContainer'
 
+
 class UserReview extends Component {
   constructor(props) {
     super(props);
@@ -19,14 +20,10 @@ class UserReview extends Component {
     this.handClick = this.handClick.bind(this);
   }
 
-
   handClick() { 
     (this.state.showEdit? this.setState({showEdit: false}) : this.setState({showEdit: true}))
-    console.log(this.state.showEdit) 
   }
   render() {
-    console.log(this.props.user_reviews)
-
     const current_user_profile_id = this.props.user_info.user_profile_id;
     const current_user_id = this.props.user_info.user_id;
     
@@ -37,7 +34,6 @@ class UserReview extends Component {
     let showEdit = this.state.showEdit;
 
     let reviews = this.props.user_reviews.map(review => {
-      console.log(review.reviewer_id)
       if (review.reviewer_id == current_user_profile_id){ hasReviewed = true }
       return (
         <div>
@@ -75,8 +71,6 @@ class UserReview extends Component {
       );
     });
 
-    console.log(current_user_profile_id)
-    console.log(this.props.reviewee_id)
     if(this.props.reviewee_id == current_user_profile_id){isOwner = true}
     return (
       <div>
