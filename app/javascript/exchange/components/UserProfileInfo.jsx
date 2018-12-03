@@ -3,6 +3,9 @@ import UserProfileContainer from '../containers/UserProfileContainer'
 import { Link } from "react-router-dom";
 
 import Logo from '../images/macbook.jpg';
+import Bronze from '../images/bronze.png';
+import Silver from '../images/silver.png';
+import Gold from '../images/gold.png';
 
 class UserProfileInfo extends Component {
   handleEditOnClick(e){
@@ -38,6 +41,18 @@ class UserProfileInfo extends Component {
           </div>
           <div className="meta">
             <span className="date">Email: {this.props.userProfile.email}</span>
+          </div>
+          <div className="meta">
+          {10 < this.props.userProfile.points && this.props.userProfile.points <= 50 ?
+            <img src={Bronze}/>: null}
+          </div>
+          <div className="meta">
+          {50 < this.props.userProfile.points && this.props.userProfile.points <= 100 ?
+            <img src={Silver}/>: null}
+          </div>
+          <div className="meta">
+          {100 < this.props.userProfile.points ?
+            <img src={Gold}/>: null}
           </div>
         </div>
         {this.props.viewingMyProfile ?

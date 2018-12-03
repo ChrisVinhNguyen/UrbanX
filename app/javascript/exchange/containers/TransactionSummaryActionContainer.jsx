@@ -12,7 +12,8 @@ class TransactionSummaryLendContainer extends Component {
     super(props);
     this.state = {
       due_date: '',
-      status: this.props.transaction.status
+      status: this.props.transaction.status,
+      due_date_error: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -27,10 +28,16 @@ class TransactionSummaryLendContainer extends Component {
   }
 
   handleLend(e, transaction) {
-    transaction.expiry_date = this.state.due_date;
-    transaction.status = 'lent';
-    this.props.updateTransaction(transaction, this.props.userProfileId, this.props.cur_status);
-
+  	if (this.state.due_date == '') {
+  		this.setState({
+  			due_date_error: true
+  		});
+  	}
+  	else {
+	    transaction.expiry_date = this.state.due_date;
+	    transaction.status = 'lent';
+	    this.props.updateTransaction(transaction, this.props.userProfileId, this.props.cur_status);
+	}
   }
 
   handleReturn(e, transaction) {
@@ -47,6 +54,7 @@ class TransactionSummaryLendContainer extends Component {
     let dueDateForm = null;
     let declineButton = null;
     let returnButton = null;
+    let dueDateError = null;
 
     let due_date = this.state.due_date;
 
@@ -86,8 +94,17 @@ class TransactionSummaryLendContainer extends Component {
                       );
     }
 
+    if (this.state.due_date_error) {
+    	dueDateError = (
+    					<strong>
+    						Invalid date.
+    					</strong>
+    					);
+    }
+
     return (
 	    	<div>
+	    		{dueDateError}
 	    		{returnButton}
 		        {dueDateForm}
 		        {declineButton}

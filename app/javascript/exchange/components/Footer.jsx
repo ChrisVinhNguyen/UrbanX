@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Grid, Segment } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
-import ProjectLogo from './ProjectLogo';
+import ProjectLogo from './ProjectLogoInverted';
 
 class Footer extends Component {
   render() {
     return (
       <div className="footer">
-         <Grid textAlign="center" verticalAlign='middle' columns={8} inverted>
+         <Grid textAlign="center" verticalAlign='middle' columns={7} inverted>
         <Grid.Row color='black'>
           <Grid.Column>
             <ProjectLogo />
@@ -30,13 +30,6 @@ class Footer extends Component {
               <Link to={'/privacy-policy'}>
                 <Segment color='black' inverted>
                   Privacy Policy
-                </Segment>
-              </Link>
-          </Grid.Column>
-          <Grid.Column>
-              <Link to={'/site-map'}>
-                <Segment color='black' inverted>
-                  Site Map
                 </Segment>
               </Link>
           </Grid.Column>
