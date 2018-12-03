@@ -24,7 +24,7 @@ describe UpdateItem do
         item_params: {}
       }
 
-      result = UpdateItem.call({})
+      result = UpdateItem.call(context_params)
 
       expect(result).to be_a_failure
     end
@@ -33,14 +33,14 @@ describe UpdateItem do
       context_params = {
         item_id: @item.id
       }
-      result = UpdateItem.call({})
+      result = UpdateItem.call(context_params)
 
       expect(result).to be_a_failure
     end
   end
 
   context 'call' do
-    it 'calls methods with params' do
+    it 'calls methods successfully with params' do
       context_params = {
         item_id: @item.id,
         item_params: {
