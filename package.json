@@ -4,6 +4,7 @@
   "dependencies": {
     "@rails/webpacker": "3.5",
     "activestorage": "^5.2.1",
+    "aws-sdk": "^2.368.0",
     "axios": "^0.18.0",
     "babel-preset-react": "^6.24.1",
     "faker": "^4.1.0",
