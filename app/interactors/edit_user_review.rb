@@ -1,5 +1,5 @@
 class EditUserReview
   include Interactor::Organizer
 
-  organize FindUserProfile, EditUserReviewInfo
+  organize FindUserProfile, UpdateUserReview
 end
