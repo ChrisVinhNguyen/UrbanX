@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Icon, Image, Item, Label, Header } from 'semantic-ui-react'
-import { Rating, Divider } from 'semantic-ui-react'
+import { Rating, Divider, Grid } from 'semantic-ui-react'
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -19,26 +19,27 @@ import "react-image-gallery/styles/css/image-gallery.css";
 
 
 class ItemDetailsComponent extends Component {
-
   render() {
+    const imageGallery = (
+      <ImageGallery items={this.props.item_images_prop}
+        showFullscreenButton={false}
+        useBrowserFullscreen={false}
+        showThumbnails={false}
+        showIndex={false}
+        showBullets={false}
+        showPlayButton={false}
+        autoPlay={true}
+        lazyLoad={true}
+        slideDuration={450}
+        slideInterval={8000}
+      />
+    );
 
     return (
       <div>
         <Item>
           <Item.Content>
-          
-          {this.props.item_images_prop ? <ImageGallery items={this.props.item_images_prop} 
-          showFullscreenButton={false}
-          useBrowserFullscreen={false}
-          showThumbnails={false} 
-          showIndex={false} 
-          showBullets={false}
-          showPlayButton={false}
-          autoPlay={true}
-          lazyLoad={true}
-          slideDuration={450}
-          slideInterval={8000}
-          /> : null}
+          {this.props.item_images_prop ? imageGallery : null}
 
           <Item.Header size = 'medium' as='a' ><strong>{this.props.item_name_prop}</strong></Item.Header>
         <Item.Meta>
