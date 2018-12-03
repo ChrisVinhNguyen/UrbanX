@@ -1,5 +1,5 @@
 class GetProfileItemsList
   include Interactor::Organizer
 
-  organize GetProfileItems, AddItemSummaryInfo
+  organize GetProfileItems, PaginateItemResults, AddItemSummaryInfo
 end

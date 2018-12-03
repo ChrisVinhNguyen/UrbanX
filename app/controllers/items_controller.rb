@@ -56,8 +56,8 @@ class ItemsController < ApplicationController
   def myItems
     context_params = {
       profile_id: params[:current_user_profile_id],
+      page_number: params[:page_number]
     }
-
     result = GetProfileItemsList.call(context_params)
 
     if result.success?
@@ -73,9 +73,8 @@ class ItemsController < ApplicationController
           puts(@images)
           result.items_summary_array[index][:images] = @images
           puts(result.items_summary_array)
-          puts("111111111111111111")
       end
-      render :json => { "filtered_items" => result.items_summary_array }
+      render :json => { "filtered_items" => result.items_summary_array , "total_pages" => result.total_pages }
     end
   end
 

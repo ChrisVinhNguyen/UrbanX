@@ -16,7 +16,7 @@ class GetProfileItems
       puts(context)
       puts(user_profile)
       puts("$$$$$$")
-      puts(items)
+      puts(items.inspect())
       puts("=======-=========")
 
       context.items = items
