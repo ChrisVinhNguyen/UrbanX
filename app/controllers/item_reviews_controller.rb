@@ -70,6 +70,18 @@ class ItemReviewsController < ApplicationController
   
   def update
     if user_signed_in?
+
+      ## Refactored 
+      # context_params = {
+      #   item_id: params[:item_id],
+      #   item_review_params: item_review_params,
+      #   item_review_id: params[:id]
+      # }
+
+      # result = EditItemReview.call(context_params)
+      # if result.success?
+      #   render json: result.item
+      # end
       @item = Item.find(params[:item_id])
       @item_review = @item.item_reviews.find(params[:id])
       #check if current user is allowed to edit
