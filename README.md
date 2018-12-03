@@ -55,6 +55,10 @@ To run the unit tests for rspec, run:
 ```
 bundle exec rspec spec
 ```
+## Admin Panel 
+
+To access the admin panel, simply add /admin at the end of the URL (user needs to have admin privilege).
+
 
 ### Break down into end to end tests
 
