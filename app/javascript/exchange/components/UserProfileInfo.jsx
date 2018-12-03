@@ -53,7 +53,7 @@ class UserProfileInfo extends Component {
           </Card.Meta>
         </Card.Content>
         { this.props.viewingMyProfile ?
-          <Card.Content extra>
+          <Card.Content extra className="edit-profile-button-container">
             <Link to={`/user_profiles_change/${this.props.userProfile.id}/edit`}>
               <Button className="edit-profile-button">Edit</Button>
             </Link>

@@ -50,10 +50,10 @@ class UserProfileContainer extends Component {
       <div>
         <Grid>
           <Grid.Column width={4}>
-            <UserProfileInfo viewingMyProfile={this.props.viewingMyProfile} userProfile={this.state.userProfile} />
+            <UserProfileInfo viewingMyProfile={ this.props.viewingMyProfile } userProfile={ this.state.userProfile } />
           </Grid.Column>
           <Grid.Column width={11}>
-            <ProfileContentContainer viewingMyProfile={this.props.viewingMyProfile} userProfileId={this.props.userProfileId} />
+            <ProfileContentContainer viewingMyProfile={ this.props.viewingMyProfile } userProfileId={ this.props.userProfileId } />
           </Grid.Column>
         </Grid>
       </div>

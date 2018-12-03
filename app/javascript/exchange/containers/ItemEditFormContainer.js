@@ -83,7 +83,7 @@ class ItemEditFormContainer extends Component {
     //     console.log(pair[0]+ ', ' + pair[1]); 
     // }
     // debugger
-    console.log("doing PATCH")
+    console.log("doing PUT")
     $.ajax({
       url: `/items/${this.props.match.params.id}`,
       method: 'PUT',

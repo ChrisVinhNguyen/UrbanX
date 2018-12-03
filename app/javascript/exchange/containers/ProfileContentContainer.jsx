@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Grid, Menu, Segment } from 'semantic-ui-react';
+import { Grid, Menu, Segment, Input } from 'semantic-ui-react';
 
 import { getMyItems, getMyTransactions, filterItems } from '../actions/itemsActions' ;
 import { getUserReviews } from '../actions/userActions'
@@ -71,6 +71,11 @@ class ProfileContentContainer extends Component {
               active={activeTab === 'Reviews'}
               onClick={() => this.handleOnClick('Reviews')}
             />
+            <Menu.Menu position='right'>
+              <Menu.Item>
+                <Input disabled icon='search' placeholder='Search...' />
+              </Menu.Item>
+            </Menu.Menu>
           </Menu>
 
           <Segment>
