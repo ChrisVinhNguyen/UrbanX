@@ -13,6 +13,7 @@ import { v4 as uuid } from 'uuid';
 import PropTypes from 'prop-types';
 import ItemDetailsComponent from '../components/ItemDetailsComponent';
 import ItemDetailsBorrowContainer from './ItemDetailsBorrowContainer';
+import { displayFlash } from '../actions/flashActions';
 
 import pic from '../images/macbook.jpg';
 
@@ -38,6 +39,12 @@ class ItemDetailsContainer extends Component {
     this.props.filterItems('All', this.props.cur_sort, '');
     this.props.history.push("/");
 
+    this.displayMessage('Item deleted successfully', 'positive');
+  }
+
+  displayMessage(flash_message, pos_or_neg) {
+    this.props.displayFlash(flash_message, true, pos_or_neg);
+    setTimeout(this.props.displayFlash, 2000, '', false, pos_or_neg);
   }
 
   render() {
@@ -151,4 +158,4 @@ const mapStateToProps = state => ({
   is_signed_in: state.user.is_signed_in
 });
 
-export default connect(mapStateToProps, {getItem, filterItems})(ItemDetailsContainer);
+export default connect(mapStateToProps, {getItem, filterItems, displayFlash})(ItemDetailsContainer);

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { newTransaction, deleteTransaction, getMyTransactionsForItem } from '../actions/itemsActions';
+import { displayFlash } from '../actions/flashActions';
 import PropTypes from 'prop-types';
 
 import SignUpButton from '../components/SignUpButton';
@@ -18,6 +19,8 @@ class ItemDetailsBorrowContainer extends Component {
     }
     this.handleBorrow = this.handleBorrow.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
+
+    this.displayMessage = this.displayMessage.bind(this);
   }
 
   componentWillUpdate(prevProps) {
@@ -29,10 +32,18 @@ class ItemDetailsBorrowContainer extends Component {
   handleBorrow(e) {
     let transaction = {item_id: this.props.item_id, status:'pending'};
     this.props.newTransaction(transaction, this.props.userProfileId, this.props.cur_status);
+    this.displayMessage('Request sent!', 'positive');
+
   }
 
   handleCancel(e, transaction) {
     this.props.deleteTransaction(transaction, this.props.userProfileId, this.props.cur_status);
+    this.displayMessage('Request cancelled.', 'negative');
+  }
+
+  displayMessage(flash_message, pos_or_neg) {
+    this.props.displayFlash(flash_message, true, pos_or_neg);
+    setTimeout(this.props.displayFlash, 2000, '', false, pos_or_neg);
   }
 
   render() {
@@ -97,7 +108,8 @@ class ItemDetailsBorrowContainer extends Component {
 ItemDetailsBorrowContainer.propTypes = {
   newTransaction: PropTypes.func.isRequired,
   deleteTransaction: PropTypes.func.isRequired,
-  getMyTransactionsForItem: PropTypes.func.isRequired
+  getMyTransactionsForItem: PropTypes.func.isRequired,
+  displayFlash: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -111,4 +123,4 @@ const mapStateToProps = state => ({
   is_signed_in: state.user.is_signed_in
 });
 
-export default connect(mapStateToProps, { newTransaction, deleteTransaction, getMyTransactionsForItem})(ItemDetailsBorrowContainer);
+export default connect(mapStateToProps, { newTransaction, deleteTransaction, getMyTransactionsForItem, displayFlash })(ItemDetailsBorrowContainer);

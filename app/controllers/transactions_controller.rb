@@ -21,6 +21,7 @@ class TransactionsController < ApplicationController
       @transaction.item_name = @item.name
       if @transaction.save
         UserMailer.with(transaction: @transaction).notify_lender.deliver_later
+        # flash[:notice] = "Request sent successfully"
         redirect_to @item
       else
         render 'new'

@@ -334,7 +334,6 @@ export const sortItems = (items_list, cur_sort) => {
   }
 }
 
-
 const getCSRFToken = () => {
   const tokenDom = document.querySelector("meta[name=csrf-token]")
   if (tokenDom) {

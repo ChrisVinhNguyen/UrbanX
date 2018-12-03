@@ -6,6 +6,7 @@ import {getItem } from '../actions/itemsActions';
 import { connect } from 'react-redux';
 import { UploadMultipleButton }  from '../components/UploadMultipleButton.js'
 import { Dropdown } from 'semantic-ui-react'
+import { displayFlash } from '../actions/flashActions';
 
 import '../stylesheets/item-edit-form-container.scss';
 
@@ -76,6 +77,8 @@ class ItemEditFormContainer extends Component {
 
     console.log(this.props.match.params.id)
     this.props.history.push("/items_list/" + this.props.match.params.id)
+
+    this.displayMessage('Item edited successfully', 'positive');
   }
   updateItemState(files){
     this.state.images = files
@@ -95,6 +98,13 @@ class ItemEditFormContainer extends Component {
     (response) => console.log(response.message),
     (response) => console.log(response.responseJSON)
     );
+
+    this.displayMessage('Image deleted successfully', 'positive');
+  }
+
+  displayMessage(flash_message, pos_or_neg) {
+    this.props.displayFlash(flash_message, true, pos_or_neg);
+    setTimeout(this.props.displayFlash, 2000, '', false, pos_or_neg);
   }
 
   render() {
@@ -191,4 +201,4 @@ const mapStateToProps = state => ({
   my_transactions_for_current_item: state.items.my_transactions_for_current_item
 });
 
-export default connect(mapStateToProps, {getItem })(ItemEditFormContainer)
+export default connect(mapStateToProps, {getItem, displayFlash })(ItemEditFormContainer)

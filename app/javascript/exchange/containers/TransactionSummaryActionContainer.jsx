@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 
-class TransactionSummaryLendContainer extends Component {
+class TransactionSummaryActionContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -96,7 +96,7 @@ class TransactionSummaryLendContainer extends Component {
 
     if (this.state.due_date_error) {
     	dueDateError = (
-    					<strong>
+    					<strong className="due_date_error">
     						Invalid date.
     					</strong>
     					);
@@ -113,7 +113,7 @@ class TransactionSummaryLendContainer extends Component {
 	}
 }
 
-TransactionSummaryLendContainer.propTypes = {
+TransactionSummaryActionContainer.propTypes = {
   updateTransaction: PropTypes.func.isRequired,
   deleteTransaction: PropTypes.func.isRequired
 }
@@ -124,4 +124,4 @@ const mapStateToProps = state => ({
   userProfileId: state.user.user_info.user_profile_id
 });
 
-export default connect(mapStateToProps, { updateTransaction, deleteTransaction })(TransactionSummaryLendContainer);
+export default connect(mapStateToProps, { updateTransaction, deleteTransaction })(TransactionSummaryActionContainer);

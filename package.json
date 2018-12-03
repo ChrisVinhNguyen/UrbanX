@@ -14,6 +14,7 @@
     "react-dom": "^16.5.2",
     "react-dropzone": "^7.0.1",
     "react-dropzone-component": "^3.2.0",
+    "react-flash-message": "^1.0.2",
     "react-img-carousel": "^1.4.1",
     "react-rails": "^0.2.5",
     "react-redux": "^5.1.1",

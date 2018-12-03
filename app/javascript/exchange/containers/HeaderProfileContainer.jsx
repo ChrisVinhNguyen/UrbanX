@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchUser, signOutUser } from '../actions/userActions';
+import { displayFlash } from '../actions/flashActions';
 
 import Logo from '../images/doge-logo-transparent-background.png';
 
@@ -34,6 +35,12 @@ class HeaderProfileContainer extends Component {
 
   onHandleLogoutClick() {
     this.props.signOutUser();
+    this.displayMessage('Signed out successfully', 'positive');
+  }
+
+  displayMessage(flash_message, pos_or_neg) {
+    this.props.displayFlash(flash_message, true, pos_or_neg);
+    setTimeout(this.props.displayFlash, 2000, '', false, pos_or_neg);
   }
 
   render() {
@@ -84,4 +91,4 @@ const mapStateToProps = state => ({
   user_info: state.user.user_info
 });
 
-export default connect(mapStateToProps, { fetchUser, signOutUser })(HeaderProfileContainer);
+export default connect(mapStateToProps, { fetchUser, signOutUser, displayFlash })(HeaderProfileContainer);
