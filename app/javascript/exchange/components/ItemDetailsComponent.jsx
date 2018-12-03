@@ -34,8 +34,10 @@ class ItemDetailsComponent extends Component {
           showIndex={false} 
           showBullets={false}
           showPlayButton={false}
-          autoPlay={false}
+          autoPlay={true}
           lazyLoad={true}
+          slideDuration={450}
+          slideInterval={8000}
           /> : null}
 
           <Item.Header size = 'medium' as='a' ><strong>{this.props.item_name_prop}</strong></Item.Header>
