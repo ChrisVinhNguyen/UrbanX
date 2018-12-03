@@ -6,24 +6,33 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import ItemReviewsContainer from '../containers/ItemReviewsContainer'
 import { getItem } from '../actions/itemsActions';
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import {Carousel} from 'react-responsive-carousel';
+// import "react-responsive-carousel/lib/styles/carousel.min.css";
+// import {Carousel} from 'react-responsive-carousel';
+import ImageGallery from 'react-image-gallery';
 import { v4 as uuid } from 'uuid';
 import PropTypes from 'prop-types';
 import ItemDetailsContainer from '../containers/ItemDetailsContainer'
 import ItemDetailsBorrowContainer from '../containers/ItemDetailsBorrowContainer';
 import pic from '../images/macbook.jpg';
+import "react-image-gallery/styles/css/image-gallery.css";
+// import '../stylesheets/image-gallery.css';
+
 
 class ItemDetailsComponent extends Component {
 
   render() {
+    console.log(this.props.item_images_prop)
+    console.log("ItemDetailsComponent")
     return (
       <div>
         <Item>
           <Item.Content>
           
-          
-          {this.props.carousel_items_prop ? (<Carousel width ="30%" dynamicHeight={true} showThumbs={false} showStatus={false} selectedItem={1}> {this.props.carousel_items_prop} </Carousel>) : null}
+          {this.props.item_images_prop ? <ImageGallery items={this.props.item_images_prop} 
+          showFullscreenButton={false} showThumbnails={false} 
+          showIndex={true} 
+          showBullets={true}
+          /> : null}
 
           <Item.Header size = 'medium' as='a' ><strong>{this.props.item_name_prop}</strong></Item.Header>
         <Item.Meta>
