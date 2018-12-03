@@ -174,7 +174,7 @@ class ItemEditFormContainer extends Component {
       descriptionError, categoryError, quantityError, conditionError, 
       valueError,errorMessages, formError  } = this.state
     var categoryOptions = [
-      {text: 'Electronics', value: 'Electronics'}, {text: 'Books', value: 'Books'}, {text: 'Sports', value: 'Sports'}, {text: 'Tools', value: 'Tools'}, {text: 'Music', value: 'Music'}, {text: 'Vehicles', value: 'Vehicles'}, {text: 'Clothing', value: 'Clothing'}, {text: 'Accessories', value: 'Accessories'}, {text: 'Others', value: 'Others'}
+      {text: 'Electronics', value: 'Electronics'}, {text: 'Books', value: 'Books'}, {text: 'Sports', value: 'Sports'}, {text: 'Tools', value: 'Tools'}, {text: 'Arts', value: 'Arts'},{text: 'Music', value: 'Music'}, {text: 'Vehicles', value: 'Vehicles'}, {text: 'Clothing', value: 'Clothing'}, {text: 'Accessories', value: 'Accessories'}, {text: 'Others', value: 'Others'}
     ]
 
     var conditionOptions = [
