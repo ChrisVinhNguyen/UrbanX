@@ -44,7 +44,7 @@ class ItemsController < ApplicationController
           @images = []
           if resultItem.images.attached?
               resultItem.images.each do |image|
-                @images.push(rails_blob_url(image),only_path:true)
+                @images.push(rails_blob_url(image))
               end
           end   
           result.items_summary_array[index][:images] = @images
