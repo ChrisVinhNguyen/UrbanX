@@ -61,11 +61,14 @@ class ProfileContentContainer extends Component {
               active={activeTab === 'My_Items'}
               onClick={() => this.handleOnClick('My_Items')}
             />
-            <Menu.Item
-              name='My Transactions'
-              active={activeTab === 'My_Transactions'}
-              onClick={() => this.handleOnClick('My_Transactions')}
-            />
+            {this.props.viewingMyProfile ?
+              <Menu.Item
+                name='My Transactions'
+                active={activeTab === 'My_Transactions'}
+                onClick={() => this.handleOnClick('My_Transactions')}
+              />
+              :null
+            }
             <Menu.Item
               name='My Reviews'
               active={activeTab === 'Reviews'}
