@@ -87,3 +87,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Add admin panel
 gem 'rails_admin', '~> 1.3'
+
+# Add pagination 
+gem 'kaminari'

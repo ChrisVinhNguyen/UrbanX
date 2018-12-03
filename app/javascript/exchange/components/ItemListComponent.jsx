@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 import ItemSummary from './ItemSummary';
 import ItemSortDropdownContainer from '../containers/ItemSortDropdownContainer';
+import PaginationContainer from '../containers/PaginationContainer';
 import NoItemResults from './NoItemResults';
 
 
@@ -29,6 +30,7 @@ class ItemListComponent extends Component {
           </Grid.Row>
         </Grid>
         { this.props.filtered_items.length == 0 ? <NoItemResults /> : null }
+        <PaginationContainer/>
       </div>
     );
   }

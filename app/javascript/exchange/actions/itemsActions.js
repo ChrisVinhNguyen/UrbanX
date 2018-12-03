@@ -19,11 +19,12 @@ import {
 
 import axios from 'axios';
 
-export const filterItems = (cur_category, cur_sort, cur_search_value) => dispatch => {
+export const filterItems = (cur_category, cur_sort, cur_search_value, page_number) => dispatch => {
   axios.get('/items/filter', {
     params: {
       cur_category: cur_category,
-      search: cur_search_value
+      search: cur_search_value,
+      page_number: page_number 
     }
   })
   .then(function(response){
@@ -32,7 +33,8 @@ export const filterItems = (cur_category, cur_sort, cur_search_value) => dispatc
       cur_category: cur_category,
       search_value: cur_search_value,
       filtered_items: response.data.filtered_items,
-      original_list: response.data.filtered_items
+      original_list: response.data.filtered_items,
+      total_pages: response.data.total_pages
     })
     dispatch(
       sortItems(response.data.filtered_items, cur_sort)
