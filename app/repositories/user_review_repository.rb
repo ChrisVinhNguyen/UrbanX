@@ -7,8 +7,8 @@ class UserReviewRepository
 		user_review = reviewee.user_reviews.create(attributes)
   end
 
-  def update(item_review, updated_attributes)
-		item_review.update(updated_attributes)
+  def update(user_review, updated_attributes)
+		user_review.update(updated_attributes)
   end
 
   def save(user_review)

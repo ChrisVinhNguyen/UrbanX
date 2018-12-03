@@ -83,7 +83,7 @@ class ItemReviewsController < ApplicationController
 
       result = EditItemReview.call(context_params)
       if result.success?
-        render json: result.item
+        render :json => {"success" => true}.to_json()      
       end
 
       # @item = Item.find(params[:item_id])
@@ -126,7 +126,7 @@ class ItemReviewsController < ApplicationController
 
       result = DeleteItemReview.call(context_params)
       if result.success?
-        render json: result.item
+        render :json => {"success" => true}.to_json()      
       end
 
       # @item = Item.find(params[:item_id])
