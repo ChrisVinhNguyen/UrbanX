@@ -29,8 +29,8 @@ class ItemCreateFormContainer extends Component {
       categoryError: false,
       quantityError: false,
       conditionError: false,
-      valueMissingError: false,
-      valueNotNumberError: false,
+      valueError: false,
+      valueError: false,
 
       errorMessages: [],
       formError: false

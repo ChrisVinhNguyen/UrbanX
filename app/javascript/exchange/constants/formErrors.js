@@ -27,7 +27,7 @@ export const QUANTITY_MISSING = 'The quantity of item is missing'
 export const CONDITION_MISSING = 'The condition of the item is missing'
 export const VALUE_MISSING = 'The value of the item is missing'
 
-export const QUANTITY_NOTNUMBER = 'The quantity must be a whole number'
+export const QUANTITY_NOTNUMBER = 'The quantity must be a number'
 export const VALUE_NOTNUMBER = 'The value must be a number'
 
 
