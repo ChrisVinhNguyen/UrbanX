@@ -109,7 +109,7 @@ class UserProfileEditContainer extends Component {
       //     console.log(pair[0]+ ', ' + pair[1]); 
       // }
       
-      console.log("doing PATCH")
+      console.log("doing PUT")
       $.ajax({
         url: `/user_profiles/${this.props.match.params.id}`,
         method: 'PUT',

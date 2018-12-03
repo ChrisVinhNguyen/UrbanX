@@ -22,7 +22,6 @@ class ItemListComponent extends Component {
       );
     });
 
-    console.log(this.props)
     return (
       <div className="item-list-component">
         <ItemSortDropdownContainer />
