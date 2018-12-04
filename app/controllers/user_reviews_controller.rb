@@ -70,7 +70,7 @@ class UserReviewsController < ApplicationController
     @reviewee = UserProfile.find(params[:user_profile_id])
     @user_reviews = UserReview.where(reviewee_id: params[:user_profile_id])
 
-    @user_reviews_array = []
+    user_reviews_array = []
     @user_reviews.each do |user_review| 
       user = User.find(user_review[:reviewer_id])
       full_name = user.user_profile[:first_name] + " " + user.user_profile[:last_name]
@@ -83,7 +83,7 @@ class UserReviewsController < ApplicationController
           user_review_hash[:image] = rails_blob_url(@user.image)
       end
 
-      @user_reviews_array.push(user_review_hash)
+      user_reviews_array.push(user_review_hash)
     end
     render :json => {"user_reviews" => user_reviews_array}.to_json()
   end

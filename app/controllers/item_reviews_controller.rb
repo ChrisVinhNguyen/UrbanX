@@ -46,7 +46,7 @@ class ItemReviewsController < ApplicationController
     @item = Item.find(params[:item_id])
     @item_reviews = @item.item_reviews
 
-    @item_reviews_array = []
+    item_reviews_array = []
     @item_reviews.each_with_index do |item_review, index|
       owner = User.find(item_review[:owner_id])
       full_name = owner.user_profile[:first_name] + " " + owner.user_profile[:last_name]
@@ -61,7 +61,7 @@ class ItemReviewsController < ApplicationController
           item_review_hash[:image] = rails_blob_url(@user.image)
       end
       
-      @item_reviews_array.push(item_review_hash)
+      item_reviews_array.push(item_review_hash)
     end
     render :json => {"current_viewed_item_reviews" => item_reviews_array}.to_json()
   end
