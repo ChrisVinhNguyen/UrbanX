@@ -39,7 +39,7 @@ class ItemDetailsComponent extends Component {
           <Item.Content>
           { this.props.item_images_prop && this.props.item_images_prop.length > 0 ?
             imageGallery :
-            <Image size='medium' src=pic />
+            <Image size='medium' src={pic} />
           }
           <Item.Header size = 'medium' as='a' ><strong>{this.props.item_name_prop}</strong></Item.Header>
         <Item.Meta>
