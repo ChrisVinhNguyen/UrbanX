@@ -12,6 +12,7 @@ class AddItemReviewInfo
       item_review.created_at = DateTime.now
       item_review.updated_at = DateTime.now 
       item_review.owner_id = context.owner_id
+      
       item_review_repo.save(item_review)
       context.item_review = item_review
     else
