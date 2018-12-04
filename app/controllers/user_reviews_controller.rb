@@ -71,23 +71,22 @@ class UserReviewsController < ApplicationController
     @user_reviews = @reviewee.user_reviews
 
     user_reviews_array = []
-    puts("=======================")
-    puts(user_reviews_array)
-    puts("=======================")
+
     @user_reviews.each do |user_review| 
-      user = User.find(user_review[:reviewer_id])
-      full_name = user.user_profile[:first_name] + " " + user.user_profile[:last_name]
-      @user = UserProfile.where(user_id: user_review.reviewer_id).first
+      #user = User.find(user_review[:reviewer_id])
+      reviewer = UserProfile.find(user_review.reviewer_id)
+      full_name = reviewer[:first_name] + " " + reviewer[:last_name]
       user_review_hash = user_review.attributes
       user_review_hash[:reviewer] = full_name
 
-      if @user.image.attached?
+      if reviewer.image.attached?
           puts("has image")
-          user_review_hash[:image] = rails_blob_url(@user.image)
+          user_review_hash[:image] = rails_blob_url(reviewer.image)
       end
 
       user_reviews_array.push(user_review_hash)
     end
+    puts(user_reviews_array)
     render :json => {"user_reviews" => user_reviews_array}.to_json()
   end
 

@@ -8,7 +8,7 @@ describe UpdateItemReview do
   context 'validate context' do
     it 'is valid with valid context params' do
       context_params = {
-        item_id: @item_review.item.id,
+        item: @item_review.item,
         item_review_id: @item_review.id,
         item_review_params: {
           rating: @item_review.rating,
@@ -16,7 +16,7 @@ describe UpdateItemReview do
         }
       }
 
-      result = EditItemReview.call(context_params)
+      result = UpdateItemReview.call(context_params)
 
       expect(result).to be_a_success
     end
@@ -30,7 +30,7 @@ describe UpdateItemReview do
         }
       }
 
-      result = EditItemReview.call(context_params)
+      result = UpdateItemReview.call(context_params)
 
       expect(result).to be_a_failure
     end
@@ -41,7 +41,7 @@ describe UpdateItemReview do
         item_review_id: @item_review.id
       }
 
-      result = EditItemReview.call(context_params)
+      result = UpdateItemReview.call(context_params)
       expect(result).to be_a_failure
     end
   end
