@@ -75,11 +75,22 @@ class UserReviewsController < ApplicationController
     puts(user_reviews_array)
     puts("=======================")
     @user_reviews.each do |user_review| 
+      puts("1------")
+      puts(user_review)
       user = User.find(user_review[:reviewer_id])
+      puts(user)
+      puts("2------")
       full_name = user.user_profile[:first_name] + " " + user.user_profile[:last_name]
+      puts(full_name)
+      puts("3------")
       @user = UserProfile.where(user_id: user_review.reviewer_id).first
+      puts(@user)
+      puts("4------")
       user_review_hash = user_review.attributes
+      puts(user_review_hash)
+      puts("5------")
       user_review_hash[:reviewer] = full_name
+      puts("6------")
 
       if @user.image.attached?
           puts("has image")
