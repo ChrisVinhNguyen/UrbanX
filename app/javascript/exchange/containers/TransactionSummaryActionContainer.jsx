@@ -59,19 +59,23 @@ class TransactionSummaryActionContainer extends Component {
     let due_date = this.state.due_date;
 
     if (this.props.transaction.status == 'pending' && this.props.transaction.lender_id == this.props.currentUserId) {
-      dueDateForm = (
-                    <Form className="new-item-form" onSubmit={ e => this.handleLend(e, this.props.transaction) }>
-                      <Form.Field>
-                        <label>Due Date</label>
-                          <Form.Input type="date" placeholder="Due Date"
-                           name="due_date" value={ due_date } onChange={ this.handleChange }/>
-                      </Form.Field>
+      let activeTransaction = this.props.filtered_transactions.find(
+          (e) => e.status == 'lent' && e.lender_id == this.props.currentUserId && e.item_id == this.props.transaction.item_id);
+      if (!activeTransaction) {
+        dueDateForm = (
+                      <Form className="new-item-form" onSubmit={ e => this.handleLend(e, this.props.transaction) }>
+                        <Form.Field>
+                          <label>Due Date</label>
+                            <Form.Input type="date" placeholder="Due Date"
+                             name="due_date" value={ due_date } onChange={ this.handleChange }/>
+                        </Form.Field>
 
-                      <Form.Button floated="right" content="Submit">
-                        Lend
-                      </Form.Button>
-                    </Form>
-                );
+                        <Form.Button floated="right" content="Submit">
+                          Lend
+                        </Form.Button>
+                      </Form>
+                  );
+      }
 
       declineButton = (
                         <Button floated="right" onClick={ e => this.handleDelete(e, this.props.transaction) }>
@@ -119,6 +123,7 @@ TransactionSummaryActionContainer.propTypes = {
 }
 
 const mapStateToProps = state => ({
+  filtered_transactions: state.items.filtered_transactions,
   cur_status: state.items.cur_status,
   currentUserId: state.user.user_info.user_id,
   userProfileId: state.user.user_info.user_profile_id

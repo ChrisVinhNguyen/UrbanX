@@ -4,7 +4,7 @@ import { Button, Comment, Form, Header, Rating, Item } from 'semantic-ui-react'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import pic from '../images/macbook.jpg';
+import pic from '../images/defaultimage.png';
 import TransactionSummary from './TransactionSummary'
 import TransactionFilterContainer from '../containers/TransactionFilterContainer'
 

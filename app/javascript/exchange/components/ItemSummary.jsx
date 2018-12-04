@@ -4,8 +4,7 @@ import { Rating, Divider } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
 import { getItem } from '../actions/itemsActions';
 import { connect } from 'react-redux';
-
-import pic from '../images/macbook.jpg';
+import pic from '../images/defaultimage.png';
 
 
 class ItemSummary extends Component {
@@ -18,7 +17,7 @@ class ItemSummary extends Component {
       url = this.props.item.images[0];
     }
     else {
-      url = "https://react.semantic-ui.com/images/wireframe/image.png"
+      url = pic
     } 
 
     return (
