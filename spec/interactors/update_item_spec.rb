@@ -56,7 +56,6 @@ describe UpdateItem do
       expect(item_repo).to receive(:update).with(item, context_params[:item_params])
 
       result = UpdateItem.call(context_params)
-
       expect(result.item).to eq(item)
     end
 

@@ -7,8 +7,8 @@ class PaginateItemResults
 
   def call
     if validate_context(context)
-      context.total_pages = (context.items.count/3.0).ceil
-      context.items = context.items.all.page(context.page_number).per(3)
+      context.total_pages = (context.items.count/30.0).ceil
+      context.items = context.items.all.page(context.page_number).per(30)
       puts(context.items.inspect())
     else
       context.fail!(message: "invalid context params")
