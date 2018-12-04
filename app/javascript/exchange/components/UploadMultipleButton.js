@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import { Button, Icon, Image, Item, Label } from 'semantic-ui-react'
 import { Rating, Divider } from 'semantic-ui-react'
 import { Link } from "react-router-dom";
-
-import pic from '../images/macbook.jpg';
 import ActiveStorageProvider from 'react-activestorage-provider';
 import DropzoneComponent from 'react-dropzone-component';
 import { DirectUpload } from "activestorage"

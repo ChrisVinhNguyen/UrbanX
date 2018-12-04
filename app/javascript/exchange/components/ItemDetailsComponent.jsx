@@ -6,14 +6,12 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import ItemReviewsContainer from '../containers/ItemReviewsContainer'
 import { getItem } from '../actions/itemsActions';
-// import "react-responsive-carousel/lib/styles/carousel.min.css";
-// import {Carousel} from 'react-responsive-carousel';
 import ImageGallery from 'react-image-gallery';
 import { v4 as uuid } from 'uuid';
 import PropTypes from 'prop-types';
 import ItemDetailsContainer from '../containers/ItemDetailsContainer'
 import ItemDetailsBorrowContainer from '../containers/ItemDetailsBorrowContainer';
-import pic from '../images/macbook.jpg';
+import pic from '../images/defaultimage.png';
 import "react-image-gallery/styles/css/image-gallery.css";
 // import '../stylesheets/image-gallery.css';
 
@@ -41,7 +39,7 @@ class ItemDetailsComponent extends Component {
           <Item.Content>
           { this.props.item_images_prop && this.props.item_images_prop.length > 0 ?
             imageGallery :
-            <Image size='medium' src="https://react.semantic-ui.com/images/wireframe/image.png" />
+            <Image size='medium' src=pic />
           }
           <Item.Header size = 'medium' as='a' ><strong>{this.props.item_name_prop}</strong></Item.Header>
         <Item.Meta>
