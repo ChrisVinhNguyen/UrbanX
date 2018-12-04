@@ -8,6 +8,8 @@ import {
   NEW_USER_REVIEW
 } from './types';
 
+import { displayFlash } from './flashActions';
+
 import axios from 'axios';
 
 export const fetchUser = () => dispatch => {
@@ -49,9 +51,11 @@ export const signInUser = (userData) => dispatch => {
   })
   .then(function(response){
     dispatch(fetchUser());
+    dispatch(displayFlash('Signed in successfully.', true, 'positive'));
   })
   .catch(function(error){
     console.log(error);
+    dispatch(displayFlash('Sign in failed.', true, 'negative'));
   })
 }
 

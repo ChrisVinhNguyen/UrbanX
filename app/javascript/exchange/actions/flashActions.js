@@ -18,7 +18,12 @@ export const displayFlash = (flash_message, visible, pos_or_neg) => {
   		temp = getState().flash.flash_message;
   	}
 
-    return dispatch(displayFlashR(temp, visible, pos_or_neg))
+    dispatch(displayFlashR(temp, visible, pos_or_neg));
+    setTimeout(() => {
+      dispatch(displayFlashR(temp, false, pos_or_neg))
+    }, 2000);
   }
 }
+
+
 

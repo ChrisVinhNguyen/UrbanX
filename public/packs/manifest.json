@@ -1,23 +1,12 @@
 {
-<<<<<<< HEAD
-  "NewItemForm.js": "/packs/NewItemForm-461fa74ceb5e0c861c4f.js",
-  "NewItemForm.js.map": "/packs/NewItemForm-461fa74ceb5e0c861c4f.js.map",
-  "application.js": "/packs/application-e4ed4657f8c365dbb2ef.js",
-  "application.js.map": "/packs/application-e4ed4657f8c365dbb2ef.js.map",
-  "exchange.css": "/packs/exchange-6dc9ebdefd907ca4fc30b2b1d144fa34.css",
-  "exchange.css.map": "/packs/exchange-6dc9ebdefd907ca4fc30b2b1d144fa34.css.map",
-  "exchange.js": "/packs/exchange-3dfaafd18ab6995741d8.js",
-  "exchange.js.map": "/packs/exchange-3dfaafd18ab6995741d8.js.map",
-=======
   "NewItemForm.js": "/packs/NewItemForm-12d35385c1c33c202ddf.js",
   "NewItemForm.js.map": "/packs/NewItemForm-12d35385c1c33c202ddf.js.map",
   "application.js": "/packs/application-1f46c67658b41cfe0868.js",
   "application.js.map": "/packs/application-1f46c67658b41cfe0868.js.map",
-  "exchange.css": "/packs/exchange-6dc9ebdefd907ca4fc30b2b1d144fa34.css",
-  "exchange.css.map": "/packs/exchange-6dc9ebdefd907ca4fc30b2b1d144fa34.css.map",
-  "exchange.js": "/packs/exchange-44fd03e09f3b21ea1ba6.js",
-  "exchange.js.map": "/packs/exchange-44fd03e09f3b21ea1ba6.js.map",
->>>>>>> 1ca77a35c8880c7f5b43ce368d21d6a9bda8adba
+  "exchange.css": "/packs/exchange-5ccea58557247d673f7fb5fbc7213fa1.css",
+  "exchange.css.map": "/packs/exchange-5ccea58557247d673f7fb5fbc7213fa1.css.map",
+  "exchange.js": "/packs/exchange-5ec91d4f500cb3702b98.js",
+  "exchange.js.map": "/packs/exchange-5ec91d4f500cb3702b98.js.map",
   "exchange/images/bronze.png": "/packs/exchange/images/bronze-92f22480681a584b0fb170ae79a04864.png",
   "exchange/images/gold.png": "/packs/exchange/images/gold-46ccc6f56d5de80fdd10c74b379653bf.png",
   "exchange/images/logo2.png": "/packs/exchange/images/logo2-22a41a177e256587d1565b45d0c6b0b5.png",
