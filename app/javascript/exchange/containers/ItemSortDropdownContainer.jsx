@@ -18,22 +18,14 @@ class ItemSortDropdownContainer extends Component {
 
   handleSelect (e, { value }) {
     let cur_list = this.props.original_list;
-    console.log(this.props.original_list);
 
     if (value == 'Default') {
       this.props.sortItems(cur_list, value);
-    }
-
-    else if (value == 'Newest') {
+    } else if (value == 'Newest') {
+      this.props.sortItems(cur_list, value);
+    } else if (value == 'Oldest') {
       this.props.sortItems(cur_list, value);
     }
-
-    else if (value == 'Oldest') {
-      this.props.sortItems(cur_list, value);
-    }
-
-    console.log(this.props.original_list);
-    // console.log(this.props.cur_sort);
   } 
 
   render() {
@@ -50,19 +42,15 @@ class ItemSortDropdownContainer extends Component {
         text: 'Oldest',
         value: 'Oldest'
       }
-      // {
-      //   text: 'Average Rating',
-      //   value: 'Average Rating'
-      // }
     ];
+
     let cur_selected;
+
     if (this.props.cur_sort == 'Default') {
       cur_selected = sortOptions[0].value;
-    }
-    else if (this.props.cur_sort == 'Newest') {
+    } else if (this.props.cur_sort == 'Newest') {
       cur_selected = sortOptions[1].value;
-    }
-    else if (this.props.cur_sort == 'Oldest') {
+    } else if (this.props.cur_sort == 'Oldest') {
       cur_selected = sortOptions[2].value;
     }
     
