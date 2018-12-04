@@ -5,13 +5,12 @@
   "application.js.map": "/packs/application-1f46c67658b41cfe0868.js.map",
   "exchange.css": "/packs/exchange-60b8a8404e030bcf222f8e71cd9669a8.css",
   "exchange.css.map": "/packs/exchange-60b8a8404e030bcf222f8e71cd9669a8.css.map",
-  "exchange.js": "/packs/exchange-ce7d29b3194bc1b5d047.js",
-  "exchange.js.map": "/packs/exchange-ce7d29b3194bc1b5d047.js.map",
+  "exchange.js": "/packs/exchange-4a96270c55dc59a78eb6.js",
+  "exchange.js.map": "/packs/exchange-4a96270c55dc59a78eb6.js.map",
   "exchange/images/bronze.png": "/packs/exchange/images/bronze-92f22480681a584b0fb170ae79a04864.png",
+  "exchange/images/defaultimage.png": "/packs/exchange/images/defaultimage-2d204e63c43d42cfc4c669a104bd753a.png",
   "exchange/images/gold.png": "/packs/exchange/images/gold-46ccc6f56d5de80fdd10c74b379653bf.png",
   "exchange/images/logo2.png": "/packs/exchange/images/logo2-22a41a177e256587d1565b45d0c6b0b5.png",
   "exchange/images/logo_inverted.png": "/packs/exchange/images/logo_inverted-d4effffcfcce7a221bb391cf6317332b.png",
-  "exchange/images/macbook.jpg": "/packs/exchange/images/macbook-357bf8312f7085ec9db8113e28615cb3.jpg",
-  "exchange/images/silver.png": "/packs/exchange/images/silver-3263a62cf6a2b7b0393894b4b0d3749f.png",
-  "exchange/images/defaultimage.png": "/packs/exchange/images/defaultimage-2d204e63c43d42cfc4c669a104bd753a.png"
+  "exchange/images/silver.png": "/packs/exchange/images/silver-3263a62cf6a2b7b0393894b4b0d3749f.png"
 }
