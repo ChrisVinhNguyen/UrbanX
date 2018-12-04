@@ -6,6 +6,7 @@ import { UploadSingleButton }  from '../components/UploadSingleButton.js';
 import { v4 as uuid } from 'uuid';
 
 import { fetchUser } from '../actions/userActions';
+import { displayFlash } from '../actions/flashActions';
 import { FIRSTNAME_MISSING, LASTNAME_MISSING, DOB_MISSING, LOCATION_MISSING } from '../constants/formErrors';
 
 import '../stylesheets/user-profile-edit-form-container.scss';
@@ -104,6 +105,7 @@ class UserProfileEditContainer extends Component {
     this.props.fetchUser();
     this.props.history.push(`/user_profiles_show/${this.props.match.params.id}`);
 
+      this.displayMessage('Edited profile successfully.', 'positive');
     }
 
   }
@@ -148,6 +150,12 @@ class UserProfileEditContainer extends Component {
     (response) => console.log(response.responseJSON)
     );
     this.props.fetchUser();
+    this.displayMessage('Image deleted successfully.', 'positive');
+  }
+
+  displayMessage(flash_message, pos_or_neg) {
+    this.props.displayFlash(flash_message, true, pos_or_neg);
+    setTimeout(this.props.displayFlash, 2000, '', false, pos_or_neg);
   }
 
   render() {
@@ -257,4 +265,4 @@ const mapStateToProps = state => ({
   user_info: state.user.user_info
 });
 
-export default connect(mapStateToProps, { fetchUser })(UserProfileEditContainer);
+export default connect(mapStateToProps, { fetchUser, displayFlash })(UserProfileEditContainer);
