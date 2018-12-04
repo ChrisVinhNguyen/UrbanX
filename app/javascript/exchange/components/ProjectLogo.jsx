@@ -6,6 +6,8 @@ import { filterItems } from '../actions/itemsActions';
 
 import Logo from '../images/logo2.png';
 
+import '../stylesheets/project-logo.scss';
+
 class ProjectLogo extends Component {
   constructor() {
     super();
@@ -19,7 +21,16 @@ class ProjectLogo extends Component {
     return (
       <div className="project-logo">
         <Link to="/">
-          <img src={ Logo } alt="Project Logo" height="66" width="160" onClick={this.handleOnClick} />
+          <svg viewBox="0 0 400 200">
+            <symbol id="s-text">
+              <text text-anchor="middle" x="50%" y="50%" dy=".35em">Urbanx</text>
+            </symbol>
+            <use class="text" href="#s-text"></use>
+            <use class="text" href="#s-text"></use>
+            <use class="text" href="#s-text"></use>
+            <use class="text" href="#s-text"></use>
+            <use class="text" href="#s-text"></use>
+          </svg>
         </Link>
       </div>
     )
