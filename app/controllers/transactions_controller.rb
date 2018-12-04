@@ -14,6 +14,19 @@ class TransactionsController < ApplicationController
 
   def create
     if user_signed_in?
+
+      # #Refactored
+      # context_params = {
+      #   item_id: params[:item_id],
+      #   transaction_params: transaction_params,
+      #   borrower_id: @current_user.id
+      # }
+
+      # result = CreateNewTransaction.call(context_params)
+      # if result.success?
+      #   render :json => {"success" => true}.to_json()
+      # end
+
       @item = Item.find(params[:item_id])
       @transaction = @item.transactions.create(transaction_params)
       @transaction.lender = @item.user
