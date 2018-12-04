@@ -88,6 +88,7 @@ class UserReviewsController < ApplicationController
 
       user_reviews_array.push(user_review_hash)
     end
+    puts(user_reviews_array)
     render :json => {"user_reviews" => user_reviews_array}.to_json()
   end
 
