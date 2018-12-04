@@ -37,7 +37,7 @@ class ItemDetailsComponent extends Component {
 
     return (
       <div>
-        <Item.Group>
+        <Item.Group className="item-details-content-container">
           <Item>
             { this.props.item_images_prop && this.props.item_images_prop.length > 0 ?
               imageGallery :
@@ -56,7 +56,7 @@ class ItemDetailsComponent extends Component {
               <Item.Description>Description: {this.props.item_description_prop}</Item.Description>
               <Item.Description>Category: {this.props.item_category_prop}</Item.Description>
               <Item.Description>Condition: {this.props.item_condition_prop}</Item.Description>
-              <Item.Description>Value: {this.props.item_value_prop}</Item.Description>
+              <Item.Description>Value: ${this.props.item_value_prop}</Item.Description>
               <Item.Extra>
                 <Rating icon='star' rating={this.props.item_avg_rating_prop} maxRating={5} disabled />
                 <Label>Rating: {this.props.item_avg_rating_prop}</Label>
