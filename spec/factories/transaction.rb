@@ -9,7 +9,7 @@ FactoryBot.define do
     expiry_date {Faker::Time.between(2.days.ago, Date.today, :all)}
     created_at {Faker::Time.between(2.days.ago, Date.today, :all)}
     updated_at {Faker::Time.between(2.days.ago, Date.today, :all)}
-    status   { "available" }
+    status   { "pending" }
     item_name { Faker::Appliance.equipment }
     item
     borrower
