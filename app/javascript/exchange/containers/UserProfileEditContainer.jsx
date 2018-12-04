@@ -19,7 +19,7 @@ class UserProfileEditContainer extends Component {
         last_name: this.props.user_info.last_name,
         date_of_birth: this.props.user_info.date_of_birth,
         location: this.props.user_info.location,
-        image: this.props.user_info.image,
+        image: null,
         firstnameError: false,
         lastnameError: false,
         locationError: false,

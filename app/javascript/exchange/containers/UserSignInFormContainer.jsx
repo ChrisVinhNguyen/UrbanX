@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Button, Checkbox, Form, Message, Grid } from 'semantic-ui-react';
 
 import { signInUser } from '../actions/userActions';
+import { displayFlash } from '../actions/flashActions';
 import { connect } from 'react-redux';
 
 import { EMAIL_MISSING, INVALID_EMAIL_FORMAT, PASSWORD_MISSING } from '../constants/formErrors';
@@ -53,6 +54,12 @@ class UserSignInFormContainer extends Component {
 
     this.props.signInUser(userData);
     this.props.history.push("/");
+    this.displayMessage('Signed in successfully.', 'positive');
+  }
+
+  displayMessage(flash_message, pos_or_neg) {
+    this.props.displayFlash(flash_message, true, pos_or_neg);
+    setTimeout(this.props.displayFlash, 2000, '', false, pos_or_neg);
   }
 
   handleFormErrors() {
@@ -134,4 +141,4 @@ class UserSignInFormContainer extends Component {
   }
 }
 
-export default connect(() => { return {} }, { signInUser })(UserSignInFormContainer);
+export default connect(() => { return {} }, { signInUser, displayFlash })(UserSignInFormContainer);
