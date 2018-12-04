@@ -71,7 +71,9 @@ class UserReviewsController < ApplicationController
     @user_reviews = @reviewee.user_reviews
 
     user_reviews_array = []
+    puts("=======================")
     puts(user_reviews_array)
+    puts("=======================")
     @user_reviews.each do |user_review| 
       user = User.find(user_review[:reviewer_id])
       full_name = user.user_profile[:first_name] + " " + user.user_profile[:last_name]
