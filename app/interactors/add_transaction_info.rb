@@ -13,6 +13,7 @@ class AddTransactionInfo
       transaction.lender_id = context.item.user_id
       transaction.item_name = context.item.name
       transaction_repo.save(transaction)
+      UserMailer.with(transaction: transaction).notify_lender.deliver_late
       context.transaction = transaction
     else
       context.fail!(message: "invalid context params")
