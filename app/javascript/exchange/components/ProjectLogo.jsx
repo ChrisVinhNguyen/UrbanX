@@ -23,13 +23,13 @@ class ProjectLogo extends Component {
         <Link to="/" onClick={ this.handleOnClick }>
           <svg viewBox="0 0 400 200">
             <symbol id="s-text">
-              <text text-anchor="middle" x="50%" y="50%" dy=".35em">Urbanx</text>
+              <text textAnchor="middle" x="50%" y="50%" dy=".35em">Urbanx</text>
             </symbol>
-            <use class="text" href="#s-text"></use>
-            <use class="text" href="#s-text"></use>
-            <use class="text" href="#s-text"></use>
-            <use class="text" href="#s-text"></use>
-            <use class="text" href="#s-text"></use>
+            <use className="text" href="#s-text"></use>
+            <use className="text" href="#s-text"></use>
+            <use className="text" href="#s-text"></use>
+            <use className="text" href="#s-text"></use>
+            <use className="text" href="#s-text"></use>
           </svg>
         </Link>
       </div>
