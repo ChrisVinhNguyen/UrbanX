@@ -16,8 +16,8 @@
 #
 
 class UserProfile < ApplicationRecord
-  validates :first_name, :last_name, :date_of_birth, :date_of_birth, :location, :created_at, :updated_at, presence: true
-
+  validates :first_name, :last_name, :date_of_birth, :date_of_birth, :location, :created_at, :points, :updated_at, presence: true
+  validates :points, numericality: { only_integer: true, greater_than: -1}
   has_many :user_reviews, dependent: :destroy, foreign_key: :reviewee_id
   belongs_to :user
   has_one_attached :image
