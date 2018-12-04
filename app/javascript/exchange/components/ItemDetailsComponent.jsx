@@ -15,6 +15,8 @@ import pic from '../images/defaultimage.png';
 import "react-image-gallery/styles/css/image-gallery.css";
 // import '../stylesheets/image-gallery.css';
 
+import '../stylesheets/item-details-component.scss';
+
 
 class ItemDetailsComponent extends Component {
   render() {
