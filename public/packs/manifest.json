@@ -5,8 +5,13 @@
   "application.js.map": "/packs/application-bc899323198c2ec2e728.js.map",
   "exchange.css": "/packs/exchange-60b8a8404e030bcf222f8e71cd9669a8.css",
   "exchange.css.map": "/packs/exchange-60b8a8404e030bcf222f8e71cd9669a8.css.map",
+<<<<<<< HEAD
   "exchange.js": "/packs/exchange-b22458a7a71d4b61b15d.js",
   "exchange.js.map": "/packs/exchange-b22458a7a71d4b61b15d.js.map",
+=======
+  "exchange.js": "/packs/exchange-f322da1ff2cbf997e27d.js",
+  "exchange.js.map": "/packs/exchange-f322da1ff2cbf997e27d.js.map",
+>>>>>>> afbd654bc6332ec0da20532562aa226b2e637ad8
   "exchange/images/bronze.png": "/packs/exchange/images/bronze-92f22480681a584b0fb170ae79a04864.png",
   "exchange/images/defaultimage.png": "/packs/exchange/images/defaultimage-2d204e63c43d42cfc4c669a104bd753a.png",
   "exchange/images/gold.png": "/packs/exchange/images/gold-46ccc6f56d5de80fdd10c74b379653bf.png",
