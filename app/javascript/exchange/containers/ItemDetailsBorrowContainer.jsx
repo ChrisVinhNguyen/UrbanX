@@ -11,6 +11,9 @@ import PropTypes from 'prop-types';
 import SignUpButton from '../components/SignUpButton';
 import SignInButton from '../components/SignInButton';
 
+import '../stylesheets/item-details-borrow-container.scss';
+
+
 class ItemDetailsBorrowContainer extends Component {
   constructor(props) {
   	super(props);

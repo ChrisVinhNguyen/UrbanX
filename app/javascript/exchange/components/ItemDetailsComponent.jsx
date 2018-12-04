@@ -43,12 +43,10 @@ class ItemDetailsComponent extends Component {
               imageGallery :
               <Image className="image-gallery" size='medium' src={pic} />
             }
-            <Item.Content>
-              <Item.Header size = 'medium' as='a' ><strong>{this.props.item_name_prop}</strong></Item.Header>
+            <Item.Content className="item-details-content">
+              <Item.Header className="item-details-header" size='huge' as='h1' ><strong>{this.props.item_name_prop}</strong></Item.Header>
               <Item.Meta>
                 <p>Quantity: {this.props.item_quantity_prop}</p>
-                
-                <ItemDetailsBorrowContainer item_id={ this.props.item_match_param_id_prop} currentUserId={ this.props.current_user_id_prop } userProfileId={ this.props.item_owner_profile_id }/>
               </Item.Meta>
               <Item.Description> 
                 <Link to={'/user_profiles_show/'+ this.props.item_owner_profile_id_prop}>
@@ -59,13 +57,18 @@ class ItemDetailsComponent extends Component {
               <Item.Description>Category: {this.props.item_category_prop}</Item.Description>
               <Item.Description>Condition: {this.props.item_condition_prop}</Item.Description>
               <Item.Description>Value: {this.props.item_value_prop}</Item.Description>
-              {this.props.active_transactions_msg_prop}
-              {this.props.edit_button_prop}
-              {this.props.delete_button_prop}
               <Item.Extra>
                 <Rating icon='star' rating={this.props.item_avg_rating_prop} maxRating={5} disabled />
                 <Label>Rating: {this.props.item_avg_rating_prop}</Label>
               </Item.Extra>
+
+              <Item.Meta className="item-details-buttons-container">
+                {this.props.active_transactions_msg_prop}
+                {this.props.edit_button_prop}
+                {this.props.delete_button_prop}
+                <ItemDetailsBorrowContainer item_id={ this.props.item_match_param_id_prop} currentUserId={ this.props.current_user_id_prop } userProfileId={ this.props.item_owner_profile_id }/>
+              </Item.Meta>
+
             </Item.Content>
           </Item>
         </Item.Group>

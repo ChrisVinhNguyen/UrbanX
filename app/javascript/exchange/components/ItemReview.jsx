@@ -52,8 +52,8 @@ class ItemReview extends Component {
                   {review.owner}
                 </Link>
               </Comment.Author>
-              <Comment.Metadata>
-                <div>
+              <Comment.Metadata className="item-review-metadata">
+                <div >
                   <Rating icon='star' rating={review.rating} maxRating={5} disabled />
                 </div>
                 <div>{String(review.updated_at).split('T')[0]}</div>
@@ -62,7 +62,7 @@ class ItemReview extends Component {
               {current_user_id == review.owner_id?
               <Comment.Actions>
                 <DeleteItemReviewContainer review_id = {review.id}/>
-                <Comment.Action onClick={this.handClick}> 
+                <Comment.Action className="item-review-edit-button" onClick={this.handClick}>
                   Edit
                 </Comment.Action> 
                   <div>

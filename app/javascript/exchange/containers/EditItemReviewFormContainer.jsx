@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import SignUpButton from '../components/SignUpButton';
 import SignInButton from '../components/SignInButton';
 
+
 class EditItemReviewFormContainer extends Component {
   constructor(props) {
     super(props);
@@ -25,24 +26,16 @@ class EditItemReviewFormContainer extends Component {
 
   handleRate(e, { rating }) {
     this.setState({ rating: rating })
-    console.log(this.state.rating)
   }
 
   handleChange(e, { name, value }) {
     this.setState({ [name]: value })
-    console.log(this.state.comment)
   }
 
   handleSubmit(e) {
-    console.log(this.state.rating)
-    console.log(this.state.comment)
-    console.log(this.state.review_id)
     let itemReviewData = this.state;
     let current_viewed_item_id = this.props.item_id;
 
-
-    console.log(this.state)
-    console.log(itemReviewData)
     this.props.editItemReview(itemReviewData, current_viewed_item_id)
   }
 
@@ -54,7 +47,6 @@ class EditItemReviewFormContainer extends Component {
     const isSignedIn = this.props.is_signed_in;
     let editItemReviewContent; 
 
-    console.log(this.props)
     if (isSignedIn) {
       editItemReviewContent = 
         <Segment raised>

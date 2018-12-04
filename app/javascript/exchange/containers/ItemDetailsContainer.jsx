@@ -74,12 +74,12 @@ class ItemDetailsContainer extends Component {
       if (this.props.currentUserId == this.props.item_details.user_id){
         if (!activeTransaction) {
           editButton=(
-            <Button as={Link} to={`/items_list/${this.props.match.params.id}/edit`}>
+            <Button className="edit-item-details-button" as={Link} to={`/items_list/${this.props.match.params.id}/edit`}>
               Edit
             </Button>
           )
           deleteButton=(
-            <Button negative onClick={this.deleteItem}>Delete</Button>
+            <Button className="deletet-item-details-button" negative onClick={this.deleteItem}>Delete</Button>
           )
         }
         else {
