@@ -16,7 +16,7 @@
 #
 
 class Transaction < ApplicationRecord
-	validates :expiry_date, :item_name, :lend_date, :return_date, :status, :created_at, :updated_at, :borrower_id, :item_id, :lender_id, presence: true
+	validates :item_name,:status, :borrower_id, :item_id, :lender_id, presence: true
 
 
 	belongs_to :borrower, class_name: :User, foreign_key: :borrower_id
