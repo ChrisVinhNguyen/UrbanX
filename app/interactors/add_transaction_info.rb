@@ -10,7 +10,7 @@ class AddTransactionInfo
       transaction_repo = TransactionRepository.new
       transaction = transaction_repo.new_transaction(context.item, context.transaction_params)
       transaction.borrower_id = context.borrower_id
-      transaction.lender_id = context.item.lender_id
+      transaction.lender_id = context.item.user_id
       transaction.item_name = context.item.name
       transaction_repo.save(transaction)
       context.transaction = transaction
