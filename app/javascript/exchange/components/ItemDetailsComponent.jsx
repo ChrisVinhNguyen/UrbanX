@@ -50,7 +50,15 @@ class ItemDetailsComponent extends Component {
                 
                 <ItemDetailsBorrowContainer item_id={ this.props.item_match_param_id_prop} currentUserId={ this.props.current_user_id_prop } userProfileId={ this.props.item_owner_profile_id }/>
               </Item.Meta>
-              <Item.Description>Description: {this.props.item_description_prop}.</Item.Description>
+              <Item.Description> 
+                <Link to={'/user_profiles_show/'+ this.props.item_owner_profile_id_prop}>
+                  {this.props.item_owner_name_prop}
+                </Link>
+              </Item.Description>
+              <Item.Description>Description: {this.props.item_description_prop}</Item.Description>
+              <Item.Description>Category: {this.props.item_category_prop}</Item.Description>
+              <Item.Description>Condition: {this.props.item_condition_prop}</Item.Description>
+              <Item.Description>Value: {this.props.item_value_prop}</Item.Description>
               {this.props.active_transactions_msg_prop}
               {this.props.edit_button_prop}
               {this.props.delete_button_prop}

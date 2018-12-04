@@ -115,7 +115,12 @@ class ItemDetailsContainer extends Component {
       <ItemDetailsComponent 
       item_id_prop={this.props.item_id} 
       item_name_prop={this.props.item_details.name} 
+      item_condition_prop={this.props.item_details.condition}
+      item_category_prop={this.props.item_details.category}
       item_quantity_prop={this.props.item_details.quantity} 
+      item_value_prop={this.props.item_details.value} 
+      item_owner_name_prop={this.props.item_details.item_owner}
+      item_owner_profile_id_prop={this.props.item_details.item_owner_profile_id}
       item_match_param_id_prop={this.props.match.params.id} 
       current_user_id_prop={this.props.currentUserId}
       item_owner_profile_id = {this.props.currentUserProfileId}
