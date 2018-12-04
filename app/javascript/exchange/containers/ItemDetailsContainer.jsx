@@ -6,7 +6,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { displayFlash } from '../actions/flashActions';
 
-import pic from '../images/macbook.jpg';
+import pic from '../images/defaultimage.png';
 
 import { getItem, filterItems } from '../actions/itemsActions';
 

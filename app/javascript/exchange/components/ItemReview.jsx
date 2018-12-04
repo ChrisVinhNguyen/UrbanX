@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import CreateItemReviewFormContainer from '../containers/CreateItemReviewFormContainer'
 import EditItemReviewFormContainer from '../containers/EditItemReviewFormContainer'
 import DeleteItemReviewContainer from '../containers/DeleteItemReviewContainer'
-import pic from '../images/macbook.jpg';
+import pic from '../images/defaultimage.png';
 
 class ItemReview extends Component {
 

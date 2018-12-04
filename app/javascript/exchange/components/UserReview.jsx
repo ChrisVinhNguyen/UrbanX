@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import CreateUserReviewFormContainer from '../containers/CreateUserReviewFormContainer'
 import EditUserReviewFormContainer from '../containers/EditUserReviewFormContainer'
 import DeleteUserReviewFormContainer from '../containers/DeleteUserReviewFormContainer'
-
+import pic from '../images/defaultimage.png';
 
 class UserReview extends Component {
   constructor(props) {

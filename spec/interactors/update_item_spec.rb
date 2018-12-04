@@ -102,7 +102,6 @@ describe UpdateItem do
       }
 
       result = UpdateItem.call(context_params)
-
       expect(result.item[:quantity]).not_to eq(context_params[:item_params][:quantity])
     end
 

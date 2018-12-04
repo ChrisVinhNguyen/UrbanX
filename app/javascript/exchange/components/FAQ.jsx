@@ -21,6 +21,22 @@ class FAQ extends Component {
           <p>
             A: Simply make an account and borrow away!
           </p>
+          <br/>
+          <p>
+            Q: How does the point system work?
+          </p>
+          <p>
+           A:
+          <ul>
+            <li>Bronze: Upload 10 items</li>
+            <li>Silver: Upload 50 items</li>
+            <li>Gold: Find out yourself!</li>
+          </ul>
+            
+              
+              
+              
+          </p>
         </Container>
       </div>
     )

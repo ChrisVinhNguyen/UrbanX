@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { Button, Icon, Image, Label, Card } from 'semantic-ui-react';
 
-import Logo from '../images/macbook.jpg';
+import pic from '../images/defaultimage.png';
 import Bronze from '../images/bronze.png';
 import Silver from '../images/silver.png';
 import Gold from '../images/gold.png';
@@ -20,7 +20,7 @@ class UserProfileInfo extends Component {
       url = this.props.userProfile.image;
     }
     else {
-      url = "https://react.semantic-ui.com/images/wireframe/image.png";
+      url = pic
     }
 
     return (

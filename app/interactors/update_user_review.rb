@@ -9,8 +9,9 @@ class UpdateUserReview
     if validate_context(context)
       user_review_repo = UserReviewRepository.new
       user_review = user_review_repo.find_by_id(context.user_profile, context.user_review_id)
-      user_review_repo.update(user_review, context.user_review_params)
       user_review.updated_at = DateTime.now 
+      
+      user_review_repo.update(user_review, context.user_review_params)
 
       context.user_review = user_review
     else
