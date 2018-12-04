@@ -111,6 +111,12 @@ class ItemsController < ApplicationController
 
     
     @item = Item.find(params[:id])
+    item_details= @item.attributes
+    @item_owner = User.find(@item.user_id)
+    full_name = @item_owner.user_profile[:first_name] + " " + @item_owner.user_profile[:last_name]
+    @item_owner_profile = UserProfile.where(user_id: @item.user_id).first
+    item_details[:item_owner] = full_name
+    item_details[:item_owner_profile_id] = @item_owner_profile.id
     @images = []
     @image_attachments_id = []
     if @item.images.attached?
@@ -120,7 +126,7 @@ class ItemsController < ApplicationController
         end   
         
     end
-    item_details= @item.attributes
+    
     item_details[:images]= @images
     item_details[:image_attachments_id] = @image_attachments_id
 
