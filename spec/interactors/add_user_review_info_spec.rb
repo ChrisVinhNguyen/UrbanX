@@ -8,7 +8,7 @@ describe AddUserReviewInfo do
   context 'validate context' do
     it 'is valid with valid context params' do
       context_params = {
-        user_profile: @user_review.reviewee,
+        user_profile: @user_review.user_profile,
         user_review_params: {
           rating: @user_review.rating,
           comment: @user_review.comment
@@ -39,7 +39,7 @@ describe AddUserReviewInfo do
 
     it 'is invalid with no user review params' do
       context_params = {
-        user_profile: @user_review.reviewee,
+        user_profile: @user_review.user_profile,
         reviewee_id: @user_review.reviewee_id,
         reviewer_id: @user_review.reviewer_id
       }
@@ -51,7 +51,7 @@ describe AddUserReviewInfo do
 
     it 'is invalid with no reviewer_id' do
       context_params = {
-        user_profile: @user_review.reviewee,
+        user_profile: @user_review.user_profile,
         user_review_params: {
           rating: @user_review.rating,
           comment: @user_review.comment
@@ -68,7 +68,7 @@ describe AddUserReviewInfo do
 
     it 'is invalid with no reviewee_id' do
       context_params = {
-        user_profile: @user_review.reviewee,
+        user_profile: @user_review.user_profile,
         user_review_params: {
           rating: @user_review.rating,
           comment: @user_review.comment
@@ -85,7 +85,7 @@ describe AddUserReviewInfo do
   context 'call' do
     it 'add user review success with valid user_review_params' do
       context_params = {
-        user_profile: @user_review.reviewee,
+        user_profile: @user_review.user_profile,
         user_review_params: {
           rating: @user_review.rating,
           comment: @user_review.comment

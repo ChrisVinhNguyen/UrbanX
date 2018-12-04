@@ -45,6 +45,6 @@ describe UserReview do
     end
   end
   context 'associateions' do
-    it {should belong_to(:reviewee)}
+    it {should belong_to(:user_profile)}
   end
 end
