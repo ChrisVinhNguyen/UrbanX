@@ -68,7 +68,7 @@ class UserReviewsController < ApplicationController
 
   def index
     @reviewee = UserProfile.find(params[:user_profile_id])
-    @user_reviews = UserReview.where(reviewee_id: params[:user_profile_id])
+    @user_reviews = @reviewee.user_reviews
 
     user_reviews_array = []
     @user_reviews.each do |user_review| 
