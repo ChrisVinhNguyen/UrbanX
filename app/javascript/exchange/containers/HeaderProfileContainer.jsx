@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchUser, signOutUser } from '../actions/userActions';
 import { displayFlash } from '../actions/flashActions';
-import { Dropdown, Image } from 'semantic-ui-react';
+import { setIsLoadingHeaderProfileContent } from '../actions/loadingActions';
+import { Dropdown, Image, Loader, Segment } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
 
 
@@ -18,6 +20,7 @@ class HeaderProfileContainer extends Component {
   }
 
   componentWillMount() {
+    this.props.setIsLoadingHeaderProfileContent(true);
     this.props.fetchUser();
   }
 
@@ -35,6 +38,11 @@ class HeaderProfileContainer extends Component {
     const isSignedIn = this.props.is_signed_in;
     let userAuthenticationContent;
 
+    if (this.props.isLoadingHeaderProfileContent) {
+      return (
+        <Loader active={ this.props.isLoadingHeaderProfileContent } />
+      )
+    }
 
     if(isSignedIn) {
       const trigger = <span>{this.props.user_info.full_name} <Image src={this.props.user_info.image ? this.props.user_info.image : "https://react.semantic-ui.com/images/wireframe/image.png" } avatar /></span>;
@@ -71,12 +79,14 @@ HeaderProfileContainer.propTypes = {
   fetchUser: PropTypes.func.isRequired,
   signOutUser: PropTypes.func.isRequired,
   is_signed_in: PropTypes.bool.isRequired,
-  user_info: PropTypes.object.isRequired
+  user_info: PropTypes.object.isRequired,
+  isLoadingHeaderProfileContent: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = state => ({
   is_signed_in: state.user.is_signed_in,
-  user_info: state.user.user_info
+  user_info: state.user.user_info,
+  isLoadingHeaderProfileContent: state.loading.isLoadingHeaderProfileContent
 });
 
-export default connect(mapStateToProps, { fetchUser, signOutUser, displayFlash })(HeaderProfileContainer);
+export default connect(mapStateToProps, { fetchUser, signOutUser, displayFlash, setIsLoadingHeaderProfileContent })(HeaderProfileContainer);
