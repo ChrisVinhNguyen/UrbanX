@@ -7,6 +7,7 @@ FactoryBot.define do
     created_at	{Faker::Time.between(2.days.ago, Date.today, :all)}
     updated_at	{Faker::Time.between(2.days.ago, Date.today, :all)}
     reviewer_id { Faker::Number.between(11,20) }
-    user_profile	
+    reviewee_id { Faker::Number.between(1,10) }
+    reviewee	
   end
 end
