@@ -11,7 +11,7 @@ class ItemReviewsController < ApplicationController
 
       result = CreateNewItemReview.call(context_params)
       if result.success?
-        render json: result.item
+        render json: result.item_review
       end
 
 

@@ -12,7 +12,7 @@ class UserReviewsController < ApplicationController
 
       result = CreateNewUserReview.call(context_params)
       if result.success?
-        render json: result.item_review
+        render json: result.user_review
       end
 
       # @reviewee = UserProfile.find(params[:reviewee_id])
