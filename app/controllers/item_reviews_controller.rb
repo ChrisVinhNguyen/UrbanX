@@ -11,7 +11,7 @@ class ItemReviewsController < ApplicationController
 
       result = CreateNewItemReview.call(context_params)
       if result.success?
-        render :json => {"success" => true}.to_json()
+        render json: result.item
       end
 
 
