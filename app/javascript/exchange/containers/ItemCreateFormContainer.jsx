@@ -108,7 +108,6 @@ class ItemCreateFormContainer extends Component {
 
   displayMessage(flash_message, pos_or_neg) {
     this.props.displayFlash(flash_message, true, pos_or_neg);
-    setTimeout(this.props.displayFlash, 2000, '', false, pos_or_neg);
   }
 
 

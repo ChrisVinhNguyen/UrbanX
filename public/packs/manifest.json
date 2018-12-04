@@ -1,4 +1,12 @@
 {
+  "NewItemForm.js": "/packs/NewItemForm-12d35385c1c33c202ddf.js",
+  "NewItemForm.js.map": "/packs/NewItemForm-12d35385c1c33c202ddf.js.map",
+  "application.js": "/packs/application-1f46c67658b41cfe0868.js",
+  "application.js.map": "/packs/application-1f46c67658b41cfe0868.js.map",
+  "exchange.css": "/packs/exchange-5ccea58557247d673f7fb5fbc7213fa1.css",
+  "exchange.css.map": "/packs/exchange-5ccea58557247d673f7fb5fbc7213fa1.css.map",
+  "exchange.js": "/packs/exchange-5ec91d4f500cb3702b98.js",
+  "exchange.js.map": "/packs/exchange-5ec91d4f500cb3702b98.js.map",
   "NewItemForm.js": "/packs/NewItemForm-461fa74ceb5e0c861c4f.js",
   "NewItemForm.js.map": "/packs/NewItemForm-461fa74ceb5e0c861c4f.js.map",
   "application.js": "/packs/application-e4ed4657f8c365dbb2ef.js",

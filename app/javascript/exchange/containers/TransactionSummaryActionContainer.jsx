@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { updateTransaction, deleteTransaction } from '../actions/itemsActions' 
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { displayFlash } from '../actions/flashActions';
 
 
 class TransactionSummaryActionContainer extends Component {
@@ -37,17 +38,24 @@ class TransactionSummaryActionContainer extends Component {
 	    transaction.expiry_date = this.state.due_date;
 	    transaction.status = 'lent';
 	    this.props.updateTransaction(transaction, this.props.userProfileId, this.props.cur_status);
+      this.displayMessage('Item lent.', 'positive');
 	}
   }
 
   handleReturn(e, transaction) {
     transaction.status = 'completed';
     this.props.updateTransaction(transaction, this.props.userProfileId, this.props.cur_status);
+    this.displayMessage('Item returned.', 'positive');
 
   }
 
   handleDelete(e, transaction) {
     this.props.deleteTransaction(transaction, this.props.userProfileId, this.props.cur_status);
+    this.displayMessage('Request removed.', 'negative');
+  }
+
+  displayMessage(flash_message, pos_or_neg) {
+    this.props.displayFlash(flash_message, true, pos_or_neg);
   }
 
   render() {
@@ -129,4 +137,4 @@ const mapStateToProps = state => ({
   userProfileId: state.user.user_info.user_profile_id
 });
 
-export default connect(mapStateToProps, { updateTransaction, deleteTransaction })(TransactionSummaryActionContainer);
+export default connect(mapStateToProps, { updateTransaction, deleteTransaction, displayFlash })(TransactionSummaryActionContainer);
