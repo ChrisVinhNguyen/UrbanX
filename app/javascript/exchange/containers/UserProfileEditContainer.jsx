@@ -147,6 +147,7 @@ class UserProfileEditContainer extends Component {
     (response) => console.log(response.message),
     (response) => console.log(response.responseJSON)
     );
+    this.props.fetchUser();
   }
 
   render() {

@@ -6,8 +6,8 @@ FactoryBot.define do
     last_name     { Faker::Name.last_name }
     date_of_birth { Faker::Date.birthday(12, 70) }
     location { Faker::Address.full_address }
-    created_at { Faker::Date.between(5.days.ago, Date.today) }
-    updated_at { Faker::Date.between(15.days.ago, Date.today) }
+    created_at	{Faker::Time.between(2.days.ago, Date.today, :all)}
+    updated_at	{Faker::Time.between(2.days.ago, Date.today, :all)}
     user
   end
 end
