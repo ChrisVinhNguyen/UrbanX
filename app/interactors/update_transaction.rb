@@ -10,23 +10,27 @@ class UpdateTransaction
       transaction_repo = TransactionRepository.new
       item_repo = ItemRepository.new
       transaction = transaction_repo.find_by_id(context.item, context.transaction_id)
-      if context.transaction[:status] == 'lent'
-        context.transaction_params[:lend_date] = DateTime.now
-        context.transaction_params[:status] = 'lent'
-      elsif context.transaction[:status] == 'completed'
-        context.transaction_params[:return_date] = DateTime.now
-        context.transaction_params[:status] = 'completed'
-      end
+      if transaction.class != String
+        if context.transaction[:status] == 'lent'
+          context.transaction_params[:lend_date] = DateTime.now
+          context.transaction_params[:status] = 'lent'
+        elsif context.transaction[:status] == 'completed'
+          context.transaction_params[:return_date] = DateTime.now
+          context.transaction_params[:status] = 'completed'
+        end
 
-      transaction_repo.update(transaction, context.transaction_params)
-      
-      if context.transaction[:status] == 'completed'
-        item_repo.update(context.item, {:status => 'available'})
-      elsif context.transaction[:status] == 'lent'
-        item_repo.update(context.item, {:status => 'unavailable'})
-      end
+        transaction_repo.update(transaction, context.transaction_params)
+        
+        if context.transaction[:status] == 'completed'
+          item_repo.update(context.item, {:status => 'available'})
+        elsif context.transaction[:status] == 'lent'
+          item_repo.update(context.item, {:status => 'unavailable'})
+        end
 
-      context.transaction = transaction
+        context.transaction = transaction
+      else
+        context.fail!(message: "can't find transaction")
+      end
     else
       context.fail!(message: "invalid context params")
     end

@@ -18,7 +18,6 @@
 class Transaction < ApplicationRecord
 	validates :item_name,:status, :borrower_id, :item_id, :lender_id, presence: true
 
-
 	belongs_to :borrower, class_name: :User, foreign_key: :borrower_id
 	belongs_to :lender, class_name: :User, foreign_key: :lender_id
 	belongs_to :item
